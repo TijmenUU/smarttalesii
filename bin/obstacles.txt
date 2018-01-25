@@ -1,0 +1,27 @@
+# <-- This indicates a comment line, it is ignored by the game
+# This file defines the obstacle types and their properties
+
+# The following per line layout is used:
+# obstacle_type obstacle_texture_file_location interaction_radius minimal_distance swipe_gesture ...
+# A line may have multiple swipe gestures at the end
+
+# Gestures
+# The following gestures are supported:
+# - tap
+# - upwards
+# - downwards
+# - leftwards
+# - rightwards
+
+# Obstacle Types
+# The following obstacle types are supported:
+# - furniture
+# - door
+# - lightswitch
+# - phone
+
+# DEFINITIONS
+furniture	textures/furniture.png		200	50	downwards
+door		textures/door.png			200	50	leftwards rightwards
+lightswitch	textures/lightswitch.png	100	100	tap
+phone		textures/phone.png			200	50	upwards
