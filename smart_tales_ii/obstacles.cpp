@@ -29,6 +29,11 @@ sf::Vector2f Obstacle::GetPosition() const
 	return sprite.getPosition();
 }
 
+ObstacleType Obstacle::GetType() const
+{
+	return type;
+}
+
 void Obstacle::SetNeutralized(const bool value)
 {
 	neutralized = value;
@@ -89,11 +94,12 @@ Obstacle::Obstacle(const Definition::Obstacle & obstacleDefinition, const sf::Ve
 	type(obstacleDefinition.type),
 	neutralized(false)
 {
-	sprite.setPosition(spawnPosition);
+	SetPosition(spawnPosition);
 
 	// start debug
 	debugShape.setFillColor(sf::Color::Transparent);
 	debugShape.setOutlineColor(sf::Color::Red);
 	debugShape.setOutlineThickness(1.f);
+	debugShape.setPosition(GetCenter());
 	// end debug
 }

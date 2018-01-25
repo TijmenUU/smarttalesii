@@ -25,6 +25,7 @@ public:
 	sf::Vector2f GetSize() const;
 	sf::Vector2f GetCenter() const;
 	sf::Vector2f GetPosition() const;
+	ObstacleType GetType() const;
 
 	void SetNeutralized(const bool value);
 	void SetPosition(const sf::Vector2f & position);
