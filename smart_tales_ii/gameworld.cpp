@@ -23,7 +23,7 @@ GameWorld::GameWorld(sf::Font * fontPointer,
 gamemodes(0),
 currentGamemodeIdx(0U)
 {
-	gamemodes.emplace_back(new Runningmode());
+	gamemodes.emplace_back(new Runningmode(fontPointer));
 
 	for(size_t i = 0; i < gamemodes.size(); ++i)
 	{

@@ -19,7 +19,7 @@ void Program::Run()
 		world.Update(sfclock.restart(), inputhandler, window.getView());
 		// end update
 
-		window.clear(sf::Color::Black);
+		window.clear(sf::Color::White);
 		// draw
 		window.draw(world);
 		// end draw
