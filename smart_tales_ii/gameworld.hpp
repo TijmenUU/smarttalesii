@@ -1,29 +1,20 @@
 #pragma once
-#include "inputhandler.hpp"
-#include "obstacles.hpp"
+#include "gamemode.hpp"
 
+#include <memory>
 #include <string>
 #include <vector>
-
-const std::string cObstacleDefinitionFile = "obstacles.txt";
-const std::string cGameDifficultyFile = "difficulty.txt";
 
 class GameWorld : public sf::Drawable
 {
 private:
-	// sf::Drawable override
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+
 protected:
 	sf::Font * fontPtr;
-	int mode;
+	std::vector<std::shared_ptr<Gamemode>> gamemodes;
+	unsigned int currentGamemodeIdx;
 	
-	// These vars should be moved into a gamemode class soon
-	std::vector<Definition::Obstacle> obstacleDefinitions;
-	std::vector<sf::Vector2f> spawnPositions;
-	std::vector<Obstacle> obstacles;
-	Definition::Difficulty gameDifficulty;
-	float scrollVelocity; // pixels per second
-
 public:
 	void Update(const sf::Time & timeElapsed,
 		const Inputhandler & input,

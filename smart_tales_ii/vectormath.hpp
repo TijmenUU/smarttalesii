@@ -1,6 +1,4 @@
-#ifndef VECTORMATH_HPP
-#define VECTORMATH_HPP
-
+#pragma once
 #include <cstdint>
 #include <SFML\System\Vector2.hpp>
 
@@ -89,5 +87,3 @@ namespace VectorMathI
 
 	float Distance(const sf::Vector2i & A, const sf::Vector2i & B);
 }
-
-#endif
