@@ -5,7 +5,7 @@ Repository of the Smart Tales sequel, codename Smart Tales II. See the original 
 
 ## Dependencies
 Currently the project requires the following:
-- Microsoft's Visual Studio 2017 (VS2017)
+- Microsoft's Visual Studio 2017 (VS2017) with Visual C++
 - Simple and Fast Multimedia Library (SFML) version 2.4.2
 
 ## License
