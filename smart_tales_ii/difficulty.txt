@@ -1,0 +1,23 @@
+# <-- This indicates a comment line, it is ignored by the game
+# This file defines the game's difficulty settings
+
+# The following per line layout is used:
+# start_velocity increment_interval increment_velocity increment_max_velocity
+
+# start_velocity
+# Velocity of the scroll speed at the start
+
+# increment_interval
+# How many seconds (whole number) must pass before the increment_velocity 
+# is added to the game's current velocity (making it scroll faster)
+
+# increment_velocity
+# The amount of velocity added per increment_interval timespan
+
+# increment_max_velocity
+# The upperbound of the velocity value, if the velocity is greater
+# than this value after adding an increment, it is set to this value
+# instead. This gives the game an upper boundry for the scrolling speed
+
+# DEFINITION
+50 2 4 1280

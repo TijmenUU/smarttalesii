@@ -54,6 +54,12 @@
     <ClCompile Include="obstacles.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="gamemode.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="runningmode.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="definitions.hpp">
@@ -80,5 +86,19 @@
     <ClInclude Include="obstacles.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="gamemode.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="runningmode.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="difficulty.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="obstacles.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

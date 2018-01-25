@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="gamemode.cpp" />
     <ClCompile Include="gameworld.cpp" />
     <ClCompile Include="gesture.cpp" />
     <ClCompile Include="inputhandler.cpp" />
@@ -27,9 +28,11 @@
     <ClCompile Include="obstacles.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="runningmode.cpp" />
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gamemode.hpp" />
     <ClInclude Include="gameworld.hpp" />
     <ClInclude Include="gesture.hpp" />
     <ClInclude Include="definitions.hpp" />
@@ -37,7 +40,20 @@
     <ClInclude Include="obstacles.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="program.hpp" />
+    <ClInclude Include="runningmode.hpp" />
     <ClInclude Include="vectormath.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="difficulty.txt">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Text>
+    <Text Include="obstacles.txt">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Text>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -110,6 +126,12 @@
       <AdditionalDependencies>sfml-graphics-s-d.lib;freetype.lib;jpeg.lib;sfml-window-s-d.lib;opengl32.lib;gdi32.lib;sfml-system-s-d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)*.txt  $(OutDir)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy resource files</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -137,6 +159,12 @@
       <AdditionalDependencies>sfml-graphics-s.lib;freetype.lib;jpeg.lib;sfml-window-s.lib;opengl32.lib;gdi32.lib;sfml-system-s.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(ProjectDir)*.txt  $(OutDir)</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy resource files</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
