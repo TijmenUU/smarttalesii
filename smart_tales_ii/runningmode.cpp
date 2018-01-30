@@ -1,9 +1,16 @@
 #include "runningmode.hpp"
+#include "vectormath.hpp"
 
-#include <sstream>
+#include <iomanip> // debug
+#include <iostream> // debug
+#include <sstream> // debug
 
 const std::string cObstacleDefinitionFile = "obstacles.txt";
 const std::string cGameDifficultyFile = "difficulty.txt";
+const std::string cPlayerTexture = "textures/player.png";
+
+const float cWorldWidth = 1280.f;
+const float cWorldHeight = 720.f;
 
 void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -13,8 +20,21 @@ void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 			continue;
 		target.draw(obstacles[i], states);
 	}
+	target.draw(player, states);
 	
 	target.draw(debugTxt, states); // debug
+}
+
+void Runningmode::SpawnObstacle()
+{
+	if(obstacleSpawnIndex >= obstacleDefinitions.size())
+	{
+		obstacleSpawnIndex = 0;
+	}
+
+	const float groundlevel = (0.66f * cWorldHeight) - obstacleDefinitions[obstacleSpawnIndex].texture.getSize().y;
+	obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex], sf::Vector2f(cWorldWidth, groundlevel));
+	++obstacleSpawnIndex;
 }
 
 void Runningmode::Reset()
@@ -24,50 +44,65 @@ void Runningmode::Reset()
 	obstacleSpawnIndex = 0;
 	currentTimeout = 0.f;
 	scrollVelocity = gameDifficulty.startVelocity;
-	distanceCovered = 0.0;
+
+	const float groundLevel = 0.66f * cWorldHeight;
+	const auto playerBounds = player.getGlobalBounds();
+	const sf::Vector2f playerPos(playerBounds.width, groundLevel - playerBounds.height);
+	player.setPosition(playerPos);
+
+	score.Reset();
 }
 
 void Runningmode::Load()
 {
 	obstacleDefinitions = Definition::GetObstacles(cObstacleDefinitionFile);
 	gameDifficulty = Definition::GetDifficulty(cGameDifficultyFile);
+	player.Load(cPlayerTexture);
 	Reset();
 }
 
 void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
 {
+	if(input.WasKeyReleased(sf::Keyboard::Key::P))
+	{
+		paused = !paused;
+	}
+
+	/* Anything affected by pause should be after this statement */
+	if(paused)
+	{
+		debugTxt.setString("Game is paused."); // debug
+		return;
+	}
+
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0 ; --i)
 	{
 		auto & obstacle = obstacles[i];
-		obstacle.Update(timeElapsed, -scrollVelocity, input);
-
-		const auto size = obstacle.GetSize();
-		const auto position = obstacle.GetPosition();
-		if(position.x + size.x < 0.f)
+		if(obstacle.Update(timeElapsed, -scrollVelocity, input))
 		{
-			if(!obstacle.IsNeutralized())
-			{
-				Reset(); 
-			}
-			else
-			{
-				obstacles.erase(obstacles.begin() + i);
-			}
-		}
-		else if(obstacle.IsNeutralized())
-		{
+			score.AddNeutralization(VectorMathF::Distance(obstacle.GetPosition(), player.getPosition()));
 			obstacles.erase(obstacles.begin() + i);
+			continue;
+		}
+
+		if(obstacle.CollidesWith(player.getGlobalBounds()))
+		{
+			std::cout << "Run over! Final score: " << score.GetTotalScore();
+			std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';// debug
+			Reset();
 		}
 	}
 
 	const auto elapsedSeconds = timeElapsed.asSeconds();
 
-	distanceCovered += elapsedSeconds * scrollVelocity;
+	score.distance += elapsedSeconds * scrollVelocity;
 
 	// debug
 	std::stringstream ss;
+	ss << std::fixed << std::setprecision(1);
 	ss << "Current scroll velocity " << scrollVelocity << " pixels per second.\n";
-	ss << "Distance of " << distanceCovered << " pixels covered.";
+	ss << "Distance of " << score.distance << " pixels covered.\n";
+	ss << "Score of " << score.GetTotalScore() << " achieved.";
 	debugTxt.setString(ss.str());
 	// end debug
 
@@ -78,15 +113,10 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 	}
 
 	currentTimeout += elapsedSeconds;
-	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().GetPosition().x < (1280.f - 400.f)))
+	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().GetPosition().x < (cWorldWidth - 400.f)))
 	{
 		currentTimeout = 0.f;
-		if(obstacleSpawnIndex >= obstacleDefinitions.size())
-		{
-			obstacleSpawnIndex = 0;
-		}
-		obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex], sf::Vector2f(1280.f, 360.f));
-		++obstacleSpawnIndex;
+		SpawnObstacle();
 	}
 }
 
@@ -99,13 +129,13 @@ Runningmode::Runningmode(sf::Font * font)
 	spawnTimeout(2.f),
 	currentTimeout(spawnTimeout),
 	scrollVelocity(0.f),
-	distanceCovered(0.0),
-	debugTxt("", *fontPtr)// debug
+	player(),
+	score(),
+	paused(false),
+	debugTxt("", *fontPtr, 22)// debug
 {
 	// debug
-	debugTxt.setFillColor(sf::Color::White);
-	debugTxt.setOutlineColor(sf::Color::Black);
-	debugTxt.setOutlineThickness(1.f);
+	debugTxt.setFillColor(sf::Color::Black);
 	debugTxt.setPosition(0.f, 0.f);
 	// end debug
 }

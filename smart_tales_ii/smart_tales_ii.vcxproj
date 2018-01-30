@@ -27,8 +27,10 @@
     <ClCompile Include="definitions.cpp" />
     <ClCompile Include="obstacles.cpp" />
     <ClCompile Include="platform.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="runningmode.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -39,8 +41,10 @@
     <ClInclude Include="inputhandler.hpp" />
     <ClInclude Include="obstacles.hpp" />
     <ClInclude Include="platform.hpp" />
+    <ClInclude Include="player.hpp" />
     <ClInclude Include="program.hpp" />
     <ClInclude Include="runningmode.hpp" />
+    <ClInclude Include="score.hpp" />
     <ClInclude Include="vectormath.hpp" />
   </ItemGroup>
   <ItemGroup>

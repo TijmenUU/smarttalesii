@@ -1,6 +1,8 @@
 #pragma once
 #include "gamemode.hpp"
 #include "obstacles.hpp"
+#include "player.hpp"
+#include "score.hpp"
 
 #include <vector>
 
@@ -20,10 +22,14 @@ protected:
 	const float spawnTimeout; // in seconds
 	float currentTimeout; // in seconds
 	float scrollVelocity; // pixels per second
-	double distanceCovered;
+
+	Player player;
+	Score score;
+	bool paused;
 
 	sf::Text debugTxt; // debug
 
+	void SpawnObstacle();
 	void Reset();
 public:
 	// May throw a runtime exception if it cannot load the required files and assets

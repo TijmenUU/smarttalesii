@@ -41,6 +41,11 @@ Program::Program( const unsigned int _windowWidth,
 	window.setFramerateLimit(frameRateLimit);
 
 	defaultFont.loadFromFile(fontLocation);
+
+	auto view = window.getView();
+	view.setSize(_windowWidth, _windowHeight);
+	view.setCenter(_windowWidth / 2, _windowHeight / 2);
+	window.setView(view);
 }
 
 Program::~Program()
