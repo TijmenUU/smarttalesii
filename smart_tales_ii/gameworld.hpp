@@ -9,14 +9,14 @@
 class GameWorld : public sf::Drawable
 {
 private:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-
-protected:
 	Fonts & fonts;
 	std::vector<std::shared_ptr<Gamemode>> gamemodes;
 	unsigned int currentGamemodeIdx;
+
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	
 public:
+	// May throw a runtime exception if it cannot load the required files and assets
 	void Load();
 
 	void Update(const sf::Time & timeElapsed,

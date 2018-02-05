@@ -20,7 +20,10 @@ void Program::Load()
 {
 	for(size_t i = 0U; i < cFontFiles.size(); ++i)
 	{
-		fontsContainer.LoadFont(cFontFiles[i], cFontNames[i]);
+		if(!fontsContainer.LoadFont(cFontFiles[i], cFontNames[i]))
+		{
+			throw std::runtime_error("Error loading file " + cFontFiles[i]);
+		}
 	}
 	world.Load();
 }

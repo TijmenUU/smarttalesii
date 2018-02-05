@@ -8,14 +8,16 @@
 
 class Program
 {
-protected:
+private:
 	unsigned int windowWidth, windowHeight;
 	sf::RenderWindow window;
 	Fonts fontsContainer;
 
 	Inputhandler inputhandler;
 	GameWorld world;
+
 public:
+	// May throw a runtime exception if it cannot load the required files and assets
 	void Load();
 
 	void Run();

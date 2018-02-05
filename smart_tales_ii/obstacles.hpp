@@ -8,9 +8,6 @@
 class Obstacle : public sf::Drawable
 {
 private:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-
-protected:
 	sf::Sprite sprite;
 	sf::CircleShape debugShape; // debug
 	uint8_t gestureNeutralizeFlag;
@@ -18,6 +15,8 @@ protected:
 	ObstacleType type;
 	bool neutralized;
 	std::string neutralizationHint;
+
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
 	bool IsNeutralized() const;
