@@ -4,7 +4,7 @@
 
 class Player : public sf::Sprite
 {
-protected:
+private:
 	sf::Texture texture;
 
 public:

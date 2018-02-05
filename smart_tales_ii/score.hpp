@@ -2,7 +2,7 @@
 
 struct Score
 {
-protected:
+private:
 	unsigned int neutralizations;
 	double bonusScore;
 

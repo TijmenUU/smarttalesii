@@ -4,7 +4,7 @@
 
 class Inputhandler
 {
-protected:
+private:
 	std::vector<sf::Keyboard::Key> keyUpEvents;
 	std::vector<sf::Keyboard::Key> keyDownEvents;
 

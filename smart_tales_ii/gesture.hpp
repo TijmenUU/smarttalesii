@@ -7,7 +7,7 @@
 
 class SwipeGesture
 {
-protected:
+private:
 	sf::Vector2f position; // world space position of interaction area center
 	float radius, minDist; // in pixels
 	bool gestureInProgress;
