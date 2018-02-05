@@ -10,16 +10,15 @@
 class Runningmode : public Gamemode
 {
 private:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-
-protected:
 	ScrollingBackground background;
 
 	std::vector<Definition::Obstacle> obstacleDefinitions;
 	Definition::Difficulty gameDifficulty;
-	std::vector<Obstacle> obstacles;
 	
+	std::vector<Obstacle> obstacles;
 	size_t obstacleSpawnIndex;
+	sf::Text obstacleHintText;
+	bool drawObstacleHint;
 	const float spawnTimeout; // in seconds
 	float currentTimeout; // in seconds
 	float scrollVelocity; // pixels per second
@@ -28,10 +27,13 @@ protected:
 	Score score;
 	bool paused;
 
-	sf::Text debugTxt; // debug
-
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
 	void Reset();
+
+	void UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);
+	void UpdateHints();
+
 public:
 	// May throw a runtime exception if it cannot load the required files and assets
 	void Load() override;

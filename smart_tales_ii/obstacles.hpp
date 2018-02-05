@@ -17,6 +17,7 @@ protected:
 	SwipeGesture gesture;
 	ObstacleType type;
 	bool neutralized;
+	std::string neutralizationHint;
 
 public:
 	bool IsNeutralized() const;
@@ -26,6 +27,7 @@ public:
 	sf::Vector2f GetCenter() const;
 	sf::Vector2f GetPosition() const;
 	ObstacleType GetType() const;
+	const std::string & GetNeutralizationHint() const;
 
 	void SetNeutralized(const bool value);
 	void SetPosition(const sf::Vector2f & position);

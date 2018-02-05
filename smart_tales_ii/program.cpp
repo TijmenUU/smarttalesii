@@ -8,14 +8,12 @@
 
 const std::vector<std::string> cFontFiles =
 {
-	"fonts/commodore.ttf",
-	"fonts/karmaticarcade.ttf"
+	"font/commodore.ttf"
 };
 
 const std::vector<std::string> cFontNames =
 {
-	"commodore",
-	"karmaticarcade"
+	"commodore"
 };
 
 void Program::Load()

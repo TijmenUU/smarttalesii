@@ -34,6 +34,7 @@ namespace Definition
 		float interactionRadius;
 		float minimalDistance;
 		uint8_t neutralizationSwipes;
+		std::string neutralizationHint;
 
 		Obstacle(const std::string & definitionline);
 	};

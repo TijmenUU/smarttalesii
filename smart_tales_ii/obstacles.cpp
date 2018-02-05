@@ -34,6 +34,11 @@ ObstacleType Obstacle::GetType() const
 	return type;
 }
 
+const std::string & Obstacle::GetNeutralizationHint() const
+{
+	return neutralizationHint;
+}
+
 void Obstacle::SetNeutralized(const bool value)
 {
 	neutralized = value;
@@ -92,7 +97,8 @@ Obstacle::Obstacle(const Definition::Obstacle & obstacleDefinition, const sf::Ve
 	gestureNeutralizeFlag(obstacleDefinition.neutralizationSwipes),
 	gesture(obstacleDefinition.interactionRadius, spawnPosition, obstacleDefinition.minimalDistance),
 	type(obstacleDefinition.type),
-	neutralized(false)
+	neutralized(false),
+	neutralizationHint(obstacleDefinition.neutralizationHint)
 {
 	SetPosition(spawnPosition);
 

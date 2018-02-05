@@ -57,13 +57,35 @@ namespace Definition
 		return ObstacleType::None;
 	}
 
+	std::string ToHint(const ObstacleType o)
+	{
+		switch(o)
+		{
+			case ObstacleType::Furniture:
+			return "Swipe down!";
+
+			case ObstacleType::Door:
+			return "Swipe left or right!";
+
+			case ObstacleType::Lightswitch:
+			return "Tap it!";
+
+			case ObstacleType::Phone:
+			return "Swipe up!";
+			
+			default:
+			return "";
+		}
+	}
+
 	Obstacle::Obstacle(const std::string & definitionline)
 		: type(ObstacleType::None),
 		textureSourceFile(),
 		texture(),
 		interactionRadius(-1.f),
 		minimalDistance(-1.f),
-		neutralizationSwipes(0U)
+		neutralizationSwipes(0U),
+		neutralizationHint()
 	{
 		std::stringstream ss;
 		ss.str(definitionline);
@@ -86,6 +108,8 @@ namespace Definition
 			{
 				neutralizationSwipes |= static_cast<uint8_t>(ToSwipeType(value));
 			}
+
+			neutralizationHint = ToHint(type);
 		}
 
 		if(!texture.loadFromFile(textureSourceFile))

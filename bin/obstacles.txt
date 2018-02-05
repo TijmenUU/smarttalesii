@@ -21,7 +21,7 @@
 # - phone
 
 # DEFINITIONS
-furniture	textures/furniture.png		200	50	downwards
-door		textures/door.png			200	50	leftwards rightwards
-lightswitch	textures/lightswitch.png	100	100	tap
-phone		textures/phone.png			200	50	upwards
+furniture	texture/furniture.png		200	50	downwards
+door		texture/door.png			200	50	leftwards rightwards
+lightswitch	texture/lightswitch.png	100	100	tap
+phone		texture/phone.png			200	50	upwards
