@@ -13,8 +13,6 @@ private:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 protected:
-	sf::Font * fontPtr;
-
 	ScrollingBackground background;
 
 	std::vector<Definition::Obstacle> obstacleDefinitions;
@@ -39,6 +37,6 @@ public:
 	void Load() override;
 	void Update(const sf::Time & timeElapsed, const Inputhandler & input) override;
 
-	Runningmode(sf::Font * font);
+	Runningmode(Fonts & fontsRef);
 };
 

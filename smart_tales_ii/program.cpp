@@ -3,10 +3,32 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream> // debug
+#include <string>
+#include <vector>
+
+const std::vector<std::string> cFontFiles =
+{
+	"fonts/commodore.ttf",
+	"fonts/karmaticarcade.ttf"
+};
+
+const std::vector<std::string> cFontNames =
+{
+	"commodore",
+	"karmaticarcade"
+};
+
+void Program::Load()
+{
+	for(size_t i = 0U; i < cFontFiles.size(); ++i)
+	{
+		fontsContainer.LoadFont(cFontFiles[i], cFontNames[i]);
+	}
+	world.Load();
+}
 
 void Program::Run()
 {
-
 	sf::Clock sfclock; // Don't do anything heavy after this (inb4 time warps)
 	do
 	{
@@ -29,18 +51,15 @@ void Program::Run()
 
 Program::Program( const unsigned int _windowWidth,
 						const unsigned int _windowHeight,
-						const std::string fontLocation,
 						const std::string windowTitle,
 						const unsigned int frameRateLimit)
 	: windowWidth(_windowWidth),
 	windowHeight(_windowHeight),
 	window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle),
 	inputhandler(),
-	world(&defaultFont, _windowWidth, _windowHeight)
+	world(fontsContainer, _windowWidth, _windowHeight)
 {
 	window.setFramerateLimit(frameRateLimit);
-
-	defaultFont.loadFromFile(fontLocation);
 
 	auto view = window.getView();
 	view.setSize(_windowWidth, _windowHeight);

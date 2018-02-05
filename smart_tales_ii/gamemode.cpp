@@ -9,3 +9,8 @@ void Gamemode::Wake()
 {
 	return;
 }
+
+Gamemode::Gamemode(Fonts & fontsRef)
+	: fonts(fontsRef)
+{
+}

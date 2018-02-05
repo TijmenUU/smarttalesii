@@ -10,7 +10,8 @@ int main(int argc, char ** argv)
 	Program * p;
 	try
 	{
-		p = new Program(windowWidth, windowHeight, "fonts/commodore.ttf", "Smart Tales II");
+		p = new Program(windowWidth, windowHeight, "Smart Tales II");
+		p->Load();
 	}
 	catch(const std::runtime_error & e)
 	{

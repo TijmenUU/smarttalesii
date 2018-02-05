@@ -5,13 +5,18 @@
 #include <iostream> // debug
 #include <sstream> // debug
 
+// Config files
 const std::string cObstacleDefinitionFile = "obstacles.txt";
 const std::string cGameDifficultyFile = "difficulty.txt";
+
+// Textures
 const std::string cPlayerTexture = "textures/player.png";
 const std::string cBackgroundWallTexture = "textures/runningbackground.png";
 
+// Utility consts
 const float cWorldWidth = 1280.f; // in pixels
 const float cWorldHeight = 720.f; // in pixels
+const float cHintBorder = cWorldWidth / 3.f; // in pixels, the minimum position for the hint to show up
 
 void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -65,6 +70,19 @@ void Runningmode::Load()
 	obstacleDefinitions = Definition::GetObstacles(cObstacleDefinitionFile);
 	gameDifficulty = Definition::GetDifficulty(cGameDifficultyFile);
 	player.Load(cPlayerTexture);
+
+	// debug
+	sf::Font * fontPtr = fonts.GetFont("commodore");
+	if(fontPtr == nullptr)
+	{
+		throw std::runtime_error("Error fetching commodore font in Runningmode.");
+	}
+	debugTxt.setFont(*fontPtr);
+	debugTxt.setCharacterSize(16);
+	debugTxt.setFillColor(sf::Color::Black);
+	debugTxt.setPosition(0.f, 0.f);
+	// end debug
+
 	Reset();
 }
 
@@ -130,8 +148,8 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 	}
 }
 
-Runningmode::Runningmode(sf::Font * font)
-	: fontPtr(font),
+Runningmode::Runningmode(Fonts & fontsRef)
+	: Gamemode(fontsRef),
 	background(cWorldWidth),
 	obstacleDefinitions(),
 	obstacles(),
@@ -143,10 +161,7 @@ Runningmode::Runningmode(sf::Font * font)
 	player(),
 	score(),
 	paused(false),
-	debugTxt("", *fontPtr, 22)// debug
+	debugTxt()// debug
 {
-	// debug
-	debugTxt.setFillColor(sf::Color::Black);
-	debugTxt.setPosition(0.f, 0.f);
-	// end debug
+
 }

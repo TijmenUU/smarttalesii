@@ -4,6 +4,14 @@
 #include <cmath>
 #include <ctime>
 
+void GameWorld::Load()
+{
+	for(size_t i = 0; i < gamemodes.size(); ++i)
+	{
+		gamemodes[i]->Load();
+	}
+}
+
 void GameWorld::Update(const sf::Time & timeElapsed,
 	const Inputhandler & input,
 	const sf::View & view)
@@ -16,17 +24,12 @@ void GameWorld::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(*(gamemodes[currentGamemodeIdx]), states);
 }
 
-GameWorld::GameWorld(sf::Font * fontPointer,
+GameWorld::GameWorld(Fonts & fontsRef,
 	const unsigned int windowWidth,
 	const unsigned int windowHeight)
-: fontPtr(fontPointer),
+: fonts(fontsRef),
 gamemodes(0),
 currentGamemodeIdx(0U)
 {
-	gamemodes.emplace_back(new Runningmode(fontPointer));
-
-	for(size_t i = 0; i < gamemodes.size(); ++i)
-	{
-		gamemodes[i]->Load();
-	}
+	gamemodes.emplace_back(new Runningmode(fonts));
 }

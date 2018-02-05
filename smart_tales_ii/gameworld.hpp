@@ -1,5 +1,6 @@
 #pragma once
 #include "gamemode.hpp"
+#include "fonts.hpp"
 
 #include <memory>
 #include <string>
@@ -11,16 +12,18 @@ private:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 protected:
-	sf::Font * fontPtr;
+	Fonts & fonts;
 	std::vector<std::shared_ptr<Gamemode>> gamemodes;
 	unsigned int currentGamemodeIdx;
 	
 public:
+	void Load();
+
 	void Update(const sf::Time & timeElapsed,
 		const Inputhandler & input,
 		const sf::View & view);
 
-	GameWorld(sf::Font * fontPointer,
+	GameWorld(Fonts & fontsRef,
 		const unsigned int windowWidth,
 		const unsigned int windowHeight);
 };
