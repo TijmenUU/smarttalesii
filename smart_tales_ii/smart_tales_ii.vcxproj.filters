@@ -25,6 +25,12 @@
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{a9471f99-f1ff-4b27-adef-94da3b35f896}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\objects">
+      <UniqueIdentifier>{59f476f1-b1bf-4291-9770-d003c3f3c2ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\objects">
+      <UniqueIdentifier>{70e02f7a-9a9c-4326-8aa6-8b911a8b3c31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,9 +57,6 @@
     <ClCompile Include="gameworld.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="obstacles.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
     <ClCompile Include="gamemode.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
@@ -61,10 +64,13 @@
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>Source Files\game</Filter>
+      <Filter>Source Files\game\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacles.cpp">
+      <Filter>Source Files\game\objects</Filter>
     </ClCompile>
     <ClCompile Include="score.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +95,6 @@
     <ClInclude Include="gameworld.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="obstacles.hpp">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="gamemode.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
@@ -99,10 +102,13 @@
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="player.hpp">
-      <Filter>Header Files\game</Filter>
+      <Filter>Header Files\game\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacles.hpp">
+      <Filter>Header Files\game\objects</Filter>
     </ClInclude>
     <ClInclude Include="score.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
