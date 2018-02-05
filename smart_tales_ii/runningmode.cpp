@@ -8,18 +8,22 @@
 const std::string cObstacleDefinitionFile = "obstacles.txt";
 const std::string cGameDifficultyFile = "difficulty.txt";
 const std::string cPlayerTexture = "textures/player.png";
+const std::string cBackgroundWallTexture = "textures/runningbackground.png";
 
-const float cWorldWidth = 1280.f;
-const float cWorldHeight = 720.f;
+const float cWorldWidth = 1280.f; // in pixels
+const float cWorldHeight = 720.f; // in pixels
 
 void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	target.draw(background, states);
+
 	for(size_t i = 0; i < obstacles.size(); ++i)
 	{
 		if(obstacles[i].IsNeutralized())
 			continue;
 		target.draw(obstacles[i], states);
 	}
+
 	target.draw(player, states);
 	
 	target.draw(debugTxt, states); // debug
@@ -39,6 +43,8 @@ void Runningmode::SpawnObstacle()
 
 void Runningmode::Reset()
 {
+	background.Reset();
+
 	obstacles.clear();
 
 	obstacleSpawnIndex = 0;
@@ -55,6 +61,7 @@ void Runningmode::Reset()
 
 void Runningmode::Load()
 {
+	background.Load(cBackgroundWallTexture);
 	obstacleDefinitions = Definition::GetObstacles(cObstacleDefinitionFile);
 	gameDifficulty = Definition::GetDifficulty(cGameDifficultyFile);
 	player.Load(cPlayerTexture);
@@ -74,6 +81,8 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 		debugTxt.setString("Game is paused."); // debug
 		return;
 	}
+
+	background.Update(timeElapsed, -scrollVelocity);
 
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0 ; --i)
 	{
@@ -106,6 +115,7 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 	debugTxt.setString(ss.str());
 	// end debug
 
+	// Anything affected by the scrolling velocity should be updated BEFORE this line
 	scrollVelocity += gameDifficulty.incrementVelocity * elapsedSeconds;
 	if(scrollVelocity > gameDifficulty.incrementMaxVelocity)
 	{
@@ -122,6 +132,7 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 
 Runningmode::Runningmode(sf::Font * font)
 	: fontPtr(font),
+	background(cWorldWidth),
 	obstacleDefinitions(),
 	obstacles(),
 	gameDifficulty(),

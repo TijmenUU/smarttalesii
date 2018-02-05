@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="background.cpp" />
     <ClCompile Include="gamemode.cpp" />
     <ClCompile Include="gameworld.cpp" />
     <ClCompile Include="gesture.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="background.hpp" />
     <ClInclude Include="gamemode.hpp" />
     <ClInclude Include="gameworld.hpp" />
     <ClInclude Include="gesture.hpp" />

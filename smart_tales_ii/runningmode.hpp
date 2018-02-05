@@ -1,4 +1,5 @@
 #pragma once
+#include "background.hpp"
 #include "gamemode.hpp"
 #include "obstacles.hpp"
 #include "player.hpp"
@@ -13,6 +14,8 @@ private:
 
 protected:
 	sf::Font * fontPtr;
+
+	ScrollingBackground background;
 
 	std::vector<Definition::Obstacle> obstacleDefinitions;
 	Definition::Difficulty gameDifficulty;
