@@ -9,10 +9,13 @@ private:
 public:
 	double distance;
 
-	void AddNeutralization(const float distanceFromPlayer);
+	double CalculateBonusScore(const double distance) const;
+	double CalculateNeutralizationScore(const unsigned int count) const;
+	double GetTotalScore() const;
+	unsigned int GetCurrency() const;
 
-	double GetTotalScore();
-	unsigned int GetCurrency();
+	// Ups the neutralization count and adds the bonus score using the distance
+	void AddNeutralization(const double distanceFromPlayer);
 
 	void Reset();
 

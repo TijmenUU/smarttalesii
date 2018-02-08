@@ -2,21 +2,31 @@
 
 #include <cmath>
 
-void Score::AddNeutralization(const float distanceFromPlayer)
+double Score::CalculateBonusScore(const double distance) const
+{
+	return (distance / 1280.0) * 200.0;
+}
+
+double Score::CalculateNeutralizationScore(const unsigned int count) const
+{
+	return static_cast<double>(count) * 50.0;
+}
+
+double Score::GetTotalScore() const
+{
+	return std::abs((distance / 100.0) + CalculateNeutralizationScore(neutralizations) + bonusScore);
+}
+
+unsigned int Score::GetCurrency() const
+{
+	return static_cast<unsigned int>(std::round(GetTotalScore() / 100.0));
+}
+
+void Score::AddNeutralization(const double distanceFromPlayer)
 {
 	++neutralizations;
 
-	bonusScore += (distanceFromPlayer / 1280.f) * 200.f;
-}
-
-double Score::GetTotalScore()
-{
-	return std::abs((distance / 100.0) + (static_cast<double>(neutralizations) * 50.0) + bonusScore);
-}
-
-unsigned int Score::GetCurrency()
-{
-	return static_cast<unsigned int>(std::round(GetTotalScore() / 100.0));
+	bonusScore += CalculateBonusScore(distanceFromPlayer);
 }
 
 void Score::Reset()

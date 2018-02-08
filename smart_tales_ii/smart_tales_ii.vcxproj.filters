@@ -78,6 +78,9 @@
     <ClCompile Include="fonts.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="scorebubble.cpp">
+      <Filter>Source Files\game\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="definitions.hpp">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="fonts.hpp">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="scorebubble.hpp">
+      <Filter>Header Files\game\objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

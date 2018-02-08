@@ -4,6 +4,7 @@
 #include "obstacles.hpp"
 #include "player.hpp"
 #include "score.hpp"
+#include "scorebubble.hpp"
 
 #include <vector>
 
@@ -23,16 +24,22 @@ private:
 	float currentTimeout; // in seconds
 	float scrollVelocity; // pixels per second
 
-	Player player;
 	Score score;
+	sf::Text scoreText;
+	std::vector<ScoreBubble> scoreBubbles;
+
+	Player player;
 	bool paused;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
+	void SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const float score, const float bonusScore);
 	void Reset();
 
 	void UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);
 	void UpdateHints();
+	void UpdateScoreDisplay();
+	void UpdateScoreBubbles(const sf::Time & elapsed);
 
 public:
 	// May throw a runtime exception if it cannot load the required files and assets

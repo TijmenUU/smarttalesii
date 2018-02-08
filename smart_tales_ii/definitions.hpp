@@ -48,6 +48,7 @@ namespace Definition
 		float incrementInterval;
 		float incrementVelocity;
 		float incrementMaxVelocity;
+		float hintBorderX;
 	};
 
 	Difficulty GetDifficulty(const std::string & definitionFile);

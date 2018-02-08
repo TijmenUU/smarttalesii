@@ -33,6 +33,7 @@
     <ClCompile Include="program.cpp" />
     <ClCompile Include="runningmode.cpp" />
     <ClCompile Include="score.cpp" />
+    <ClCompile Include="scorebubble.cpp" />
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +50,7 @@
     <ClInclude Include="program.hpp" />
     <ClInclude Include="runningmode.hpp" />
     <ClInclude Include="score.hpp" />
+    <ClInclude Include="scorebubble.hpp" />
     <ClInclude Include="vectormath.hpp" />
   </ItemGroup>
   <ItemGroup>

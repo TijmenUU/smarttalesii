@@ -1,23 +1,29 @@
 # <-- This indicates a comment line, it is ignored by the game
 # This file defines the game's difficulty settings
+# The game uses a 1280x720 fixed internal resolution, independent
+# of the actual window size
 
 # The following per line layout is used:
-# start_velocity increment_interval increment_velocity increment_max_velocity
+# start_velocity increment_velocity increment_max_velocity hint_border
 
 # start_velocity
+# Unit: pixels per second
 # Velocity of the scroll speed at the start
 
-# increment_interval
-# How many seconds (whole number) must pass before the increment_velocity 
-# is added to the game's current velocity (making it scroll faster)
-
 # increment_velocity
+# Unit: pixels per second
 # The amount of velocity added per increment_interval timespan
 
 # increment_max_velocity
+# Unit: pixels per second
 # The upperbound of the velocity value, if the velocity is greater
 # than this value after adding an increment, it is set to this value
 # instead. This gives the game an upper boundry for the scrolling speed
 
+# hint_border
+# Unit: pixels
+# The border after which scrolling hints are being displayed above
+# obstacles. Can be set to 0 to effectively turn it off.
+
 # DEFINITION
-50 2 4 1280
+50 2 4 1280 960

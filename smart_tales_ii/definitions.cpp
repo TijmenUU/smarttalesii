@@ -192,6 +192,10 @@ namespace Definition
 			{
 				throw std::runtime_error("Error during difficulty file parsing: increment max velocity invalid <" + line + ">");
 			}
+			if(!(ss >> result.hintBorderX))
+			{
+				throw std::runtime_error("Error during difficulty file parsing: hint border x position invalid <" + line + ">");
+			}
 
 			jobDone = true;
 			break;
