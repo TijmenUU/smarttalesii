@@ -29,23 +29,29 @@ private:
 	std::vector<ScoreBubble> scoreBubbles;
 
 	Player player;
-	bool paused;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
 	void SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const float score, const float bonusScore);
+	
+	void GameOver();
 	void Reset();
+
+	bool SurpressDraw() const override;
+	bool SurpressUpdate() const override;
+	void OnExit() override;
+	void OnEnter() override;
+
+	// May throw a runtime exception if it cannot load the required files and assets
+	void Load() override;
 
 	void UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);
 	void UpdateHints();
 	void UpdateScoreDisplay();
 	void UpdateScoreBubbles(const sf::Time & elapsed);
-
-public:
-	// May throw a runtime exception if it cannot load the required files and assets
-	void Load() override;
 	void Update(const sf::Time & timeElapsed, const Inputhandler & input) override;
 
-	Runningmode(Fonts & fontsRef);
+public:
+	Runningmode(Fonts & fontsRef, GameManager & managerRef);
 };
 

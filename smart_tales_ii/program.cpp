@@ -1,4 +1,5 @@
 #include "program.hpp"
+#include "runningmode.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -25,7 +26,9 @@ void Program::Load()
 			throw std::runtime_error("Error loading file " + cFontFiles[i]);
 		}
 	}
-	world.Load();
+	// Set game starting gamemode
+	std::shared_ptr<Gamemode> startupmode(new Runningmode(fontsContainer, manager));
+	manager.PushGamemode(startupmode);
 }
 
 void Program::Run()
@@ -39,12 +42,12 @@ void Program::Run()
 		if(inputhandler.WasKeyReleased(sf::Keyboard::Key::Escape))
 			break;
 
-		world.Update(sfclock.restart(), inputhandler, window.getView());
+		manager.Update(sfclock.restart(), inputhandler, window.getView());
 		// end update
 
 		window.clear(sf::Color::White);
 		// draw
-		window.draw(world);
+		window.draw(manager);
 		// end draw
 		window.display();
 	} while(!inputhandler.DidWindowClose());
@@ -58,7 +61,7 @@ Program::Program( const unsigned int _windowWidth,
 	windowHeight(_windowHeight),
 	window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle),
 	inputhandler(),
-	world(fontsContainer, _windowWidth, _windowHeight)
+	manager()
 {
 	window.setFramerateLimit(frameRateLimit);
 

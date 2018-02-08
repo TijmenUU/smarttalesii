@@ -1,8 +1,11 @@
 #include "runningmode.hpp"
+#include "gamemanager.hpp"
+#include "pausemode.hpp"
 #include "vectormath.hpp"
 
 #include <iomanip>
 #include <iostream> // debug
+#include <memory>
 #include <sstream>
 
 // Config files
@@ -14,8 +17,7 @@ const std::string cPlayerTexture = "texture/player.png";
 const std::string cBackgroundWallTexture = "texture/runningbackground.png";
 
 // Utility consts
-const float cWorldWidth = 1280.f; // in pixels
-const float cWorldHeight = 720.f; // in pixels
+const float cFloorY = 520.f; // in pixels
 const std::string cScoreString = "SCORE ";
 
 void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -49,8 +51,8 @@ void Runningmode::SpawnObstacle()
 		obstacleSpawnIndex = 0;
 	}
 
-	const float groundlevel = (0.66f * cWorldHeight) - obstacleDefinitions[obstacleSpawnIndex].texture.getSize().y;
-	obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex], sf::Vector2f(cWorldWidth, groundlevel));
+	const float positionY = (cFloorY) - obstacleDefinitions[obstacleSpawnIndex].texture.getSize().y;
+	obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex], sf::Vector2f(cWorldWidth, positionY));
 	++obstacleSpawnIndex;
 }
 
@@ -66,6 +68,16 @@ void Runningmode::SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const 
 	scoreBubbles.emplace_back(*fontPtr, obstaclePosition, score, bonusScore);
 }
 
+void Runningmode::GameOver()
+{
+	// TODO start gamemode switch here to score screen
+	std::shared_ptr<Gamemode> newmode(new PauseMode(fonts, manager, "Game over! Press P to retry"));
+	manager.PushGamemode(newmode);
+
+	Reset();
+	return;
+}
+
 void Runningmode::Reset()
 {
 	background.Reset();
@@ -78,11 +90,16 @@ void Runningmode::Reset()
 
 	score.Reset();
 	scoreBubbles.clear();
+}
 
-	const float groundLevel = 0.66f * cWorldHeight;
-	const auto playerBounds = player.getGlobalBounds();
-	const sf::Vector2f playerPos(playerBounds.width, groundLevel - playerBounds.height);
-	player.setPosition(playerPos);
+bool Runningmode::SurpressDraw() const
+{
+	return true;
+}
+
+bool Runningmode::SurpressUpdate() const
+{
+	return true;
 }
 
 void Runningmode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
@@ -108,7 +125,7 @@ void Runningmode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 			std::cout << "Run over! Final score: " << score.GetTotalScore();
 			std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
 			// end debug
-			Reset();
+			GameOver();
 		}
 	}
 }
@@ -162,7 +179,10 @@ void Runningmode::Load()
 	background.Load(cBackgroundWallTexture);
 	obstacleDefinitions = Definition::GetObstacles(cObstacleDefinitionFile);
 	gameDifficulty = Definition::GetDifficulty(cGameDifficultyFile);
+	
 	player.Load(cPlayerTexture);
+	const auto playerBounds = player.getGlobalBounds();
+	player.setPosition(playerBounds.width, cFloorY - playerBounds.height);
 
 	sf::Font * fontPtr = fonts.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -181,21 +201,15 @@ void Runningmode::Load()
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
-	scoreText.setPosition(0.f, 0.f);
-
-	Reset();
+	scoreText.setPosition(0.f, 15.f);
 }
 
 void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
 {
 	if(input.WasKeyReleased(sf::Keyboard::Key::P))
 	{
-		paused = !paused;
-	}
-
-	/* Anything affected by pause should be after this statement */
-	if(paused)
-	{
+		std::shared_ptr<Gamemode> newmode(new PauseMode(fonts, manager));
+		manager.PushGamemode(newmode);
 		return;
 	}
 
@@ -228,8 +242,18 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 	}
 }
 
-Runningmode::Runningmode(Fonts & fontsRef)
-	: Gamemode(fontsRef),
+void Runningmode::OnExit()
+{
+	// Update the last achieved score?
+}
+
+void Runningmode::OnEnter()
+{
+	Reset();
+}
+
+Runningmode::Runningmode(Fonts & fontsRef, GameManager & managerRef)
+	: Gamemode(fontsRef, managerRef),
 	background(cWorldWidth),
 	obstacleDefinitions(),
 	obstacles(),
@@ -243,8 +267,7 @@ Runningmode::Runningmode(Fonts & fontsRef)
 	score(),
 	scoreText(),
 	scoreBubbles(),
-	player(),
-	paused(false)
+	player()
 {
 
 }

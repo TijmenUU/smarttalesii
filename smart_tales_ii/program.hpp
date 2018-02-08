@@ -1,7 +1,6 @@
 #pragma once
 #include "fonts.hpp"
-#include "gameworld.hpp"
-#include "inputhandler.hpp"
+#include "gamemanager.hpp"
 
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -14,7 +13,7 @@ private:
 	Fonts fontsContainer;
 
 	Inputhandler inputhandler;
-	GameWorld world;
+	GameManager manager;
 
 public:
 	// May throw a runtime exception if it cannot load the required files and assets
