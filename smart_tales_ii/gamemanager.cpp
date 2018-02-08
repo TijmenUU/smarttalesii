@@ -11,6 +11,7 @@ void GameManager::Update(const sf::Time & timeElapsed,
 	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
 	{
 		Gamemode & gamemode = *(gamemodes[i]);
+		// This is done beforehand due to the gamemode potentially deleting itself in the update
 		if(gamemode.SurpressUpdate())
 		{
 			gamemode.Update(timeElapsed, input);

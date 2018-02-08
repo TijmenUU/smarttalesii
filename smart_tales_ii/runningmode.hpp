@@ -8,7 +8,7 @@
 
 #include <vector>
 
-class Runningmode : public Gamemode
+class RunningMode : public Gamemode
 {
 private:
 	ScrollingBackground background;
@@ -52,6 +52,6 @@ private:
 	void Update(const sf::Time & timeElapsed, const Inputhandler & input) override;
 
 public:
-	Runningmode(Fonts & fontsRef, GameManager & managerRef);
+	RunningMode(Fonts & fontsRef, GameManager & managerRef);
 };
 

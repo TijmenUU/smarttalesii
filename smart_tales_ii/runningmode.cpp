@@ -20,7 +20,7 @@ const std::string cBackgroundWallTexture = "texture/runningbackground.png";
 const float cFloorY = 520.f; // in pixels
 const std::string cScoreString = "SCORE ";
 
-void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
+void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(background, states);
 
@@ -44,7 +44,7 @@ void Runningmode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(obstacleHintText, states);
 }
 
-void Runningmode::SpawnObstacle()
+void RunningMode::SpawnObstacle()
 {
 	if(obstacleSpawnIndex >= obstacleDefinitions.size())
 	{
@@ -56,7 +56,7 @@ void Runningmode::SpawnObstacle()
 	++obstacleSpawnIndex;
 }
 
-void Runningmode::SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const float score, const float bonusScore)
+void RunningMode::SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const float score, const float bonusScore)
 {
 	auto * fontPtr = fonts.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -68,7 +68,7 @@ void Runningmode::SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const 
 	scoreBubbles.emplace_back(*fontPtr, obstaclePosition, score, bonusScore);
 }
 
-void Runningmode::GameOver()
+void RunningMode::GameOver()
 {
 	// TODO start gamemode switch here to score screen
 	std::shared_ptr<Gamemode> newmode(new PauseMode(fonts, manager, "Game over! Press P to retry"));
@@ -78,7 +78,7 @@ void Runningmode::GameOver()
 	return;
 }
 
-void Runningmode::Reset()
+void RunningMode::Reset()
 {
 	background.Reset();
 
@@ -92,17 +92,17 @@ void Runningmode::Reset()
 	scoreBubbles.clear();
 }
 
-bool Runningmode::SurpressDraw() const
+bool RunningMode::SurpressDraw() const
 {
 	return true;
 }
 
-bool Runningmode::SurpressUpdate() const
+bool RunningMode::SurpressUpdate() const
 {
 	return true;
 }
 
-void Runningmode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
+void RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
 {
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
@@ -130,7 +130,7 @@ void Runningmode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 	}
 }
 
-void Runningmode::UpdateHints()
+void RunningMode::UpdateHints()
 {
 	drawObstacleHint = false;
 	if(obstacles.size() > 0U)
@@ -148,7 +148,7 @@ void Runningmode::UpdateHints()
 	}
 }
 
-void Runningmode::UpdateScoreDisplay()
+void RunningMode::UpdateScoreDisplay()
 {
 	// Content
 	std::stringstream ss;
@@ -163,7 +163,7 @@ void Runningmode::UpdateScoreDisplay()
 	scoreText.setPosition((cWorldWidth / 2) - (width / 2), oldPosition.y);
 }
 
-void Runningmode::UpdateScoreBubbles(const sf::Time & elapsed)
+void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 {
 	for(int64_t i = static_cast<int64_t>(scoreBubbles.size()) - 1; i >= 0; --i)
 	{
@@ -174,7 +174,7 @@ void Runningmode::UpdateScoreBubbles(const sf::Time & elapsed)
 	}
 }
 
-void Runningmode::Load()
+void RunningMode::Load()
 {
 	background.Load(cBackgroundWallTexture);
 	obstacleDefinitions = Definition::GetObstacles(cObstacleDefinitionFile);
@@ -187,7 +187,7 @@ void Runningmode::Load()
 	sf::Font * fontPtr = fonts.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
-		throw std::runtime_error("Error fetching commodore font in Runningmode.");
+		throw std::runtime_error("Error fetching commodore font in RunningMode.");
 	}
 	//const_cast<sf::Texture&>(fontPtr->getTexture(32)).setSmooth(false);
 	obstacleHintText.setFont(*fontPtr);
@@ -204,7 +204,7 @@ void Runningmode::Load()
 	scoreText.setPosition(0.f, 15.f);
 }
 
-void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
+void RunningMode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
 {
 	if(input.WasKeyReleased(sf::Keyboard::Key::P))
 	{
@@ -242,17 +242,17 @@ void Runningmode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 	}
 }
 
-void Runningmode::OnExit()
+void RunningMode::OnExit()
 {
 	// Update the last achieved score?
 }
 
-void Runningmode::OnEnter()
+void RunningMode::OnEnter()
 {
 	Reset();
 }
 
-Runningmode::Runningmode(Fonts & fontsRef, GameManager & managerRef)
+RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef)
 	: Gamemode(fontsRef, managerRef),
 	background(cWorldWidth),
 	obstacleDefinitions(),
