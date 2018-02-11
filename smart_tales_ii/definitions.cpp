@@ -152,7 +152,7 @@ namespace Definition
 		std::vector<std::string> lines;
 		try
 		{
-			lines = Platform::LoadFile(definitionFile);
+			lines = Platform::LoadFile(definitionFile, true, true);
 		}
 		catch(std::runtime_error & e)
 		{
