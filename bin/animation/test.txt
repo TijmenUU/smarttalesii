@@ -1,0 +1,34 @@
+# Animation properties available:
+# frame-start-x
+#	Unit: pixels
+# frame-start-y
+#	Unit: pixels
+# frame-width
+#	Unit: pixels
+# frame-height
+#	Unit: pixels
+# frame-margin
+#	Unit: pixels
+#	Added when getting the next frame, fixes potential artifacting with transparancy
+# frame-count
+# frame-time
+#	in milliseconds
+# reverse
+#	If present, it sets the animation to reverse play (start position - (margin + frame width))
+
+texture-source texture/testsheet.png
+
+animation idle
+	frame-start-x 0
+	frame-start-y 16
+	frame-width 16
+	frame-height 16
+	frame-count 1
+
+animation blink
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 16
+	frame-height 16
+	frame-count 4
+	frame-time 64
