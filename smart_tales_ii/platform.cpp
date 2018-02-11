@@ -7,7 +7,7 @@ namespace Platform
 {
 	const char cCommentChar = '#';
 
-	std::vector<std::string> LoadFile(const std::string & filelocation, const bool ignoreComments, const bool ignoreEmpty)
+	std::vector<std::string> LoadTextFile(const std::string & filelocation, const bool ignoreComments, const bool ignoreEmpty)
 	{
 		std::vector<std::string> result;
 		

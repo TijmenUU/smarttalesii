@@ -257,7 +257,7 @@ Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
 
 void AnimatedSprite::Load(const std::string & animationFile, const bool smoothTexture)
 {
-	auto lines = Platform::LoadFile(animationFile, true, true);
+	auto lines = Platform::LoadTextFile(animationFile, true, true);
 
 	for(size_t i = 0U; i < lines.size(); ++i)
 	{
