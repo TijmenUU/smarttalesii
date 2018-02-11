@@ -255,7 +255,7 @@ Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
 	return result;
 }
 
-void AnimatedSprite::Load(const std::string & animationFile, const bool smoothTexture)
+void AnimatedSprite::Load(const std::string & animationFile, sf::Texture & textureStorage)
 {
 	auto lines = Platform::LoadTextFile(animationFile, true, true);
 
@@ -274,12 +274,11 @@ void AnimatedSprite::Load(const std::string & animationFile, const bool smoothTe
 			{
 				std::string value;
 				ss >> value;
-				if(!texture.loadFromFile(value))
+				if(!textureStorage.loadFromFile(value))
 				{
 					throw std::runtime_error("Failed to load texture <" + value + "> specified in animation file <" + animationFile + ">.");
 				}
-				texture.setSmooth(smoothTexture);
-				setTexture(texture);
+				setTexture(textureStorage);
 			}
 			break;
 
@@ -315,7 +314,6 @@ void AnimatedSprite::Update(const sf::Time & elapsed)
 
 AnimatedSprite::AnimatedSprite()
 	: Sprite(),
-	texture(),
 	animations(),
 	currentAnimation(nullptr),
 	currentFrame(0U),

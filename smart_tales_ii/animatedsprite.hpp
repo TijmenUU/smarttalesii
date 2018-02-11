@@ -19,7 +19,6 @@ struct Animation
 class AnimatedSprite : public sf::Sprite
 {
 private:
-	sf::Texture texture;
 	std::unordered_map<std::string, Animation> animations;
 	const Animation * currentAnimation;
 	unsigned int currentFrame;
@@ -40,7 +39,7 @@ public:
 	void FlipHorizontally();
 	void FlipVertically();
 	// May throw a runtime_error if the file or the file definition is wrong
-	void Load(const std::string & animationFile, const bool smoothTexture = true);
+	void Load(const std::string & animationFile, sf::Texture & textureStorage);
 	void Update(const sf::Time & elapsed);
 
 	AnimatedSprite();
