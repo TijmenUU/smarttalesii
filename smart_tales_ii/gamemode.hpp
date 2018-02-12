@@ -10,7 +10,7 @@ const float cWorldHeight = 720.f; // in pixels
 
 class GameManager;
 
-class Gamemode : public sf::Drawable, public std::enable_shared_from_this<Gamemode>
+class Gamemode : public sf::Drawable
 {
 private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
