@@ -1,5 +1,6 @@
 #pragma once
 #include "background.hpp"
+#include "difficulty.hpp"
 #include "gamemode.hpp"
 #include "obstacles.hpp"
 #include "player.hpp"
@@ -13,8 +14,8 @@ class RunningMode : public Gamemode
 private:
 	ScrollingBackground background;
 
-	std::vector<Definition::Obstacle> obstacleDefinitions;
-	Definition::Difficulty gameDifficulty;
+	std::vector<std::unique_ptr<ObstacleDefinition>> obstacleDefinitions;
+	Difficulty gameDifficulty;
 	
 	std::vector<Obstacle> obstacles;
 	size_t obstacleSpawnIndex;
@@ -32,7 +33,7 @@ private:
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
-	void SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const float score, const float bonusScore);
+	void SpawnScoreBubble(const Obstacle & obstacle, const float score, const float bonusScore);
 	
 	void GameOver();
 	void Reset();
