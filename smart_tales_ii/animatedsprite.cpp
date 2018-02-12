@@ -331,6 +331,29 @@ void AnimatedSprite::Update(const sf::Time & elapsed)
 	}
 }
 
+AnimatedSprite & AnimatedSprite::operator=(const AnimatedSprite & other)
+{
+	Sprite::operator=(other);
+	animations = other.animations;
+	currentAnimation = nullptr;
+	currentFrame = other.currentFrame;
+	currentFrameTime = other.currentFrameTime;
+
+	if(other.currentAnimation != nullptr)
+	{
+		for(auto iter = other.animations.begin(); iter != other.animations.end(); ++iter)
+		{
+			if(&(iter->second) == other.currentAnimation)
+			{
+				SetAnimation(iter->first);
+				break;
+			}
+		}
+	}
+
+	return *this;
+}
+
 AnimatedSprite::AnimatedSprite()
 	: Sprite(),
 	animations(),
@@ -338,4 +361,24 @@ AnimatedSprite::AnimatedSprite()
 	currentFrame(0U),
 	currentFrameTime(0U)
 {
+}
+
+AnimatedSprite::AnimatedSprite(const AnimatedSprite & other)
+	: Sprite(other),
+	animations(other.animations),
+	currentAnimation(nullptr),
+	currentFrame(other.currentFrame),
+	currentFrameTime(other.currentFrameTime)
+{
+	if(other.currentAnimation != nullptr)
+	{
+		for(auto iter = other.animations.begin(); iter != other.animations.end(); ++iter)
+		{
+			if(&(iter->second) == other.currentAnimation)
+			{
+				SetAnimation(iter->first);
+				break;
+			}
+		}
+	}
 }

@@ -45,5 +45,8 @@ public:
 	void Load(const std::string & animationFile, sf::Texture & textureStorage);
 	void Update(const sf::Time & elapsed);
 
+	AnimatedSprite & operator = (const AnimatedSprite & other);
+
 	AnimatedSprite();
+	AnimatedSprite(const AnimatedSprite & other);
 };
