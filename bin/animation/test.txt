@@ -15,20 +15,23 @@
 #	in milliseconds
 # reverse
 #	If present, it sets the animation to reverse play (start position - (margin + frame width))
+# loop
+#	If present, it makes the animation loop and never finish. If missing it halts on last frame
 
 texture-source texture/testsheet.png
 
 animation idle
 	frame-start-x 0
-	frame-start-y 16
-	frame-width 16
-	frame-height 16
+	frame-start-y 0
+	frame-width 30
+	frame-height 21
 	frame-count 1
 
-animation blink
+animation run
 	frame-start-x 0
 	frame-start-y 0
-	frame-width 16
-	frame-height 16
-	frame-count 4
-	frame-time 64
+	frame-width 30
+	frame-height 21
+	frame-count 8
+	frame-time 100
+	loop

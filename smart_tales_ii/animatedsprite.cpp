@@ -35,7 +35,7 @@ AnimationHeader GetHeader(std::string headerstr)
 	return AnimationHeader::Unknown;
 }
 
-std::array<std::string, 8> cAnimationProperties = 
+std::array<std::string, 9> cAnimationProperties = 
 {
 	"frame-start-x",
 	"frame-start-y",
@@ -44,7 +44,8 @@ std::array<std::string, 8> cAnimationProperties =
 	"frame-margin",
 	"frame-count",
 	"frame-time",
-	"reverse"
+	"reverse",
+	"loop"
 };
 
 enum class AnimationProperty
@@ -57,7 +58,8 @@ enum class AnimationProperty
 	FrameMargin,
 	FrameCount,
 	FrameTime,
-	Reverse
+	Reverse,
+	Loop
 };
 
 AnimationProperty GetProperty(std::string propertystr)
@@ -80,7 +82,8 @@ Animation::Animation()
 	frameMargin(0U),
 	frameCount(0U),
 	frameTime(0U),
-	reverse(false)
+	reverse(false),
+	loop(false)
 {
 }
 
@@ -94,12 +97,19 @@ void AnimatedSprite::GetNextFrame()
 	++currentFrame;
 	if(currentFrame >= currentAnimation->frameCount)
 	{
-		currentFrame = 0;
-		setTextureRect(sf::IntRect(
-			currentAnimation->frameStart.x,
-			currentAnimation->frameStart.y,
-			currentAnimation->frameSize.x,
-			currentAnimation->frameSize.y));
+		if(!currentAnimation->loop)
+		{
+			currentFrame = currentAnimation->frameCount;
+		}
+		else
+		{
+			currentFrame = 0;
+			setTextureRect(sf::IntRect(
+				currentAnimation->frameStart.x,
+				currentAnimation->frameStart.y,
+				currentAnimation->frameSize.x,
+				currentAnimation->frameSize.y));
+		}
 	}
 	else
 	{
@@ -185,6 +195,11 @@ bool AnimatedSprite::RemoveAnimation(const std::string & name)
 	return false;
 }
 
+bool AnimatedSprite::IsAnimationFinished() const
+{
+	return currentFrame >= currentAnimation->frameCount;
+}
+
 void AnimatedSprite::FlipHorizontally()
 {
 	auto scale = getScale();
@@ -245,6 +260,10 @@ Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
 			result.reverse = true;
 			break;
 
+			case AnimationProperty::Loop:
+			result.loop = true;
+			break;
+
 			default:
 			break;
 		}
@@ -289,7 +308,7 @@ void AnimatedSprite::Load(const std::string & animationFile, sf::Texture & textu
 
 				++i;
 				AddAnimation(LoadAnimation(lines, i), value);
-				--i;
+				--i; // decrement once because next loop we should consider that position
 			}
 			break;
 

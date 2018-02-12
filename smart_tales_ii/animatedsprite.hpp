@@ -12,6 +12,7 @@ struct Animation
 	unsigned int frameCount;
 	unsigned int frameTime;		// in milliseconds
 	bool reverse;
+	bool loop;
 
 	Animation();
 };
@@ -35,6 +36,8 @@ public:
 	void ForceAddAnimation(const Animation animation, const std::string & name);
 	bool SetAnimation(const std::string & name);
 	bool RemoveAnimation(const std::string & name);
+
+	bool IsAnimationFinished() const;
 
 	void FlipHorizontally();
 	void FlipVertically();
