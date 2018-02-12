@@ -71,8 +71,7 @@ void RunningMode::SpawnScoreBubble(const sf::Vector2f & obstaclePosition, const 
 void RunningMode::GameOver()
 {
 	// TODO start gamemode switch here to score screen
-	std::shared_ptr<Gamemode> newmode(new PauseMode(fonts, manager, "Game over! Press P to retry"));
-	manager.PushGamemode(newmode);
+	manager.PushGamemode(new PauseMode(fonts, manager, "Game over! Press P to retry"));
 
 	Reset();
 	return;
@@ -208,8 +207,7 @@ void RunningMode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 {
 	if(input.WasKeyReleased(sf::Keyboard::Key::P))
 	{
-		std::shared_ptr<Gamemode> newmode(new PauseMode(fonts, manager));
-		manager.PushGamemode(newmode);
+		manager.PushGamemode(new PauseMode(fonts, manager));
 		return;
 	}
 

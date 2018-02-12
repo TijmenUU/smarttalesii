@@ -27,8 +27,7 @@ void Program::Load()
 		}
 	}
 	// Set game starting gamemode
-	std::shared_ptr<Gamemode> startupmode(new RunningMode(fontsContainer, manager));
-	manager.PushGamemode(startupmode);
+	manager.PushGamemode(new RunningMode(fontsContainer, manager));
 }
 
 void Program::Run()

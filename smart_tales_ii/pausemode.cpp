@@ -33,7 +33,7 @@ void PauseMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
 	if(input.WasKeyReleased(sf::Keyboard::P))
 	{
-		manager.RemoveGamemode(Gamemode::shared_from_this());
+		manager.RemoveGamemode(this);
 		return;
 	}
 }
