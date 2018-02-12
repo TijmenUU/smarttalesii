@@ -18,8 +18,12 @@
 # loop
 #	If present, it makes the animation loop and never finish. If missing it halts on last frame
 
-texture-source texture/testsheet.png
+# This tells the program where the spritesheet can be found. Frames of a single
+# animation should all be on the same line / row.
+spritesheet-source "spritesheet/testsheet.png"
 
+# This indicates the start of an animation definition which name will be
+# idle. I.e. use it by calling SetAnimation("idle").
 animation idle
 	frame-start-x 0
 	frame-start-y 0

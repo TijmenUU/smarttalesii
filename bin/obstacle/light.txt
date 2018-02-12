@@ -1,0 +1,8 @@
+type									light
+animation-file						"animation/light.txt"
+interaction-radius				250
+interaction-local-position		60 168
+minimal-interaction-distance	200
+neutralization-gestures			tap
+hint-string							"Tap it!"
+hint-local-position				60 -30

@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/phone.png"
+
+animation active
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 92
+	frame-height 132
+	frame-count 1
+
+animation neutralized
+	frame-start-x 92
+	frame-start-y 0
+	frame-width 92
+	frame-height 132
+	frame-count 1

@@ -1,5 +1,6 @@
 #include "animatedsprite.hpp"
 #include "platform.hpp"
+#include "stringutil.hpp"
 
 #include <array>
 #include <cassert>
@@ -10,14 +11,14 @@
 
 std::array<std::string, 8> cAnimationHeaders =
 {
-	"texture-source",
+	"spritesheet-source",
 	"animation"
 };
 
 enum class AnimationHeader
 {
 	Unknown = -1,
-	TextureSource,
+	SpritesheetSource,
 	Animation
 };
 
@@ -197,7 +198,7 @@ bool AnimatedSprite::RemoveAnimation(const std::string & name)
 
 bool AnimatedSprite::IsAnimationFinished() const
 {
-	return currentFrame >= currentAnimation->frameCount;
+	return (currentFrame >= currentAnimation->frameCount) && !currentAnimation->loop;
 }
 
 void AnimatedSprite::FlipHorizontally()
@@ -289,13 +290,12 @@ void AnimatedSprite::Load(const std::string & animationFile, sf::Texture & textu
 		const auto header = GetHeader(key);
 		switch(header)
 		{
-			case AnimationHeader::TextureSource:
+			case AnimationHeader::SpritesheetSource:
 			{
-				std::string value;
-				ss >> value;
-				if(!textureStorage.loadFromFile(value))
+				const auto sourcefile = Util::GetStringInQuotes(lines[i]);
+				if(!textureStorage.loadFromFile(sourcefile))
 				{
-					throw std::runtime_error("Failed to load texture <" + value + "> specified in animation file <" + animationFile + ">.");
+					throw std::runtime_error("Failed to load texture <" + sourcefile + "> specified in animation file <" + animationFile + ">.");
 				}
 				setTexture(textureStorage);
 			}

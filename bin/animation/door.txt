@@ -1,0 +1,16 @@
+spritesheet-source "spritesheet/door.png"
+
+animation active
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 324
+	frame-height 520
+	frame-count 1
+
+animation neutralized
+	frame-start-x 324
+	frame-start-y 0
+	frame-width 324
+	frame-height 520
+	frame-count 1
+	loop

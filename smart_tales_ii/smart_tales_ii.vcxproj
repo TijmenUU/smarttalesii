@@ -21,13 +21,14 @@
   <ItemGroup>
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="difficulty.cpp" />
     <ClCompile Include="fonts.cpp" />
     <ClCompile Include="gamemode.cpp" />
     <ClCompile Include="gamemanager.cpp" />
     <ClCompile Include="gesture.cpp" />
     <ClCompile Include="inputhandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="definitions.cpp" />
+    <ClCompile Include="obstacledefinition.cpp" />
     <ClCompile Include="obstacles.cpp" />
     <ClCompile Include="pausemode.cpp" />
     <ClCompile Include="platform.cpp" />
@@ -36,17 +37,19 @@
     <ClCompile Include="runningmode.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="scorebubble.cpp" />
+    <ClCompile Include="stringutil.cpp" />
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animatedsprite.hpp" />
     <ClInclude Include="background.hpp" />
+    <ClInclude Include="difficulty.hpp" />
     <ClInclude Include="fonts.hpp" />
     <ClInclude Include="gamemode.hpp" />
     <ClInclude Include="gamemanager.hpp" />
     <ClInclude Include="gesture.hpp" />
-    <ClInclude Include="definitions.hpp" />
     <ClInclude Include="inputhandler.hpp" />
+    <ClInclude Include="obstacledefinition.hpp" />
     <ClInclude Include="obstacles.hpp" />
     <ClInclude Include="pausemode.hpp" />
     <ClInclude Include="platform.hpp" />
@@ -55,19 +58,8 @@
     <ClInclude Include="runningmode.hpp" />
     <ClInclude Include="score.hpp" />
     <ClInclude Include="scorebubble.hpp" />
+    <ClInclude Include="stringutil.hpp" />
     <ClInclude Include="vectormath.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="difficulty.txt">
-      <DeploymentContent>true</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </Text>
-    <Text Include="obstacles.txt">
-      <DeploymentContent>true</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-    </Text>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -141,10 +133,12 @@
       <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)*.txt  $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy resource files</Message>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -174,10 +168,12 @@
       <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)*.txt  $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy resource files</Message>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

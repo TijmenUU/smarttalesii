@@ -45,9 +45,6 @@
     <ClCompile Include="program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="definitions.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
     <ClCompile Include="gesture.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
@@ -93,11 +90,17 @@
     <ClCompile Include="animatedsprite.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="difficulty.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacledefinition.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="stringutil.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="definitions.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
     <ClInclude Include="platform.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -146,13 +149,14 @@
     <ClInclude Include="animatedsprite.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="difficulty.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="obstacles.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClInclude Include="difficulty.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacledefinition.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="stringutil.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

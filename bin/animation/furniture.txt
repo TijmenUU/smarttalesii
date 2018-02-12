@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/furniture.png"
+
+animation active
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 100
+	frame-height 124
+	frame-count 1
+
+animation neutralized
+	frame-start-x 100
+	frame-start-y 0
+	frame-width 100
+	frame-height 124
+	frame-count 1

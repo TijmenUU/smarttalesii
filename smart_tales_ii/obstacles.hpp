@@ -1,41 +1,28 @@
 #pragma once
-#include "definitions.hpp"
+#include "animatedsprite.hpp"
 #include "gesture.hpp"
 #include "inputhandler.hpp"
+#include "obstacledefinition.hpp"
 
-#include <SFML\Graphics.hpp>
 
-class Obstacle : public sf::Drawable
+class Obstacle : public AnimatedSprite
 {
 private:
-	sf::Sprite sprite;
-	sf::CircleShape debugShape; // debug
-	uint8_t gestureNeutralizeFlag;
+	// TODO Do something more sensible than a raw pointer
+	const ObstacleDefinition * definitionPtr;
 	SwipeGesture gesture;
-	ObstacleType type;
 	bool neutralized;
-	std::string neutralizationHint;
-
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
 	bool IsNeutralized() const;
 
-	// in world coordinates, not screen size necessarily!
-	sf::Vector2f GetSize() const;
-	sf::Vector2f GetCenter() const;
-	sf::Vector2f GetPosition() const;
 	ObstacleType GetType() const;
 	const std::string & GetNeutralizationHint() const;
-
-	void SetNeutralized(const bool value);
-	void SetPosition(const sf::Vector2f & position);
-
-	bool CollidesWith(const sf::FloatRect & other) const;
+	sf::Vector2f GetNeutralizationHintPosition() const;
 
 	// Return value indicates neutralized status
 	bool Update(const sf::Time & elapsed, const float velocity, const Inputhandler & input);
 
-	Obstacle(const Definition::Obstacle & obstacleDefinition, const sf::Vector2f & spawnPosition);
+	Obstacle(const ObstacleDefinition * definition);
 };
 

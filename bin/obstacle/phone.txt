@@ -1,0 +1,8 @@
+type									phone
+animation-file						"animation/phone.txt"
+interaction-radius				120
+interaction-local-position		45 60
+minimal-interaction-distance	30
+neutralization-gestures			upwards
+hint-string							"Swipe up!"
+hint-local-position				45 -30

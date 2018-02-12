@@ -1,0 +1,8 @@
+type									furniture
+animation-file						"animation/furniture.txt"
+interaction-radius				100
+interaction-local-position		50 62
+minimal-interaction-distance	25
+neutralization-gestures			downwards
+hint-string							"Swipe down!"
+hint-local-position				50 -40

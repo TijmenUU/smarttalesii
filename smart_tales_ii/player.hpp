@@ -1,15 +1,15 @@
 #pragma once
-#include <SFML\Graphics.hpp>
+#include "animatedsprite.hpp"
+
 #include <string>
 
-class Player : public sf::Sprite
+class Player : public AnimatedSprite
 {
 private:
 	sf::Texture texture;
 
 public:
-	// May throw std::runtime_error if texture cannot be loaded
-	void Load(const std::string & textureSrc);
+	void Load(const std::string & animationFile);
 
 	Player();
 };

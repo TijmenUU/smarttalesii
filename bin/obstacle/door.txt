@@ -1,0 +1,8 @@
+type									door
+animation-file						"animation/door.txt"
+interaction-radius				200
+interaction-local-position		160 380
+minimal-interaction-distance	50
+neutralization-gestures			leftwards rightwards
+hint-string							"Swipe left or right!"
+hint-local-position				120 100

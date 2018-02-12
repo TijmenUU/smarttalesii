@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/light.png"
+
+animation active
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 124
+	frame-height 292
+	frame-count 1
+
+animation neutralized
+	frame-start-x 124
+	frame-start-y 0
+	frame-width 124
+	frame-height 292
+	frame-count 1

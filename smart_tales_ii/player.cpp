@@ -2,17 +2,13 @@
 
 #include <stdexcept>
 
-void Player::Load(const std::string & textureSrc)
+void Player::Load(const std::string & animationFile)
 {
-	if(!texture.loadFromFile(textureSrc))
-	{
-		throw std::runtime_error("Failed to load player texture from " + textureSrc);
-	}
-	setTexture(texture, true);
+	AnimatedSprite::Load(animationFile, texture);
 }
 
 Player::Player()
-	: Sprite(),
+	: AnimatedSprite(),
 	texture()
 {
 }

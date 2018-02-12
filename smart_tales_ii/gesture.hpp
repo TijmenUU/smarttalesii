@@ -1,9 +1,21 @@
 #pragma once
-#include "definitions.hpp"
 #include "inputhandler.hpp"
 
 #include <SFML\Graphics.hpp>
 #include <vector>
+
+enum class SwipeType : uint8_t
+{
+	None = 0,
+	InProgress = 1,
+	Tap = 2,
+	Vertical_Upwards = 4,
+	Vertical_Downwards = 8,
+	Horizontal_LeftToRight = 16,
+	Horizontal_RightToLeft = 32,
+};
+
+SwipeType ToSwipeType(std::string value);
 
 class SwipeGesture
 {

@@ -1,8 +1,33 @@
 #include "gesture.hpp"
 #include "vectormath.hpp"
 
+#include <array>
 #include <cmath>
-#include <cstdio>
+#include <utility>
+
+const std::array<std::string, 7U> SwipeStringTypes =
+{
+	"tap",
+	"upwards",
+	"downwards",
+	"leftwards",
+	"rightwards"
+};
+
+SwipeType ToSwipeType(std::string value)
+{
+	std::transform(value.begin(), value.end(), value.begin(), ::tolower); // to lower case
+	for(size_t i = 0; i < SwipeStringTypes.size(); ++i)
+	{
+		if(value.compare(SwipeStringTypes[i]) == 0)
+		{
+			// remember to cast to powers of two (see enum definition in header)
+			return static_cast<SwipeType>(1U << (i + 1U));
+		}
+	}
+
+	return SwipeType::None;
+}
 
 bool SwipeGesture::IsInProgress() const
 {
@@ -27,17 +52,6 @@ void SwipeGesture::SetInteractionRadius(const float newRadius)
 float SwipeGesture::GetInteractionRadius() const
 {
 	return radius;
-}
-
-// debug
-std::string ToString(const sf::Vector2f & vec)
-{
-	std::string result;
-	result.resize(256);
-	auto finalSize = sprintf_s(&result[0], 256, "X%.2f Y%.2f", vec.x, vec.y);
-	result.resize(finalSize);
-
-	return result;
 }
 
 SwipeType SwipeGesture::Update(const Inputhandler & input)
@@ -66,7 +80,6 @@ SwipeType SwipeGesture::Update(const Inputhandler & input)
 		}
 
 		const auto difference = mousePos - start;
-		//printf("Start %s End %s Difference %s \n", ToString(start).c_str(), ToString(mousePos).c_str(), ToString(difference).c_str()); // debug
 		if(std::abs(difference.x) > std::abs(difference.y))
 		{
 			if(difference.x > 0.f)
