@@ -21,18 +21,18 @@ void GameManager::Update(const sf::Time & timeElapsed,
 	}
 }
 
-void GameManager::PushGamemode(std::shared_ptr<Gamemode> gamemode)
+void GameManager::PushGamemode(Gamemode * gamemode)
 {
 	gamemode->Load();
 	gamemode->OnEnter();
 	gamemodes.emplace_back(gamemode);
 }
 
-bool GameManager::RemoveGamemode(std::shared_ptr<Gamemode> gamemode)
+bool GameManager::RemoveGamemode(Gamemode * gamemode)
 {
 	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
 	{
-		if(gamemodes[i] == gamemode)
+		if(gamemodes[i].get() == gamemode)
 		{
 			gamemode->OnExit();
 			gamemodes.erase(gamemodes.begin() + i);

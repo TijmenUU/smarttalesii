@@ -9,8 +9,6 @@
 
 namespace Definition
 {
-	const char cCommentChar = '#';
-
 	const std::array<std::string, 7U> SwipeStringTypes =
 	{
 		"tap",
@@ -125,7 +123,7 @@ namespace Definition
 		std::vector<std::string> lines;
 		try
 		{
-			lines = Platform::LoadFile(definitionFile);
+			lines = Platform::LoadTextFile(definitionFile, true, true);
 		}
 		catch(std::runtime_error & e)
 		{
@@ -137,8 +135,6 @@ namespace Definition
 		for(size_t i = 0; i < lines.size(); ++i)
 		{
 			auto & line = lines[i];
-			if(line.find(cCommentChar) != std::string::npos || line.size() < 1U)
-				continue;
 
 			result.emplace_back(line);
 			if(result.back().type == ObstacleType::None)
@@ -156,7 +152,7 @@ namespace Definition
 		std::vector<std::string> lines;
 		try
 		{
-			lines = Platform::LoadFile(definitionFile);
+			lines = Platform::LoadTextFile(definitionFile, true, true);
 		}
 		catch(std::runtime_error & e)
 		{
@@ -169,8 +165,6 @@ namespace Definition
 		for(size_t i = 0; i < lines.size(); ++i)
 		{
 			auto & line = lines[i];
-			if(line.find(cCommentChar) != std::string::npos || line.size() < 1U)
-				continue;
 
 			// this line is not empty or a comment, must be our definition line
 			std::stringstream ss;

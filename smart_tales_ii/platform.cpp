@@ -5,7 +5,9 @@
 
 namespace Platform
 {
-	std::vector<std::string> LoadFile(const std::string & filelocation)
+	const char cCommentChar = '#';
+
+	std::vector<std::string> LoadTextFile(const std::string & filelocation, const bool ignoreComments, const bool ignoreEmpty)
 	{
 		std::vector<std::string> result;
 		
@@ -20,6 +22,10 @@ namespace Platform
 		{
 			std::string line;
 			std::getline(inputfile, line);
+			
+			if((ignoreEmpty && line.size() == 0U) || (ignoreComments && line[0] == cCommentChar))
+				continue;
+
 			result.push_back(line);
 		}
 

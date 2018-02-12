@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="background.cpp" />
     <ClCompile Include="fonts.cpp" />
     <ClCompile Include="gamemode.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animatedsprite.hpp" />
     <ClInclude Include="background.hpp" />
     <ClInclude Include="fonts.hpp" />
     <ClInclude Include="gamemode.hpp" />
