@@ -30,4 +30,5 @@ protected:
 
 public:
 	Gamemode(Fonts & fontsRef, GameManager & managerRef);
+	virtual ~Gamemode() = default;
 };

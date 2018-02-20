@@ -3,8 +3,9 @@
 #include "difficulty.hpp"
 #include "gamemode.hpp"
 #include "obstacles.hpp"
-#include "player.hpp"
-#include "score.hpp"
+#include "playersprite.hpp"
+#include "playerinventory.hpp"
+#include "playerscore.hpp"
 #include "scorebubble.hpp"
 
 #include <vector>
@@ -25,11 +26,12 @@ private:
 	float currentTimeout; // in seconds
 	float scrollVelocity; // pixels per second
 
-	Score score;
+	Player::Score score;
 	sf::Text scoreText;
 	std::vector<ScoreBubble> scoreBubbles;
 
-	Player player;
+	PlayerSprite player;
+	const Player::Inventory playerInventory;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
@@ -53,6 +55,7 @@ private:
 	void Update(const sf::Time & timeElapsed, const Inputhandler & input) override;
 
 public:
-	RunningMode(Fonts & fontsRef, GameManager & managerRef);
+	RunningMode(Fonts & fontsRef, GameManager & managerRef, const Player::Inventory & inventory);
+	~RunningMode() override = default;
 };
 

@@ -27,7 +27,7 @@ void Program::Load()
 		}
 	}
 	// Set game starting gamemode
-	manager.PushGamemode(new RunningMode(fontsContainer, manager));
+	manager.PushGamemode(new RunningMode(fontsContainer, manager, Player::Inventory()));
 }
 
 void Program::Run()

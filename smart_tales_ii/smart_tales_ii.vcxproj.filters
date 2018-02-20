@@ -37,6 +37,12 @@
     <Filter Include="Source Files\game\modes">
       <UniqueIdentifier>{fde58331-89f8-43e9-84cb-4fe430830ee1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\player">
+      <UniqueIdentifier>{b6ad7d12-dfa2-4f08-832f-aeea632bc099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\player">
+      <UniqueIdentifier>{eac0158d-995f-43a6-a879-219e99201ed8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,14 +66,8 @@
     <ClCompile Include="gamemode.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
     <ClCompile Include="obstacles.cpp">
       <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="score.cpp">
-      <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="background.cpp">
       <Filter>Source Files\game\objects</Filter>
@@ -99,6 +99,24 @@
     <ClCompile Include="stringutil.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="upgrades.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="shopmode.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="scoremode.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="playersprite.cpp">
+      <Filter>Source Files\game\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="playerinventory.cpp">
+      <Filter>Source Files\game\player</Filter>
+    </ClCompile>
+    <ClCompile Include="playerscore.cpp">
+      <Filter>Source Files\game\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -119,14 +137,8 @@
     <ClInclude Include="gamemode.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="player.hpp">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
     <ClInclude Include="obstacles.hpp">
       <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="score.hpp">
-      <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="background.hpp">
       <Filter>Header Files\game\objects</Filter>
@@ -157,6 +169,24 @@
     </ClInclude>
     <ClInclude Include="stringutil.hpp">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="upgrades.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="shopmode.hpp">
+      <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="scoremode.hpp">
+      <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="playersprite.hpp">
+      <Filter>Header Files\game\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="playerinventory.hpp">
+      <Filter>Header Files\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="playerscore.hpp">
+      <Filter>Header Files\game\player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

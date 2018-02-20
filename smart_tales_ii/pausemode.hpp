@@ -15,4 +15,5 @@ protected:
 
 public:
 	PauseMode(Fonts & fontsRef, GameManager & managerRef, const std::string message = "Press P to unpause");
+	~PauseMode() override = default;
 };

@@ -285,7 +285,7 @@ void RunningMode::OnEnter()
 	Reset();
 }
 
-RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef)
+RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef, const Player::Inventory & inventory)
 	: Gamemode(fontsRef, managerRef),
 	background(cWorldWidth),
 	obstacleDefinitions(),
@@ -300,7 +300,8 @@ RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef)
 	score(),
 	scoreText(),
 	scoreBubbles(),
-	player()
+	player(),
+	playerInventory(inventory)
 {
 
 }

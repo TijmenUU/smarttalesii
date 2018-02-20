@@ -3,7 +3,7 @@
 
 #include <string>
 
-class Player : public AnimatedSprite
+class PlayerSprite : public AnimatedSprite
 {
 private:
 	sf::Texture texture;
@@ -11,6 +11,6 @@ private:
 public:
 	void Load(const std::string & animationFile);
 
-	Player();
+	PlayerSprite();
 };
 
