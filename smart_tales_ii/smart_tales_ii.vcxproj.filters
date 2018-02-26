@@ -43,6 +43,12 @@
     <Filter Include="Source Files\game\player">
       <UniqueIdentifier>{eac0158d-995f-43a6-a879-219e99201ed8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\objects\shop">
+      <UniqueIdentifier>{3c13de0d-04c4-48bb-b549-adfb8577d68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\objects\shop">
+      <UniqueIdentifier>{79ac7075-9f40-40e5-82f1-47c786b3cb20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="vectormath.cpp">
       <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="gamemode.cpp">
-      <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="obstacles.cpp">
       <Filter>Source Files\game\objects</Filter>
@@ -93,9 +96,6 @@
     <ClCompile Include="difficulty.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="obstacledefinition.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
     <ClCompile Include="stringutil.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
@@ -117,6 +117,18 @@
     <ClCompile Include="playerscore.cpp">
       <Filter>Source Files\game\player</Filter>
     </ClCompile>
+    <ClCompile Include="gamemode.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacledefinition.cpp">
+      <Filter>Source Files\game\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="carousel.cpp">
+      <Filter>Source Files\game\objects\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>Source Files\game\objects\shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -133,9 +145,6 @@
     </ClInclude>
     <ClInclude Include="program.hpp">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gamemode.hpp">
-      <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="obstacles.hpp">
       <Filter>Header Files\game\objects</Filter>
@@ -164,9 +173,6 @@
     <ClInclude Include="difficulty.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="obstacledefinition.hpp">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="stringutil.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -187,6 +193,18 @@
     </ClInclude>
     <ClInclude Include="playerscore.hpp">
       <Filter>Header Files\game\player</Filter>
+    </ClInclude>
+    <ClInclude Include="gamemode.hpp">
+      <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacledefinition.hpp">
+      <Filter>Header Files\game\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="carousel.hpp">
+      <Filter>Header Files\game\objects\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.hpp">
+      <Filter>Header Files\game\objects\shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

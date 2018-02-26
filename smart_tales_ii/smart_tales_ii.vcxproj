@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="carousel.cpp" />
     <ClCompile Include="difficulty.cpp" />
     <ClCompile Include="fonts.cpp" />
     <ClCompile Include="gamemode.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="playerinventory.cpp" />
     <ClCompile Include="scoremode.cpp" />
     <ClCompile Include="shopmode.cpp" />
+    <ClCompile Include="tile.cpp" />
     <ClCompile Include="upgrades.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="runningmode.cpp" />
@@ -47,6 +49,7 @@
   <ItemGroup>
     <ClInclude Include="animatedsprite.hpp" />
     <ClInclude Include="background.hpp" />
+    <ClInclude Include="carousel.hpp" />
     <ClInclude Include="difficulty.hpp" />
     <ClInclude Include="fonts.hpp" />
     <ClInclude Include="gamemode.hpp" />
@@ -61,6 +64,7 @@
     <ClInclude Include="playerinventory.hpp" />
     <ClInclude Include="scoremode.hpp" />
     <ClInclude Include="shopmode.hpp" />
+    <ClInclude Include="tile.hpp" />
     <ClInclude Include="upgrades.hpp" />
     <ClInclude Include="program.hpp" />
     <ClInclude Include="runningmode.hpp" />
