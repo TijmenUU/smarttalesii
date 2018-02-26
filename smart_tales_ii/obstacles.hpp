@@ -19,6 +19,7 @@ public:
 	ObstacleType GetType() const;
 	const std::string & GetNeutralizationHint() const;
 	sf::Vector2f GetNeutralizationHintPosition() const;
+	sf::Vector2f GetCenter() const;
 
 	// Return value indicates neutralized status
 	bool Update(const sf::Time & elapsed, const float velocity, const Inputhandler & input);

@@ -128,12 +128,15 @@ void RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		{
 			if(obstacle.Update(elapsed, -scrollVelocity, input))
 			{
-				const auto obstaclePosition = obstacle.getPosition();
-				const float playerObstacleDist = VectorMathF::Distance(obstaclePosition, player.getPosition());
+				const auto obstacleCenter = obstacle.GetCenter();
+				const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
 
-				SpawnScoreBubble(obstacle, score.CalculateNeutralizationScore(1), score.CalculateBonusScore(playerObstacleDist));
+				const auto neutralizationScore = score.CalculateNeutralizationScore(1); // could be made a constexpr
+				const auto bonusScore = score.CalculateBonusScore(playerObstacleDist);
+				score.AddBonusScore(bonusScore);
+				score.AddNeutralization();
 
-				score.AddNeutralization(playerObstacleDist);
+				SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
 			}
 			else if(obstacle.getGlobalBounds().intersects((player.getGlobalBounds())))
 			{

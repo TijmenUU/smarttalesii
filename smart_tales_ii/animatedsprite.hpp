@@ -24,7 +24,12 @@ private:
 	const Animation * currentAnimation;
 	unsigned int currentFrame;
 	unsigned int currentFrameTime;
+	// unflipped variant
+	sf::IntRect baseFrame;
+	bool isFlippedHorizontally;
+	bool isFlippedVertically;
 
+	void UpdateTextureRect();
 	void GetNextFrame();
 
 public:
@@ -41,6 +46,10 @@ public:
 
 	void FlipHorizontally();
 	void FlipVertically();
+
+	// texture rectangle dimensions multiplied by scale
+	sf::Vector2f GetSize() const;
+
 	// May throw a runtime_error if the file or the file definition is wrong
 	void Load(const std::string & animationFile, sf::Texture & textureStorage);
 	void Update(const sf::Time & elapsed);

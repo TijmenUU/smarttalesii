@@ -11,13 +11,15 @@ namespace Player
 	public:
 		double distance;
 
-		double CalculateBonusScore(const double distance) const;
-		double CalculateNeutralizationScore(const unsigned int count) const;
+		static double CalculateBonusScore(const double distance);
+		static double CalculateNeutralizationScore(const unsigned int count);
+
 		double GetTotalScore() const;
 		unsigned int GetCurrency() const;
 
 		// Ups the neutralization count and adds the bonus score using the distance
-		void AddNeutralization(const double distanceFromPlayer);
+		void AddNeutralization();
+		void AddBonusScore(const double score);
 
 		void Reset();
 

@@ -4,12 +4,12 @@
 
 namespace Player
 {
-	double Score::CalculateBonusScore(const double distance) const
+	double Score::CalculateBonusScore(const double distance)
 	{
 		return (distance / 1280.0) * 200.0;
 	}
 
-	double Score::CalculateNeutralizationScore(const unsigned int count) const
+	double Score::CalculateNeutralizationScore(const unsigned int count)
 	{
 		return static_cast<double>(count) * 50.0;
 	}
@@ -24,11 +24,14 @@ namespace Player
 		return static_cast<unsigned int>(std::round(GetTotalScore() / 100.0));
 	}
 
-	void Score::AddNeutralization(const double distanceFromPlayer)
+	void Score::AddNeutralization()
 	{
 		++neutralizations;
+	}
 
-		bonusScore += CalculateBonusScore(distanceFromPlayer);
+	void Score::AddBonusScore(const double score)
+	{
+		bonusScore += score;
 	}
 
 	void Score::Reset()

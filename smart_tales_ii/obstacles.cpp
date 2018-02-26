@@ -20,6 +20,12 @@ sf::Vector2f Obstacle::GetNeutralizationHintPosition() const
 	return getPosition() + definitionPtr->neutralizationHintLocalPos;
 }
 
+sf::Vector2f Obstacle::GetCenter() const
+{
+	auto halfDimensions = GetSize() / 2.f;
+	return getPosition() + halfDimensions;
+}
+
 bool Obstacle::Update(const sf::Time & elapsed, const float velocity, const Inputhandler & input)
 {
 	// Input
@@ -33,10 +39,6 @@ bool Obstacle::Update(const sf::Time & elapsed, const float velocity, const Inpu
 			if(GetType() == ObstacleType::Door && swipe == SwipeType::Horizontal_LeftToRight)
 			{
 				FlipHorizontally();
-				// compensate for flip 
-				auto position = getPosition();
-				position.x += getGlobalBounds().width;
-				setPosition(position);
 			}
 		}
 	}
