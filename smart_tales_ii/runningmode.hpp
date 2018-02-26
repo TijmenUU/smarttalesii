@@ -48,7 +48,8 @@ private:
 	// May throw a runtime exception if it cannot load the required files and assets
 	void Load() override;
 
-	void UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);
+	// if it returns true, game over
+	bool UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);
 	void UpdateHints();
 	void UpdateScoreDisplay();
 	void UpdateScoreBubbles(const sf::Time & elapsed);
