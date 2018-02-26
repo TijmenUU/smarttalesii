@@ -1,6 +1,8 @@
 #include "runningmode.hpp"
+
 #include "gamemanager.hpp"
-#include "pausemode.hpp"
+#include "overlaymode.hpp"
+#include "scoremode.hpp"
 #include "vectormath.hpp"
 
 #include <array>
@@ -79,10 +81,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score,
 
 void RunningMode::GameOver()
 {
-	// TODO start gamemode switch here to score screen
-	manager.PushGamemode(new PauseMode(fonts, manager, "Game over! Press P to retry"));
-
-	Reset();
+	manager.PushGamemode(new ScoreMode(fonts, manager, score, playerInventory));
 	return;
 }
 
@@ -110,7 +109,7 @@ bool RunningMode::SurpressUpdate() const
 	return true;
 }
 
-void RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
+bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
 {
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
@@ -145,10 +144,12 @@ void RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 				std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
 				// end debug
 				GameOver();
-				return;
+				return true;
 			}
 		}
 	}
+
+	return false;
 }
 
 void RunningMode::UpdateHints()
@@ -205,6 +206,8 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 
 void RunningMode::Load()
 {
+	manager.PopAllBelow(this);
+
 	background.Load(cBackgroundWallTexture);
 	for(size_t i = 0; i < cObstacleDefinitionFiles.size(); ++i)
 	{
@@ -237,21 +240,18 @@ void RunningMode::Load()
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
 	scoreText.setPosition(0.f, 15.f);
+
+	manager.PushGamemode(new OverlayMode(fonts, manager));
 }
 
 void RunningMode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
 {
-	if(input.WasKeyReleased(sf::Keyboard::Key::P))
-	{
-		manager.PushGamemode(new PauseMode(fonts, manager));
-		return;
-	}
-
 	background.Update(timeElapsed, -scrollVelocity);
 
 	UpdateScoreBubbles(timeElapsed);
 
-	UpdateObstacles(timeElapsed, input);
+	if(UpdateObstacles(timeElapsed, input))
+		return;
 
 	player.Update(timeElapsed);
 

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="carousel.cpp" />
     <ClCompile Include="difficulty.cpp" />
     <ClCompile Include="fonts.cpp" />
@@ -31,7 +32,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="obstacledefinition.cpp" />
     <ClCompile Include="obstacles.cpp" />
-    <ClCompile Include="pausemode.cpp" />
+    <ClCompile Include="overlaymode.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="playersprite.cpp" />
     <ClCompile Include="playerinventory.cpp" />
@@ -49,6 +50,7 @@
   <ItemGroup>
     <ClInclude Include="animatedsprite.hpp" />
     <ClInclude Include="background.hpp" />
+    <ClInclude Include="button.hpp" />
     <ClInclude Include="carousel.hpp" />
     <ClInclude Include="difficulty.hpp" />
     <ClInclude Include="fonts.hpp" />
@@ -58,7 +60,7 @@
     <ClInclude Include="inputhandler.hpp" />
     <ClInclude Include="obstacledefinition.hpp" />
     <ClInclude Include="obstacles.hpp" />
-    <ClInclude Include="pausemode.hpp" />
+    <ClInclude Include="overlaymode.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="playersprite.hpp" />
     <ClInclude Include="playerinventory.hpp" />

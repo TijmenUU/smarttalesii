@@ -49,6 +49,18 @@
     <Filter Include="Header Files\game\objects\shop">
       <UniqueIdentifier>{79ac7075-9f40-40e5-82f1-47c786b3cb20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\objects\running">
+      <UniqueIdentifier>{057c8f85-8edc-45b8-8998-021236f187c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\objects\running">
+      <UniqueIdentifier>{60f9d47b-7e50-4194-a6dc-2bbf937e0bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\objects\overlay">
+      <UniqueIdentifier>{f38e1ead-695b-4f93-a9ae-3b053be8600f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\objects\overlay">
+      <UniqueIdentifier>{4a251553-c23b-4381-a7f4-dcdf670368e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,25 +81,13 @@
     <ClCompile Include="vectormath.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="obstacles.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="background.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
     <ClCompile Include="fonts.cpp">
       <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="scorebubble.cpp">
-      <Filter>Source Files\game\objects</Filter>
     </ClCompile>
     <ClCompile Include="gamemanager.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="runningmode.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="pausemode.cpp">
       <Filter>Source Files\game\modes</Filter>
     </ClCompile>
     <ClCompile Include="animatedsprite.cpp">
@@ -108,9 +108,6 @@
     <ClCompile Include="scoremode.cpp">
       <Filter>Source Files\game\modes</Filter>
     </ClCompile>
-    <ClCompile Include="playersprite.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
     <ClCompile Include="playerinventory.cpp">
       <Filter>Source Files\game\player</Filter>
     </ClCompile>
@@ -120,14 +117,32 @@
     <ClCompile Include="gamemode.cpp">
       <Filter>Source Files\game\modes</Filter>
     </ClCompile>
-    <ClCompile Include="obstacledefinition.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
     <ClCompile Include="carousel.cpp">
       <Filter>Source Files\game\objects\shop</Filter>
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>Source Files\game\objects\shop</Filter>
+    </ClCompile>
+    <ClCompile Include="overlaymode.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="background.cpp">
+      <Filter>Source Files\game\objects\running</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacledefinition.cpp">
+      <Filter>Source Files\game\objects\running</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacles.cpp">
+      <Filter>Source Files\game\objects\running</Filter>
+    </ClCompile>
+    <ClCompile Include="playersprite.cpp">
+      <Filter>Source Files\game\objects\running</Filter>
+    </ClCompile>
+    <ClCompile Include="scorebubble.cpp">
+      <Filter>Source Files\game\objects\running</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Source Files\game\objects\overlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,25 +161,13 @@
     <ClInclude Include="program.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="obstacles.hpp">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="background.hpp">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
     <ClInclude Include="fonts.hpp">
       <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="scorebubble.hpp">
-      <Filter>Header Files\game\objects</Filter>
     </ClInclude>
     <ClInclude Include="gamemanager.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="runningmode.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="pausemode.hpp">
       <Filter>Header Files\game\modes</Filter>
     </ClInclude>
     <ClInclude Include="animatedsprite.hpp">
@@ -185,9 +188,6 @@
     <ClInclude Include="scoremode.hpp">
       <Filter>Header Files\game\modes</Filter>
     </ClInclude>
-    <ClInclude Include="playersprite.hpp">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
     <ClInclude Include="playerinventory.hpp">
       <Filter>Header Files\game\player</Filter>
     </ClInclude>
@@ -197,14 +197,32 @@
     <ClInclude Include="gamemode.hpp">
       <Filter>Header Files\game\modes</Filter>
     </ClInclude>
-    <ClInclude Include="obstacledefinition.hpp">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
     <ClInclude Include="carousel.hpp">
       <Filter>Header Files\game\objects\shop</Filter>
     </ClInclude>
     <ClInclude Include="tile.hpp">
       <Filter>Header Files\game\objects\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="overlaymode.hpp">
+      <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="background.hpp">
+      <Filter>Header Files\game\objects\running</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacledefinition.hpp">
+      <Filter>Header Files\game\objects\running</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacles.hpp">
+      <Filter>Header Files\game\objects\running</Filter>
+    </ClInclude>
+    <ClInclude Include="playersprite.hpp">
+      <Filter>Header Files\game\objects\running</Filter>
+    </ClInclude>
+    <ClInclude Include="scorebubble.hpp">
+      <Filter>Header Files\game\objects\running</Filter>
+    </ClInclude>
+    <ClInclude Include="button.hpp">
+      <Filter>Header Files\game\objects\overlay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

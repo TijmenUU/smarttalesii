@@ -1,5 +1,6 @@
 #include "program.hpp"
 #include "runningmode.hpp"
+#include "overlaymode.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -38,13 +39,10 @@ void Program::Run()
 		// start update
 		inputhandler.Update(window);
 
-		if(inputhandler.WasKeyReleased(sf::Keyboard::Key::Escape))
-			break;
-
 		manager.Update(sfclock.restart(), inputhandler, window.getView());
 		// end update
 
-		window.clear(sf::Color::White);
+		window.clear(sf::Color::Black);
 		// draw
 		window.draw(manager);
 		// end draw

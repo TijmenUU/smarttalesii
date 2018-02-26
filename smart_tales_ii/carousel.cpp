@@ -1,5 +1,7 @@
 #include "carousel.hpp"
 
+const float cTileSpacing = 50.f;
+
 void SaleTileCarousel::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for(size_t i = 0; i < tiles.size(); ++i)
@@ -39,6 +41,7 @@ SaleTileCarousel::SaleTileCarousel()
 	: scrollingSpeed(0.f),
 	wasMouseDown(false),
 	previousMousePosition(0.f, 0.f),
+	leftTilePosition(50.f, 0.f),
 	tiles()
 {
 }

@@ -94,7 +94,7 @@ void ObstacleDefinition::LoadFromFile(const std::string & filename)
 			break;
 
 			case ObstacleProperty::AnimationFile:
-			animatedSprite.Load(Util::GetStringInQuotes(line), texture);
+			animatedSprite.LoadFromFile(Util::GetStringInQuotes(line), texture);
 			break;
 
 			case ObstacleProperty::InteractionRadius:

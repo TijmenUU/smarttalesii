@@ -36,23 +36,23 @@ public:
 	std::vector<std::string> GetAnimations() const;
 
 	// Returns false if animation already exists
-	bool AddAnimation(const Animation animation, const std::string & name);
+	virtual bool AddAnimation(const Animation animation, const std::string & name);
 	// May overwrite an exisiting entry
-	void ForceAddAnimation(const Animation animation, const std::string & name);
-	bool SetAnimation(const std::string & name);
-	bool RemoveAnimation(const std::string & name);
+	virtual void ForceAddAnimation(const Animation animation, const std::string & name);
+	virtual bool SetAnimation(const std::string & name);
+	virtual bool RemoveAnimation(const std::string & name);
 
-	bool IsAnimationFinished() const;
+	virtual bool IsAnimationFinished() const;
 
-	void FlipHorizontally();
-	void FlipVertically();
+	virtual void FlipHorizontally();
+	virtual void FlipVertically();
 
 	// texture rectangle dimensions multiplied by scale
-	sf::Vector2f GetSize() const;
+	virtual sf::Vector2f GetSize() const;
 
 	// May throw a runtime_error if the file or the file definition is wrong
-	void Load(const std::string & animationFile, sf::Texture & textureStorage);
-	void Update(const sf::Time & elapsed);
+	virtual void LoadFromFile(const std::string & animationFile, sf::Texture & textureStorage);
+	virtual void Update(const sf::Time & elapsed);
 
 	AnimatedSprite & operator = (const AnimatedSprite & other);
 

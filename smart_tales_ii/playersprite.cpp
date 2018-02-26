@@ -4,7 +4,7 @@
 
 void PlayerSprite::Load(const std::string & animationFile)
 {
-	AnimatedSprite::Load(animationFile, texture);
+	AnimatedSprite::LoadFromFile(animationFile, texture);
 }
 
 PlayerSprite::PlayerSprite()

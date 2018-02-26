@@ -299,7 +299,7 @@ Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
 	return result;
 }
 
-void AnimatedSprite::Load(const std::string & animationFile, sf::Texture & textureStorage)
+void AnimatedSprite::LoadFromFile(const std::string & animationFile, sf::Texture & textureStorage)
 {
 	auto lines = Platform::LoadTextFile(animationFile, true, true);
 

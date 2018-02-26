@@ -7,6 +7,7 @@ private:
 	float scrollingSpeed;
 	bool wasMouseDown;
 	sf::Vector2f previousMousePosition;
+	sf::Vector2f leftTilePosition;
 	std::vector<std::unique_ptr<SaleTile>> tiles;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

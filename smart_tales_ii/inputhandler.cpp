@@ -96,35 +96,27 @@ bool Inputhandler::WindowHasFocus() const
 	return hasFocus;
 }
 
-bool Inputhandler::WasKeyPressed(const sf::Keyboard::Key k) const
+bool Inputhandler::PointingDeviceIsUp() const
 {
-	return std::find(keyDownEvents.begin(), keyDownEvents.end(), k) != keyDownEvents.end();
+	return !sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
-bool Inputhandler::WasKeyReleased(const sf::Keyboard::Key k) const
+bool Inputhandler::PointingDeviceIsDown() const
 {
-	return std::find(keyUpEvents.begin(), keyUpEvents.end(), k) != keyUpEvents.end();
+	return sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
-
-bool Inputhandler::WasButtonPressed(const sf::Mouse::Button b) const
+bool Inputhandler::PointingDevicePressedEvent() const
 {
-	return std::find(buttonDownEvents.begin(), buttonDownEvents.end(), b) != buttonDownEvents.end();
+	return std::find(buttonDownEvents.begin(), buttonDownEvents.end(), sf::Mouse::Left) != buttonDownEvents.end();
 }
-bool Inputhandler::WasButtonReleased(const sf::Mouse::Button b) const
+bool Inputhandler::PointingDeviceReleasedEvent() const
 {
-	return std::find(buttonUpEvents.begin(), buttonUpEvents.end(), b) != buttonUpEvents.end();
+	return std::find(buttonUpEvents.begin(), buttonUpEvents.end(), sf::Mouse::Left) != buttonUpEvents.end();
 }
-
-std::string Inputhandler::GetTextTyped() const
-{
-	return textEntered;
-}
-
-sf::Vector2i Inputhandler::GetMouseWindowCoordinate() const
+sf::Vector2i Inputhandler::PointingDeviceWindowPosition() const
 {
 	return mousePixelPosition;
 }
-
-sf::Vector2f Inputhandler::GetMouseWorldCoordinate() const
+sf::Vector2f Inputhandler::PointingDeviceWorldPosition() const
 {
 	return mouseWorldPosition;
 }

@@ -57,29 +57,29 @@ float SwipeGesture::GetInteractionRadius() const
 SwipeType SwipeGesture::Update(const Inputhandler & input)
 {
 	// TODO add configurable button
-	if(!gestureInProgress && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	if(!gestureInProgress && input.PointingDeviceIsDown())
 	{
-		const auto mousePos = input.GetMouseWorldCoordinate();
-		const float distance = VectorMathF::Distance(mousePos, position);
+		const auto inputpos = input.PointingDeviceWorldPosition();
+		const float distance = VectorMathF::Distance(inputpos, position);
 
 		if(distance < radius)
 		{
 			gestureInProgress = true;
-			start = input.GetMouseWindowCoordinate();
+			startWindowPosition = input.PointingDeviceWindowPosition();
 		}
 	}
-	else if(input.WasButtonReleased(sf::Mouse::Button::Left) && gestureInProgress)
+	else if(input.PointingDeviceReleasedEvent() && gestureInProgress)
 	{
 		gestureInProgress = false;
 
-		const auto mousePos = input.GetMouseWindowCoordinate();
-		const float distance = VectorMathI::Distance(start, mousePos);
+		const auto endWindowPosition = input.PointingDeviceWindowPosition();
+		const float distance = VectorMathI::Distance(startWindowPosition, endWindowPosition);
 		if(distance < minDist)
 		{
 			return SwipeType::Tap;
 		}
 
-		const auto difference = mousePos - start;
+		const auto difference = endWindowPosition - startWindowPosition;
 		if(std::abs(difference.x) > std::abs(difference.y))
 		{
 			if(difference.x > 0.f)
@@ -126,6 +126,6 @@ SwipeGesture::SwipeGesture(const float interactionRadius,
 	radius(interactionRadius),
 	minDist(minimumDistance),
 	gestureInProgress(false),
-	start(0.f, 0.f)
+	startWindowPosition(0.f, 0.f)
 {
 }

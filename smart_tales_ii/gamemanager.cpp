@@ -23,9 +23,9 @@ void GameManager::Update(const sf::Time & timeElapsed,
 
 void GameManager::PushGamemode(Gamemode * gamemode)
 {
+	gamemodes.emplace_back(gamemode);
 	gamemode->Load();
 	gamemode->OnEnter();
-	gamemodes.emplace_back(gamemode);
 }
 
 bool GameManager::RemoveGamemode(Gamemode * gamemode)
@@ -40,6 +40,38 @@ bool GameManager::RemoveGamemode(Gamemode * gamemode)
 		}
 	}
 
+	return false;
+}
+
+void GameManager::Pop()
+{
+	if(gamemodes.size() > 0)
+	{
+		gamemodes.erase(gamemodes.end() - 1);
+	}
+}
+
+bool GameManager::PopUntill(Gamemode * gamemode)
+{
+	while(gamemodes.size() > 0 && gamemodes.back().get() != gamemode)
+	{
+		Pop();
+	}
+	if(gamemodes.size() > 0)
+	{
+		Pop();
+		return true;
+	}
+
+	return false;
+}
+
+bool GameManager::PopAllBelow(Gamemode * gamemode)
+{
+	while(gamemodes.size() > 0 && gamemodes.front().get() != gamemode)
+	{
+		gamemodes.erase(gamemodes.begin());
+	}
 	return false;
 }
 
