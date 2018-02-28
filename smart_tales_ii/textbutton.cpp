@@ -7,7 +7,7 @@
 void TextButton::UpdateTextPosition(const sf::Vector2f & position)
 {
 	const auto center = Alignment::GetRectangleCenter(buttonSprite.getGlobalBounds());
-	const auto offset = Alignment::GetCenterOffset(buttonText.getGlobalBounds(), center);
+	const auto offset = Alignment::GetCenterOffset(buttonText.getLocalBounds(), center);
 	// We can use the offset alone because we're passing in global bounds, so it is already in world space
 	
 	// debug
