@@ -23,8 +23,7 @@ protected:
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:
-	OverlayMode(Fonts & fontsRef, 
+	OverlayMode(ResourceCache & resourceCacheRef, 
 		GameManager & managerRef, 
 		const bool canPause = true);
-	~OverlayMode() override = default;
 };

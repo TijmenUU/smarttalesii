@@ -5,4 +5,4 @@ interaction-local-position		160 380
 minimal-interaction-distance	50
 neutralization-gestures			leftwards rightwards
 hint-string							"Swipe left or right!"
-hint-local-position				120 100
+hint-local-position				160 150

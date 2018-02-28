@@ -1,5 +1,5 @@
 #pragma once
-#include "fonts.hpp"
+#include "resourcecache.hpp"
 #include "gamemanager.hpp"
 
 #include <memory>
@@ -10,7 +10,7 @@ class Program
 private:
 	unsigned int windowWidth, windowHeight;
 	sf::RenderWindow window;
-	Fonts fontsContainer;
+	ResourceCache resourceCache;
 
 	Inputhandler inputhandler;
 	GameManager manager;

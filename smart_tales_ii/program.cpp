@@ -22,13 +22,13 @@ void Program::Load()
 {
 	for(size_t i = 0U; i < cFontFiles.size(); ++i)
 	{
-		if(!fontsContainer.LoadFont(cFontFiles[i], cFontNames[i]))
+		if(!resourceCache.LoadFont(cFontFiles[i], cFontNames[i]))
 		{
 			throw std::runtime_error("Error loading file " + cFontFiles[i]);
 		}
 	}
 	// Set game starting gamemode
-	manager.PushGamemode(new RunningMode(fontsContainer, manager, Player::Inventory()));
+	manager.PushGamemode(new RunningMode(resourceCache, manager, Player::Inventory()));
 }
 
 void Program::Run()

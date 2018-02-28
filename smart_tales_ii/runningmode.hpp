@@ -53,10 +53,9 @@ private:
 	void UpdateHints();
 	void UpdateScoreDisplay();
 	void UpdateScoreBubbles(const sf::Time & elapsed);
-	void Update(const sf::Time & timeElapsed, const Inputhandler & input) override;
+	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:
-	RunningMode(Fonts & fontsRef, GameManager & managerRef, const Player::Inventory & inventory);
-	~RunningMode() override = default;
+	RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory);
 };
 

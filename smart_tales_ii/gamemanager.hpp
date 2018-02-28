@@ -1,5 +1,5 @@
 #pragma once
-#include "fonts.hpp"
+#include "resourcecache.hpp"
 #include "gamemode.hpp"
 
 #include <memory>
@@ -17,7 +17,7 @@ private:
 protected:
 	friend class Program;
 
-	void Update(const sf::Time & timeElapsed,
+	void Update(const sf::Time & elapsed,
 		const Inputhandler & input,
 		const sf::View & view);
 

@@ -1,5 +1,6 @@
 #include "runningmode.hpp"
 
+#include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
 #include "overlaymode.hpp"
 #include "scoremode.hpp"
@@ -69,7 +70,7 @@ void RunningMode::SpawnObstacle()
 
 void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score, const float bonusScore)
 {
-	auto * fontPtr = fonts.GetFont("commodore");
+	auto * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
 		std::cerr << "Error loading font commodore for score bubble.\n";
@@ -81,7 +82,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score,
 
 void RunningMode::GameOver()
 {
-	manager.PushGamemode(new ScoreMode(fonts, manager, score, playerInventory));
+	manager.PushGamemode(new ScoreMode(resourceCache, manager, score, playerInventory));
 	return;
 }
 
@@ -166,9 +167,11 @@ void RunningMode::UpdateHints()
 				if(obstaclePosition.x <= gameDifficulty.GetHintBorderXCoord())
 				{
 					obstacleHintText.setString(obstacle.GetNeutralizationHint());
-					auto position = obstacle.GetNeutralizationHintPosition();
-					position.x -= obstacleHintText.getGlobalBounds().width / 2.f;
-					obstacleHintText.setPosition(position);
+					const auto hintPosition = obstacle.GetNeutralizationHintPosition();
+					obstacleHintText.setPosition(Alignment::GetCenterOffset(obstacleHintText.getLocalBounds(), hintPosition));
+					//obstacleHintText.setPosition(
+					//	Alignment::GetCenterOffset(obstacleHintText.getGlobalBounds().width, hintPosition.x),
+					//	hintPosition.y);
 
 					drawObstacleHint = true;
 					break;
@@ -188,9 +191,7 @@ void RunningMode::UpdateScoreDisplay()
 	scoreText.setString(ss.str());
 	
 	// Positioning
-	const float width = scoreText.getGlobalBounds().width;
-	const auto oldPosition = scoreText.getPosition();
-	scoreText.setPosition((cWorldWidth / 2) - (width / 2), oldPosition.y);
+	scoreText.setPosition(Alignment::GetCenterOffset(scoreText.getGlobalBounds().width, cWorldWidth / 2.f), 15.f);
 }
 
 void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
@@ -222,7 +223,7 @@ void RunningMode::Load()
 	const auto playerBounds = player.getGlobalBounds();
 	player.setPosition(playerBounds.width, cFloorY - playerBounds.height);
 
-	sf::Font * fontPtr = fonts.GetFont("commodore");
+	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
 		throw std::runtime_error("Error fetching commodore font in RunningMode.");
@@ -239,25 +240,31 @@ void RunningMode::Load()
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
-	scoreText.setPosition(0.f, 15.f);
 
-	manager.PushGamemode(new OverlayMode(fonts, manager));
+	manager.PushGamemode(new OverlayMode(resourceCache, manager));
 }
 
-void RunningMode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
+void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	background.Update(timeElapsed, -scrollVelocity);
+	// debug
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	{
+		GameOver();
+		return;
+	}
+	// end debug
+	background.Update(elapsed, -scrollVelocity);
 
-	UpdateScoreBubbles(timeElapsed);
+	UpdateScoreBubbles(elapsed);
 
-	if(UpdateObstacles(timeElapsed, input))
+	if(UpdateObstacles(elapsed, input))
 		return;
 
-	player.Update(timeElapsed);
+	player.Update(elapsed);
 
 	UpdateHints();
 
-	const auto elapsedSeconds = timeElapsed.asSeconds();
+	const auto elapsedSeconds = elapsed.asSeconds();
 
 	score.distance += elapsedSeconds * scrollVelocity;
 
@@ -288,8 +295,8 @@ void RunningMode::OnEnter()
 	Reset();
 }
 
-RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef, const Player::Inventory & inventory)
-	: Gamemode(fontsRef, managerRef),
+RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
+	: Gamemode(resourceCacheRef, managerRef),
 	background(cWorldWidth),
 	obstacleDefinitions(),
 	obstacles(),

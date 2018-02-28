@@ -14,10 +14,12 @@ private:
 
 public:
 	void AddSaleTile(SaleTile * tilePtr);
-	bool RemoveSaleTile(SaleTile * tilePtr);
 
-	void Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory);
+	// Returns whether one of the tiles had an interaction
+	bool Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory);
+
+	void RefreshTiles(const Player::Inventory & inventory);
 
 	SaleTileCarousel();
-	~SaleTileCarousel() = default;
+	virtual ~SaleTileCarousel() = default;
 };

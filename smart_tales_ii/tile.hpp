@@ -8,15 +8,15 @@
 
 class SaleTile : public sf::Drawable
 {
-private:
-	sf::Vector2f position;
-	std::vector<std::unique_ptr<sf::Drawable>> drawables;
-
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+protected:
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
 
 public:
-	virtual void SetPosition(const float x, const float y);
-	virtual sf::Vector2f GetPosition() const;
+	virtual void SetPosition(const sf::Vector2f & p) = 0;
+	virtual sf::Vector2f GetPosition() const = 0;
+	virtual sf::Vector2f GetSize() const = 0;
+
+	virtual void Refresh(const Player::Inventory & inventory) = 0;
 
 	// Returns whether the interaction was handled
 	virtual bool Update(const sf::Time & elapsed, 
@@ -24,6 +24,6 @@ public:
 		Player::Inventory & inventory, 
 		const float horizontalDisplacement) = 0;
 
-	SaleTile();
+	SaleTile() = default;
 	virtual ~SaleTile() = default;
 };

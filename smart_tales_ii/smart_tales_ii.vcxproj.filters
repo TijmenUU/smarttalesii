@@ -55,11 +55,17 @@
     <Filter Include="Header Files\game\objects\running">
       <UniqueIdentifier>{60f9d47b-7e50-4194-a6dc-2bbf937e0bf5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\game\objects\overlay">
+    <Filter Include="Source Files\game\objects\buttons">
+      <UniqueIdentifier>{4a251553-c23b-4381-a7f4-dcdf670368e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\objects\buttons">
       <UniqueIdentifier>{f38e1ead-695b-4f93-a9ae-3b053be8600f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\game\objects\overlay">
-      <UniqueIdentifier>{4a251553-c23b-4381-a7f4-dcdf670368e0}</UniqueIdentifier>
+    <Filter Include="Source Files\game\objects\upgrades">
+      <UniqueIdentifier>{524af921-5660-4c2c-8dcc-ef0a0b62e7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\upgrades">
+      <UniqueIdentifier>{d60fb9ba-16bb-4986-9464-2b9c2f551361}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,9 +87,6 @@
     <ClCompile Include="vectormath.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
-    <ClCompile Include="fonts.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
     <ClCompile Include="gamemanager.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
@@ -98,9 +101,6 @@
     </ClCompile>
     <ClCompile Include="stringutil.cpp">
       <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="upgrades.cpp">
-      <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="shopmode.cpp">
       <Filter>Source Files\game\modes</Filter>
@@ -142,7 +142,22 @@
       <Filter>Source Files\game\objects\running</Filter>
     </ClCompile>
     <ClCompile Include="button.cpp">
-      <Filter>Source Files\game\objects\overlay</Filter>
+      <Filter>Source Files\game\objects\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="resourcecache.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="alignmenthelp.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="textbutton.cpp">
+      <Filter>Source Files\game\objects\buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="upgrades.cpp">
+      <Filter>Source Files\game\objects\upgrades</Filter>
+    </ClCompile>
+    <ClCompile Include="upgradetile.cpp">
+      <Filter>Source Files\game\objects\shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +176,6 @@
     <ClInclude Include="program.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fonts.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
     <ClInclude Include="gamemanager.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
@@ -178,9 +190,6 @@
     </ClInclude>
     <ClInclude Include="stringutil.hpp">
       <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="upgrades.hpp">
-      <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="shopmode.hpp">
       <Filter>Header Files\game\modes</Filter>
@@ -222,7 +231,22 @@
       <Filter>Header Files\game\objects\running</Filter>
     </ClInclude>
     <ClInclude Include="button.hpp">
-      <Filter>Header Files\game\objects\overlay</Filter>
+      <Filter>Header Files\game\objects\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="resourcecache.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="alignmenthelp.hpp">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="textbutton.hpp">
+      <Filter>Header Files\game\objects\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="upgrades.hpp">
+      <Filter>Header Files\game\upgrades</Filter>
+    </ClInclude>
+    <ClInclude Include="upgradetile.hpp">
+      <Filter>Header Files\game\objects\shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

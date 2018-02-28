@@ -1,5 +1,8 @@
 #pragma once
+#include "obstacledefinition.hpp"
+
 #include <cstdint>
+#include <string>
 
 namespace Upgrade
 {
@@ -11,4 +14,10 @@ namespace Upgrade
 		HealthBand = 4,
 		LiveTile = 8
 	};
+
+	Sensor ToEnum(std::string str);
+
+	ObstacleType GetObstacleCountered(const Sensor s);
+
+	Sensor GetCounteringSensor(const ObstacleType t);
 }

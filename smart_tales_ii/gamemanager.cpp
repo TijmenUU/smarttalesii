@@ -4,7 +4,7 @@
 #include <cmath>
 #include <ctime>
 
-void GameManager::Update(const sf::Time & timeElapsed,
+void GameManager::Update(const sf::Time & elapsed,
 	const Inputhandler & input,
 	const sf::View & view)
 {
@@ -14,10 +14,10 @@ void GameManager::Update(const sf::Time & timeElapsed,
 		// This is done beforehand due to the gamemode potentially deleting itself in the update
 		if(gamemode.SurpressUpdate())
 		{
-			gamemode.Update(timeElapsed, input);
+			gamemode.Update(elapsed, input);
 			break;
 		}
-		gamemode.Update(timeElapsed, input);
+		gamemode.Update(elapsed, input);
 	}
 }
 

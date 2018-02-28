@@ -19,12 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="alignmenthelp.cpp" />
     <ClCompile Include="animatedsprite.cpp" />
     <ClCompile Include="background.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="carousel.cpp" />
     <ClCompile Include="difficulty.cpp" />
-    <ClCompile Include="fonts.cpp" />
+    <ClCompile Include="resourcecache.cpp" />
     <ClCompile Include="gamemode.cpp" />
     <ClCompile Include="gamemanager.cpp" />
     <ClCompile Include="gesture.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="playerinventory.cpp" />
     <ClCompile Include="scoremode.cpp" />
     <ClCompile Include="shopmode.cpp" />
+    <ClCompile Include="textbutton.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="upgrades.cpp" />
     <ClCompile Include="program.cpp" />
@@ -45,15 +47,17 @@
     <ClCompile Include="playerscore.cpp" />
     <ClCompile Include="scorebubble.cpp" />
     <ClCompile Include="stringutil.cpp" />
+    <ClCompile Include="upgradetile.cpp" />
     <ClCompile Include="vectormath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="alignmenthelp.hpp" />
     <ClInclude Include="animatedsprite.hpp" />
     <ClInclude Include="background.hpp" />
     <ClInclude Include="button.hpp" />
     <ClInclude Include="carousel.hpp" />
     <ClInclude Include="difficulty.hpp" />
-    <ClInclude Include="fonts.hpp" />
+    <ClInclude Include="resourcecache.hpp" />
     <ClInclude Include="gamemode.hpp" />
     <ClInclude Include="gamemanager.hpp" />
     <ClInclude Include="gesture.hpp" />
@@ -66,6 +70,7 @@
     <ClInclude Include="playerinventory.hpp" />
     <ClInclude Include="scoremode.hpp" />
     <ClInclude Include="shopmode.hpp" />
+    <ClInclude Include="textbutton.hpp" />
     <ClInclude Include="tile.hpp" />
     <ClInclude Include="upgrades.hpp" />
     <ClInclude Include="program.hpp" />
@@ -73,6 +78,7 @@
     <ClInclude Include="playerscore.hpp" />
     <ClInclude Include="scorebubble.hpp" />
     <ClInclude Include="stringutil.hpp" />
+    <ClInclude Include="upgradetile.hpp" />
     <ClInclude Include="vectormath.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

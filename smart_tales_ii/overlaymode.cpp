@@ -27,7 +27,7 @@ void OverlayMode::Load()
 	pauseOverlay.setPosition(0.f, 0.f);
 	pauseOverlay.setFillColor(sf::Color(0, 0, 0, 65));
 
-	sf::Font * fontPtr = fonts.GetFont("commodore");
+	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
 		throw std::runtime_error("Error fetching commodore font in PausedMode.");
@@ -49,11 +49,11 @@ void OverlayMode::Load()
 
 	const float buttonSpacing = 60.f + 15.f;
 	sf::Vector2f buttonPosition(1280.f - buttonSpacing, 15.f);
-	gamePauseButton.setPosition(buttonPosition);
+	gamePauseButton.SetPosition(buttonPosition);
 	buttonPosition.x -= buttonSpacing;
-	musicMuteButton.setPosition(buttonPosition);
+	musicMuteButton.SetPosition(buttonPosition);
 	buttonPosition.x -= buttonSpacing;
-	sfxMuteButton.setPosition(buttonPosition);
+	sfxMuteButton.SetPosition(buttonPosition);
 }
 
 void OverlayMode::Update(const sf::Time & elapsed, const Inputhandler & input)
@@ -72,8 +72,8 @@ void OverlayMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	}
 }
 
-OverlayMode::OverlayMode(Fonts & fontsRef, GameManager & managerRef, const bool canPause)
-	: Gamemode(fontsRef, managerRef),
+OverlayMode::OverlayMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const bool canPause)
+	: Gamemode(resourceCacheRef, managerRef),
 	pauseOverlay(sf::Vector2f(cWorldWidth, cWorldHeight)),
 	pauseText(),
 	pauseEnabled(canPause),
@@ -82,6 +82,6 @@ OverlayMode::OverlayMode(Fonts & fontsRef, GameManager & managerRef, const bool 
 	gamePauseTexture(),
 	sfxMuteButton(),
 	musicMuteButton(),
-	gamePauseButton()
+	gamePauseButton(canPause)
 {
 }
