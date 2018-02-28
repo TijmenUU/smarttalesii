@@ -4,7 +4,6 @@
 class SaleTileCarousel : public sf::Drawable
 {
 private:
-	float scrollingSpeed;
 	bool wasMouseDown;
 	sf::Vector2f previousMousePosition;
 	sf::Vector2f leftTilePosition;
@@ -12,11 +11,13 @@ private:
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
+	// indicates if it has scrolled
+	bool UpdateScroll(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory);
+
 public:
 	void AddSaleTile(SaleTile * tilePtr);
 
-	// Returns whether one of the tiles had an interaction
-	bool Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory);
+	void Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory);
 
 	void RefreshTiles(const Player::Inventory & inventory);
 

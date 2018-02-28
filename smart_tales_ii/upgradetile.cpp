@@ -1,6 +1,7 @@
 #include "upgradetile.hpp"
 
 #include <iomanip>
+#include <iostream> // debug
 #include <sstream>
 
 /* Tile layout */
@@ -118,12 +119,17 @@ void UpgradeTile::Refresh(const Player::Inventory & inventory)
 	UpdateButton(inventory);
 }
 
-bool UpgradeTile::Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory, const float horizontalDisplacement)
+bool UpgradeTile::Update(const sf::Time & elapsed, 
+	const Inputhandler & input, 
+	Player::Inventory & inventory, 
+	const float horizontalDisplacement,
+	const bool allowInteraction)
 {
 	bool retval = false;
-	if(purchaseButton.Update(elapsed, input))
+	if(allowInteraction && purchaseButton.Update(elapsed, input))
 	{
 		inventory.RemoveCurrency(upgradePrice);
+		std::cout << "Bought upgrade for " << upgradePrice << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
 		inventory.AddSensorUpgrade(upgrade);
 		UpdateButton(inventory);
 

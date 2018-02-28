@@ -37,7 +37,8 @@ public:
 	bool Update(const sf::Time & elapsed,
 		const Inputhandler & input,
 		Player::Inventory & inventory,
-		const float horizontalDisplacement) override;
+		const float horizontalDisplacement,
+		const bool allowInteraction = true) override;
 
 	UpgradeTile() = default;
 	~UpgradeTile() override = default;

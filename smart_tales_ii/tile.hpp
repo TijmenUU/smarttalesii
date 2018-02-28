@@ -22,7 +22,8 @@ public:
 	virtual bool Update(const sf::Time & elapsed, 
 		const Inputhandler & input, 
 		Player::Inventory & inventory, 
-		const float horizontalDisplacement) = 0;
+		const float horizontalDisplacement,
+		const bool allowInteraction = true) = 0;
 
 	SaleTile() = default;
 	virtual ~SaleTile() = default;

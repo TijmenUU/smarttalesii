@@ -2,19 +2,12 @@
 
 #include "alignmenthelp.hpp"
 
-#include <iostream> // debug
-
 void TextButton::UpdateTextPosition(const sf::Vector2f & position)
 {
 	const auto center = Alignment::GetRectangleCenter(buttonSprite.getGlobalBounds());
 	const auto offset = Alignment::GetCenterOffset(buttonText.getLocalBounds(), center);
 	// We can use the offset alone because we're passing in global bounds, so it is already in world space
 	
-	// debug
-	std::cout << "\ntext-button <" << buttonText.getString().toAnsiString() << "> moved\n";
-	std::cout << "center X" << center.x << " Y" << center.y << '\n';
-	std::cout << "offset X" << offset.x << " Y" << offset.y << '\n';
-	// end debug
 	buttonText.setPosition(offset);
 }
 

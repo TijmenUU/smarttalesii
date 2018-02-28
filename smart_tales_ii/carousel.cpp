@@ -1,7 +1,10 @@
 #include "carousel.hpp"
 
+#include "vectormath.hpp"
+
 const float cTileSpacing = 50.f;
 const float cTileYPos = 90.f;
+const float cMinimumScrollDistance = 5.f;
 
 void SaleTileCarousel::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -9,6 +12,35 @@ void SaleTileCarousel::draw(sf::RenderTarget & target, sf::RenderStates states) 
 	{
 		target.draw(*(tiles[i]), states);
 	}
+}
+
+bool SaleTileCarousel::UpdateScroll(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory)
+{
+	if(input.PointingDevicePressedEvent())
+	{
+		wasMouseDown = true;
+		previousMousePosition = input.PointingDeviceWorldPosition();
+	}
+	else if(input.PointingDeviceIsDown())
+	{
+		const float horizontalDistance = input.PointingDeviceWorldPosition().x - previousMousePosition.x;
+		previousMousePosition = input.PointingDeviceWorldPosition();
+
+		if(std::abs(horizontalDistance) > cMinimumScrollDistance)
+		{
+			for(size_t i = 0; i < tiles.size(); ++ i)
+			{
+				tiles[i]->Update(elapsed, input, inventory, horizontalDistance, false);
+			}
+			return true;
+		}
+	}
+	else
+	{
+		wasMouseDown = false;
+	}
+
+	return false;
 }
 
 void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
@@ -27,20 +59,21 @@ void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
 	tiles.emplace_back(tilePtr);
 }
 
-bool SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory)
+void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory)
 {
 	bool hasInteracted = false;
-	for(int64_t i = static_cast<int64_t>(tiles.size()) - 1; i >= 0; --i)
+	if(!UpdateScroll(elapsed, input, inventory))
 	{
-		hasInteracted = hasInteracted || (tiles[i])->Update(elapsed, input, inventory, 0.f); // TODO add scroll
+		for(size_t i = 0; i < tiles.size(); ++i)
+		{
+			hasInteracted = hasInteracted || tiles[i]->Update(elapsed, input, inventory, 0.f);
+		}
 	}
 
 	if(hasInteracted)
 	{
 		RefreshTiles(inventory);
 	}
-
-	return hasInteracted;
 }
 
 void SaleTileCarousel::RefreshTiles(const Player::Inventory & inventory)
@@ -52,8 +85,7 @@ void SaleTileCarousel::RefreshTiles(const Player::Inventory & inventory)
 }
 
 SaleTileCarousel::SaleTileCarousel()
-	: scrollingSpeed(0.f),
-	wasMouseDown(false),
+	: wasMouseDown(false),
 	previousMousePosition(0.f, 0.f),
 	leftTilePosition(cTileSpacing, cTileYPos),
 	tiles()

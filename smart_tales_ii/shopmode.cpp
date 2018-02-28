@@ -7,7 +7,8 @@
 #include "upgradetile.hpp"
 
 #include <array>
-
+#include <iostream> // debug
+ 
 const std::array<Upgrade::Sensor, 4> cTileUpgrades = {
 	Upgrade::Sensor::PassiveInfrared,
 	Upgrade::Sensor::ActiveInfrared,
@@ -111,6 +112,12 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	{
 		manager.PushGamemode(new RunningMode(resourceCache, manager, playerInventory));
 		return;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+	{
+		playerInventory.AddCurrency(10);
+		std::cout << "Gave you 10 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
+		carousel.RefreshTiles(playerInventory);
 	}
 	// end debug
 	carousel.Update(elapsed, input, playerInventory);
