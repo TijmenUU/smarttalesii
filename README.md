@@ -7,15 +7,16 @@ Repository of the Smart Tales sequel, codename Smart Tales II. See the original 
 Currently the project requires the following:
 - Microsoft's Visual Studio 2017 (VS2017) with Visual C++
 - Simple and Fast Multimedia Library (SFML) version 2.4.2
-Should work on Linux too, no platform specific libraries or APIs used.
+
+Should build on Linux too, as there are no platform specific libraries or APIs used. However, this has not been tested yet.
 
 ## Branches
-- master: the most recent stable build of the game. It may miss some upcoming features, but it should compile no problem.
+- master: the most recent stable version of the game. It may miss some upcoming features, but it should build with no problems.
 - GameplayEvaluation: the first basic prototype of the game, for testing the fundamental game mechanics.
-- shop: the build where the score screen and shop was added to the game, may be deleted in the future. May or may not build, as it is currently under development.
+- shop: the version where the score screen and shop was added to the game. It may be deleted in the future and may or may not build, as it is currently under development.
 
 ## Releases
-Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for builds if you cannot or do not want to build it yourself.
+Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for binaries if you cannot or do not want to build it yourself.
 
 ## License
 The project and all its assets are licensed under the MIT License unless otherwise specified.
