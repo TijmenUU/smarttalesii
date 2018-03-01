@@ -40,6 +40,7 @@ const std::array<unsigned int, 4> cTilePrices = {
 void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(title, states);
+	target.draw(gotoGameButton, states);
 	target.draw(carousel, states);
 }
 
@@ -102,17 +103,19 @@ void ShopMode::Load()
 	title.setString("Shop");
 	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 0.f);
 
-	LoadTiles();	
+	gotoGameButton.LoadFromFile("animation/navigationbutton_large.txt", navigationButtonTexture);
+	const auto buttonBounds = gotoGameButton.GetGlobalbounds();
+	gotoGameButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
+	sf::Text buttonText("Back to running", *fontPtr, 26U);
+	buttonText.setFillColor(sf::Color::White);
+	gotoGameButton.SetText(buttonText);
+
+	LoadTiles();
 }
 
 void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
 	// debug
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		manager.PushGamemode(new RunningMode(resourceCache, manager, playerInventory));
-		return;
-	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
 	{
 		playerInventory.AddCurrency(40);
@@ -120,6 +123,11 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		carousel.RefreshTiles(playerInventory);
 	}
 	// end debug
+	if(gotoGameButton.Update(elapsed, input))
+	{
+		manager.PushGamemode(new RunningMode(resourceCache, manager, playerInventory));
+		return;
+	}
 	carousel.Update(elapsed, input, playerInventory);
 }
 
@@ -127,6 +135,8 @@ ShopMode::ShopMode(ResourceCache & resourceCacheRef, GameManager & managerRef, c
 	:Gamemode(resourceCacheRef, managerRef),
 	playerInventory(inventory),
 	carousel(),
-	title()
+	title(),
+	navigationButtonTexture(),
+	gotoGameButton()
 {
 }

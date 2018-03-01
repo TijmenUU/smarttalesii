@@ -3,6 +3,7 @@
 
 #include "carousel.hpp"
 #include "playerinventory.hpp"
+#include "textbutton.hpp"
 
 class ShopMode : public Gamemode
 {
@@ -14,6 +15,8 @@ private:
 	sf::Texture purchaseButtonTexture;
 	SaleTileCarousel carousel;
 	sf::Text title;
+	sf::Texture navigationButtonTexture;
+	TextButton gotoGameButton;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void LoadTiles();
