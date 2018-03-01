@@ -4,7 +4,8 @@
 
 const float cTileSpacing = 50.f;
 const float cTileYPos = 90.f;
-const float cMinimumScrollDistance = 5.f;
+// Maximum distance moved before a tap is no longer a tap but a swipe
+const float cTapBias = 15.f;
 
 void SaleTileCarousel::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -12,35 +13,6 @@ void SaleTileCarousel::draw(sf::RenderTarget & target, sf::RenderStates states) 
 	{
 		target.draw(*(tiles[i]), states);
 	}
-}
-
-bool SaleTileCarousel::UpdateScroll(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory)
-{
-	if(input.PointingDevicePressedEvent())
-	{
-		wasMouseDown = true;
-		previousMousePosition = input.PointingDeviceWorldPosition();
-	}
-	else if(input.PointingDeviceIsDown())
-	{
-		const float horizontalDistance = input.PointingDeviceWorldPosition().x - previousMousePosition.x;
-		previousMousePosition = input.PointingDeviceWorldPosition();
-
-		if(std::abs(horizontalDistance) > cMinimumScrollDistance)
-		{
-			for(size_t i = 0; i < tiles.size(); ++ i)
-			{
-				tiles[i]->Update(elapsed, input, inventory, horizontalDistance, false);
-			}
-			return true;
-		}
-	}
-	else
-	{
-		wasMouseDown = false;
-	}
-
-	return false;
 }
 
 void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
@@ -62,11 +34,34 @@ void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
 void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory)
 {
 	bool hasInteracted = false;
-	if(!UpdateScroll(elapsed, input, inventory))
+
+	if(input.PointingDevicePressedEvent())
 	{
+		wasMouseDown = true;
+		mouseStartPosition = input.PointingDeviceWorldPosition();
+		previousMousePosition = mouseStartPosition;
+	}
+	else if(input.PointingDeviceIsDown())
+	{
+		const float horizontalDistance = input.PointingDeviceWorldPosition().x - previousMousePosition.x;
+		previousMousePosition = input.PointingDeviceWorldPosition();
+
 		for(size_t i = 0; i < tiles.size(); ++i)
 		{
-			hasInteracted = hasInteracted || tiles[i]->Update(elapsed, input, inventory, 0.f);
+			tiles[i]->Update(elapsed, input, inventory, horizontalDistance, false);
+		}
+	}
+	else if(input.PointingDeviceReleasedEvent())
+	{
+		wasMouseDown = false;
+
+		const float distanceTravelledTotal = VectorMathF::Distance(mouseStartPosition, input.PointingDeviceWorldPosition());
+		if(distanceTravelledTotal < cTapBias)
+		{
+			for(size_t i = 0; i < tiles.size(); ++i)
+			{
+				hasInteracted = hasInteracted || tiles[i]->Update(elapsed, input, inventory, 0.f);
+			}
 		}
 	}
 
@@ -86,6 +81,7 @@ void SaleTileCarousel::RefreshTiles(const Player::Inventory & inventory)
 
 SaleTileCarousel::SaleTileCarousel()
 	: wasMouseDown(false),
+	mouseStartPosition(0.f, 0.f),
 	previousMousePosition(0.f, 0.f),
 	leftTilePosition(cTileSpacing, cTileYPos),
 	tiles()
