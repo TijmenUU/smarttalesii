@@ -13,7 +13,6 @@ Should build on Linux too, as there are no platform specific libraries or APIs u
 ## Branches
 - master: the most recent stable version of the game. It may miss some upcoming features, but it should build with no problems.
 - GameplayEvaluation: the first basic prototype of the game, for testing the fundamental game mechanics.
-- shop: the version where the score screen and shop was added to the game. It may be deleted in the future and may or may not build, as it is currently under development.
 
 ## Releases
 Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for binaries if you cannot or do not want to build it yourself.
