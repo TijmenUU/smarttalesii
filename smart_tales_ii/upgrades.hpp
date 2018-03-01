@@ -17,7 +17,7 @@ namespace Upgrade
 
 	Sensor ToEnum(std::string str);
 
-	ObstacleType GetObstacleCountered(const Sensor s);
+	ObstacleType GetObstacleCounter(const Sensor s);
 
 	Sensor GetCounteringSensor(const ObstacleType t);
 }

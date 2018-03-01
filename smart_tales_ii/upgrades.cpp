@@ -30,7 +30,7 @@ namespace Upgrade
 		return Sensor::Unknown;
 	}
 
-	ObstacleType GetObstacleCountered(const Sensor s)
+	ObstacleType GetObstacleCounter(const Sensor s)
 	{
 		switch(s)
 		{

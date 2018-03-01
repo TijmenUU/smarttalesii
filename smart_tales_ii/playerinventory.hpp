@@ -16,6 +16,8 @@ namespace Player
 		void AddSensorUpgrade(const Upgrade::Sensor s);
 		void RemoveSensorUpgrade(const Upgrade::Sensor s);
 
+		bool HasObstacleCounter(const ObstacleType o) const;
+
 		unsigned int GetCurrency() const;
 		void AddCurrency(const unsigned int amount);
 		void RemoveCurrency(const unsigned int amount);
