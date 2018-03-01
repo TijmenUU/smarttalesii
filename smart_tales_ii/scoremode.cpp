@@ -8,6 +8,9 @@
 void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(title, states);
+	target.draw(playerScoreTxt, states);
+	target.draw(currencyEarned, states);
+	target.draw(newBalance, states);
 	target.draw(gotoShopButton, states);
 }
 
@@ -35,6 +38,30 @@ void ScoreMode::Load()
 	title.setOutlineThickness(2.f);
 	title.setString("Score Screen");
 	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 0.f);
+
+	playerScoreTxt.setFont(*fontPtr);
+	playerScoreTxt.setCharacterSize(24);
+	playerScoreTxt.setFillColor(sf::Color::White);
+	playerScoreTxt.setOutlineColor(sf::Color::Black);
+	playerScoreTxt.setOutlineThickness(1.f);
+	playerScoreTxt.setString("Your score: " + std::to_string(static_cast<int>(playerScore.GetTotalScore())));
+	playerScoreTxt.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
+
+	currencyEarned.setFont(*fontPtr);
+	currencyEarned.setCharacterSize(24);
+	currencyEarned.setFillColor(sf::Color::White);
+	currencyEarned.setOutlineColor(sf::Color::Black);
+	currencyEarned.setOutlineThickness(1.f);
+	currencyEarned.setString("Currency earned: " + std::to_string(playerScore.GetCurrency()));
+	currencyEarned.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 200.f);
+
+	newBalance.setFont(*fontPtr);
+	newBalance.setCharacterSize(24);
+	newBalance.setFillColor(sf::Color::White);
+	newBalance.setOutlineColor(sf::Color::Black);
+	newBalance.setOutlineThickness(1.f);
+	newBalance.setString("Your new balance: " + std::to_string(playerScore.GetCurrency() + playerInventory.GetCurrency()));
+	newBalance.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 300.f);
 }
 
 void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
