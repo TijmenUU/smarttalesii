@@ -28,7 +28,7 @@ bool Obstacle::IsObstacleAnimationFinished() const
 
 bool Obstacle::CanHurtPlayer() const
 {
-	return !definitionPtr->sensorPurchased;
+	return !(definitionPtr->sensorPurchased || neutralized);
 }
 
 sf::FloatRect Obstacle::GetObstacleGlobalBounds() const
