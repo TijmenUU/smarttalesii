@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/active_ir.png"
+
+animation idle
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 32
+	frame-height 32
+	frame-count 1
+
+animation activated
+	frame-start-x 32
+	frame-start-y 0
+	frame-width 32
+	frame-height 32
+	frame-count 1

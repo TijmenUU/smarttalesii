@@ -18,7 +18,7 @@ void Obstacle::Neutralize()
 
 bool Obstacle::IsNeutralized() const
 {
-	return neutralized;
+	return neutralized || definitionPtr->sensorPurchased;
 }
 
 bool Obstacle::IsObstacleAnimationFinished() const

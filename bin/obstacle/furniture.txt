@@ -6,3 +6,5 @@ minimal-interaction-distance	25
 neutralization-gestures			downwards
 hint-string							"Swipe down!"
 hint-local-position				50 -40
+sensor-animation-file			"animation/livetile.txt"
+sensor-local-position			-80 73

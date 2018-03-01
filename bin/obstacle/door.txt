@@ -6,3 +6,5 @@ minimal-interaction-distance	50
 neutralization-gestures			leftwards rightwards
 hint-string							"Swipe left or right!"
 hint-local-position				160 150
+sensor-animation-file			"animation/active_ir.txt"
+sensor-local-position			-32 450

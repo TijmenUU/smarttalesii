@@ -115,8 +115,8 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
 	{
-		playerInventory.AddCurrency(10);
-		std::cout << "Gave you 10 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
+		playerInventory.AddCurrency(40);
+		std::cout << "Gave you 40 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
 		carousel.RefreshTiles(playerInventory);
 	}
 	// end debug
