@@ -4,15 +4,15 @@
 #include <unordered_map>
 #include <vector>
 
-struct Fonts
+struct ResourceCache
 {
 private:
-	std::unordered_map<std::string, sf::Font> storage;
+	std::unordered_map<std::string, sf::Font> fontStorage;
 
 public:
 	bool LoadFont(const std::string & file, const std::string & name);
 
 	sf::Font * GetFont(const std::string & name);
 
-	Fonts();
+	ResourceCache();
 };

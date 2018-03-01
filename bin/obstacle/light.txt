@@ -6,3 +6,5 @@ minimal-interaction-distance	200
 neutralization-gestures			tap
 hint-string							"Tap it!"
 hint-local-position				60 -30
+sensor-animation-file			"animation/passive_ir.txt"
+sensor-local-position			-80 -63

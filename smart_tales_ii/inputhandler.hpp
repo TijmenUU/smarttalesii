@@ -28,23 +28,17 @@ public:
 	bool DidWindowClose() const;
 	bool WindowHasFocus() const;
 
-	// key down event (not iskeydown, initial press only)
-	bool WasKeyPressed(const sf::Keyboard::Key k) const;
-	// key up event
-	bool WasKeyReleased(const sf::Keyboard::Key k) const;
-
-	// button down event (not isButtonPressed, initial press only)
-	bool WasButtonPressed(const sf::Mouse::Button b) const;
-	// button up event
-	bool WasButtonReleased(const sf::Mouse::Button b) const;
-
-	bool IsCursorInWindow() const;
-	bool DidCursorMove() const;
-
-	std::string GetTextTyped() const;
-
-	sf::Vector2i GetMouseWindowCoordinate() const;
-	sf::Vector2f GetMouseWorldCoordinate() const;
+	/* Main input methods */
+	// is it currently released
+	bool PointingDeviceIsUp() const;
+	// is it currently being pressed down
+	bool PointingDeviceIsDown() const;
+	// did it just get pressed
+	bool PointingDevicePressedEvent() const;
+	// did it just get released
+	bool PointingDeviceReleasedEvent() const;
+	sf::Vector2i PointingDeviceWindowPosition() const;
+	sf::Vector2f PointingDeviceWorldPosition() const;
 
 	Inputhandler();
 };

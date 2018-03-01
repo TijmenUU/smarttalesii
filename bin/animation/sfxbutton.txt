@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/sfxbutton.png"
+
+animation up
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 60
+	frame-height 60
+	frame-count 1
+
+animation down
+	frame-start-x 60
+	frame-start-y 0
+	frame-width 60
+	frame-height 60
+	frame-count 1

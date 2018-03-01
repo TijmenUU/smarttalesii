@@ -1,5 +1,6 @@
 #include "program.hpp"
 #include "runningmode.hpp"
+#include "overlaymode.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -21,13 +22,13 @@ void Program::Load()
 {
 	for(size_t i = 0U; i < cFontFiles.size(); ++i)
 	{
-		if(!fontsContainer.LoadFont(cFontFiles[i], cFontNames[i]))
+		if(!resourceCache.LoadFont(cFontFiles[i], cFontNames[i]))
 		{
 			throw std::runtime_error("Error loading file " + cFontFiles[i]);
 		}
 	}
 	// Set game starting gamemode
-	manager.PushGamemode(new RunningMode(fontsContainer, manager));
+	manager.PushGamemode(new RunningMode(resourceCache, manager, Player::Inventory()));
 }
 
 void Program::Run()
@@ -38,13 +39,10 @@ void Program::Run()
 		// start update
 		inputhandler.Update(window);
 
-		if(inputhandler.WasKeyReleased(sf::Keyboard::Key::Escape))
-			break;
-
 		manager.Update(sfclock.restart(), inputhandler, window.getView());
 		// end update
 
-		window.clear(sf::Color::White);
+		window.clear(sf::Color::Black);
 		// draw
 		window.draw(manager);
 		// end draw

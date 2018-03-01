@@ -23,7 +23,7 @@ private:
 	sf::Vector2f position; // world space position of interaction area center
 	float radius, minDist; // in pixels
 	bool gestureInProgress;
-	sf::Vector2i start; // window space starting coordinate of swipe gesture
+	sf::Vector2i startWindowPosition; // window space starting coordinate of swipe gesture
 
 public:
 	bool IsInProgress() const;

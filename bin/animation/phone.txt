@@ -13,3 +13,4 @@ animation neutralized
 	frame-width 92
 	frame-height 132
 	frame-count 1
+	loop

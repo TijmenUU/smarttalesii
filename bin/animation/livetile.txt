@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/livetile.png"
+
+animation idle
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 72
+	frame-height 52
+	frame-count 1
+
+animation activated
+	frame-start-x 72
+	frame-start-y 0
+	frame-width 72
+	frame-height 52
+	frame-count 1

@@ -16,10 +16,12 @@ enum class ObstacleProperty
 	NeutralizationGestures,
 	InteractionLocalPosition,
 	HintLocalPosition,
-	HintString
+	HintString,
+	SensorAnimationFile,
+	SensorLocalPosition
 };
 
-std::array<std::string, 8U> cObstaclePropertyStrings = 
+std::array<std::string, 10U> cObstaclePropertyStrings = 
 {
 	"type",
 	"animation-file",
@@ -28,7 +30,9 @@ std::array<std::string, 8U> cObstaclePropertyStrings =
 	"neutralization-gestures",
 	"interaction-local-position",
 	"hint-local-position",
-	"hint-string"
+	"hint-string",
+	"sensor-animation-file",
+	"sensor-local-position"
 };
 
 ObstacleProperty ToObstacleProperty(std::string s)
@@ -94,7 +98,7 @@ void ObstacleDefinition::LoadFromFile(const std::string & filename)
 			break;
 
 			case ObstacleProperty::AnimationFile:
-			animatedSprite.Load(Util::GetStringInQuotes(line), texture);
+			obstacleSprite.LoadFromFile(Util::GetStringInQuotes(line), obstacleSpriteTexture);
 			break;
 
 			case ObstacleProperty::InteractionRadius:
@@ -130,6 +134,15 @@ void ObstacleDefinition::LoadFromFile(const std::string & filename)
 			neutralizationHint = Util::GetStringInQuotes(line);
 			break;
 
+			case ObstacleProperty::SensorAnimationFile:
+			sensorSprite.LoadFromFile(Util::GetStringInQuotes(line), sensorSpriteTexture);
+			break;
+
+			case ObstacleProperty::SensorLocalPosition:
+			ss >> sensorLocalPos.x;
+			ss >> sensorLocalPos.y;
+			break;
+
 			default:
 			case ObstacleProperty::Unknown:
 			break;
@@ -140,14 +153,21 @@ void ObstacleDefinition::LoadFromFile(const std::string & filename)
 	{
 		throw std::runtime_error("Error loading <" + filename + ">: result is of unknown type.");
 	}
+
+	obstacleSprite.SetAnimation("active");
+	sensorSprite.SetAnimation("idle");
 }
 
 ObstacleDefinition::ObstacleDefinition()
 	: type(ObstacleType::Unknown),
-	texture(),
-	animatedSprite(),
+	obstacleSpriteTexture(),
+	sensorSpriteTexture(),
+	obstacleSprite(),
+	sensorSprite(),
+	sensorPurchased(false),
 	interactionLocalPos(0.f, 0.f),
 	neutralizationHintLocalPos(0.f, 0.f),
+	sensorLocalPos(0.f, 0.f),
 	interactionRadius(0.f),
 	minimalDistance(0.f),
 	neutralizationSwipes(0U),

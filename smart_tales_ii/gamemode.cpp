@@ -20,8 +20,8 @@ void Gamemode::OnEnter()
 	return;
 }
 
-Gamemode::Gamemode(Fonts & fontsRef, GameManager & managerRef)
-	: fonts(fontsRef),
+Gamemode::Gamemode(ResourceCache & resourceCacheRef, GameManager & managerRef)
+	: resourceCache(resourceCacheRef),
 	manager(managerRef)
 {
 }

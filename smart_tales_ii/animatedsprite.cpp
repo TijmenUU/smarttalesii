@@ -88,6 +88,23 @@ Animation::Animation()
 {
 }
 
+void AnimatedSprite::UpdateTextureRect()
+{
+	auto textureRect = baseFrame;
+	if(isFlippedHorizontally)
+	{
+		textureRect.left += textureRect.width;
+		textureRect.width *= -1;
+	}
+	if(isFlippedVertically)
+	{
+		textureRect.top += textureRect.height;
+		textureRect.height *= -1;
+	}
+
+	setTextureRect(textureRect);
+}
+
 void AnimatedSprite::GetNextFrame()
 {
 	assert(currentAnimation != nullptr);
@@ -105,26 +122,27 @@ void AnimatedSprite::GetNextFrame()
 		else
 		{
 			currentFrame = 0;
-			setTextureRect(sf::IntRect(
+			baseFrame = sf::IntRect(
 				currentAnimation->frameStart.x,
 				currentAnimation->frameStart.y,
 				currentAnimation->frameSize.x,
-				currentAnimation->frameSize.y));
+				currentAnimation->frameSize.y);
+
+			UpdateTextureRect();
 		}
 	}
 	else
 	{
-		auto textureRect = getTextureRect();
 		if(currentAnimation->reverse)
 		{
-			textureRect.left -= currentAnimation->frameMargin + currentAnimation->frameSize.x;
+			baseFrame.left -= currentAnimation->frameMargin + currentAnimation->frameSize.x;
 		}
 		else
 		{
-			textureRect.left += currentAnimation->frameMargin + currentAnimation->frameSize.x;
+			baseFrame.left += currentAnimation->frameMargin + currentAnimation->frameSize.x;
 		}
 
-		setTextureRect(textureRect);
+		UpdateTextureRect();
 	}
 }
 
@@ -169,11 +187,13 @@ bool AnimatedSprite::SetAnimation(const std::string & name)
 
 	currentAnimation = &(findresult->second);
 
-	setTextureRect(sf::IntRect(
+	baseFrame = sf::IntRect(
 		currentAnimation->frameStart.x,
 		currentAnimation->frameStart.y,
 		currentAnimation->frameSize.x,
-		currentAnimation->frameSize.y));
+		currentAnimation->frameSize.y);
+	UpdateTextureRect();
+
 	currentFrame = 0U;
 	currentFrameTime = 0U;
 
@@ -203,16 +223,20 @@ bool AnimatedSprite::IsAnimationFinished() const
 
 void AnimatedSprite::FlipHorizontally()
 {
-	auto scale = getScale();
-	scale.x *= -1.f;
-	setScale(scale);
+	isFlippedHorizontally = !isFlippedHorizontally;
+	UpdateTextureRect();
 }
 
 void AnimatedSprite::FlipVertically()
 {
-	auto scale = getScale();
-	scale.y *= -1.f;
-	setScale(scale);
+	isFlippedVertically = !isFlippedVertically;
+	UpdateTextureRect();
+}
+
+sf::Vector2f AnimatedSprite::GetSize() const
+{
+	auto & scale = getScale();
+	return sf::Vector2f(baseFrame.width * scale.x, baseFrame.height * scale.y);
 }
 
 Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
@@ -275,7 +299,7 @@ Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
 	return result;
 }
 
-void AnimatedSprite::Load(const std::string & animationFile, sf::Texture & textureStorage)
+void AnimatedSprite::LoadFromFile(const std::string & animationFile, sf::Texture & textureStorage)
 {
 	auto lines = Platform::LoadTextFile(animationFile, true, true);
 
@@ -338,6 +362,9 @@ AnimatedSprite & AnimatedSprite::operator=(const AnimatedSprite & other)
 	currentAnimation = nullptr;
 	currentFrame = other.currentFrame;
 	currentFrameTime = other.currentFrameTime;
+	baseFrame = other.baseFrame;
+	isFlippedHorizontally = other.isFlippedHorizontally;
+	isFlippedVertically = other.isFlippedVertically;
 
 	if(other.currentAnimation != nullptr)
 	{
@@ -359,7 +386,10 @@ AnimatedSprite::AnimatedSprite()
 	animations(),
 	currentAnimation(nullptr),
 	currentFrame(0U),
-	currentFrameTime(0U)
+	currentFrameTime(0U),
+	baseFrame(),
+	isFlippedHorizontally(false),
+	isFlippedVertically(false)
 {
 }
 
@@ -368,7 +398,10 @@ AnimatedSprite::AnimatedSprite(const AnimatedSprite & other)
 	animations(other.animations),
 	currentAnimation(nullptr),
 	currentFrame(other.currentFrame),
-	currentFrameTime(other.currentFrameTime)
+	currentFrameTime(other.currentFrameTime),
+	baseFrame(other.baseFrame),
+	isFlippedHorizontally(other.isFlippedHorizontally),
+	isFlippedVertically(other.isFlippedVertically)
 {
 	if(other.currentAnimation != nullptr)
 	{

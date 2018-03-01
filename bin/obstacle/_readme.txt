@@ -21,3 +21,7 @@ neutralization-gestures		leftwards rightwards
 hint-string			"Swipe left or right!"
 
 hint-local-position		50	50
+
+sensor-animation-file "animation/active_ir.txt"
+
+sensor-local-position -32 450

@@ -1,0 +1,22 @@
+spritesheet-source "spritesheet/purchasebutton.png"
+
+animation buy
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 145
+	frame-height 82
+	frame-count 1
+
+animation bought
+	frame-start-x 145
+	frame-start-y 0
+	frame-width 145
+	frame-height 82
+	frame-count 1
+
+animation too-expensive
+	frame-start-x 290
+	frame-start-y 0
+	frame-width 145
+	frame-height 82
+	frame-count 1

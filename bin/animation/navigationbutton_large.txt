@@ -1,0 +1,15 @@
+spritesheet-source "spritesheet/navigationbutton_large.png"
+
+animation up
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 400
+	frame-height 76
+	frame-count 1
+
+animation down
+	frame-start-x 400
+	frame-start-y 0
+	frame-width 400
+	frame-height 76
+	frame-count 1

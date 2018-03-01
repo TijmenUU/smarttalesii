@@ -4,12 +4,13 @@ animation active
 	frame-start-x 0
 	frame-start-y 0
 	frame-width 124
-	frame-height 292
+	frame-height 320
 	frame-count 1
 
 animation neutralized
 	frame-start-x 124
 	frame-start-y 0
 	frame-width 124
-	frame-height 292
+	frame-height 320
 	frame-count 1
+	loop

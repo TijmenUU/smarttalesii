@@ -1,6 +1,9 @@
 #include "runningmode.hpp"
+
+#include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
-#include "pausemode.hpp"
+#include "overlaymode.hpp"
+#include "scoremode.hpp"
 #include "vectormath.hpp"
 
 #include <array>
@@ -59,15 +62,15 @@ void RunningMode::SpawnObstacle()
 	obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex].get());
 	
 	auto & newObstacle = obstacles.back();
-	newObstacle.SetAnimation("active");
-	newObstacle.setPosition(cWorldWidth, cFloorY - newObstacle.getGlobalBounds().height);
+	//newObstacle.SetAnimation("active");
+	newObstacle.SetPosition(sf::Vector2f(cWorldWidth, cFloorY - newObstacle.GetObstacleGlobalBounds().height));
 	
 	++obstacleSpawnIndex;
 }
 
 void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score, const float bonusScore)
 {
-	auto * fontPtr = fonts.GetFont("commodore");
+	auto * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
 		std::cerr << "Error loading font commodore for score bubble.\n";
@@ -79,10 +82,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score,
 
 void RunningMode::GameOver()
 {
-	// TODO start gamemode switch here to score screen
-	manager.PushGamemode(new PauseMode(fonts, manager, "Game over! Press P to retry"));
-
-	Reset();
+	manager.PushGamemode(new ScoreMode(resourceCache, manager, score, playerInventory));
 	return;
 }
 
@@ -110,42 +110,47 @@ bool RunningMode::SurpressUpdate() const
 	return true;
 }
 
-void RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
+bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
 {
+	const auto playerBounds = player.getGlobalBounds();
+
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
 		auto & obstacle = obstacles[i];
-		if(obstacle.IsNeutralized())
+
+		if(obstacle.IsNeutralized() && obstacle.GetObstaclePosition().x + obstacle.GetObstacleGlobalBounds().width < 0.f)
 		{
-			obstacle.Update(elapsed, -scrollVelocity, input);
-			if(obstacle.IsAnimationFinished() || (obstacle.getPosition().x + obstacle.getGlobalBounds().width) < 0.f)
-			{
-				obstacles.erase(obstacles.begin() + i);
-				continue; // make sure we cannot use the deleted obj anymore
-			}
+			obstacles.erase(obstacles.begin() + i);
+			continue; // make sure we cannot use the deleted obj anymore
 		}
-		else
+
+		const bool gotNeutralized = obstacle.Update(elapsed, -scrollVelocity, input, playerBounds);
+		
+		if(gotNeutralized)
 		{
-			if(obstacle.Update(elapsed, -scrollVelocity, input))
-			{
-				const auto obstaclePosition = obstacle.getPosition();
-				const float playerObstacleDist = VectorMathF::Distance(obstaclePosition, player.getPosition());
+			const auto obstacleCenter = obstacle.GetObstacleCenter();
+			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
 
-				SpawnScoreBubble(obstacle, score.CalculateNeutralizationScore(1), score.CalculateBonusScore(playerObstacleDist));
+			const auto neutralizationScore = score.CalculateNeutralizationScore(1); // could be made a constexpr
+			const auto bonusScore = score.CalculateBonusScore(playerObstacleDist);
+			score.AddBonusScore(bonusScore);
+			score.AddNeutralization();
 
-				score.AddNeutralization(playerObstacleDist);
-			}
-			else if(obstacle.getGlobalBounds().intersects((player.getGlobalBounds())))
-			{
-				// debug
-				std::cout << "Run over! Final score: " << score.GetTotalScore();
-				std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
-				// end debug
-				GameOver();
-				return;
-			}
+			SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
+		}
+		else if(obstacle.CanHurtPlayer() && obstacle.GetObstacleGlobalBounds().intersects(playerBounds))
+		{
+			// debug
+			std::cout << "Run over! Final score: " << score.GetTotalScore();
+			std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
+			std::cout << "\tKilled by a <" << static_cast<int>(obstacle.GetType()) << ">\n";
+			// end debug
+			GameOver();
+			return true;
 		}
 	}
+
+	return false;
 }
 
 void RunningMode::UpdateHints()
@@ -158,13 +163,15 @@ void RunningMode::UpdateHints()
 			const auto & obstacle = obstacles[i];
 			if(!obstacle.IsNeutralized())
 			{
-				auto obstaclePosition = obstacle.getPosition();
+				auto obstaclePosition = obstacle.GetObstaclePosition();
 				if(obstaclePosition.x <= gameDifficulty.GetHintBorderXCoord())
 				{
 					obstacleHintText.setString(obstacle.GetNeutralizationHint());
-					auto position = obstacle.GetNeutralizationHintPosition();
-					position.x -= obstacleHintText.getGlobalBounds().width / 2.f;
-					obstacleHintText.setPosition(position);
+					const auto hintPosition = obstacle.GetNeutralizationHintPosition();
+					obstacleHintText.setPosition(Alignment::GetCenterOffset(obstacleHintText.getLocalBounds(), hintPosition));
+					//obstacleHintText.setPosition(
+					//	Alignment::GetCenterOffset(obstacleHintText.getGlobalBounds().width, hintPosition.x),
+					//	hintPosition.y);
 
 					drawObstacleHint = true;
 					break;
@@ -184,9 +191,7 @@ void RunningMode::UpdateScoreDisplay()
 	scoreText.setString(ss.str());
 	
 	// Positioning
-	const float width = scoreText.getGlobalBounds().width;
-	const auto oldPosition = scoreText.getPosition();
-	scoreText.setPosition((cWorldWidth / 2) - (width / 2), oldPosition.y);
+	scoreText.setPosition(Alignment::GetCenterOffset(scoreText.getGlobalBounds().width, cWorldWidth / 2.f), 15.f);
 }
 
 void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
@@ -202,12 +207,16 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 
 void RunningMode::Load()
 {
+	manager.PopAllBelow(this);
+
 	background.Load(cBackgroundWallTexture);
 	for(size_t i = 0; i < cObstacleDefinitionFiles.size(); ++i)
 	{
 		obstacleDefinitions.emplace_back(new ObstacleDefinition());
-		obstacleDefinitions.back()->LoadFromFile(cObstacleDefinitionFiles[i]);
-		obstacleDefinitions.back()->animatedSprite.SetAnimation("active");
+		
+		auto & obstacleDef = obstacleDefinitions.back();
+		obstacleDef->LoadFromFile(cObstacleDefinitionFiles[i]);
+		obstacleDef->sensorPurchased = playerInventory.HasObstacleCounter(obstacleDef->type);
 	}
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
@@ -216,7 +225,7 @@ void RunningMode::Load()
 	const auto playerBounds = player.getGlobalBounds();
 	player.setPosition(playerBounds.width, cFloorY - playerBounds.height);
 
-	sf::Font * fontPtr = fonts.GetFont("commodore");
+	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
 		throw std::runtime_error("Error fetching commodore font in RunningMode.");
@@ -233,28 +242,31 @@ void RunningMode::Load()
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
-	scoreText.setPosition(0.f, 15.f);
+
+	manager.PushGamemode(new OverlayMode(resourceCache, manager));
 }
 
-void RunningMode::Update(const sf::Time & timeElapsed, const Inputhandler & input)
+void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	if(input.WasKeyReleased(sf::Keyboard::Key::P))
+	// debug
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 	{
-		manager.PushGamemode(new PauseMode(fonts, manager));
+		GameOver();
 		return;
 	}
+	// end debug
+	background.Update(elapsed, -scrollVelocity);
 
-	background.Update(timeElapsed, -scrollVelocity);
+	UpdateScoreBubbles(elapsed);
 
-	UpdateScoreBubbles(timeElapsed);
+	if(UpdateObstacles(elapsed, input))
+		return;
 
-	UpdateObstacles(timeElapsed, input);
-
-	player.Update(timeElapsed);
+	player.Update(elapsed);
 
 	UpdateHints();
 
-	const auto elapsedSeconds = timeElapsed.asSeconds();
+	const auto elapsedSeconds = elapsed.asSeconds();
 
 	score.distance += elapsedSeconds * scrollVelocity;
 
@@ -268,7 +280,8 @@ void RunningMode::Update(const sf::Time & timeElapsed, const Inputhandler & inpu
 	}
 
 	currentTimeout += elapsedSeconds;
-	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().getPosition().x < (cWorldWidth - 400.f)))
+	// TODO add better spawn algorithm
+	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().GetObstaclePosition().x < (cWorldWidth - 400.f)))
 	{
 		currentTimeout = 0.f;
 		SpawnObstacle();
@@ -285,8 +298,8 @@ void RunningMode::OnEnter()
 	Reset();
 }
 
-RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef)
-	: Gamemode(fontsRef, managerRef),
+RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
+	: Gamemode(resourceCacheRef, managerRef),
 	background(cWorldWidth),
 	obstacleDefinitions(),
 	obstacles(),
@@ -300,7 +313,8 @@ RunningMode::RunningMode(Fonts & fontsRef, GameManager & managerRef)
 	score(),
 	scoreText(),
 	scoreBubbles(),
-	player()
+	player(),
+	playerInventory(inventory)
 {
 
 }

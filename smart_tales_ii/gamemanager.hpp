@@ -1,5 +1,5 @@
 #pragma once
-#include "fonts.hpp"
+#include "resourcecache.hpp"
 #include "gamemode.hpp"
 
 #include <memory>
@@ -17,7 +17,7 @@ private:
 protected:
 	friend class Program;
 
-	void Update(const sf::Time & timeElapsed,
+	void Update(const sf::Time & elapsed,
 		const Inputhandler & input,
 		const sf::View & view);
 
@@ -25,6 +25,10 @@ public:
 	// Calls Load on gamemode, thus it may throw an runtime_error exception
 	void PushGamemode(Gamemode * gamemode);
 	bool RemoveGamemode(Gamemode * gamemode);
+	void Pop();
+	// Inclusive, pops until it finds gamemode, pops that too and then stops
+	bool PopUntill(Gamemode * gamemode);
+	bool PopAllBelow(Gamemode * gamemode);
 
 	GameManager();
 };
