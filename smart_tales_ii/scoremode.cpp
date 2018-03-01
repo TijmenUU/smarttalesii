@@ -80,7 +80,9 @@ ScoreMode::ScoreMode(ResourceCache & resourceCacheRef, GameManager & managerRef,
 	playerInventory(inventory),
 	navigationButtonTexture(),
 	gotoShopButton(),
-	title()
+	title(),
+	playerScoreTxt(),
+	currencyEarned(),
+	newBalance()
 {
-	playerInventory.AddCurrency(score.GetCurrency());
 }
