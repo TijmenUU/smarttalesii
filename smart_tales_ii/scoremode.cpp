@@ -45,7 +45,7 @@ void ScoreMode::Load()
 	playerScoreTxt.setOutlineColor(sf::Color::Black);
 	playerScoreTxt.setOutlineThickness(1.f);
 	playerScoreTxt.setString("Your score: " + std::to_string(static_cast<int>(playerScore.GetTotalScore())));
-	playerScoreTxt.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
+	playerScoreTxt.setPosition(Alignment::GetCenterOffset(playerScoreTxt.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
 
 	currencyEarned.setFont(*fontPtr);
 	currencyEarned.setCharacterSize(24);
@@ -53,7 +53,7 @@ void ScoreMode::Load()
 	currencyEarned.setOutlineColor(sf::Color::Black);
 	currencyEarned.setOutlineThickness(1.f);
 	currencyEarned.setString("Currency earned: " + std::to_string(playerScore.GetCurrency()));
-	currencyEarned.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 200.f);
+	currencyEarned.setPosition(Alignment::GetCenterOffset(currencyEarned.getGlobalBounds().width, cWorldWidth / 2.f), 200.f);
 
 	newBalance.setFont(*fontPtr);
 	newBalance.setCharacterSize(24);
@@ -61,7 +61,7 @@ void ScoreMode::Load()
 	newBalance.setOutlineColor(sf::Color::Black);
 	newBalance.setOutlineThickness(1.f);
 	newBalance.setString("Your new balance: " + std::to_string(playerScore.GetCurrency() + playerInventory.GetCurrency()));
-	newBalance.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 300.f);
+	newBalance.setPosition(Alignment::GetCenterOffset(newBalance.getGlobalBounds().width, cWorldWidth / 2.f), 300.f);
 }
 
 void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
