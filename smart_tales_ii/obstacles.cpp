@@ -18,12 +18,17 @@ void Obstacle::Neutralize()
 
 bool Obstacle::IsNeutralized() const
 {
-	return neutralized || definitionPtr->sensorPurchased;
+	return neutralized;
 }
 
 bool Obstacle::IsObstacleAnimationFinished() const
 {
 	return obstacleSprite.IsAnimationFinished();
+}
+
+bool Obstacle::CanHurtPlayer() const
+{
+	return !definitionPtr->sensorPurchased;
 }
 
 sf::FloatRect Obstacle::GetObstacleGlobalBounds() const

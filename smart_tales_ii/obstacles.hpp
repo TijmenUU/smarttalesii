@@ -18,6 +18,7 @@ public:
 	void Neutralize();
 	bool IsNeutralized() const;
 	bool IsObstacleAnimationFinished() const;
+	bool CanHurtPlayer() const;
 	sf::FloatRect GetObstacleGlobalBounds() const;
 
 	ObstacleType GetType() const;

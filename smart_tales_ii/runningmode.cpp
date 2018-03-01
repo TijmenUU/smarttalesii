@@ -117,39 +117,36 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
 		auto & obstacle = obstacles[i];
-		if(obstacle.IsNeutralized())
+
+		if(obstacle.IsNeutralized() && obstacle.GetObstaclePosition().x + obstacle.GetObstacleGlobalBounds().width < 0.f)
 		{
-			obstacle.Update(elapsed, -scrollVelocity, input, playerBounds);
-			if(obstacle.IsObstacleAnimationFinished() || 
-				(obstacle.GetObstaclePosition().x + obstacle.GetObstacleGlobalBounds().width) < 0.f)
-			{
-				obstacles.erase(obstacles.begin() + i);
-				continue; // make sure we cannot use the deleted obj anymore
-			}
+			obstacles.erase(obstacles.begin() + i);
+			continue; // make sure we cannot use the deleted obj anymore
 		}
-		else
+
+		const bool gotNeutralized = obstacle.Update(elapsed, -scrollVelocity, input, playerBounds);
+		
+		if(gotNeutralized)
 		{
-			if(obstacle.Update(elapsed, -scrollVelocity, input, player.getGlobalBounds()))
-			{
-				const auto obstacleCenter = obstacle.GetObstacleCenter();
-				const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
+			const auto obstacleCenter = obstacle.GetObstacleCenter();
+			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
 
-				const auto neutralizationScore = score.CalculateNeutralizationScore(1); // could be made a constexpr
-				const auto bonusScore = score.CalculateBonusScore(playerObstacleDist);
-				score.AddBonusScore(bonusScore);
-				score.AddNeutralization();
+			const auto neutralizationScore = score.CalculateNeutralizationScore(1); // could be made a constexpr
+			const auto bonusScore = score.CalculateBonusScore(playerObstacleDist);
+			score.AddBonusScore(bonusScore);
+			score.AddNeutralization();
 
-				SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
-			}
-			else if(obstacle.GetObstacleGlobalBounds().intersects((player.getGlobalBounds())))
-			{	// TODO Potentially add check for neutralization by the sensor!
-				// debug
-				std::cout << "Run over! Final score: " << score.GetTotalScore();
-				std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
-				// end debug
-				GameOver();
-				return true;
-			}
+			SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
+		}
+		else if(obstacle.CanHurtPlayer() && obstacle.GetObstacleGlobalBounds().intersects(playerBounds))
+		{
+			// debug
+			std::cout << "Run over! Final score: " << score.GetTotalScore();
+			std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
+			std::cout << "\tKilled by a <" << static_cast<int>(obstacle.GetType()) << ">\n";
+			// end debug
+			GameOver();
+			return true;
 		}
 	}
 
