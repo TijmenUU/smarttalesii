@@ -16,10 +16,13 @@ class ObstacleDefinition
 {
 public:
 	ObstacleType type;
-	sf::Texture texture;
-	AnimatedSprite animatedSprite;
+	sf::Texture obstacleSpriteTexture;
+	sf::Texture sensorSpriteTexture;
+	AnimatedSprite obstacleSprite;
+	AnimatedSprite sensorSprite;
+	bool sensorPurchased;
 
-	sf::Vector2f interactionLocalPos, neutralizationHintLocalPos;
+	sf::Vector2f interactionLocalPos, neutralizationHintLocalPos, sensorLocalPos;
 	float interactionRadius;
 	float minimalDistance;
 	uint8_t neutralizationSwipes;

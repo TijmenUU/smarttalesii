@@ -58,4 +58,3 @@ private:
 public:
 	RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory);
 };
-

@@ -62,8 +62,8 @@ void RunningMode::SpawnObstacle()
 	obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex].get());
 	
 	auto & newObstacle = obstacles.back();
-	newObstacle.SetAnimation("active");
-	newObstacle.setPosition(cWorldWidth, cFloorY - newObstacle.getGlobalBounds().height);
+	//newObstacle.SetAnimation("active");
+	newObstacle.SetPosition(sf::Vector2f(cWorldWidth, cFloorY - newObstacle.GetObstacleGlobalBounds().height));
 	
 	++obstacleSpawnIndex;
 }
@@ -112,13 +112,16 @@ bool RunningMode::SurpressUpdate() const
 
 bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
 {
+	const auto playerBounds = player.getGlobalBounds();
+
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
 		auto & obstacle = obstacles[i];
 		if(obstacle.IsNeutralized())
 		{
-			obstacle.Update(elapsed, -scrollVelocity, input);
-			if(obstacle.IsAnimationFinished() || (obstacle.getPosition().x + obstacle.getGlobalBounds().width) < 0.f)
+			obstacle.Update(elapsed, -scrollVelocity, input, playerBounds);
+			if(obstacle.IsObstacleAnimationFinished() || 
+				(obstacle.GetObstaclePosition().x + obstacle.GetObstacleGlobalBounds().width) < 0.f)
 			{
 				obstacles.erase(obstacles.begin() + i);
 				continue; // make sure we cannot use the deleted obj anymore
@@ -126,9 +129,9 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		}
 		else
 		{
-			if(obstacle.Update(elapsed, -scrollVelocity, input))
+			if(obstacle.Update(elapsed, -scrollVelocity, input, player.getGlobalBounds()))
 			{
-				const auto obstacleCenter = obstacle.GetCenter();
+				const auto obstacleCenter = obstacle.GetObstacleCenter();
 				const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
 
 				const auto neutralizationScore = score.CalculateNeutralizationScore(1); // could be made a constexpr
@@ -138,8 +141,8 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 
 				SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
 			}
-			else if(obstacle.getGlobalBounds().intersects((player.getGlobalBounds())))
-			{
+			else if(obstacle.GetObstacleGlobalBounds().intersects((player.getGlobalBounds())))
+			{	// TODO Potentially add check for neutralization by the sensor!
 				// debug
 				std::cout << "Run over! Final score: " << score.GetTotalScore();
 				std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
@@ -163,7 +166,7 @@ void RunningMode::UpdateHints()
 			const auto & obstacle = obstacles[i];
 			if(!obstacle.IsNeutralized())
 			{
-				auto obstaclePosition = obstacle.getPosition();
+				auto obstaclePosition = obstacle.GetObstaclePosition();
 				if(obstaclePosition.x <= gameDifficulty.GetHintBorderXCoord())
 				{
 					obstacleHintText.setString(obstacle.GetNeutralizationHint());
@@ -213,8 +216,10 @@ void RunningMode::Load()
 	for(size_t i = 0; i < cObstacleDefinitionFiles.size(); ++i)
 	{
 		obstacleDefinitions.emplace_back(new ObstacleDefinition());
-		obstacleDefinitions.back()->LoadFromFile(cObstacleDefinitionFiles[i]);
-		obstacleDefinitions.back()->animatedSprite.SetAnimation("active");
+		
+		auto & obstacleDef = obstacleDefinitions.back();
+		obstacleDef->LoadFromFile(cObstacleDefinitionFiles[i]);
+		obstacleDef->sensorPurchased = playerInventory.HasObstacleCounter(obstacleDef->type);
 	}
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
@@ -278,7 +283,8 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	}
 
 	currentTimeout += elapsedSeconds;
-	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().getPosition().x < (cWorldWidth - 400.f)))
+	// TODO add better spawn algorithm
+	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().GetObstaclePosition().x < (cWorldWidth - 400.f)))
 	{
 		currentTimeout = 0.f;
 		SpawnObstacle();
