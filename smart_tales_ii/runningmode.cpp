@@ -6,6 +6,12 @@
 #include "scoremode.hpp"
 #include "vectormath.hpp"
 
+// Obstacles
+#include "furnitureobstacle.hpp"
+#include "doorobstacle.hpp"
+#include "lightobstacle.hpp"
+#include "phoneobstacle.hpp"
+
 #include <array>
 #include <iomanip>
 #include <iostream> // debug
@@ -13,13 +19,6 @@
 #include <sstream>
 
 // Config files
-const std::array<std::string, 4> cObstacleDefinitionFiles =
-{
-	"obstacle/door.txt",
-	"obstacle/furniture.txt",
-	"obstacle/light.txt",
-	"obstacle/phone.txt"
-};
 const std::string cGameDifficultyFile = "difficulty.txt";
 
 // Resources
@@ -36,7 +35,7 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 	for(size_t i = 0; i < obstacles.size(); ++i)
 	{
-		target.draw(obstacles[i], states);
+		target.draw(*(obstacles[i]), states);
 	}
 
 	for(size_t i = 0; i < scoreBubbles.size(); ++i)
@@ -54,21 +53,19 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void RunningMode::SpawnObstacle()
 {
-	if(obstacleSpawnIndex >= obstacleDefinitions.size())
+	if(obstacleSpawnIndex >= obstacleFactory.size())
 	{
 		obstacleSpawnIndex = 0;
 	}
 
-	obstacles.emplace_back(obstacleDefinitions[obstacleSpawnIndex].get());
-	
-	auto & newObstacle = obstacles.back();
-	//newObstacle.SetAnimation("active");
-	newObstacle.SetPosition(sf::Vector2f(cWorldWidth, cFloorY - newObstacle.GetObstacleGlobalBounds().height));
+	auto * copy = obstacleFactory[obstacleSpawnIndex]->Clone();
+	copy->SetPosition(sf::Vector2f(cWorldWidth, cFloorY - copy->GetKillBounds().height));
+	obstacles.emplace_back(copy);
 	
 	++obstacleSpawnIndex;
 }
 
-void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score, const float bonusScore)
+void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const float score, const float bonusScore)
 {
 	auto * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -77,7 +74,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle & obstacle, const float score,
 		return;
 	}
 
-	scoreBubbles.emplace_back(*fontPtr, obstacle.GetNeutralizationHintPosition(), score, bonusScore);
+	scoreBubbles.emplace_back(*fontPtr, obstacle.GetScoreBubbleSpawnPosition(), score, bonusScore);
 }
 
 void RunningMode::GameOver()
@@ -113,20 +110,22 @@ bool RunningMode::SurpressUpdate() const
 bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
 {
 	const auto playerBounds = player.getGlobalBounds();
+	const float displacement = elapsed.asSeconds() * -scrollVelocity;
 
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
-		auto & obstacle = obstacles[i];
+		auto & obstacle = *(obstacles[i]);
 
-		if(obstacle.IsNeutralized() && obstacle.GetObstaclePosition().x + obstacle.GetObstacleGlobalBounds().width < 0.f)
+		if(obstacle.CanDespawn())
 		{
 			obstacles.erase(obstacles.begin() + i);
 			continue; // make sure we cannot use the deleted obj anymore
 		}
 
-		const bool gotNeutralized = obstacle.Update(elapsed, -scrollVelocity, input, playerBounds);
+		const auto wasNeutralized = obstacle.IsNeutralizedByPlayer();
+		obstacle.Update(elapsed, input, displacement, playerBounds);
 		
-		if(gotNeutralized)
+		if(wasNeutralized != obstacle.IsNeutralizedByPlayer())
 		{
 			const auto obstacleCenter = obstacle.GetObstacleCenter();
 			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
@@ -138,12 +137,12 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 
 			SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
 		}
-		else if(obstacle.CanHurtPlayer() && obstacle.GetObstacleGlobalBounds().intersects(playerBounds))
+		else if(!obstacle.IsUnharmful() && obstacle.GetKillBounds().intersects(playerBounds))
 		{
 			// debug
 			std::cout << "Run over! Final score: " << score.GetTotalScore();
 			std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
-			std::cout << "\tKilled by a <" << static_cast<int>(obstacle.GetType()) << ">\n";
+			std::cout << "\tKilled by a <" << Obstacle::GetString(obstacle.GetType()) << ">\n";
 			// end debug
 			GameOver();
 			return true;
@@ -160,18 +159,15 @@ void RunningMode::UpdateHints()
 	{
 		for(size_t i = 0; i < obstacles.size(); ++i)
 		{
-			const auto & obstacle = obstacles[i];
-			if(!obstacle.IsNeutralized())
+			const auto & obstacle = *(obstacles[i]);
+			if(!obstacle.IsUnharmful())
 			{
-				auto obstaclePosition = obstacle.GetObstaclePosition();
+				auto obstaclePosition = obstacle.GetPosition();
 				if(obstaclePosition.x <= gameDifficulty.GetHintBorderXCoord())
 				{
-					obstacleHintText.setString(obstacle.GetNeutralizationHint());
-					const auto hintPosition = obstacle.GetNeutralizationHintPosition();
+					obstacleHintText.setString(Obstacle::GetHintString(obstacle.GetType()));
+					const auto hintPosition = obstacle.GetHintPosition();
 					obstacleHintText.setPosition(Alignment::GetCenterOffset(obstacleHintText.getLocalBounds(), hintPosition));
-					//obstacleHintText.setPosition(
-					//	Alignment::GetCenterOffset(obstacleHintText.getGlobalBounds().width, hintPosition.x),
-					//	hintPosition.y);
 
 					drawObstacleHint = true;
 					break;
@@ -210,14 +206,16 @@ void RunningMode::Load()
 	manager.PopAllBelow(this);
 
 	background.Load(cBackgroundWallTexture);
-	for(size_t i = 0; i < cObstacleDefinitionFiles.size(); ++i)
+	
+	obstacleFactory.emplace_back(new Obstacle::Furniture(playerInventory.HasObstacleCounter(Obstacle::Type::Furniture)));
+	obstacleFactory.emplace_back(new Obstacle::Door(playerInventory.HasObstacleCounter(Obstacle::Type::Door)));
+	obstacleFactory.emplace_back(new Obstacle::Light(playerInventory.HasObstacleCounter(Obstacle::Type::Light)));
+	obstacleFactory.emplace_back(new Obstacle::Phone(playerInventory.HasObstacleCounter(Obstacle::Type::Phone)));
+	for(size_t i = 0; i < obstacleFactory.size(); ++i)
 	{
-		obstacleDefinitions.emplace_back(new ObstacleDefinition());
-		
-		auto & obstacleDef = obstacleDefinitions.back();
-		obstacleDef->LoadFromFile(cObstacleDefinitionFiles[i]);
-		obstacleDef->sensorPurchased = playerInventory.HasObstacleCounter(obstacleDef->type);
+		obstacleFactory[i]->Load(obstacleTextureStorage);
 	}
+
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
 	player.Load(cPlayerAnimationFile);
@@ -281,7 +279,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 	currentTimeout += elapsedSeconds;
 	// TODO add better spawn algorithm
-	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back().GetObstaclePosition().x < (cWorldWidth - 400.f)))
+	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back()->GetPosition().x < (cWorldWidth - 400.f)))
 	{
 		currentTimeout = 0.f;
 		SpawnObstacle();
@@ -301,9 +299,10 @@ void RunningMode::OnEnter()
 RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
 	: Gamemode(resourceCacheRef, managerRef),
 	background(cWorldWidth),
-	obstacleDefinitions(),
-	obstacles(),
+	obstacleTextureStorage(),
+	obstacleFactory(),
 	gameDifficulty(),
+	obstacles(),
 	obstacleSpawnIndex(0),
 	obstacleHintText(),
 	drawObstacleHint(false),

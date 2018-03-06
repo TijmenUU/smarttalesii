@@ -15,7 +15,7 @@ private:
 
 public:
 	// May throw an std::runtime_error if texturefile cannot be loaded
-	void Load(const std::string & textureFile);
+	void Load(const std::string & textureStorage);
 	void Reset();
 	void Update(const sf::Time & elapsed, const float scrollVelocity);
 

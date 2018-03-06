@@ -1,5 +1,5 @@
 #pragma once
-#include "obstacledefinition.hpp"
+#include "obstacletype.hpp"
 
 #include <cstdint>
 #include <string>
@@ -17,7 +17,7 @@ namespace Upgrade
 
 	Sensor ToEnum(std::string str);
 
-	ObstacleType GetObstacleCounter(const Sensor s);
+	Obstacle::Type GetObstacleCounter(const Sensor s);
 
-	Sensor GetCounteringSensor(const ObstacleType t);
+	Sensor GetCounteringSensor(const Obstacle::Type t);
 }

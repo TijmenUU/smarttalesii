@@ -112,11 +112,11 @@ bool Inputhandler::PointingDeviceReleasedEvent() const
 {
 	return std::find(buttonUpEvents.begin(), buttonUpEvents.end(), sf::Mouse::Left) != buttonUpEvents.end();
 }
-sf::Vector2i Inputhandler::PointingDeviceWindowPosition() const
+const sf::Vector2i & Inputhandler::PointingDeviceWindowPosition() const
 {
 	return mousePixelPosition;
 }
-sf::Vector2f Inputhandler::PointingDeviceWorldPosition() const
+const sf::Vector2f & Inputhandler::PointingDeviceWorldPosition() const
 {
 	return mouseWorldPosition;
 }

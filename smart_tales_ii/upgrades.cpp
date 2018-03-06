@@ -30,45 +30,45 @@ namespace Upgrade
 		return Sensor::Unknown;
 	}
 
-	ObstacleType GetObstacleCounter(const Sensor s)
+	Obstacle::Type GetObstacleCounter(const Sensor s)
 	{
 		switch(s)
 		{
 			case Sensor::PassiveInfrared:
-			return ObstacleType::Light;
+			return Obstacle::Type::Light;
 
 			case Sensor::ActiveInfrared:
-			return ObstacleType::Door;
+			return Obstacle::Type::Door;
 
 			case Sensor::HealthBand:
-			return ObstacleType::Phone;
+			return Obstacle::Type::Phone;
 
 			case Sensor::LiveTile:
-			return ObstacleType::Furniture;
+			return Obstacle::Type::Furniture;
 
 			case Sensor::Unknown:
 			default:
-			return ObstacleType::Unknown;
+			return Obstacle::Type::Unknown;
 		}
 	}
 
-	Sensor GetCounteringSensor(const ObstacleType t)
+	Sensor GetCounteringSensor(const Obstacle::Type t)
 	{
 		switch(t)
 		{
-			case ObstacleType::Light:
+			case Obstacle::Type::Light:
 			return Sensor::PassiveInfrared;
 
-			case ObstacleType::Door:
+			case Obstacle::Type::Door:
 			return Sensor::ActiveInfrared;
 			
-			case ObstacleType::Phone:
+			case Obstacle::Type::Phone:
 			return Sensor::HealthBand;
 
-			case ObstacleType::Furniture:
+			case Obstacle::Type::Furniture:
 			return Sensor::LiveTile;
 
-			case ObstacleType::Unknown:
+			case Obstacle::Type::Unknown:
 			default:
 			return Sensor::Unknown;
 		}

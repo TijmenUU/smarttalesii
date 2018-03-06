@@ -1,4 +1,5 @@
 #pragma once
+#include "obstacletype.hpp"
 #include "upgrades.hpp"
 
 namespace Player
@@ -16,7 +17,7 @@ namespace Player
 		void AddSensorUpgrade(const Upgrade::Sensor s);
 		void RemoveSensorUpgrade(const Upgrade::Sensor s);
 
-		bool HasObstacleCounter(const ObstacleType o) const;
+		bool HasObstacleCounter(const Obstacle::Type o) const;
 
 		unsigned int GetCurrency() const;
 		void AddCurrency(const unsigned int amount);

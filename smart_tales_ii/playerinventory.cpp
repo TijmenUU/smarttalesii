@@ -22,10 +22,10 @@ void Player::Inventory::RemoveSensorUpgrade(const Upgrade::Sensor s)
 	sensorUpgrades &= ~(static_cast<uint8_t>(s));
 }
 
-bool Player::Inventory::HasObstacleCounter(const ObstacleType o) const
+bool Player::Inventory::HasObstacleCounter(const Obstacle::Type o) const
 {
 	const auto requiredSensorUpgrade = Upgrade::GetCounteringSensor(o);
-	assert(o != ObstacleType::Unknown && requiredSensorUpgrade != Upgrade::Sensor::Unknown);
+	assert(o != Obstacle::Type::Unknown && requiredSensorUpgrade != Upgrade::Sensor::Unknown);
 	
 	return sensorUpgrades & static_cast<uint8_t>(requiredSensorUpgrade);
 }
