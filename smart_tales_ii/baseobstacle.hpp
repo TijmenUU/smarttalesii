@@ -34,6 +34,7 @@ namespace Obstacle
 
 		virtual void SetPosition(const sf::Vector2f & p) = 0;
 		virtual void Move(const float x, const float y) = 0;
+		virtual void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord);
 
 		virtual void Load(std::list<sf::Texture> & textureStorage) = 0;
 		virtual void Update(const sf::Time & elapsed,

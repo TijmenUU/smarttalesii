@@ -3,6 +3,7 @@
 namespace Obstacle
 {
 	const sf::Vector2f cLocalHintPosition(45, -30);
+	const float cSpawnHeight = 135.f; // pixels
 
 	void Phone::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
@@ -44,6 +45,11 @@ namespace Obstacle
 	void Phone::Move(const float x, const float y)
 	{
 		obstacleSprite.move(x, y);
+	}
+
+	void Phone::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
+	{
+		SetPosition(sf::Vector2f(windowWidth, floorYcoord - (cSpawnHeight + obstacleSprite.getGlobalBounds().width)));
 	}
 
 	void Phone::Load(std::list<sf::Texture>& textureStorage)

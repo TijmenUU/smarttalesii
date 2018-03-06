@@ -59,7 +59,6 @@ void RunningMode::SpawnObstacle()
 	}
 
 	auto * copy = obstacleFactory[obstacleSpawnIndex]->Clone();
-	copy->SetPosition(sf::Vector2f(cWorldWidth, cFloorY - copy->GetKillBounds().height));
 	obstacles.emplace_back(copy);
 	
 	++obstacleSpawnIndex;
@@ -214,12 +213,14 @@ void RunningMode::Load()
 	for(size_t i = 0; i < obstacleFactory.size(); ++i)
 	{
 		obstacleFactory[i]->Load(obstacleTextureStorage);
+		obstacleFactory[i]->SetPosition(sf::Vector2f(0.f, 0.f));
+		obstacleFactory[i]->SetSpawnPosition(cWorldWidth, cFloorY);
 	}
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
 	player.Load(cPlayerAnimationFile);
-	player.SetAnimation("run");
+	player.SetAnimation("run"); // TODO set different animation depending on upgrades
 	const auto playerBounds = player.getGlobalBounds();
 	player.setPosition(playerBounds.width, cFloorY - playerBounds.height);
 
@@ -228,7 +229,7 @@ void RunningMode::Load()
 	{
 		throw std::runtime_error("Error fetching commodore font in RunningMode.");
 	}
-	//const_cast<sf::Texture&>(fontPtr->getTexture(32)).setSmooth(false);
+
 	obstacleHintText.setFont(*fontPtr);
 	obstacleHintText.setCharacterSize(26);
 	obstacleHintText.setFillColor(sf::Color::White);

@@ -15,6 +15,8 @@ namespace Obstacle
 		virtual void UpdateSensorTrigger(const sf::FloatRect & playerBounds) = 0;
 
 	public:
+		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
+
 		void Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,

@@ -27,6 +27,11 @@ namespace Obstacle
 		return playerNeutralized;
 	}
 
+	void Base::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
+	{
+		SetPosition(sf::Vector2f(windowWidth, floorYcoord - obstacleSprite.getGlobalBounds().height));
+	}
+
 	const sf::Vector2f & Base::GetPosition() const
 	{
 		return obstacleSprite.getPosition();

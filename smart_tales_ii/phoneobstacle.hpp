@@ -19,6 +19,7 @@ namespace Obstacle
 
 		void SetPosition(const sf::Vector2f & p) override;
 		void Move(const float x, const float y) override;
+		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
 
 		void Load(std::list<sf::Texture>& textureStorage) override;
 		void Update(const sf::Time & elapsed,

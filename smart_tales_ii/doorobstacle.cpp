@@ -16,11 +16,27 @@ namespace Obstacle
 		return VectorMathF::Distance(pos, obstacleSprite.getPosition() + cLocalInteractionCenter) < cInteractionRadius;
 	}
 
+	void Door::HandleInput(const Inputhandler & input)
+	{
+		const uint8_t gestureInfo = static_cast<uint8_t>(TrackGestures(input));
+		if(gestureInfo & gestureFlag)
+		{
+			playerNeutralized = true;
+			Neutralize();
+
+			if(gestureInfo & static_cast<uint8_t>(GestureType::Horizontal_LeftToRight))
+			{
+				obstacleSprite.FlipHorizontally();
+			}
+		}
+	}
+
 	void Door::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
 	{
 		if(playerBounds.left + playerBounds.width > sensorSprite.getPosition().x)
 		{
 			Neutralize();
+			obstacleSprite.FlipHorizontally();
 		}
 	}
 

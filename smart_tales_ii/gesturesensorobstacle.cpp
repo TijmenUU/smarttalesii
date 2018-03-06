@@ -19,7 +19,13 @@ namespace Obstacle
 		neutralized = true;
 	}
 
-	void GestureSensorBase::Update(const sf::Time & elapsed, 
+	void GestureSensorBase::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
+	{
+		const auto offset = obstacleSprite.getPosition() - sensorSprite.getPosition();
+		SetPosition(sf::Vector2f(windowWidth + offset.x, floorYcoord - obstacleSprite.getGlobalBounds().height));
+	}
+
+	void GestureSensorBase::Update(const sf::Time & elapsed,
 		const Inputhandler & input, 
 		const float horizontalDisplacement, 
 		const sf::FloatRect & playerBounds)

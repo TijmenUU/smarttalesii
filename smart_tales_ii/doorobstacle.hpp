@@ -8,6 +8,7 @@ namespace Obstacle
 	private:
 	protected:
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
+		void HandleInput(const Inputhandler & input) override;
 
 		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 

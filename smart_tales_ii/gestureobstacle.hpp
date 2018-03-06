@@ -17,12 +17,13 @@ namespace Obstacle
 	class GestureBase : public Base
 	{
 	private:
-		uint8_t gestureFlag;
 		bool gestureInProgress;
 		sf::Vector2f gestureStart;
 		float gestureMinDistance;
 
 	protected:
+		uint8_t gestureFlag;
+
 		virtual bool IsInteractionInBounds(const Inputhandler & input) const = 0;
 		virtual GestureType TrackGestures(const Inputhandler & input);
 		virtual void HandleInput(const Inputhandler & input);
