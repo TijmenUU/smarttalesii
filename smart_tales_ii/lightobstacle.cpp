@@ -4,12 +4,26 @@
 
 namespace Obstacle
 {
-	const sf::Vector2f cLocalSensorPosition(-80, -63);
-	const sf::Vector2f cLocalHintPosition(60, -30);
+	const sf::Vector2f cLocalSensorPosition(-80, 200);
+	const sf::Vector2f cLocalHintPosition(150, 100);
 
 	bool Light::IsInteractionInBounds(const Inputhandler & input) const
 	{
 		return obstacleSprite.getGlobalBounds().contains(input.PointingDeviceWorldPosition());
+	}
+
+	void Light::HandleInput(const Inputhandler & input)
+	{
+		if(input.PointingDeviceReleasedEvent() && IsInteractionInBounds(input))
+		{
+			playerNeutralized = true;
+			Neutralize();
+		}
+	}
+
+	void Light::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
+	{
+		SetPosition(sf::Vector2f(windowWidth, 0.f));
 	}
 
 	void Light::UpdateSensorTrigger(const sf::FloatRect & playerBounds)

@@ -3,14 +3,14 @@ spritesheet-source "spritesheet/light.png"
 animation active
 	frame-start-x 0
 	frame-start-y 0
-	frame-width 124
-	frame-height 320
+	frame-width 680
+	frame-height 580
 	frame-count 1
 
 animation neutralized
-	frame-start-x 124
+	frame-start-x 680
 	frame-start-y 0
-	frame-width 124
-	frame-height 320
+	frame-width 680
+	frame-height 580
 	frame-count 1
 	loop
