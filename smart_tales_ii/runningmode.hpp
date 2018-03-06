@@ -2,23 +2,26 @@
 #include "background.hpp"
 #include "difficulty.hpp"
 #include "gamemode.hpp"
-#include "obstacles.hpp"
+#include "baseobstacle.hpp"
 #include "playersprite.hpp"
 #include "playerinventory.hpp"
 #include "playerscore.hpp"
 #include "scorebubble.hpp"
 
+#include <list>
 #include <vector>
+#include <memory>
 
 class RunningMode : public Gamemode
 {
 private:
 	ScrollingBackground background;
 
-	std::vector<std::unique_ptr<ObstacleDefinition>> obstacleDefinitions;
+	std::list<sf::Texture> obstacleTextureStorage;
+	std::vector<std::unique_ptr<Obstacle::Base>> obstacleFactory;
 	Difficulty gameDifficulty;
 	
-	std::vector<Obstacle> obstacles;
+	std::vector<std::unique_ptr<Obstacle::Base>> obstacles;
 	size_t obstacleSpawnIndex;
 	sf::Text obstacleHintText;
 	bool drawObstacleHint;
@@ -35,7 +38,7 @@ private:
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
-	void SpawnScoreBubble(const Obstacle & obstacle, const float score, const float bonusScore);
+	void SpawnScoreBubble(const Obstacle::Base & obstacle, const float score, const float bonusScore);
 	
 	void GameOver();
 	void Reset();

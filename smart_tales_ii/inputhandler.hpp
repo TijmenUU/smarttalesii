@@ -37,8 +37,8 @@ public:
 	bool PointingDevicePressedEvent() const;
 	// did it just get released
 	bool PointingDeviceReleasedEvent() const;
-	sf::Vector2i PointingDeviceWindowPosition() const;
-	sf::Vector2f PointingDeviceWorldPosition() const;
+	const sf::Vector2i & PointingDeviceWindowPosition() const;
+	const sf::Vector2f & PointingDeviceWorldPosition() const;
 
 	Inputhandler();
 };

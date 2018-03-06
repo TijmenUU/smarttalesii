@@ -73,6 +73,12 @@
     <Filter Include="Source Files\game\objects\running\obstacle">
       <UniqueIdentifier>{8c2fc7d2-3a4d-4ea6-9ba4-0f1964628eda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\objects\running\obstacle\base">
+      <UniqueIdentifier>{e61c1563-55f0-4f5e-9d51-1fbf6e908d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\objects\running\obstacle\base">
+      <UniqueIdentifier>{4dbb0b25-b809-4f99-98c4-6ffaeff8f6d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -80,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="program.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gesture.cpp">
-      <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="inputhandler.cpp">
       <Filter>Source Files\utils</Filter>
@@ -135,12 +138,6 @@
     <ClCompile Include="background.cpp">
       <Filter>Source Files\game\objects\running</Filter>
     </ClCompile>
-    <ClCompile Include="obstacledefinition.cpp">
-      <Filter>Source Files\game\objects\running</Filter>
-    </ClCompile>
-    <ClCompile Include="obstacles.cpp">
-      <Filter>Source Files\game\objects\running</Filter>
-    </ClCompile>
     <ClCompile Include="playersprite.cpp">
       <Filter>Source Files\game\objects\running</Filter>
     </ClCompile>
@@ -165,6 +162,30 @@
     <ClCompile Include="upgradetile.cpp">
       <Filter>Source Files\game\objects\shop</Filter>
     </ClCompile>
+    <ClCompile Include="doorobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="baseobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
+    </ClCompile>
+    <ClCompile Include="gesturesensorobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
+    </ClCompile>
+    <ClCompile Include="gestureobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
+    </ClCompile>
+    <ClCompile Include="obstacletype.cpp">
+      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
+    </ClCompile>
+    <ClCompile Include="furnitureobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="lightobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="phoneobstacle.cpp">
+      <Filter>Source Files\game\objects\running\obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -174,9 +195,6 @@
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="vectormath.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="gesture.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="program.hpp">
@@ -224,12 +242,6 @@
     <ClInclude Include="background.hpp">
       <Filter>Header Files\game\objects\running</Filter>
     </ClInclude>
-    <ClInclude Include="obstacledefinition.hpp">
-      <Filter>Header Files\game\objects\running</Filter>
-    </ClInclude>
-    <ClInclude Include="obstacles.hpp">
-      <Filter>Header Files\game\objects\running</Filter>
-    </ClInclude>
     <ClInclude Include="playersprite.hpp">
       <Filter>Header Files\game\objects\running</Filter>
     </ClInclude>
@@ -253,6 +265,30 @@
     </ClInclude>
     <ClInclude Include="upgradetile.hpp">
       <Filter>Header Files\game\objects\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="doorobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="gestureobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
+    </ClInclude>
+    <ClInclude Include="baseobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
+    </ClInclude>
+    <ClInclude Include="gesturesensorobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacletype.hpp">
+      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
+    </ClInclude>
+    <ClInclude Include="furnitureobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="lightobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="phoneobstacle.hpp">
+      <Filter>Header Files\game\objects\running\obstacle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
