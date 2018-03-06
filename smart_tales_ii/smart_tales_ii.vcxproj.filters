@@ -67,6 +67,12 @@
     <Filter Include="Header Files\game\upgrades">
       <UniqueIdentifier>{d60fb9ba-16bb-4986-9464-2b9c2f551361}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\objects\running\obstacle">
+      <UniqueIdentifier>{49bc88da-827c-432c-bf20-68760f30c19b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\objects\running\obstacle">
+      <UniqueIdentifier>{8c2fc7d2-3a4d-4ea6-9ba4-0f1964628eda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
