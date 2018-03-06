@@ -53,6 +53,8 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void RunningMode::SpawnObstacle()
 {
+	currentTimeout = 0;
+
 	if(obstacleSpawnIndex >= obstacleFactory.size())
 	{
 		obstacleSpawnIndex = 0;
@@ -278,12 +280,19 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		scrollVelocity = gameDifficulty.GetMaxScrollVelocity();
 	}
 
-	currentTimeout += elapsedSeconds;
 	// TODO add better spawn algorithm
-	if(obstacles.size() == 0 || (currentTimeout > spawnTimeout && obstacles.back()->GetPosition().x < (cWorldWidth - 400.f)))
+	currentTimeout += elapsedSeconds;
+	if(obstacles.size() == 0)
 	{
-		currentTimeout = 0.f;
 		SpawnObstacle();
+	}
+	else
+	{
+		const auto obstacleBounds = obstacles.back()->GetKillBounds();
+		if(currentTimeout > spawnTimeout && obstacleBounds.width + obstacleBounds.left < cWorldWidth)
+		{
+			SpawnObstacle();
+		}
 	}
 }
 
@@ -307,8 +316,8 @@ RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & manager
 	obstacleSpawnIndex(0),
 	obstacleHintText(),
 	drawObstacleHint(false),
-	spawnTimeout(2.f),
-	currentTimeout(spawnTimeout),
+	spawnTimeout(2.5f),
+	currentTimeout(0.f),
 	scrollVelocity(0.f),
 	score(),
 	scoreText(),
