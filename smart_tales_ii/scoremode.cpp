@@ -7,22 +7,34 @@
 
 void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	target.draw(background, states);
 	target.draw(title, states);
 	target.draw(currencyEarned, states);
 	target.draw(newBalance, states);
 	target.draw(gotoShopButton, states);
 }
 
+bool ScoreMode::SurpressUpdate() const
+{
+	return true;
+}
+
 void ScoreMode::Load()
 {
-	manager.PopAllBelow(this);
+	//manager.PopAllBelow(this);
 	manager.PushGamemode(new OverlayMode(resourceCache, manager, false));
 
 	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
-		throw std::runtime_error("Error fetching commodore font in RunningMode.");
+		throw std::runtime_error("Error fetching commodore font in ScoreMode.");
 	}
+
+	background.LoadFromFile("animation/scorebackground.txt", backgroundTexture);
+	backgroundTexture.setSmooth(false);
+	background.setPosition(0.f, 0.f);
+	background.setScale(4.f, 4.f);
+	background.SetAnimation("zoom");
 
 	gotoShopButton.LoadFromFile("animation/navigationbutton_large.txt", navigationButtonTexture);
 	gotoShopButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
@@ -63,13 +75,17 @@ void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		manager.PushGamemode(new ShopMode(resourceCache, manager, playerInventory));
 		return;
 	}
+
+	background.Update(elapsed);
 }
 
 ScoreMode::ScoreMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Score & score, const Player::Inventory & inventory)
 	:	Gamemode(resourceCacheRef, managerRef),
 	playerScore(score),
 	playerInventory(inventory),
+	backgroundTexture(),
 	navigationButtonTexture(),
+	background(),
 	gotoShopButton(),
 	title(),
 	currencyEarned(),

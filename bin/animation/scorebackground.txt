@@ -1,0 +1,9 @@
+spritesheet-source "spritesheet/scorebackground.png"
+
+animation zoom
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 320
+	frame-height 180
+	frame-time 32
+	frame-count 6
