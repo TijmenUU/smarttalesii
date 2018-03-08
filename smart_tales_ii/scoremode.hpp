@@ -12,7 +12,7 @@ private:
 	
 	sf::Texture navigationButtonTexture;
 	TextButton gotoShopButton;
-	sf::Text title, playerScoreTxt, currencyEarned, newBalance;
+	sf::Text title, currencyEarned, newBalance;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 

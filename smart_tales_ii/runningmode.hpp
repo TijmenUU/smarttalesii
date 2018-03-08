@@ -38,7 +38,7 @@ private:
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void SpawnObstacle();
-	void SpawnScoreBubble(const Obstacle::Base & obstacle, const float score, const float bonusScore);
+	void SpawnScoreBubble(const Obstacle::Base & obstacle, const unsigned int score);
 	
 	void GameOver();
 	void Reset();

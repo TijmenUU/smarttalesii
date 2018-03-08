@@ -29,14 +29,12 @@ bool ScoreBubble::Update(const sf::Time & elapsed)
 	return ShouldRemove();
 }
 
-ScoreBubble::ScoreBubble(sf::Font & fontRef, const sf::Vector2f spawnPosition, const double score, const double bonusScore)
+ScoreBubble::ScoreBubble(sf::Font & fontRef, const sf::Vector2f spawnPosition, const unsigned int score)
 	:text(),
 	timeAlive(0.f)
 {
 	std::stringstream ss;
-	ss << '+' << static_cast<int>(std::round(score + bonusScore));
-	//ss << '+' << static_cast<int>(std::round(score)) << '\n';
-	//ss << '+' << static_cast<int>(std::round(bonusScore));
+	ss << '+' << score;
 
 	text.setString(ss.str());
 	text.setFont(fontRef);

@@ -4,46 +4,35 @@
 
 namespace Player
 {
-	double Score::CalculateBonusScore(const double distance)
+	unsigned int Score::GetNeutralizationCurrency(const double distance)
 	{
-		return (distance / 1280.0) * 200.0;
-	}
-
-	double Score::CalculateNeutralizationScore(const unsigned int count)
-	{
-		return static_cast<double>(count) * 50.0;
-	}
-
-	double Score::GetTotalScore() const
-	{
-		return std::abs((distance / 100.0) + CalculateNeutralizationScore(neutralizations) + bonusScore);
-	}
-
-	unsigned int Score::GetCurrency() const
-	{
-		return static_cast<unsigned int>(std::round(GetTotalScore() / 100.0));
-	}
-
-	void Score::AddNeutralization()
-	{
+		const unsigned int score = 5U + static_cast<unsigned int>(std::round(distance / 100.f));
+		currencyGained += score;
 		++neutralizations;
+
+		return score;
 	}
 
-	void Score::AddBonusScore(const double score)
+	unsigned int Score::GetTotalCurrency() const
 	{
-		bonusScore += score;
+		return currencyGained;
+	}
+
+	unsigned int Score::GetTotalNeutralizations() const
+	{
+		return neutralizations;
 	}
 
 	void Score::Reset()
 	{
 		neutralizations = 0U;
-		bonusScore = 0.0;
+		currencyGained = 0U;
 		distance = 0.0;
 	}
 
 	Score::Score()
 		: neutralizations(0U),
-		bonusScore(0.0),
+		currencyGained(0U),
 		distance(0.0)
 	{
 	}

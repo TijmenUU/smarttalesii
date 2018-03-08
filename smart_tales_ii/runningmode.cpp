@@ -66,7 +66,7 @@ void RunningMode::SpawnObstacle()
 	++obstacleSpawnIndex;
 }
 
-void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const float score, const float bonusScore)
+void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const unsigned int score)
 {
 	auto * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -75,7 +75,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const float 
 		return;
 	}
 
-	scoreBubbles.emplace_back(*fontPtr, obstacle.GetScoreBubbleSpawnPosition(), score, bonusScore);
+	scoreBubbles.emplace_back(*fontPtr, obstacle.GetScoreBubbleSpawnPosition(), score);
 }
 
 void RunningMode::GameOver()
@@ -130,19 +130,16 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		{
 			const auto obstacleCenter = obstacle.GetObstacleCenter();
 			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
-
-			const auto neutralizationScore = score.CalculateNeutralizationScore(1); // could be made a constexpr
-			const auto bonusScore = score.CalculateBonusScore(playerObstacleDist);
-			score.AddBonusScore(bonusScore);
-			score.AddNeutralization();
-
-			SpawnScoreBubble(obstacle, neutralizationScore, bonusScore);
+			
+			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
+			SpawnScoreBubble(obstacle, currencyScore);
 		}
 		else if(!obstacle.IsUnharmful() && obstacle.GetKillBounds().intersects(playerBounds))
 		{
 			// debug
-			std::cout << "Run over! Final score: " << score.GetTotalScore();
-			std::cout << " with " << score.distance << " covered and a scroll velocity of " << scrollVelocity << '\n';
+			std::cout << "Run over! Currency earned this run: " << score.GetTotalCurrency();
+			std::cout << " with a distance of " << score.distance;
+			std::cout << " covered and a scroll velocity of " << scrollVelocity << '\n';
 			std::cout << "\tKilled by a <" << Obstacle::GetString(obstacle.GetType()) << ">\n";
 			// end debug
 			GameOver();
@@ -184,7 +181,7 @@ void RunningMode::UpdateScoreDisplay()
 	std::stringstream ss;
 	ss << cScoreString;
 	ss << std::setfill('0') << std::setw(6);
-	ss << static_cast<int>(score.GetTotalScore());
+	ss << static_cast<int>(score.GetTotalCurrency());
 	scoreText.setString(ss.str());
 	
 	// Positioning
