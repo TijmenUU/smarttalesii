@@ -30,6 +30,21 @@ bool Player::Inventory::HasObstacleCounter(const Obstacle::Type o) const
 	return sensorUpgrades & static_cast<uint8_t>(requiredSensorUpgrade);
 }
 
+unsigned int Player::Inventory::GetSensorUpgradeCount() const
+{
+	const int size = sizeof(sensorUpgrades) * 8; // get bit count
+	unsigned int count = 0U;
+	for(unsigned int i = 0U; i < size; ++i)
+	{
+		if((1U << i) & sensorUpgrades)
+		{
+			++count;
+		}
+	}
+
+	return count;
+}
+
 unsigned int Player::Inventory::GetCurrency() const
 {
 	return currency;

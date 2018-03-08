@@ -80,6 +80,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const unsign
 
 void RunningMode::GameOver()
 {
+	manager.Pop(); // delete our created overlay
 	manager.PushGamemode(new ScoreMode(resourceCache, manager, score, playerInventory));
 	return;
 }
@@ -92,7 +93,8 @@ void RunningMode::Reset()
 
 	obstacleSpawnIndex = 0;
 	currentTimeout = 0.f;
-	scrollVelocity = gameDifficulty.GetStartScrollVelocity();
+	// TODO tweak this initial scroll velocity expression
+	scrollVelocity = gameDifficulty.GetStartScrollVelocity() + playerInventory.GetSensorUpgradeCount() * 25.f;
 
 	score.Reset();
 	scoreBubbles.clear();
