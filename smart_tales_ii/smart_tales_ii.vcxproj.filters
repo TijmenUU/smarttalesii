@@ -61,9 +61,6 @@
     <Filter Include="Header Files\game\objects\buttons">
       <UniqueIdentifier>{f38e1ead-695b-4f93-a9ae-3b053be8600f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\game\objects\upgrades">
-      <UniqueIdentifier>{524af921-5660-4c2c-8dcc-ef0a0b62e7fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\game\upgrades">
       <UniqueIdentifier>{d60fb9ba-16bb-4986-9464-2b9c2f551361}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     </Filter>
     <Filter Include="Header Files\game\objects\running\obstacle\base">
       <UniqueIdentifier>{4dbb0b25-b809-4f99-98c4-6ffaeff8f6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\upgrades">
+      <UniqueIdentifier>{524af921-5660-4c2c-8dcc-ef0a0b62e7fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +157,7 @@
       <Filter>Source Files\game\objects\buttons</Filter>
     </ClCompile>
     <ClCompile Include="upgrades.cpp">
-      <Filter>Source Files\game\objects\upgrades</Filter>
+      <Filter>Source Files\game\upgrades</Filter>
     </ClCompile>
     <ClCompile Include="upgradetile.cpp">
       <Filter>Source Files\game\objects\shop</Filter>
