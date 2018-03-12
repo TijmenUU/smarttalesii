@@ -239,6 +239,31 @@ sf::Vector2f AnimatedSprite::GetSize() const
 	return sf::Vector2f(baseFrame.width * scale.x, baseFrame.height * scale.y);
 }
 
+const Animation & AnimatedSprite::GetCurrentAnimation() const
+{
+	return *currentAnimation;
+}
+
+Animation * AnimatedSprite::GetcurrentAnimationPtr()
+{
+	return const_cast<Animation *>(currentAnimation);
+}
+
+unsigned int AnimatedSprite::GetCurrentFrame() const
+{
+	return currentFrame;
+}
+
+unsigned int AnimatedSprite::GetCurrentFrameTime() const
+{
+	return currentFrameTime;
+}
+
+void AnimatedSprite::SetCurrentFrame(const unsigned int frameNo)
+{
+	currentFrame = frameNo;
+}
+
 Animation LoadAnimation(const std::vector<std::string> & definition, size_t & i)
 {
 	Animation result;

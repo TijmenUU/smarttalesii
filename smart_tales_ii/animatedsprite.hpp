@@ -30,11 +30,11 @@ private:
 	bool isFlippedVertically;
 
 protected:
-	void UpdateTextureRect();
-	void GetNextFrame();
+	virtual void UpdateTextureRect();
+	virtual void GetNextFrame();
 
 public:
-	std::vector<std::string> GetAnimations() const;
+	virtual std::vector<std::string> GetAnimations() const;
 
 	// Returns false if animation already exists
 	virtual bool AddAnimation(const Animation animation, const std::string & name);
@@ -50,6 +50,13 @@ public:
 
 	// texture rectangle dimensions multiplied by scale
 	virtual sf::Vector2f GetSize() const;
+	virtual const Animation & GetCurrentAnimation() const;
+	// be careful with its internal state... Modifications made will be persistent
+	virtual Animation * GetcurrentAnimationPtr();
+	virtual unsigned int GetCurrentFrame() const;
+	virtual unsigned int GetCurrentFrameTime() const;
+
+	virtual void SetCurrentFrame(const unsigned int frameNo);
 
 	// May throw a runtime_error if the file or the file definition is wrong
 	virtual void LoadFromFile(const std::string & animationFile, sf::Texture & textureStorage);
