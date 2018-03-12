@@ -24,6 +24,7 @@ namespace Obstacle
 			playerNeutralized = true;
 			Neutralize();
 			lightSwitch.SetAnimation("activated");
+			showBeam = false;
 		}
 	}
 
