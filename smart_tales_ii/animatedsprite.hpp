@@ -29,6 +29,7 @@ private:
 	bool isFlippedHorizontally;
 	bool isFlippedVertically;
 
+protected:
 	void UpdateTextureRect();
 	void GetNextFrame();
 

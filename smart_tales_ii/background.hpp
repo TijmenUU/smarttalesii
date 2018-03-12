@@ -11,6 +11,7 @@ private:
 	sf::Vector2f scrollPosition;
 	const float worldWidth;
 
+protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 
 public:

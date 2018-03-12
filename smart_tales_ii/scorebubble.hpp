@@ -9,6 +9,7 @@ private:
 	sf::Text text;
 	float timeAlive; // in seconds
 
+protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
