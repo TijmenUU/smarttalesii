@@ -5,7 +5,7 @@
 
 namespace Obstacle
 {
-	const sf::Vector2f cLocalSensorPosition(-80, 200);
+	const sf::Vector2f cLocalSensorPosition(-100, 200);
 	const sf::Vector2f cLocalSwitchPosition(-100, 250);
 	const float cInteractionRadius = 50.f;
 
@@ -36,6 +36,7 @@ namespace Obstacle
 		if(playerBounds.left + playerBounds.width > sensorSprite.getPosition().x)
 		{
 			Neutralize();
+			lightSwitch.SetAnimation("activated");
 		}
 	}
 
