@@ -40,12 +40,12 @@ namespace Obstacle
 		}
 	}
 
-	const sf::Vector2f Door::GetScoreBubbleSpawnPosition() const
+	sf::Vector2f Door::GetScoreBubbleSpawnPosition() const
 	{
 		return cLocalHintPosition + obstacleSprite.getPosition();
 	}
 
-	const sf::Vector2f Door::GetHintPosition() const
+	sf::Vector2f Door::GetHintPosition() const
 	{
 		return GetScoreBubbleSpawnPosition();
 	}

@@ -12,8 +12,8 @@ namespace Obstacle
 		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 
 	public:
-		virtual const sf::Vector2f GetScoreBubbleSpawnPosition() const;
-		virtual const sf::Vector2f GetHintPosition() const;
+		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
+		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
 

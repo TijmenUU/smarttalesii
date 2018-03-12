@@ -7,7 +7,7 @@ namespace Obstacle
 		return type;
 	}
 
-	const sf::FloatRect Base::GetKillBounds() const
+	sf::FloatRect Base::GetKillBounds() const
 	{
 		return obstacleSprite.getGlobalBounds();
 	}
@@ -37,10 +37,15 @@ namespace Obstacle
 		return obstacleSprite.getPosition();
 	}
 
-	const sf::Vector2f Base::GetObstacleCenter() const
+	sf::Vector2f Base::GetObstacleCenter() const
 	{
 		const auto bounds = obstacleSprite.getGlobalBounds();
 		return sf::Vector2f(bounds.left + (bounds.width / 2.f), bounds.top + (bounds.height / 2.f));
+	}
+
+	sf::Vector2f Base::GetNeutralizationPosition() const
+	{
+		return GetObstacleCenter();
 	}
 
 	Base::Base(const Type & t, const bool playerHasSensor)

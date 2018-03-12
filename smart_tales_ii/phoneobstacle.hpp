@@ -12,8 +12,8 @@ namespace Obstacle
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 
 	public:
-		const sf::Vector2f GetScoreBubbleSpawnPosition() const override;
-		const sf::Vector2f GetHintPosition() const override;
+		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
+		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
 

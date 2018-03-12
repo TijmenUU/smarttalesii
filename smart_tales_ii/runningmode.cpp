@@ -130,7 +130,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		
 		if(wasNeutralized != obstacle.IsNeutralizedByPlayer())
 		{
-			const auto obstacleCenter = obstacle.GetObstacleCenter();
+			const auto obstacleCenter = obstacle.GetNeutralizationPosition();
 			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
 			
 			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
