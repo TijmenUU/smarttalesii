@@ -5,6 +5,7 @@
 #include "uioverlay.hpp"
 #include "scoremode.hpp"
 #include "vectormath.hpp"
+#include "winoverlay.hpp"
 
 // Obstacles
 #include "furnitureobstacle.hpp"
@@ -185,9 +186,6 @@ void RunningMode::UpdateScoreDisplay()
 	ss << std::setfill('0') << std::setw(6);
 	ss << static_cast<int>(score.GetTotalCurrency());
 	scoreText.setString(ss.str());
-	
-	// Positioning
-	scoreText.setPosition(Alignment::GetCenterOffset(scoreText.getGlobalBounds().width, cWorldWidth / 2.f), 15.f);
 }
 
 void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
@@ -242,8 +240,17 @@ void RunningMode::Load()
 	scoreText.setFillColor(sf::Color::White);
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
+	scoreText.setString(cScoreString + "000000");
+	scoreText.setPosition(Alignment::GetCenterOffset(scoreText.getGlobalBounds().width, cWorldWidth / 2.f), 15.f);
 
-	manager.PushGamemode(new UIOverlay(resourceCache, manager));
+	if(playerInventory.GetSensorUpgradeCount() > 3)
+	{
+		manager.PushGamemode(new WinOverlay(resourceCache, manager));
+	}
+	else
+	{
+		manager.PushGamemode(new UIOverlay(resourceCache, manager));
+	}
 }
 
 void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)

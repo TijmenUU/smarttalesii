@@ -4,7 +4,21 @@
 class WinOverlay : public Gamemode
 {
 private:
-protected:
-public:
+	float idleTimeOut;
+	uint8_t fadeIncrement;
+	uint8_t colorValue;
+	sf::Text title;
+	sf::Text body;
+	sf::RectangleShape background;
 
+protected:
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+
+	void Load() override;
+	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
+
+public:
+	void Show();
+
+	WinOverlay(ResourceCache & resourceCacheRef, GameManager & managerRef, const float timeOut = 15.f);
 };
