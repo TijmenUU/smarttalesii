@@ -26,5 +26,5 @@ animation neutralized-enhanced
 	frame-start-y 0
 	frame-width 324
 	frame-height 520
-	frame-time 32
+	frame-time 64
 	frame-count 3
