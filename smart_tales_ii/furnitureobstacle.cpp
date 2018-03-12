@@ -1,15 +1,46 @@
 #include "furnitureobstacle.hpp"
 
+#include "alignmenthelp.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
 {
 	const sf::Vector2f cLocalSensorPosition(-80, 73);
 	const sf::Vector2f cLocalHintPosition(50, -40);
+	const float cFallingForce = 10.f;
+	const float cFallingGravity = 5.f;
+
+	void Furniture::Fall(const sf::Vector2f & force, const sf::Vector2f & forceOrigin)
+	{
+		isFalling = true;
+
+		if(forceOrigin.x < Alignment::GetRectangleCenter(obstacleSprite.getGlobalBounds()).x)
+		{
+			angularVelocity = -3.f;
+		}
+		else
+		{
+			angularVelocity = 3.f;
+		}
+		
+		fallVelocity = VectorMathF::SetLength(force, cFallingForce) + sf::Vector2f(0, cFallingGravity);
+	}
 
 	bool Furniture::IsInteractionInBounds(const Inputhandler & input) const
 	{
 		return obstacleSprite.getGlobalBounds().contains(input.PointingDeviceWorldPosition());
+	}
+
+	void Furniture::HandleInput(const Inputhandler & input)
+	{
+		const uint8_t gestureInfo = static_cast<uint8_t>(TrackGestures(input));
+		if(gestureInfo & gestureFlag)
+		{
+			playerNeutralized = true;
+			Neutralize();
+			const auto mousepos = input.PointingDeviceWorldPosition();
+			Fall(mousepos - gestureStart, mousepos);
+		}
 	}
 
 	void Furniture::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
@@ -17,6 +48,7 @@ namespace Obstacle
 		if(playerBounds.intersects(sensorSprite.getGlobalBounds()))
 		{
 			Neutralize();
+			Fall(sf::Vector2f(0, 1), sf::Vector2f(0, 0));
 		}
 	}
 
@@ -32,7 +64,7 @@ namespace Obstacle
 
 	bool Furniture::CanDespawn() const
 	{
-		const auto bounds = sensorSprite.getGlobalBounds();
+		const auto bounds = obstacleSprite.getGlobalBounds();
 		return bounds.width + bounds.left < 0.f;
 	}
 
@@ -62,13 +94,31 @@ namespace Obstacle
 		sensorSprite.SetAnimation("idle");
 	}
 
+	void Furniture::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
+	{
+		if(isFalling)
+		{
+			obstacleSprite.move(fallVelocity.x + horizontalDisplacement, fallVelocity.y);
+			obstacleSprite.rotate(angularVelocity);
+
+			sensorSprite.move(horizontalDisplacement, 0.f);
+		}
+		else
+		{
+			GestureSensorBase::Update(elapsed, input, horizontalDisplacement, playerBounds);
+		}
+	}
+
 	Base * Furniture::Clone() const
 	{
 		return new Furniture(*this);
 	}
 
 	Furniture::Furniture(const bool playerHasSensor)
-		: GestureSensorBase(8, 50.f, Type::Furniture, playerHasSensor)
+		: GestureSensorBase(8, 50.f, Type::Furniture, playerHasSensor),
+		isFalling(false),
+		fallVelocity(0, 0),
+		angularVelocity(0.f)
 	{
 	}
 }

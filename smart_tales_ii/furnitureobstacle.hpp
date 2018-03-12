@@ -6,9 +6,15 @@ namespace Obstacle
 	class Furniture : public GestureSensorBase
 	{
 	private:
-	protected:
-		bool IsInteractionInBounds(const Inputhandler & input) const override;
+		bool isFalling;
+		sf::Vector2f fallVelocity;
+		float angularVelocity;
 
+	protected:
+		void Fall(const sf::Vector2f & force, const sf::Vector2f & forceOrigin);
+
+		bool IsInteractionInBounds(const Inputhandler & input) const override;
+		void HandleInput(const Inputhandler & input) override;
 		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 
 	public:
@@ -21,6 +27,10 @@ namespace Obstacle
 		virtual void Move(const float x, const float y) override;
 
 		void Load(std::list<sf::Texture>& textureStorage) override;
+		void Update(const sf::Time & elapsed,
+			const Inputhandler & input,
+			const float horizontalDisplacement,
+			const sf::FloatRect & playerBounds) override;
 
 		Base * Clone() const override;
 
