@@ -47,7 +47,7 @@ void Program::Run()
 		window.draw(manager);
 		// end draw
 		window.display();
-	} while(!inputhandler.DidWindowClose() && !manager.gamemodes.size() > 0);
+	} while(!inputhandler.DidWindowClose() && manager.gamemodes.size() > 0);
 }
 
 Program::Program( const unsigned int _windowWidth,
