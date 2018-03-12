@@ -21,12 +21,12 @@ namespace Obstacle
 		return obstacleSprite.getGlobalBounds().contains(input.PointingDeviceWorldPosition());
 	}
 
-	const sf::Vector2f Phone::GetScoreBubbleSpawnPosition() const
+	sf::Vector2f Phone::GetScoreBubbleSpawnPosition() const
 	{
 		return cLocalHintPosition + obstacleSprite.getPosition();
 	}
 
-	const sf::Vector2f Phone::GetHintPosition() const
+	sf::Vector2f Phone::GetHintPosition() const
 	{
 		return GetScoreBubbleSpawnPosition();
 	}

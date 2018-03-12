@@ -1,6 +1,6 @@
 #include "program.hpp"
 #include "runningmode.hpp"
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -47,7 +47,7 @@ void Program::Run()
 		window.draw(manager);
 		// end draw
 		window.display();
-	} while(!inputhandler.DidWindowClose());
+	} while(!inputhandler.DidWindowClose() && manager.gamemodes.size() > 0);
 }
 
 Program::Program( const unsigned int _windowWidth,

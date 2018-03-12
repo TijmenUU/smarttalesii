@@ -21,11 +21,12 @@ namespace Obstacle
 
 	public:
 		Type GetType() const;
-		virtual const sf::FloatRect GetKillBounds() const;
+		virtual sf::FloatRect GetKillBounds() const;
 		virtual const sf::Vector2f & GetPosition() const;
-		virtual const sf::Vector2f GetObstacleCenter() const;
-		virtual const sf::Vector2f GetScoreBubbleSpawnPosition() const = 0;
-		virtual const sf::Vector2f GetHintPosition() const = 0;
+		virtual sf::Vector2f GetObstacleCenter() const;
+		virtual sf::Vector2f GetNeutralizationPosition() const;
+		virtual sf::Vector2f GetScoreBubbleSpawnPosition() const = 0;
+		virtual sf::Vector2f GetHintPosition() const = 0;
 
 		virtual bool IsUnharmful() const;
 		virtual bool IsActive() const;

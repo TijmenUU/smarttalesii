@@ -45,7 +45,6 @@ private:
 
 	bool SurpressDraw() const override;
 	bool SurpressUpdate() const override;
-	void OnExit() override;
 	void OnEnter() override;
 
 	// May throw a runtime exception if it cannot load the required files and assets

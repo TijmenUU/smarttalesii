@@ -7,14 +7,16 @@ namespace Obstacle
 	{
 	private:
 	protected:
+		void Neutralize() override;
+
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 		void HandleInput(const Inputhandler & input) override;
 
 		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 
 	public:
-		const sf::Vector2f GetScoreBubbleSpawnPosition() const override;
-		const sf::Vector2f GetHintPosition() const override;
+		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
+		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
 

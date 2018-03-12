@@ -132,9 +132,6 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files\game\objects\shop</Filter>
     </ClCompile>
-    <ClCompile Include="overlaymode.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
     <ClCompile Include="background.cpp">
       <Filter>Source Files\game\objects\running</Filter>
     </ClCompile>
@@ -186,6 +183,12 @@
     <ClCompile Include="phoneobstacle.cpp">
       <Filter>Source Files\game\objects\running\obstacle</Filter>
     </ClCompile>
+    <ClCompile Include="winoverlay.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
+    <ClCompile Include="uioverlay.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -235,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="tile.hpp">
       <Filter>Header Files\game\objects\shop</Filter>
-    </ClInclude>
-    <ClInclude Include="overlaymode.hpp">
-      <Filter>Header Files\game\modes</Filter>
     </ClInclude>
     <ClInclude Include="background.hpp">
       <Filter>Header Files\game\objects\running</Filter>
@@ -289,6 +289,12 @@
     </ClInclude>
     <ClInclude Include="phoneobstacle.hpp">
       <Filter>Header Files\game\objects\running\obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="winoverlay.hpp">
+      <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="uioverlay.hpp">
+      <Filter>Header Files\game\modes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

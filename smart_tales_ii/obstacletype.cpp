@@ -38,6 +38,23 @@ namespace Obstacle
 
 	std::string GetHintString(const Type t)
 	{
-		return std::string();
+		switch(t)
+		{
+			case Type::Furniture:
+			return "Swipe down!";
+
+			case Type::Door:
+			return "Swipe left or right!";
+
+			case Type::Light:
+			return "Tap the button!";
+
+			case Type::Phone:
+			return "Swipe up!";
+
+			default:
+			case Type::Unknown:
+			return std::string();
+		}
 	}
 }

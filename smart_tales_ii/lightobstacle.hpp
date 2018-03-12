@@ -6,16 +6,22 @@ namespace Obstacle
 	class Light : public GestureSensorBase
 	{
 	private:
+		sf::Sprite sensorBeam;
+		bool showBeam;
+		AnimatedSprite lightSwitch;
+
 	protected:
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 		void HandleInput(const Inputhandler & input) override;
 		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
 
 		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
+		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 	public:
-		const sf::Vector2f GetScoreBubbleSpawnPosition() const override;
-		const sf::Vector2f GetHintPosition() const override;
+		sf::Vector2f GetNeutralizationPosition() const override;
+		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
+		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
 

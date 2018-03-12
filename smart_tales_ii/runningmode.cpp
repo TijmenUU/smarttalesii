@@ -2,7 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 #include "scoremode.hpp"
 #include "vectormath.hpp"
 
@@ -130,7 +130,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		
 		if(wasNeutralized != obstacle.IsNeutralizedByPlayer())
 		{
-			const auto obstacleCenter = obstacle.GetObstacleCenter();
+			const auto obstacleCenter = obstacle.GetNeutralizationPosition();
 			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
 			
 			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
@@ -162,7 +162,7 @@ void RunningMode::UpdateHints()
 			const auto & obstacle = *(obstacles[i]);
 			if(!obstacle.IsUnharmful())
 			{
-				auto obstaclePosition = obstacle.GetPosition();
+				auto obstaclePosition = obstacle.GetNeutralizationPosition();
 				if(obstaclePosition.x <= gameDifficulty.GetHintBorderXCoord())
 				{
 					obstacleHintText.setString(Obstacle::GetHintString(obstacle.GetType()));
@@ -243,7 +243,7 @@ void RunningMode::Load()
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
 
-	manager.PushGamemode(new OverlayMode(resourceCache, manager));
+	manager.PushGamemode(new UIOverlay(resourceCache, manager));
 }
 
 void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
@@ -293,11 +293,6 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 			SpawnObstacle();
 		}
 	}
-}
-
-void RunningMode::OnExit()
-{
-	// Update the last achieved score?
 }
 
 void RunningMode::OnEnter()
