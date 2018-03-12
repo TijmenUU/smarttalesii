@@ -122,6 +122,14 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		std::cout << "Gave you 40 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
 		carousel.RefreshTiles(playerInventory);
 	}
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		for(size_t i = 0; i < cTileUpgrades.size(); ++i)
+		{
+			playerInventory.AddSensorUpgrade(cTileUpgrades[i]);
+		}
+		carousel.RefreshTiles(playerInventory);
+	}
 	// end debug
 	if(gotoGameButton.Update(elapsed, input))
 	{
