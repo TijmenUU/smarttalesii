@@ -1,15 +1,19 @@
 #include "lightobstacle.hpp"
 
+#include "alignmenthelp.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
 {
 	const sf::Vector2f cLocalSensorPosition(-80, 200);
-	const sf::Vector2f cLocalHintPosition(150, 100);
+	const sf::Vector2f cLocalSwitchPosition(-100, 250);
+	const float cInteractionRadius = 50.f;
 
 	bool Light::IsInteractionInBounds(const Inputhandler & input) const
 	{
-		return obstacleSprite.getGlobalBounds().contains(input.PointingDeviceWorldPosition());
+		const auto center = Alignment::GetRectangleCenter(lightSwitch.getGlobalBounds());
+		const auto distance = VectorMathF::Distance(center, input.PointingDeviceWorldPosition());
+		return distance < cInteractionRadius;
 	}
 
 	void Light::HandleInput(const Inputhandler & input)
@@ -18,12 +22,13 @@ namespace Obstacle
 		{
 			playerNeutralized = true;
 			Neutralize();
+			lightSwitch.SetAnimation("activated");
 		}
 	}
 
 	void Light::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
 	{
-		SetPosition(sf::Vector2f(windowWidth, 0.f));
+		SetPosition(sf::Vector2f(windowWidth - cLocalSwitchPosition.x, 0.f));
 	}
 
 	void Light::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
@@ -34,14 +39,30 @@ namespace Obstacle
 		}
 	}
 
-	const sf::Vector2f Light::GetScoreBubbleSpawnPosition() const
+	void Light::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{
-		return cLocalHintPosition + obstacleSprite.getPosition();
+		target.draw(lightSwitch, states);
+		if(sensorEnabled)
+			target.draw(sensorSprite);
+		target.draw(obstacleSprite, states);
 	}
 
-	const sf::Vector2f Light::GetHintPosition() const
+	sf::Vector2f Light::GetNeutralizationPosition() const
 	{
-		return GetScoreBubbleSpawnPosition();
+		return Alignment::GetRectangleCenter(lightSwitch.getGlobalBounds());
+	}
+
+	sf::Vector2f Light::GetScoreBubbleSpawnPosition() const
+	{
+		return lightSwitch.getPosition();
+	}
+
+	sf::Vector2f Light::GetHintPosition() const
+	{
+		const auto bounds = lightSwitch.getGlobalBounds();
+		auto pos = Alignment::GetRectangleCenter(bounds);
+		pos.y -= bounds.height;
+		return pos;
 	}
 
 	bool Light::CanDespawn() const
@@ -54,6 +75,7 @@ namespace Obstacle
 	{
 		obstacleSprite.setPosition(p);
 		sensorSprite.setPosition(p + cLocalSensorPosition);
+		lightSwitch.setPosition(p + cLocalSwitchPosition);
 	}
 
 	void Light::Move(const float x, const float y)
@@ -74,6 +96,10 @@ namespace Obstacle
 		textureStorage.emplace_back();
 		sensorSprite.LoadFromFile("animation/passive_ir.txt", textureStorage.back());
 		sensorSprite.SetAnimation("idle");
+
+		textureStorage.emplace_back();
+		lightSwitch.LoadFromFile("animation/lightswitch.txt", textureStorage.back());
+		lightSwitch.SetAnimation("idle");
 	}
 
 	Base * Light::Clone() const
@@ -82,7 +108,7 @@ namespace Obstacle
 	}
 
 	Light::Light(const bool playerHasSensor)
-		: GestureSensorBase(2, 25.f, Type::Light, playerHasSensor)
+		: GestureSensorBase(2U, 50.f, Type::Light, playerHasSensor)
 	{
 	}
 }
