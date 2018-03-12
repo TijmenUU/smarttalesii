@@ -6,6 +6,8 @@ namespace Obstacle
 	class Light : public GestureSensorBase
 	{
 	private:
+		sf::Sprite sensorBeam;
+		bool showBeam;
 		AnimatedSprite lightSwitch;
 
 	protected:

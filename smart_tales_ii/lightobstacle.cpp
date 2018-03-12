@@ -5,7 +5,8 @@
 
 namespace Obstacle
 {
-	const sf::Vector2f cLocalSensorPosition(-100, 200);
+	const sf::Vector2f cLocalSensorPosition(-100, 196);
+	const sf::Vector2f cLocalSensorBeamPosition(cLocalSensorPosition + sf::Vector2f(-368, 14));
 	const sf::Vector2f cLocalSwitchPosition(-100, 250);
 	const float cInteractionRadius = 50.f;
 
@@ -28,15 +29,17 @@ namespace Obstacle
 
 	void Light::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
 	{
-		SetPosition(sf::Vector2f(windowWidth - cLocalSwitchPosition.x, 0.f));
+		SetPosition(sf::Vector2f(windowWidth - cLocalSensorBeamPosition.x, 0.f));
 	}
 
 	void Light::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
 	{
-		if(playerBounds.left + playerBounds.width > sensorSprite.getPosition().x)
+		const auto bounds = sensorBeam.getGlobalBounds();
+		if(playerBounds.left + playerBounds.width > (bounds.left + bounds.width / 2.f))
 		{
 			Neutralize();
 			lightSwitch.SetAnimation("activated");
+			showBeam = false;
 		}
 	}
 
@@ -44,7 +47,11 @@ namespace Obstacle
 	{
 		target.draw(lightSwitch, states);
 		if(sensorEnabled)
-			target.draw(sensorSprite);
+		{
+			target.draw(sensorSprite, states);
+			if(showBeam)
+				target.draw(sensorBeam, states);
+		}
 		target.draw(obstacleSprite, states);
 	}
 
@@ -76,6 +83,7 @@ namespace Obstacle
 	{
 		obstacleSprite.setPosition(p);
 		sensorSprite.setPosition(p + cLocalSensorPosition);
+		sensorBeam.setPosition(p + cLocalSensorBeamPosition);
 		lightSwitch.setPosition(p + cLocalSwitchPosition);
 	}
 
@@ -101,6 +109,13 @@ namespace Obstacle
 		textureStorage.emplace_back();
 		lightSwitch.LoadFromFile("animation/lightswitch.txt", textureStorage.back());
 		lightSwitch.SetAnimation("idle");
+
+		textureStorage.emplace_back();
+		if(!textureStorage.back().loadFromFile("texture/passive_ir_sensor_beam.png"))
+		{
+			throw std::runtime_error("Error loading texture/passive_ir_sensor_beam.png in Light obstacle.");
+		}
+		sensorBeam.setTexture(textureStorage.back(), true);
 	}
 
 	Base * Light::Clone() const
@@ -109,7 +124,10 @@ namespace Obstacle
 	}
 
 	Light::Light(const bool playerHasSensor)
-		: GestureSensorBase(2U, 50.f, Type::Light, playerHasSensor)
+		: GestureSensorBase(2U, 50.f, Type::Light, playerHasSensor),
+		sensorBeam(),
+		showBeam(playerHasSensor),
+		lightSwitch()
 	{
 	}
 }
