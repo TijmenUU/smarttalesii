@@ -162,7 +162,7 @@ void RunningMode::UpdateHints()
 			const auto & obstacle = *(obstacles[i]);
 			if(!obstacle.IsUnharmful())
 			{
-				auto obstaclePosition = obstacle.GetPosition();
+				auto obstaclePosition = obstacle.GetNeutralizationPosition();
 				if(obstaclePosition.x <= gameDifficulty.GetHintBorderXCoord())
 				{
 					obstacleHintText.setString(Obstacle::GetHintString(obstacle.GetType()));
