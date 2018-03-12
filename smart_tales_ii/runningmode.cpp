@@ -295,11 +295,6 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	}
 }
 
-void RunningMode::OnExit()
-{
-	// Update the last achieved score?
-}
-
 void RunningMode::OnEnter()
 {
 	Reset();
