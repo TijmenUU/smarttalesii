@@ -2,7 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 #include "scoremode.hpp"
 #include "vectormath.hpp"
 
@@ -243,7 +243,7 @@ void RunningMode::Load()
 	scoreText.setOutlineColor(sf::Color::Black);
 	scoreText.setOutlineThickness(2.f);
 
-	manager.PushGamemode(new OverlayMode(resourceCache, manager));
+	manager.PushGamemode(new UIOverlay(resourceCache, manager));
 }
 
 void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)

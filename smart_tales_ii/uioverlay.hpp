@@ -2,7 +2,7 @@
 #include "button.hpp"
 #include "gamemode.hpp"
 
-class OverlayMode : public Gamemode
+class UIOverlay : public Gamemode
 {
 private:
 	sf::RectangleShape pauseOverlay;
@@ -23,7 +23,7 @@ protected:
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:
-	OverlayMode(ResourceCache & resourceCacheRef, 
+	UIOverlay(ResourceCache & resourceCacheRef, 
 		GameManager & managerRef, 
 		const bool canPause = true);
 };

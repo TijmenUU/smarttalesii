@@ -2,7 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 #include "shopmode.hpp"
 
 void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -22,7 +22,7 @@ bool ScoreMode::SurpressUpdate() const
 void ScoreMode::Load()
 {
 	//manager.PopAllBelow(this);
-	manager.PushGamemode(new OverlayMode(resourceCache, manager, false));
+	manager.PushGamemode(new UIOverlay(resourceCache, manager, false));
 
 	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)

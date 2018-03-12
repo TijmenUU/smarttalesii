@@ -2,7 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 #include "runningmode.hpp"
 #include "upgradetile.hpp"
 
@@ -87,7 +87,7 @@ void ShopMode::LoadTiles()
 void ShopMode::Load()
 {
 	manager.PopAllBelow(this);
-	manager.PushGamemode(new OverlayMode(resourceCache, manager, false));
+	manager.PushGamemode(new UIOverlay(resourceCache, manager, false));
 
 	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)

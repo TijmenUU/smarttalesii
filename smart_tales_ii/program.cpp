@@ -1,6 +1,6 @@
 #include "program.hpp"
 #include "runningmode.hpp"
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 
 #include <algorithm>
 #include <cassert>

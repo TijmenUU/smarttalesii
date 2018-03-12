@@ -1,8 +1,8 @@
-#include "overlaymode.hpp"
+#include "uioverlay.hpp"
 
 #include "gamemanager.hpp"
 
-void OverlayMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
+void UIOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	if(pauseEnabled)
 	{
@@ -17,12 +17,12 @@ void OverlayMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(musicMuteButton, states);
 }
 
-bool OverlayMode::SurpressUpdate() const
+bool UIOverlay::SurpressUpdate() const
 {
 	return gamePauseButton.IsDown();
 }
 
-void OverlayMode::Load()
+void UIOverlay::Load()
 {
 	pauseOverlay.setPosition(0.f, 0.f);
 	pauseOverlay.setFillColor(sf::Color(0, 0, 0, 65));
@@ -56,7 +56,7 @@ void OverlayMode::Load()
 	sfxMuteButton.SetPosition(buttonPosition);
 }
 
-void OverlayMode::Update(const sf::Time & elapsed, const Inputhandler & input)
+void UIOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
 	if(sfxMuteButton.Update(elapsed, input))
 	{
@@ -72,7 +72,7 @@ void OverlayMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	}
 }
 
-OverlayMode::OverlayMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const bool canPause)
+UIOverlay::UIOverlay(ResourceCache & resourceCacheRef, GameManager & managerRef, const bool canPause)
 	: Gamemode(resourceCacheRef, managerRef),
 	pauseOverlay(sf::Vector2f(cWorldWidth, cWorldHeight)),
 	pauseText(),
