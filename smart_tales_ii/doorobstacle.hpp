@@ -7,6 +7,8 @@ namespace Obstacle
 	{
 	private:
 	protected:
+		void Neutralize() override;
+
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 		void HandleInput(const Inputhandler & input) override;
 

@@ -10,6 +10,20 @@ namespace Obstacle
 	const float cInteractionRadius = 200.f;
 	const float cSensorTriggerDistance = 50.f;
 
+	void Door::Neutralize()
+	{
+		if(sensorEnabled)
+		{
+			sensorSprite.SetAnimation("activated");
+			obstacleSprite.SetAnimation("neutralized-enhanced");
+		}
+		else
+		{
+			obstacleSprite.SetAnimation("neutralized");
+		}
+		neutralized = true;
+	}
+
 	bool Door::IsInteractionInBounds(const Inputhandler & input) const
 	{
 		const auto pos = input.PointingDeviceWorldPosition();
@@ -24,7 +38,8 @@ namespace Obstacle
 			playerNeutralized = true;
 			Neutralize();
 
-			if(gestureInfo & static_cast<uint8_t>(GestureType::Horizontal_LeftToRight))
+			// TODO possibly fix this if necessary, would require custom animation
+			if((gestureInfo & static_cast<uint8_t>(GestureType::Horizontal_LeftToRight)) && !sensorEnabled)
 			{
 				obstacleSprite.FlipHorizontally();
 			}
@@ -36,7 +51,6 @@ namespace Obstacle
 		if(playerBounds.left + playerBounds.width > sensorSprite.getPosition().x)
 		{
 			Neutralize();
-			obstacleSprite.FlipHorizontally();
 		}
 	}
 
@@ -75,7 +89,14 @@ namespace Obstacle
 	{
 		textureStorage.emplace_back();
 		obstacleSprite.LoadFromFile("animation/door.txt", textureStorage.back());
-		obstacleSprite.SetAnimation("active");
+		if(sensorEnabled)
+		{
+			obstacleSprite.SetAnimation("active-enhanced");
+		}
+		else
+		{
+			obstacleSprite.SetAnimation("active");
+		}
 
 		textureStorage.emplace_back();
 		sensorSprite.LoadFromFile("animation/active_ir.txt", textureStorage.back());
