@@ -18,8 +18,10 @@ private:
 	sf::Texture navigationButtonTexture;
 	TextButton gotoGameButton;
 
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	void LoadTiles();
+
+protected:
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
 	void Load() override;

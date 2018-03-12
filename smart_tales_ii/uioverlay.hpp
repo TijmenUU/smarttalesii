@@ -15,9 +15,9 @@ private:
 	Button musicMuteButton;
 	Button gamePauseButton;
 
+protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-protected:
 	bool SurpressUpdate() const override;
 	void Load() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;

@@ -13,12 +13,12 @@ class GameManager;
 class Gamemode : public sf::Drawable
 {
 private:
-	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
-
 protected:
 	friend class GameManager;
 	ResourceCache & resourceCache;
 	GameManager & manager;
+
+	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
 
 	virtual bool SurpressDraw() const;
 	virtual bool SurpressUpdate() const;

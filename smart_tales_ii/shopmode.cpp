@@ -37,13 +37,6 @@ const std::array<unsigned int, 4> cTilePrices = {
 	1000
 };
 
-void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	target.draw(title, states);
-	target.draw(gotoGameButton, states);
-	target.draw(carousel, states);
-}
-
 void ShopMode::LoadTiles()
 {
 	if(!tileBackgroundTexture.loadFromFile("texture/upgradetilebg.png"))
@@ -82,6 +75,13 @@ void ShopMode::LoadTiles()
 	}
 
 	carousel.RefreshTiles(playerInventory);
+}
+
+void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
+{
+	target.draw(title, states);
+	target.draw(gotoGameButton, states);
+	target.draw(carousel, states);
 }
 
 void ShopMode::Load()

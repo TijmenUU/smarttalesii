@@ -36,7 +36,9 @@ private:
 	PlayerSprite player;
 	const Player::Inventory playerInventory;
 
+protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+
 	void SpawnObstacle();
 	void SpawnScoreBubble(const Obstacle::Base & obstacle, const unsigned int score);
 	
