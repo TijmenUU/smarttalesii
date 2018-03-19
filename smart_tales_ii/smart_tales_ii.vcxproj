@@ -37,6 +37,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="obstacletype.cpp" />
     <ClCompile Include="baseobstacle.cpp" />
+    <ClCompile Include="animationsheet.cpp" />
     <ClCompile Include="uioverlay.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="playersprite.cpp" />
@@ -74,6 +75,7 @@
     <ClInclude Include="inputhandler.hpp" />
     <ClInclude Include="obstacletype.hpp" />
     <ClInclude Include="baseobstacle.hpp" />
+    <ClInclude Include="animationsheet.hpp" />
     <ClInclude Include="uioverlay.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="playersprite.hpp" />
