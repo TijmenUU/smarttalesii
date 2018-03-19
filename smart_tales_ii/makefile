@@ -1,5 +1,5 @@
 CC = clang++-6.0
-CFLAGS = -std=c++11 -Wall -I/home/tijmen/coding/_lib/_src/sfml_2_4_2/include
+CFLAGS = -std=c++14 -Wall -I/home/tijmen/coding/_lib/_src/sfml_2_4_2/include
 LFLAGS = -Wall
 LIBS = -lm -L/home/tijmen/coding/_lib/sfml/lib -lsfml-system -lsfml-window -lsfml-graphics
 
