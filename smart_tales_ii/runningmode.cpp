@@ -23,8 +23,17 @@
 const std::string cGameDifficultyFile = "difficulty.txt";
 
 // Resources
-const std::string cPlayerAnimationFile = "animation/player.txt";
 const std::string cBackgroundWallTexture = "texture/runningbackground.png";
+	// Obstacles
+const std::string cFurnitureObstacleFile = "animation/furniture.txt";
+const std::string cFurnitureSensorFile = "animation/livetile.txt";
+const std::string cDoorObstacleFile = "animation/door.txt";
+const std::string cDoorSensorFile = "animation/active_ir.txt";
+const std::string cPhoneObstacleFile = "animation/phone.txt";
+	// no phone sensor
+const std::string cLightObstacleFile = "animation/light.txt";
+const std::string cLightSensorFile = "animation/passive_ir.txt";
+const std::string cLightSwitchFile = "animation/lightswitch.txt";
 
 // Utility consts
 const float cFloorY = 520.f; // in pixels
@@ -113,7 +122,7 @@ bool RunningMode::SurpressUpdate() const
 
 bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
 {
-	const auto playerBounds = player.getGlobalBounds();
+	const auto playerBounds = player.GetGlobalBounds();
 	const float displacement = elapsed.asSeconds() * -scrollVelocity;
 
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
@@ -132,7 +141,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		if(wasNeutralized != obstacle.IsNeutralizedByPlayer())
 		{
 			const auto obstacleCenter = obstacle.GetNeutralizationPosition();
-			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.getPosition());
+			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.GetPosition());
 			
 			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
 			SpawnScoreBubble(obstacle, currencyScore);
@@ -199,29 +208,49 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 	}
 }
 
+Animation::Sheet & RunningMode::LoadSheet(const std::string file)
+{
+	spriteSheetStorage.emplace_back();
+	spriteSheetStorage.back().LoadFromFile(file);
+
+	return spriteSheetStorage.back();
+}
+
 void RunningMode::Load()
 {
 	manager.PopAllBelow(this);
 
 	background.Load(cBackgroundWallTexture);
 	
-	obstacleFactory.emplace_back(new Obstacle::Furniture(playerInventory.HasObstacleCounter(Obstacle::Type::Furniture)));
-	obstacleFactory.emplace_back(new Obstacle::Door(playerInventory.HasObstacleCounter(Obstacle::Type::Door)));
-	obstacleFactory.emplace_back(new Obstacle::Light(playerInventory.HasObstacleCounter(Obstacle::Type::Light)));
-	obstacleFactory.emplace_back(new Obstacle::Phone(playerInventory.HasObstacleCounter(Obstacle::Type::Phone)));
+	obstacleFactory.emplace_back(new Obstacle::Furniture(LoadSheet(cFurnitureObstacleFile),
+		LoadSheet(cFurnitureSensorFile),
+		playerInventory.HasObstacleCounter(Obstacle::Type::Furniture)));
+	
+	obstacleFactory.emplace_back(new Obstacle::Door(LoadSheet(cDoorObstacleFile),
+		LoadSheet(cDoorSensorFile),
+		playerInventory.HasObstacleCounter(Obstacle::Type::Door)));
+
+	textureStorage.emplace_back();
+	obstacleFactory.emplace_back(new Obstacle::Light(LoadSheet(cLightSwitchFile),
+		textureStorage.back(),
+		LoadSheet(cLightObstacleFile),
+		LoadSheet(cLightSensorFile),
+		playerInventory.HasObstacleCounter(Obstacle::Type::Light)));
+	
+	obstacleFactory.emplace_back(new Obstacle::Phone(LoadSheet(cPhoneObstacleFile),
+		playerInventory.HasObstacleCounter(Obstacle::Type::Phone)));
+
 	for(size_t i = 0; i < obstacleFactory.size(); ++i)
 	{
-		obstacleFactory[i]->Load(obstacleTextureStorage);
 		obstacleFactory[i]->SetPosition(sf::Vector2f(0.f, 0.f));
 		obstacleFactory[i]->SetSpawnPosition(cWorldWidth, cFloorY);
 	}
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
-	player.Load(cPlayerAnimationFile);
-	player.SetAnimation("run"); // TODO set different animation depending on upgrades
-	const auto playerBounds = player.getGlobalBounds();
-	player.setPosition(playerBounds.width, cFloorY - playerBounds.height);
+	player.Load();
+	const auto playerBounds = player.GetGlobalBounds();
+	player.SetPosition(sf::Vector2f(playerBounds.width, cFloorY - playerBounds.height));
 
 	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -310,7 +339,8 @@ void RunningMode::OnEnter()
 RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
 	: Gamemode(resourceCacheRef, managerRef),
 	background(cWorldWidth),
-	obstacleTextureStorage(),
+	spriteSheetStorage(),
+	textureStorage(),
 	obstacleFactory(),
 	gameDifficulty(),
 	obstacles(),

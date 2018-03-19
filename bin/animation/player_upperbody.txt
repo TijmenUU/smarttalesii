@@ -1,0 +1,10 @@
+spritesheet-source "spritesheet/player_upperbody.png"
+
+animation run
+	frame-start-x 0
+	frame-start-y 0
+	frame-width 124
+	frame-height 280
+	frame-count 8
+	frame-time 64
+	loop

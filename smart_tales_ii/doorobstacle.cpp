@@ -85,31 +85,19 @@ namespace Obstacle
 		SetPosition(pos);
 	}
 
-	void Door::Load(std::list<sf::Texture>& textureStorage)
-	{
-		textureStorage.emplace_back();
-		obstacleSprite.LoadFromFile("animation/door.txt", textureStorage.back());
-		if(sensorEnabled)
-		{
-			obstacleSprite.SetAnimation("active-enhanced");
-		}
-		else
-		{
-			obstacleSprite.SetAnimation("active");
-		}
-
-		textureStorage.emplace_back();
-		sensorSprite.LoadFromFile("animation/active_ir.txt", textureStorage.back());
-		sensorSprite.SetAnimation("idle");
-	}
-
 	Base * Door::Clone() const
 	{
 		return new Door(*this);
 	}
 
-	Door::Door(const bool playerHasSensor)
-		: GestureSensorBase(48, 50.f, Type::Door, playerHasSensor)
+	Door::Door(const Animation::Sheet & obstacleSheet, 
+		const Animation::Sheet & sensorSheet, 
+		bool playerHasSensor)
+		: GestureSensorBase(obstacleSheet, sensorSheet, 48, 50.f, Type::Door, playerHasSensor)
 	{
+		if(sensorEnabled)
+		{
+			obstacleSprite.SetAnimation("active-enhanced");
+		}
 	}
 }

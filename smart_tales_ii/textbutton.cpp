@@ -46,8 +46,10 @@ void TextButton::SetFont(sf::Font & font)
 	UpdateTextPosition(buttonSprite.getPosition());
 }
 
-TextButton::TextButton(const bool enabled, const bool down)
-	: Button(enabled, down),
+TextButton::TextButton(const Animation::Sheet & buttonSheet,
+	bool enabled, 
+	const bool down)
+	: Button(buttonSheet, enabled, down),
 	buttonText()
 {
 }

@@ -83,17 +83,6 @@ namespace Obstacle
 		SetPosition(pos);
 	}
 
-	void Furniture::Load(std::list<sf::Texture>& textureStorage)
-	{
-		textureStorage.emplace_back();
-		obstacleSprite.LoadFromFile("animation/furniture.txt", textureStorage.back());
-		obstacleSprite.SetAnimation("active");
-
-		textureStorage.emplace_back();
-		sensorSprite.LoadFromFile("animation/livetile.txt", textureStorage.back());
-		sensorSprite.SetAnimation("idle");
-	}
-
 	void Furniture::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
 	{
 		if(isFalling)
@@ -114,8 +103,10 @@ namespace Obstacle
 		return new Furniture(*this);
 	}
 
-	Furniture::Furniture(const bool playerHasSensor)
-		: GestureSensorBase(8, 50.f, Type::Furniture, playerHasSensor),
+	Furniture::Furniture(const Animation::Sheet & obstacleSheet,
+		const Animation::Sheet & sensorSheet, 
+		const bool playerHasSensor)
+		: GestureSensorBase(obstacleSheet, sensorSheet, 8, 50.f, Type::Furniture, playerHasSensor),
 		isFalling(false),
 		fallVelocity(0, 0),
 		angularVelocity(0.f)

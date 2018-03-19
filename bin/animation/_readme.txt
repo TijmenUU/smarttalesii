@@ -14,7 +14,7 @@
 # frame-time
 #	in milliseconds
 # reverse
-#	If present, it sets the animation to reverse play (start position - (margin + frame width))
+#	If present, it sets the animation to reverse play
 # loop
 #	If present, it makes the animation loop and never finish. If missing it halts on last frame
 

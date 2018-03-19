@@ -7,13 +7,13 @@ class Button : public sf::Drawable
 protected:
 	bool isDown;
 	bool isEnabled;
-	AnimatedSprite buttonSprite;
+	Animation::Sprite buttonSprite;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	virtual void UpdateButtonVisual();
 
 public:
-	virtual void LoadFromFile(const std::string & animationFile, sf::Texture & textureStorage);
+	virtual bool GetInteraction(const Inputhandler & input);
 	// return value indicates change of button state (gone pressed or gone up == true)
 	virtual bool Update(const sf::Time & elapsed, const Inputhandler & input);
 
@@ -30,6 +30,8 @@ public:
 
 	virtual void SetDown(const bool down);
 
-	Button(const bool enabled = true, const bool down = false);
+	Button(const Animation::Sheet & buttonSheet,
+		bool enabled = true, 
+		const bool down = false);
 	virtual ~Button() = default;
 };

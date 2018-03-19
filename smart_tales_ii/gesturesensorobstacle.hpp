@@ -7,7 +7,7 @@ namespace Obstacle
 	class GestureSensorBase : public GestureBase
 	{
 	protected:
-		AnimatedSprite sensorSprite;
+		Animation::Sprite sensorSprite;
 
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 		void Neutralize() override;
@@ -22,6 +22,11 @@ namespace Obstacle
 			const float horizontalDisplacement,
 			const sf::FloatRect & playerBounds) override;
 
-		GestureSensorBase(const uint8_t & gestureFlag, const float gestureMinWorldTravel, const Type & t, const bool playerHasSensor);
+		GestureSensorBase(const Animation::Sheet & obstacleSheet, 
+			const Animation::Sheet & sensorSheet,
+			const uint8_t gestureFlag, 
+			const float gestureMinWorldTravel, 
+			const Type t, 
+			const bool playerHasSensor);
 	};
 }

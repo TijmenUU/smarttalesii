@@ -27,9 +27,10 @@ namespace Obstacle
 		virtual void HandleInput(const Inputhandler & input);
 
 	public:
-		GestureBase(const uint8_t & gestureFlag, 
+		GestureBase(const uint8_t _gestureFlag,
 			const float gestureMinWorldTravel, 
-			const Type & t, 
+			const Type t,
+			const Animation::Sheet & obstacleSheet,
 			const bool playerHasSensor);
 	};
 }

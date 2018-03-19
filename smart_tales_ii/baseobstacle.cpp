@@ -48,12 +48,13 @@ namespace Obstacle
 		return GetObstacleCenter();
 	}
 
-	Base::Base(const Type & t, const bool playerHasSensor)
+	Base::Base(Type t, const Animation::Sheet & obstacleSheet, const bool playerHasSensor)
 		: type(t),
-		obstacleSprite(),
+		obstacleSprite(obstacleSheet),
 		neutralized(false),
 		playerNeutralized(false),
 		sensorEnabled(playerHasSensor)
 	{
+		obstacleSprite.SetAnimation("active");
 	}
 }

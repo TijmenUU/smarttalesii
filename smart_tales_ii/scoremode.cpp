@@ -7,11 +7,11 @@
 
 void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(background, states);
+	target.draw(*backgroundSprite, states);
 	target.draw(title, states);
 	target.draw(currencyEarned, states);
 	target.draw(newBalance, states);
-	target.draw(gotoShopButton, states);
+	target.draw(*gotoShopButton, states);
 }
 
 bool ScoreMode::SurpressUpdate() const
@@ -30,17 +30,21 @@ void ScoreMode::Load()
 		throw std::runtime_error("Error fetching commodore font in ScoreMode.");
 	}
 
-	background.LoadFromFile("animation/scorebackground.txt", backgroundTexture);
-	backgroundTexture.setSmooth(false);
-	background.setPosition(0.f, 0.f);
-	background.setScale(4.f, 4.f);
-	background.SetAnimation("zoom");
+	backgroundSheet.LoadFromFile("animation/scorebackground.txt");
+	//backgroundTexture->setSmooth(false);
 
-	gotoShopButton.LoadFromFile("animation/navigationbutton_large.txt", navigationButtonTexture);
-	gotoShopButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
+	backgroundSprite = std::make_unique<Animation::Sprite>(backgroundSheet);
+	backgroundSprite->setPosition(0.f, 0.f);
+	backgroundSprite->setScale(4.f, 4.f);
+	backgroundSprite->SetAnimation("zoom");
+
+	navigationButtonSheet.LoadFromFile("animation/navigationbutton_large.txt");
+
+	gotoShopButton = std::make_unique<TextButton>(navigationButtonSheet);
+	gotoShopButton->SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton->GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
 	sf::Text buttonText("Go to shop", *fontPtr, 30U);
 	buttonText.setFillColor(sf::Color::White);
-	gotoShopButton.SetText(buttonText);
+	gotoShopButton->SetText(buttonText);
 
 	title.setFont(*fontPtr);
 	title.setCharacterSize(36);
@@ -69,23 +73,23 @@ void ScoreMode::Load()
 
 void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	if(gotoShopButton.Update(elapsed, input))
+	if(gotoShopButton->Update(elapsed, input))
 	{
 		playerInventory.AddCurrency(playerScore.GetTotalCurrency());
 		manager.PushGamemode(new ShopMode(resourceCache, manager, playerInventory));
 		return;
 	}
 
-	background.Update(elapsed);
+	backgroundSprite->Update(elapsed);
 }
 
 ScoreMode::ScoreMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Score & score, const Player::Inventory & inventory)
 	:	Gamemode(resourceCacheRef, managerRef),
 	playerScore(score),
 	playerInventory(inventory),
-	backgroundTexture(),
-	navigationButtonTexture(),
-	background(),
+	backgroundSheet(),
+	navigationButtonSheet(),
+	backgroundSprite(),
 	gotoShopButton(),
 	title(),
 	currencyEarned(),
