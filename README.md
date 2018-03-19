@@ -13,6 +13,7 @@ Should build on Linux too, as there are no platform specific libraries or APIs u
 ## Branches
 - master: the most recent stable version of the game. It may miss some upcoming features, but it should build with no problems.
 - GameplayEvaluation: the first basic prototype of the game, for testing the fundamental game mechanics.
+- linux: experimental branch with a working makefile. However, the generated executable has permission problems or uses a wrong directory / file lookup. It cannot load fonts because it cannot find them.
 
 ## Releases
 Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for binaries if you cannot or do not want to build it yourself.
