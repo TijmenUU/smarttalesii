@@ -3,7 +3,7 @@
 #include "resourcecache.hpp"
 
 #include <memory>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 const float cWorldWidth = 1280.f; // in pixels
 const float cWorldHeight = 720.f; // in pixels

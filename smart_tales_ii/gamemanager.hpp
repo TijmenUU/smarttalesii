@@ -3,7 +3,7 @@
 #include "gamemode.hpp"
 
 #include <memory>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
 

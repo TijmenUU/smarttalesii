@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML\Graphics\Rect.hpp>
-#include <SFML\System\Vector2.hpp>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/System/Vector2.hpp>
 
 /*
 	Utility tools for alignment of GUI

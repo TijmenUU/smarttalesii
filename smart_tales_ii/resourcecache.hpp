@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML\Graphics\Font.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <string>
 #include <unordered_map>
 #include <vector>
