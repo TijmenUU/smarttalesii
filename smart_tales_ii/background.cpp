@@ -1,5 +1,6 @@
 #include "background.hpp"
 
+#include <cmath>
 #include <stdexcept>
 #include <string>
 
@@ -18,7 +19,7 @@ void ScrollingBackground::Load(const std::string & textureFile)
 	wallTexture.setSmooth(false);
 
 	wallSpriteWidth = wallTexture.getSize().x;
-	const int repetitions = static_cast<int>(std::ceilf(worldWidth / wallSpriteWidth)) + 2;
+	const int repetitions = static_cast<int>(std::ceil(worldWidth / wallSpriteWidth)) + 2;
 
 	wallSprite.setTexture(wallTexture);
 	wallSprite.setTextureRect(sf::IntRect(0, 0, repetitions * wallSpriteWidth, wallTexture.getSize().y));
