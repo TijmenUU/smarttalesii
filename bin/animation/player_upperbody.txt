@@ -8,3 +8,21 @@ animation run
 	frame-count 8
 	frame-time 64
 	loop
+
+animation run-enhanced
+	frame-start-x 0
+	frame-start-y 280
+	frame-width 124
+	frame-height 280
+	frame-count 8
+	frame-time 64
+	loop
+
+animation run-showoff
+	frame-start-x 0
+	frame-start-y 560
+	frame-width 124
+	frame-height 280
+	frame-count 8
+	frame-time 64
+	loop

@@ -146,16 +146,24 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
 			SpawnScoreBubble(obstacle, currencyScore);
 		}
-		else if(!obstacle.IsUnharmful() && obstacle.GetKillBounds().intersects(playerBounds))
+		else if(obstacle.GetKillBounds().intersects(playerBounds))
 		{
-			// debug
-			std::cout << "Run over! Currency earned this run: " << score.GetTotalCurrency();
-			std::cout << " with a distance of " << score.distance;
-			std::cout << " covered and a scroll velocity of " << scrollVelocity << '\n';
-			std::cout << "\tKilled by a <" << Obstacle::GetString(obstacle.GetType()) << ">\n";
-			// end debug
-			GameOver();
-			return true;
+			if(!obstacle.IsUnharmful())
+			{
+				// debug
+				std::cout << "Run over! Currency earned this run: " << score.GetTotalCurrency();
+				std::cout << " with a distance of " << score.distance;
+				std::cout << " covered and a scroll velocity of " << scrollVelocity << '\n';
+				std::cout << "\tKilled by a <" << Obstacle::GetString(obstacle.GetType()) << ">\n";
+				// end debug
+				GameOver();
+
+				return true;
+			}
+			else if(obstacle.GetType() == Obstacle::Type::Phone && !player.IsShowingOff())
+			{
+				player.ShowOff();
+			}	
 		}
 	}
 
@@ -248,7 +256,7 @@ void RunningMode::Load()
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
-	player.Load();
+	player.Load(playerInventory);
 	const auto playerBounds = player.GetGlobalBounds();
 	player.SetPosition(sf::Vector2f(playerBounds.width, cFloorY - playerBounds.height));
 
