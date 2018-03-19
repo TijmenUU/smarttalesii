@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 // TODO add random scrolling elements like paintings and clocks if time allows
 class ScrollingBackground : public sf::Drawable

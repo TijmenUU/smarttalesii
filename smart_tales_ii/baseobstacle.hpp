@@ -3,7 +3,7 @@
 #include "inputhandler.hpp"
 #include "obstacletype.hpp"
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 namespace Obstacle
