@@ -1,6 +1,7 @@
 #include "difficulty.hpp"
 #include "platform.hpp"
 
+#include <algorithm>
 #include <array>
 #include <sstream>
 #include <stdexcept>
