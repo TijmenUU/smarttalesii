@@ -44,12 +44,15 @@ namespace Obstacle
 		Move(horizontalDisplacement, 0.f);
 	}
 
-	GestureSensorBase::GestureSensorBase(const uint8_t & gestureFlag, 
-		const float gestureMinWorldTravel, 
-		const Type & t, 
+	GestureSensorBase::GestureSensorBase(const Animation::Sheet & obstacleSheet,
+		const Animation::Sheet & sensorSheet,
+		const uint8_t gestureFlag,
+		const float gestureMinWorldTravel,
+		const Type t,
 		const bool playerHasSensor)
-		: GestureBase(gestureFlag, gestureMinWorldTravel, t, playerHasSensor),
-		sensorSprite()
+		: GestureBase(gestureFlag, gestureMinWorldTravel, t, obstacleSheet, playerHasSensor),
+		sensorSprite(sensorSheet)
 	{
+		sensorSprite.SetAnimation("idle");
 	}
 }

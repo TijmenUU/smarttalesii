@@ -29,7 +29,7 @@ public:
 	void SetPrice(const unsigned int price, const sf::Text & text);
 	void SetDescription(const std::string & description, sf::Font & font);
 	void SetDescription(const sf::Text & text);
-	void SetButton(const TextButton & toCopy);
+	void SetButtonText(const sf::Text & text);
 
 	void Refresh(const Player::Inventory & inventory) override;
 
@@ -40,7 +40,6 @@ public:
 		const float horizontalDisplacement,
 		const bool allowInteraction = true) override;
 
-	UpgradeTile() = default;
-	~UpgradeTile() override = default;
+	UpgradeTile(const Animation::Sheet & purchaseButtonSheet);
 };
 

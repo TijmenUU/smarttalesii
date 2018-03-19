@@ -3,13 +3,27 @@
 
 #include <string>
 
-class PlayerSprite : public AnimatedSprite
+class PlayerSprite : public sf::Drawable
 {
 private:
-	sf::Texture texture;
+	Animation::Sheet upperBodySheet;
+	Animation::Sheet legsSheet;
+
+	Animation::Sprite upperBodySprite;
+	Animation::Sprite legsSprite;
+
+protected:
+	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
-	void Load(const std::string & animationFile);
+	bool SetAnimation(const std::string & name);
+	void SetPosition(const sf::Vector2f & p);
+
+	const sf::Vector2f & GetPosition() const;
+	sf::FloatRect GetGlobalBounds() const;
+
+	void Load();
+	void Update(const sf::Time & elapsed);
 
 	PlayerSprite();
 };

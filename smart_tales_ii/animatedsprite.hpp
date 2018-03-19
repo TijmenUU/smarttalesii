@@ -27,6 +27,7 @@ namespace Animation
 		bool SetAnimation(const std::string & name);
 
 		virtual void Update(const sf::Time & elapsed);
+		virtual void Update(const Sprite & parent);
 
 		// Remember to set the animation afterwards!
 		Sprite(const Sheet & sheetRef);

@@ -17,7 +17,8 @@ class RunningMode : public Gamemode
 private:
 	ScrollingBackground background;
 
-	std::list<sf::Texture> obstacleTextureStorage;
+	std::list<sf::Texture> textureStorage;
+	std::list<Animation::Sheet> spriteSheetStorage;
 	std::vector<std::unique_ptr<Obstacle::Base>> obstacleFactory;
 	Difficulty gameDifficulty;
 	
@@ -50,6 +51,7 @@ protected:
 	void OnEnter() override;
 
 	// May throw a runtime exception if it cannot load the required files and assets
+	Animation::Sheet & LoadSheet(const std::string file);
 	void Load() override;
 
 	// if it returns true, game over

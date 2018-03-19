@@ -52,13 +52,6 @@ namespace Obstacle
 		SetPosition(sf::Vector2f(windowWidth, floorYcoord - (cSpawnHeight + obstacleSprite.getGlobalBounds().width)));
 	}
 
-	void Phone::Load(std::list<sf::Texture>& textureStorage)
-	{
-		textureStorage.emplace_back();
-		obstacleSprite.LoadFromFile("animation/phone.txt", textureStorage.back());
-		obstacleSprite.SetAnimation("active");
-	}
-
 	void Phone::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
 	{
 		if(!neutralized)
@@ -76,8 +69,8 @@ namespace Obstacle
 		return new Phone(*this);
 	}
 
-	Phone::Phone(const bool playerHasSensor)
-		: GestureBase(4, 50.f, Type::Phone, playerHasSensor)
+	Phone::Phone(const Animation::Sheet & obstacleSheet, const bool playerHasSensor)
+		: GestureBase(4, 50.f, Type::Phone, obstacleSheet, playerHasSensor)
 	{
 	}
 }

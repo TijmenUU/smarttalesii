@@ -109,9 +109,9 @@ void UpgradeTile::SetDescription(const sf::Text & text)
 	upgradeDescription = text;
 }
 
-void UpgradeTile::SetButton(const TextButton & toCopy)
+void UpgradeTile::SetButtonText(const sf::Text & text)
 {
-	purchaseButton = toCopy;
+	purchaseButton.SetText(text);
 }
 
 void UpgradeTile::Refresh(const Player::Inventory & inventory)
@@ -126,7 +126,7 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 	const bool allowInteraction)
 {
 	bool retval = false;
-	if(allowInteraction && purchaseButton.Update(elapsed, input))
+	if(allowInteraction && purchaseButton.GetInteraction(input))
 	{
 		inventory.RemoveCurrency(upgradePrice);
 		std::cout << "Bought upgrade for " << upgradePrice << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
@@ -144,4 +144,16 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 	}
 
 	return retval;
+}
+
+UpgradeTile::UpgradeTile(const Animation::Sheet & purchaseButtonSheet)
+	: SaleTile(),
+	upgrade(),
+	tileSprite(),
+	upgradeImage(),
+	upgradePrice(),
+	upgradePriceText(),
+	purchaseButton(purchaseButtonSheet),
+	upgradeDescription()
+{
 }

@@ -11,6 +11,17 @@
 
 namespace Animation
 {
+	Animation::Animation()
+		: frameStart(),
+		frameSize(),
+		frameMargin(0U),
+		frameCount(0U),
+		frameTime(0U),
+		reverse(false),
+		loop(false)
+	{
+	}
+
 #pragma region Animation Loading
 	std::array<std::string, 8> cAnimationHeaders =
 	{
@@ -159,7 +170,7 @@ namespace Animation
 				case AnimationHeader::SpritesheetSource:
 				{
 					const auto sourcefile = Util::GetStringInQuotes(lines[i]);
-					if(texture.loadFromFile(sourcefile))
+					if(!texture.loadFromFile(sourcefile))
 					{
 						throw std::runtime_error("Failed to load texture <" + sourcefile + "> specified in animation file <" + animationFile + ">.");
 					}
@@ -188,7 +199,7 @@ namespace Animation
 		assert(frameNumber < anim.frameCount);
 		
 		return sf::IntRect(anim.frameStart.x + frameNumber * anim.frameSize.x, 
-			anim.frameStart.y + frameNumber * anim.frameSize.y, 
+			anim.frameStart.y, 
 			anim.frameSize.x, 
 			anim.frameSize.y);
 	}
@@ -198,10 +209,9 @@ namespace Animation
 		auto findresult = animations.find(name);
 		if(findresult == animations.end())
 		{
-			return &(findresult->second);
+			return nullptr;
 		}
-
-		return nullptr;
+		return &(findresult->second);
 	}
 
 	std::string Sheet::GetAnimationName(const Animation * ptr) const

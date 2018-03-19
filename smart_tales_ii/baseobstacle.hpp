@@ -1,4 +1,5 @@
 #pragma once
+#include "animatedsprite.hpp"
 #include "inputhandler.hpp"
 #include "obstacletype.hpp"
 
@@ -12,7 +13,7 @@ namespace Obstacle
 	private:
 	protected:
 		Type type;
-		AnimatedSprite obstacleSprite;
+		Animation::Sprite obstacleSprite;
 		bool neutralized, playerNeutralized;
 		bool sensorEnabled;
 
@@ -37,7 +38,6 @@ namespace Obstacle
 		virtual void Move(const float x, const float y) = 0;
 		virtual void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord);
 
-		virtual void Load(std::list<sf::Texture> & textureStorage) = 0;
 		virtual void Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
@@ -45,7 +45,7 @@ namespace Obstacle
 
 		virtual Base * Clone() const = 0;
 
-		Base(const Type & t, const bool playerHasSensor);
+		Base(Type t, const Animation::Sheet & obstacleSheet, const bool playerHasSensor);
 		virtual ~Base() = default;
 	};
 

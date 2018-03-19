@@ -17,13 +17,7 @@ void Button::UpdateButtonVisual()
 	}
 }
 
-void Button::LoadFromFile(const std::string & animationFile, sf::Texture & textureStorage)
-{
-	buttonSprite.LoadFromFile(animationFile, textureStorage);
-	UpdateButtonVisual();
-}
-
-bool Button::Update(const sf::Time & elapsed, const Inputhandler & input)
+bool Button::GetInteraction(const Inputhandler & input)
 {
 	if(input.PointingDeviceReleasedEvent() && isEnabled)
 	{
@@ -32,14 +26,22 @@ bool Button::Update(const sf::Time & elapsed, const Inputhandler & input)
 		if(bounds.contains(inputpos))
 		{
 			isDown = !isDown;
-			UpdateButtonVisual();
 			return true;
 		}
 	}
 
+	return false;
+}
+
+bool Button::Update(const sf::Time & elapsed, const Inputhandler & input)
+{
+	bool retval = GetInteraction(input);
+	if(retval)
+		UpdateButtonVisual();
+
 	buttonSprite.Update(elapsed);
 
-	return false;
+	return retval;
 }
 
 bool Button::IsDown() const
@@ -83,9 +85,12 @@ void Button::SetDown(const bool down)
 	UpdateButtonVisual();
 }
 
-Button::Button(const bool enabled, const bool down)
+Button::Button(const Animation::Sheet & buttonSheet, 
+	const bool enabled, 
+	const bool down)
 	: isDown(down),
 	isEnabled(enabled),
-	buttonSprite()
+	buttonSprite(buttonSheet)
 {
+	UpdateButtonVisual();
 }

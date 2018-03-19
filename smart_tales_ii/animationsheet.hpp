@@ -15,6 +15,8 @@ namespace Animation
 		unsigned int frameTime;		// in milliseconds
 		bool reverse;
 		bool loop;
+
+		Animation();
 	};
 
 	class Sheet

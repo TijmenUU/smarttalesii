@@ -97,38 +97,27 @@ namespace Obstacle
 		SetPosition(pos);
 	}
 
-	void Light::Load(std::list<sf::Texture>& textureStorage)
-	{
-		textureStorage.emplace_back();
-		obstacleSprite.LoadFromFile("animation/light.txt", textureStorage.back());
-		obstacleSprite.SetAnimation("active");
-
-		textureStorage.emplace_back();
-		sensorSprite.LoadFromFile("animation/passive_ir.txt", textureStorage.back());
-		sensorSprite.SetAnimation("idle");
-
-		textureStorage.emplace_back();
-		lightSwitch.LoadFromFile("animation/lightswitch.txt", textureStorage.back());
-		lightSwitch.SetAnimation("idle");
-
-		textureStorage.emplace_back();
-		if(!textureStorage.back().loadFromFile("texture/passive_ir_sensor_beam.png"))
-		{
-			throw std::runtime_error("Error loading texture/passive_ir_sensor_beam.png in Light obstacle.");
-		}
-		sensorBeam.setTexture(textureStorage.back(), true);
-	}
-
 	Base * Light::Clone() const
 	{
 		return new Light(*this);
 	}
 
-	Light::Light(const bool playerHasSensor)
-		: GestureSensorBase(2U, 50.f, Type::Light, playerHasSensor),
+	Light::Light(const Animation::Sheet & lightSwitchSheet,
+		sf::Texture & storage,
+		const Animation::Sheet & obstacleSheet,
+		const Animation::Sheet & sensorSheet,
+		const bool playerHasSensor)
+		: GestureSensorBase(obstacleSheet, sensorSheet, 2U, 50.f, Type::Light, playerHasSensor),
 		sensorBeam(),
 		showBeam(playerHasSensor),
-		lightSwitch()
+		lightSwitch(lightSwitchSheet)
 	{
+		lightSwitch.SetAnimation("idle");
+
+		if(!storage.loadFromFile("texture/passive_ir_sensor_beam.png"))
+		{
+			throw std::runtime_error("Error loading texture/passive_ir_sensor_beam.png in Light obstacle.");
+		}
+		sensorBeam.setTexture(storage, true);
 	}
 }

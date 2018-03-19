@@ -97,6 +97,15 @@ namespace Animation
 		}
 	}
 
+	void Sprite::Update(const Sprite & parent)
+	{
+		if(!parent.IsAnimationFinished() && currentFrame != parent.currentFrame)
+		{
+			currentFrame = parent.currentFrame;
+			GetFrame();
+		}
+	}
+
 	Sprite::Sprite(const Sheet & sheetRef)
 		: sf::Sprite(sheetRef.GetTexture()),
 		sheet(sheetRef),

@@ -19,5 +19,7 @@ public:
 	virtual void SetString(const std::string & s);
 	virtual void SetFont(sf::Font & font);
 
-	TextButton(const bool enabled = true, const bool down = false);
+	TextButton(const Animation::Sheet & buttonSheet,
+		const bool enabled = true, 
+		const bool down = false);
 };

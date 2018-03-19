@@ -5,15 +5,17 @@
 #include "playerscore.hpp"
 #include "playerinventory.hpp"
 
+#include <memory>
+
 class ScoreMode : public Gamemode
 {
 private:
 	const Player::Score playerScore;
 	Player::Inventory playerInventory;
 	
-	sf::Texture backgroundTexture, navigationButtonTexture;
-	AnimatedSprite background;
-	TextButton gotoShopButton;
+	Animation::Sheet backgroundSheet, navigationButtonSheet;
+	std::unique_ptr<Animation::Sprite> backgroundSprite;
+	std::unique_ptr<TextButton> gotoShopButton;
 	sf::Text title, currencyEarned, newBalance;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

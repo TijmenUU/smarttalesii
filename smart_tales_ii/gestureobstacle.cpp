@@ -60,12 +60,13 @@ namespace Obstacle
 		}
 	}
 
-	GestureBase::GestureBase(const uint8_t & gestureNeutralizationFlag, 
+	GestureBase::GestureBase(const uint8_t _gestureFlag,
 		const float gestureMinWorldTravel, 
-		const Type & t, 
+		const Type t,
+		const Animation::Sheet & obstacleSheet,
 		const bool playerHasSensor)
-		: Base(t, playerHasSensor),
-		gestureFlag(gestureNeutralizationFlag),
+		: Base(t, obstacleSheet, playerHasSensor),
+		gestureFlag(_gestureFlag),
 		gestureInProgress(false),
 		gestureStart(0.f, 0.f),
 		gestureMinDistance(gestureMinWorldTravel)

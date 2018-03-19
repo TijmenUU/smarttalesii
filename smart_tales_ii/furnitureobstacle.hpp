@@ -26,7 +26,6 @@ namespace Obstacle
 		virtual void SetPosition(const sf::Vector2f & p) override;
 		virtual void Move(const float x, const float y) override;
 
-		void Load(std::list<sf::Texture>& textureStorage) override;
 		void Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
@@ -34,6 +33,8 @@ namespace Obstacle
 
 		Base * Clone() const override;
 
-		Furniture(const bool playerHasSensor);
+		Furniture(const Animation::Sheet & obstacleSheet,
+			const Animation::Sheet & sensorSheet, 
+			const bool playerHasSensor);
 	};
 }

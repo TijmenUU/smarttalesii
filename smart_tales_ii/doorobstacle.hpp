@@ -23,10 +23,10 @@ namespace Obstacle
 		void SetPosition(const sf::Vector2f & p) override;
 		void Move(const float x, const float y) override;
 
-		void Load(std::list<sf::Texture>& textureStorage) override;
-
 		Base * Clone() const override;
 
-		Door(const bool playerHasSensor);
+		Door(const Animation::Sheet & obstacleSheet,
+			const Animation::Sheet & sensorSheet,
+			bool playerHasSensor);
 	};
 }

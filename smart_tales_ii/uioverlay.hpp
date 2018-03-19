@@ -2,6 +2,9 @@
 #include "button.hpp"
 #include "gamemode.hpp"
 
+#include <list>
+#include <memory>
+
 class UIOverlay : public Gamemode
 {
 private:
@@ -9,11 +12,9 @@ private:
 	sf::Text pauseText;
 	const bool pauseEnabled;
 
-	sf::Texture sfxMuteTexture, musicMuteTexture, gamePauseTexture;
+	Animation::Sheet sheetStorage[3];
 
-	Button sfxMuteButton;
-	Button musicMuteButton;
-	Button gamePauseButton;
+	std::unique_ptr<Button> sfxMuteButton, musicMuteButton, gamePauseButton;
 
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

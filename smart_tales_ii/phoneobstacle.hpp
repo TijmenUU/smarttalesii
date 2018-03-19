@@ -21,7 +21,6 @@ namespace Obstacle
 		void Move(const float x, const float y) override;
 		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
 
-		void Load(std::list<sf::Texture>& textureStorage) override;
 		void Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
@@ -29,6 +28,7 @@ namespace Obstacle
 
 		Base * Clone() const override;
 
-		Phone(const bool playerHasSensor);
+		Phone(const Animation::Sheet & obstacleSheet,
+			const bool playerHasSensor);
 	};
 }

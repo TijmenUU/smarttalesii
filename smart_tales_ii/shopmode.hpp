@@ -5,18 +5,22 @@
 #include "playerinventory.hpp"
 #include "textbutton.hpp"
 
+#include <memory>
+
 class ShopMode : public Gamemode
 {
 private:
 	Player::Inventory playerInventory;
 
-	std::vector<sf::Texture> tileImageTextures;
 	sf::Texture tileBackgroundTexture;
-	sf::Texture purchaseButtonTexture;
+	std::vector<sf::Texture> tileImageTextures;
+	Animation::Sheet purchaseButtonSheet;
+	Animation::Sheet navigationButtonSheet;
+
 	SaleTileCarousel carousel;
 	sf::Text title;
-	sf::Texture navigationButtonTexture;
-	TextButton gotoGameButton;
+	
+	std::unique_ptr<TextButton> gotoGameButton;
 
 	void LoadTiles();
 

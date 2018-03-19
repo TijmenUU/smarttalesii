@@ -8,7 +8,7 @@ namespace Obstacle
 	private:
 		sf::Sprite sensorBeam;
 		bool showBeam;
-		AnimatedSprite lightSwitch;
+		Animation::Sprite lightSwitch;
 
 	protected:
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
@@ -28,10 +28,12 @@ namespace Obstacle
 		void SetPosition(const sf::Vector2f & p) override;
 		void Move(const float x, const float y) override;
 
-		void Load(std::list<sf::Texture>& textureStorage) override;
-
 		Base * Clone() const override;
 
-		Light(const bool playerHasSensor);
+		Light(const Animation::Sheet & lightSwitchSheet,
+			sf::Texture & storage,
+			const Animation::Sheet & obstacleSheet,
+			const Animation::Sheet & sensorSheet, 
+			const bool playerHasSensor);
 	};
 }

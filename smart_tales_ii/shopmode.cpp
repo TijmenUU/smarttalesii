@@ -50,10 +50,7 @@ void ShopMode::LoadTiles()
 		throw std::runtime_error("Error fetching commodore font in Shopmode.");
 	}
 
-	TextButton buttonTemplate;
-	buttonTemplate.LoadFromFile("animation/purchasebutton.txt", purchaseButtonTexture);
 	sf::Text buttonTemplateText("test", *fontPtr, 18U);
-	buttonTemplate.SetText(buttonTemplateText);
 
 	tileImageTextures.resize(cTileImageTextures.size());	
 	for(size_t i = 0; i < tileImageTextures.size(); ++i)
@@ -63,13 +60,13 @@ void ShopMode::LoadTiles()
 			throw std::runtime_error("Error fetching <" + cTileImageTextures[i] + "> in Shopmode.");
 		}
 
-		UpgradeTile * upgradeTile = new UpgradeTile();
+		UpgradeTile * upgradeTile = new UpgradeTile(purchaseButtonSheet);
 		upgradeTile->SetTileBackground(tileBackgroundTexture);
 		upgradeTile->SetUpgrade(cTileUpgrades[i]);
 		upgradeTile->SetImage(tileImageTextures[i]);
 		upgradeTile->SetPrice(cTilePrices[i], *fontPtr);
 		upgradeTile->SetDescription(cTileDescriptions[i], *fontPtr);
-		upgradeTile->SetButton(buttonTemplate);	
+		upgradeTile->SetButtonText(buttonTemplateText);
 
 		carousel.AddSaleTile(upgradeTile);
 	}
@@ -80,7 +77,7 @@ void ShopMode::LoadTiles()
 void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(title, states);
-	target.draw(gotoGameButton, states);
+	target.draw(*gotoGameButton, states);
 	target.draw(carousel, states);
 }
 
@@ -103,12 +100,15 @@ void ShopMode::Load()
 	title.setString("Shop");
 	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 0.f);
 
-	gotoGameButton.LoadFromFile("animation/navigationbutton_large.txt", navigationButtonTexture);
-	const auto buttonBounds = gotoGameButton.GetGlobalbounds();
-	gotoGameButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
+	purchaseButtonSheet.LoadFromFile("animation/purchasebutton.txt");
+	navigationButtonSheet.LoadFromFile("animation/navigationbutton_large.txt");
+	gotoGameButton = std::make_unique<TextButton>(navigationButtonSheet);
+
+	const auto buttonBounds = gotoGameButton->GetGlobalbounds();
+	gotoGameButton->SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
 	sf::Text buttonText("Back to running", *fontPtr, 26U);
 	buttonText.setFillColor(sf::Color::White);
-	gotoGameButton.SetText(buttonText);
+	gotoGameButton->SetText(buttonText);
 
 	LoadTiles();
 }
@@ -131,7 +131,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		carousel.RefreshTiles(playerInventory);
 	}
 	// end debug
-	if(gotoGameButton.Update(elapsed, input))
+	if(gotoGameButton->Update(elapsed, input))
 	{
 		manager.PushGamemode(new RunningMode(resourceCache, manager, playerInventory));
 		return;
@@ -142,9 +142,12 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 ShopMode::ShopMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
 	:Gamemode(resourceCacheRef, managerRef),
 	playerInventory(inventory),
+	tileBackgroundTexture(),
+	tileImageTextures(),
+	purchaseButtonSheet(),
+	navigationButtonSheet(),
 	carousel(),
 	title(),
-	navigationButtonTexture(),
 	gotoGameButton()
 {
 }
