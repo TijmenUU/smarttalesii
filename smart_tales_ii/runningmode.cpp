@@ -160,7 +160,9 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 
 				return true;
 			}
-			else if(obstacle.GetType() == Obstacle::Type::Phone && !player.IsShowingOff())
+			else if(obstacle.GetType() == Obstacle::Type::Phone && 
+				!player.IsShowingOff() && 
+				obstacle.IsActive())
 			{
 				player.ShowOff();
 			}	
