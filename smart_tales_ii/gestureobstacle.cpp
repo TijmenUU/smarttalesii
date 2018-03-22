@@ -66,8 +66,8 @@ namespace Obstacle
 		const Animation::Sheet & obstacleSheet,
 		const bool playerHasSensor)
 		: Base(t, obstacleSheet, playerHasSensor),
-		gestureFlag(_gestureFlag),
-		gestureMinDistance(gestureMinWorldTravel)
+		gestureMinDistance(gestureMinWorldTravel),
+		gestureFlag(_gestureFlag)
 	{
 	}
 }
