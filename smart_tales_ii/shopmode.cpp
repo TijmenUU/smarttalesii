@@ -87,9 +87,9 @@ void ShopMode::Load()
 	const auto buttonBounds = gotoGameButton.GetGlobalbounds();
 	gotoGameButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
 	sf::Text buttonText("Back to running", font, 30U);
-	buttonText.setOutlineThickness(1.f);
+	buttonText.setOutlineThickness(2.f);
 	buttonText.setOutlineColor(sf::Color(120, 63, 0));
-	buttonText.setFillColor(sf::Color(181, 105, 0));
+	buttonText.setFillColor(sf::Color::White);
 	gotoGameButton.SetText(buttonText);
 
 	LoadTiles();

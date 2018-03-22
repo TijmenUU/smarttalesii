@@ -33,9 +33,9 @@ void ScoreMode::Load()
 
 	gotoShopButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
 	sf::Text buttonText("Go to shop", font, 30U);
-	buttonText.setOutlineThickness(1.f);
+	buttonText.setOutlineThickness(2.f);
 	buttonText.setOutlineColor(sf::Color(120, 63, 0));
-	buttonText.setFillColor(sf::Color(181, 105, 0));
+	buttonText.setFillColor(sf::Color::White);
 	gotoShopButton.SetText(buttonText);
 
 	title.setFont(font);
