@@ -36,7 +36,7 @@ public:
 	virtual void SetDown(const bool down);
 
 	Button(const Animation::Sheet & buttonSheet,
-		bool enabled = true, 
+		const bool enabled = true, 
 		const bool down = false);
 	virtual ~Button() = default;
 };
