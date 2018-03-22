@@ -12,11 +12,11 @@ private:
 	std::vector<sf::Mouse::Button> buttonDownEvents;
 
 	std::string textEntered;
-	bool didWindowResize, hasFocus, didWindowClose;
-	bool cursorInWindow, cursorMoved;
+	bool didWindowResize = false, hasFocus = true, didWindowClose = false;
+	bool cursorInWindow = true, cursorMoved = false;
 
-	sf::Vector2i mousePixelPosition;
-	sf::Vector2f mouseWorldPosition;
+	sf::Vector2i mousePixelPosition = sf::Vector2i(0, 0);
+	sf::Vector2f mouseWorldPosition = sf::Vector2f(0.f, 0.f);
 
 	void ClearState();
 public:
@@ -39,6 +39,4 @@ public:
 	bool PointingDeviceReleasedEvent() const;
 	const sf::Vector2i & PointingDeviceWindowPosition() const;
 	const sf::Vector2f & PointingDeviceWorldPosition() const;
-
-	Inputhandler();
 };

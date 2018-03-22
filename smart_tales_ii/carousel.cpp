@@ -80,11 +80,7 @@ void SaleTileCarousel::RefreshTiles(const Player::Inventory & inventory)
 }
 
 SaleTileCarousel::SaleTileCarousel()
-	: wasMouseDown(false),
-	mouseStartPosition(0.f, 0.f),
-	previousMousePosition(0.f, 0.f),
-	leftTilePosition(cTileSpacing, cTileYPos),
-	tiles()
+	: leftTilePosition(cTileSpacing, cTileYPos)
 {
 }
 

@@ -8,12 +8,12 @@ namespace Animation
 	private:
 		const Sheet & sheet;
 		
-		const Animation * currentAnimation;
+		const Animation * currentAnimation = nullptr;
 		sf::IntRect baseFrame;
-		unsigned int currentFrame;
-		unsigned int currentFrameTime;
-		bool isFlippedHorizontally;
-		bool isFlippedVertically;
+		unsigned int currentFrame = 0U;
+		unsigned int currentFrameTime = 0U;
+		bool isFlippedHorizontally = false;
+		bool isFlippedVertically = false;
 
 		void UpdateTextureRect();
 		void GetFrame();

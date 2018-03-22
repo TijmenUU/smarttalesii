@@ -5,8 +5,8 @@ class WinOverlay : public Gamemode
 {
 private:
 	float idleTimeOut;
-	uint8_t fadeIncrement;
-	uint8_t colorValue;
+	uint8_t fadeIncrement = 3U;
+	uint8_t colorValue = 0U;
 	sf::Text title;
 	sf::Text body;
 	sf::RectangleShape background;

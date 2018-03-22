@@ -4,10 +4,10 @@
 class Difficulty
 {
 private:
-	float startVelocity;	// pixels per second
-	float incrementVelocity; // pixels per second
-	float maxVelocity; // pixels per second
-	float hintBorderX; // pixels
+	float startVelocity = 0.f;	// pixels per second
+	float incrementVelocity = 0.f; // pixels per second
+	float maxVelocity = 0.f; // pixels per second
+	float hintBorderX = 0.f; // pixels
 
 public:
 	float GetStartScrollVelocity() const;
@@ -17,7 +17,5 @@ public:
 
 	// May throw a runtime_error if definitionfile is corrupt or missing
 	void LoadFromFile(const std::string & definitionFile);
-
-	Difficulty();
 };
 

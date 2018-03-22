@@ -46,10 +46,6 @@ void ScrollingBackground::Update(const sf::Time & elapsed, const float scrollVel
 }
 
 ScrollingBackground::ScrollingBackground(const float _worldWidth)
-	: wallSprite(),
-	wallTexture(),
-	wallSpriteWidth(-1.f),
-	scrollPosition(0.f, 0.f),
-	worldWidth(_worldWidth)
+	: worldWidth(_worldWidth)
 {
 }

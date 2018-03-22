@@ -141,13 +141,6 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 ShopMode::ShopMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
 	:Gamemode(resourceCacheRef, managerRef),
-	playerInventory(inventory),
-	tileBackgroundTexture(),
-	tileImageTextures(),
-	purchaseButtonSheet(),
-	navigationButtonSheet(),
-	carousel(),
-	title(),
-	gotoGameButton()
+	playerInventory(inventory)
 {
 }

@@ -147,13 +147,6 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 }
 
 UpgradeTile::UpgradeTile(const Animation::Sheet & purchaseButtonSheet)
-	: SaleTile(),
-	upgrade(),
-	tileSprite(),
-	upgradeImage(),
-	upgradePrice(),
-	upgradePriceText(),
-	purchaseButton(purchaseButtonSheet),
-	upgradeDescription()
+	: purchaseButton(purchaseButtonSheet)
 {
 }

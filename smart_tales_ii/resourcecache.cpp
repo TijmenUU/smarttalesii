@@ -19,8 +19,3 @@ sf::Font * ResourceCache::GetFont(const std::string & name)
 
 	return &(fontStorage[name]);
 }
-
-ResourceCache::ResourceCache()
-	:fontStorage()
-{
-}

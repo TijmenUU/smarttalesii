@@ -349,21 +349,6 @@ void RunningMode::OnEnter()
 RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
 	: Gamemode(resourceCacheRef, managerRef),
 	background(cWorldWidth),
-	spriteSheetStorage(),
-	textureStorage(),
-	obstacleFactory(),
-	gameDifficulty(),
-	obstacles(),
-	obstacleSpawnIndex(0),
-	obstacleHintText(),
-	drawObstacleHint(false),
-	spawnTimeout(2.5f),
-	currentTimeout(0.f),
-	scrollVelocity(0.f),
-	score(),
-	scoreText(),
-	scoreBubbles(),
-	player(),
 	playerInventory(inventory)
 {
 

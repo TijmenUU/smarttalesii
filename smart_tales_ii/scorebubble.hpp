@@ -7,7 +7,7 @@ class ScoreBubble : public sf::Drawable
 {
 private:
 	sf::Text text;
-	float timeAlive; // in seconds
+	float timeAlive = 0.f; // in seconds
 
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

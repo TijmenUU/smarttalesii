@@ -23,12 +23,12 @@ private:
 	Difficulty gameDifficulty;
 	
 	std::vector<std::unique_ptr<Obstacle::Base>> obstacles;
-	size_t obstacleSpawnIndex;
+	size_t obstacleSpawnIndex = 0;
 	sf::Text obstacleHintText;
-	bool drawObstacleHint;
-	const float spawnTimeout; // in seconds
-	float currentTimeout; // in seconds
-	float scrollVelocity; // pixels per second
+	bool drawObstacleHint = false;
+	const float spawnTimeout = 2.5f; // in seconds
+	float currentTimeout = 0.f; // in seconds
+	float scrollVelocity = 0.f; // pixels per second
 
 	Player::Score score;
 	sf::Text scoreText;

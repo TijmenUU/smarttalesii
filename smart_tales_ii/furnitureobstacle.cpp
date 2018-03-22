@@ -106,10 +106,7 @@ namespace Obstacle
 	Furniture::Furniture(const Animation::Sheet & obstacleSheet,
 		const Animation::Sheet & sensorSheet, 
 		const bool playerHasSensor)
-		: GestureSensorBase(obstacleSheet, sensorSheet, 8, 50.f, Type::Furniture, playerHasSensor),
-		isFalling(false),
-		fallVelocity(0, 0),
-		angularVelocity(0.f)
+		: GestureSensorBase(obstacleSheet, sensorSheet, 8, 50.f, Type::Furniture, playerHasSensor)
 	{
 	}
 }

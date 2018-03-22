@@ -29,6 +29,4 @@ public:
 	// Inclusive, pops until it finds gamemode, pops that too and then stops
 	bool PopUntill(Gamemode * gamemode);
 	bool PopAllBelow(Gamemode * gamemode);
-
-	GameManager();
 };

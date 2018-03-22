@@ -7,9 +7,9 @@ class ScrollingBackground : public sf::Drawable
 private:
 	sf::Texture wallTexture;
 	sf::Sprite wallSprite;
-	float wallSpriteWidth;
-	sf::Vector2f scrollPosition;
-	const float worldWidth;
+	float wallSpriteWidth = -1;
+	sf::Vector2f scrollPosition = sf::Vector2f(0.f, 0.f);
+	const float worldWidth = -1;
 
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const;

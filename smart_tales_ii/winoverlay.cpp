@@ -74,8 +74,6 @@ void WinOverlay::Show()
 
 WinOverlay::WinOverlay(ResourceCache & resourceCacheRef, GameManager & managerRef, const float timeOut)
 	: Gamemode(resourceCacheRef, managerRef),
-	idleTimeOut(timeOut),
-	fadeIncrement(3U),
-	colorValue(0U)
+	idleTimeOut(timeOut)
 {
 }

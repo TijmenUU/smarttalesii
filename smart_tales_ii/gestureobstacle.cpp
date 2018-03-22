@@ -67,8 +67,6 @@ namespace Obstacle
 		const bool playerHasSensor)
 		: Base(t, obstacleSheet, playerHasSensor),
 		gestureFlag(_gestureFlag),
-		gestureInProgress(false),
-		gestureStart(0.f, 0.f),
 		gestureMinDistance(gestureMinWorldTravel)
 	{
 	}

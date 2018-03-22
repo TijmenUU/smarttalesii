@@ -4,9 +4,9 @@
 class SaleTileCarousel : public sf::Drawable
 {
 private:
-	bool wasMouseDown;
-	sf::Vector2f mouseStartPosition;
-	sf::Vector2f previousMousePosition;
+	bool wasMouseDown = false;
+	sf::Vector2f mouseStartPosition = sf::Vector2f(0.f, 0.f);
+	sf::Vector2f previousMousePosition = sf::Vector2f(0.f, 0.f);
 	sf::Vector2f leftTilePosition;
 	std::vector<std::unique_ptr<SaleTile>> tiles;
 

@@ -14,8 +14,8 @@ private:
 	Animation::Sprite upperBodySprite;
 	Animation::Sprite legsSprite;
 
-	bool showingOff;
-	float showoffTimer;
+	bool showingOff = false;
+	float showoffTimer = 0.f;
 
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

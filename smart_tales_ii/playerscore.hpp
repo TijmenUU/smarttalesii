@@ -2,11 +2,11 @@
 
 namespace Player
 {
-	struct Score
+	class Score
 	{
 	private:
-		unsigned int neutralizations;
-		unsigned int currencyGained;
+		unsigned int neutralizations = 0U;
+		unsigned int currencyGained = 0U;
 
 	public:
 		double distance;
@@ -19,8 +19,6 @@ namespace Player
 		unsigned int GetTotalNeutralizations() const;
 
 		void Reset();
-
-		Score();
 	};
 }
 

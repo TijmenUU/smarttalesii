@@ -29,11 +29,4 @@ namespace Player
 		currencyGained = 0U;
 		distance = 0.0;
 	}
-
-	Score::Score()
-		: neutralizations(0U),
-		currencyGained(0U),
-		distance(0.0)
-	{
-	}
 }

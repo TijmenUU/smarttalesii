@@ -108,7 +108,6 @@ namespace Obstacle
 		const Animation::Sheet & sensorSheet,
 		const bool playerHasSensor)
 		: GestureSensorBase(obstacleSheet, sensorSheet, 2U, 50.f, Type::Light, playerHasSensor),
-		sensorBeam(),
 		showBeam(playerHasSensor),
 		lightSwitch(lightSwitchSheet)
 	{

@@ -78,11 +78,7 @@ void PlayerSprite::Update(const sf::Time & elapsed)
 }
 
 PlayerSprite::PlayerSprite()
-	: upperBodySheet(),
-	legsSheet(),
-	upperBodySprite(upperBodySheet),
-	legsSprite(legsSheet),
-	showingOff(false),
-	showoffTimer(0.f)
+	: upperBodySprite(upperBodySheet),
+	legsSprite(legsSheet)
 {
 }

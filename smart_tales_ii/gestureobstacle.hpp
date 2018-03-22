@@ -17,8 +17,8 @@ namespace Obstacle
 	class GestureBase : public Base
 	{
 	protected:
-		bool gestureInProgress;
-		sf::Vector2f gestureStart;
+		bool gestureInProgress = false;
+		sf::Vector2f gestureStart = sf::Vector2f(0.f, 0.f);
 		float gestureMinDistance;
 		uint8_t gestureFlag;
 

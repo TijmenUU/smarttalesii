@@ -94,11 +94,3 @@ void Difficulty::LoadFromFile(const std::string & definitionFile)
 		}
 	}
 }
-
-Difficulty::Difficulty()
-	:startVelocity(0.f),
-	incrementVelocity(0.f),
-	maxVelocity(0.f),
-	hintBorderX(0.f)
-{
-}

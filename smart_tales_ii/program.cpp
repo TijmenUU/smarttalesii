@@ -56,9 +56,7 @@ Program::Program( const unsigned int _windowWidth,
 						const unsigned int frameRateLimit)
 	: windowWidth(_windowWidth),
 	windowHeight(_windowHeight),
-	window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle),
-	inputhandler(),
-	manager()
+	window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle)
 {
 	window.setFramerateLimit(frameRateLimit);
 

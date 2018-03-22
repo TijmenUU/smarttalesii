@@ -71,9 +71,3 @@ void Player::Inventory::Reset()
 	sensorUpgrades = 0U;
 	currency = 0U;
 }
-
-Player::Inventory::Inventory()
-	: sensorUpgrades(0),
-	currency(0)
-{
-}

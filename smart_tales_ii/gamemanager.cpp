@@ -93,9 +93,3 @@ void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(*(gamemodes[i]), states);
 	}
 }
-
-GameManager::GameManager()
-: gamemodes()
-{
-
-}

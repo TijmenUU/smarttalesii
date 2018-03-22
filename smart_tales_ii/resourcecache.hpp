@@ -13,6 +13,4 @@ public:
 	bool LoadFont(const std::string & file, const std::string & name);
 
 	sf::Font * GetFont(const std::string & name);
-
-	ResourceCache();
 };

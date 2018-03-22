@@ -49,7 +49,6 @@ void TextButton::SetFont(sf::Font & font)
 TextButton::TextButton(const Animation::Sheet & buttonSheet,
 	bool enabled, 
 	const bool down)
-	: Button(buttonSheet, enabled, down),
-	buttonText()
+	: Button(buttonSheet, enabled, down)
 {
 }

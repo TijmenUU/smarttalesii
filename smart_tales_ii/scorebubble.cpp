@@ -30,8 +30,6 @@ bool ScoreBubble::Update(const sf::Time & elapsed)
 }
 
 ScoreBubble::ScoreBubble(sf::Font & fontRef, const sf::Vector2f spawnPosition, const unsigned int score)
-	:text(),
-	timeAlive(0.f)
 {
 	std::stringstream ss;
 	ss << '+' << score;

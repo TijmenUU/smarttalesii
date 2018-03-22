@@ -79,10 +79,6 @@ void UIOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 UIOverlay::UIOverlay(ResourceCache & resourceCacheRef, GameManager & managerRef, const bool canPause)
 	: Gamemode(resourceCacheRef, managerRef),
 	pauseOverlay(sf::Vector2f(cWorldWidth, cWorldHeight)),
-	pauseText(),
-	pauseEnabled(canPause),
-	sfxMuteButton(),
-	musicMuteButton(),
-	gamePauseButton()
+	pauseEnabled(canPause)
 {
 }

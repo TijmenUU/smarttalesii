@@ -6,9 +6,9 @@ namespace Obstacle
 	class Furniture : public GestureSensorBase
 	{
 	private:
-		bool isFalling;
-		sf::Vector2f fallVelocity;
-		float angularVelocity;
+		bool isFalling = false;
+		sf::Vector2f fallVelocity = sf::Vector2f(0.f, 0.f);
+		float angularVelocity = 0.f;
 
 	protected:
 		void Fall(const sf::Vector2f & force, const sf::Vector2f & forceOrigin);

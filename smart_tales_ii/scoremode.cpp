@@ -86,13 +86,6 @@ void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 ScoreMode::ScoreMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Score & score, const Player::Inventory & inventory)
 	:	Gamemode(resourceCacheRef, managerRef),
 	playerScore(score),
-	playerInventory(inventory),
-	backgroundSheet(),
-	navigationButtonSheet(),
-	backgroundSprite(),
-	gotoShopButton(),
-	title(),
-	currencyEarned(),
-	newBalance()
+	playerInventory(inventory)
 {
 }

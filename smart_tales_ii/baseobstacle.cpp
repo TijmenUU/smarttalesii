@@ -51,8 +51,6 @@ namespace Obstacle
 	Base::Base(Type t, const Animation::Sheet & obstacleSheet, const bool playerHasSensor)
 		: type(t),
 		obstacleSprite(obstacleSheet),
-		neutralized(false),
-		playerNeutralized(false),
 		sensorEnabled(playerHasSensor)
 	{
 		obstacleSprite.SetAnimation("active");

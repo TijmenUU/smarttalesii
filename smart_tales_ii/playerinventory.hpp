@@ -7,8 +7,8 @@ namespace Player
 	class Inventory
 	{
 	private:
-		uint8_t sensorUpgrades;
-		unsigned int currency;
+		uint8_t sensorUpgrades = 0U;
+		unsigned int currency = 0U;
 
 	public:
 		bool HasSensorUpgrade(const Upgrade::Sensor s) const;
@@ -25,7 +25,5 @@ namespace Player
 		void RemoveCurrency(const unsigned int amount);
 
 		void Reset();
-
-		Inventory();
 	};
 }

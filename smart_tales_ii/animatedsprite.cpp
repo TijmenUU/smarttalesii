@@ -108,13 +108,7 @@ namespace Animation
 
 	Sprite::Sprite(const Sheet & sheetRef)
 		: sf::Sprite(sheetRef.GetTexture()),
-		sheet(sheetRef),
-		currentAnimation(nullptr),
-		baseFrame(),
-		currentFrame(0U),
-		currentFrameTime(0U),
-		isFlippedHorizontally(false),
-		isFlippedVertically(false)
+		sheet(sheetRef)
 	{
 	}
 }

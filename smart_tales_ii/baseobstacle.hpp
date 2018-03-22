@@ -14,7 +14,8 @@ namespace Obstacle
 	protected:
 		Type type;
 		Animation::Sprite obstacleSprite;
-		bool neutralized, playerNeutralized;
+		bool neutralized = false;
+		bool playerNeutralized = false;
 		bool sensorEnabled;
 
 		virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;

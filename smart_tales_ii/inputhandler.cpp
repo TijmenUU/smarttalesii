@@ -120,19 +120,3 @@ const sf::Vector2f & Inputhandler::PointingDeviceWorldPosition() const
 {
 	return mouseWorldPosition;
 }
-
-Inputhandler::Inputhandler()
-: keyUpEvents(),
-keyDownEvents(),
-buttonUpEvents(),
-buttonDownEvents(),
-textEntered(),
-didWindowResize(false),
-hasFocus(true),
-didWindowClose(false),
-cursorInWindow(true),
-cursorMoved(false),
-mousePixelPosition(0, 0),
-mouseWorldPosition(0.f, 0.f)
-{
-}
