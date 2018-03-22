@@ -2,13 +2,13 @@
 
 #include "alignmenthelp.hpp"
 
-void TextButton::UpdateTextPosition(const sf::Vector2f & position)
+void TextButton::UpdateTextPosition()
 {
 	const auto center = Alignment::GetRectangleCenter(buttonSprite.getGlobalBounds());
-	const auto offset = Alignment::GetCenterOffset(buttonText.getLocalBounds(), center);
+	const auto offset = Alignment::GetRectangleCenter(buttonText.getLocalBounds());
 	// We can use the offset alone because we're passing in global bounds, so it is already in world space
 	
-	buttonText.setPosition(offset);
+	buttonText.setPosition(center - offset);
 }
 
 void TextButton::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -20,7 +20,7 @@ void TextButton::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void TextButton::SetPosition(const sf::Vector2f & position)
 {
 	Button::SetPosition(position);
-	UpdateTextPosition(position);
+	UpdateTextPosition();
 }
 
 sf::Text & TextButton::GetText()
@@ -31,23 +31,23 @@ sf::Text & TextButton::GetText()
 void TextButton::SetText(const sf::Text & text)
 {
 	buttonText = text;
-	UpdateTextPosition(buttonSprite.getPosition());
+	UpdateTextPosition();
 }
 
 void TextButton::SetString(const std::string & s)
 {
 	buttonText.setString(s);
-	UpdateTextPosition(buttonSprite.getPosition());
+	UpdateTextPosition();
 }
 
 void TextButton::SetFont(sf::Font & font)
 {
 	buttonText.setFont(font);
-	UpdateTextPosition(buttonSprite.getPosition());
+	UpdateTextPosition();
 }
 
 TextButton::TextButton(const Animation::Sheet & buttonSheet,
-	bool enabled, 
+	const bool enabled, 
 	const bool down)
 	: Button(buttonSheet, enabled, down)
 {

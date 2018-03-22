@@ -3,11 +3,10 @@
 
 class TextButton : public Button
 {
-private:
+protected:
 	sf::Text buttonText;
 
-protected:
-	void UpdateTextPosition(const sf::Vector2f & position);
+	void UpdateTextPosition();
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
