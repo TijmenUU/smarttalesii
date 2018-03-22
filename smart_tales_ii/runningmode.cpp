@@ -55,7 +55,7 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 	target.draw(player, states);
 
-	target.draw(scoreText, states);
+	target.draw(*currencyDisplay, states);
 
 	if(drawObstacleHint)
 		target.draw(obstacleHintText, states);
@@ -76,7 +76,7 @@ void RunningMode::SpawnObstacle()
 	++obstacleSpawnIndex;
 }
 
-void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const unsigned int score)
+void RunningMode::SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score)
 {
 	auto * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -85,7 +85,7 @@ void RunningMode::SpawnScoreBubble(const Obstacle::Base & obstacle, const unsign
 		return;
 	}
 
-	scoreBubbles.emplace_back(*fontPtr, obstacle.GetScoreBubbleSpawnPosition(), score);
+	scoreBubbles.emplace_back(*fontPtr, mousePos, score);
 }
 
 void RunningMode::GameOver()
@@ -146,7 +146,8 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.GetPosition());
 			
 			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
-			SpawnScoreBubble(obstacle, currencyScore);
+			SpawnScoreBubble(input.PointingDeviceWorldPosition(), currencyScore);
+			currencyDisplay->SetValue(score.GetTotalCurrency());
 		}
 		else if(obstacle.GetKillBounds().intersects(playerBounds))
 		{
@@ -197,16 +198,6 @@ void RunningMode::UpdateHints()
 			}
 		}
 	}
-}
-
-void RunningMode::UpdateScoreDisplay()
-{
-	// Content
-	std::stringstream ss;
-	ss << cScoreString;
-	ss << std::setfill('0') << std::setw(6);
-	ss << static_cast<int>(score.GetTotalCurrency());
-	scoreText.setString(ss.str());
 }
 
 void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
@@ -279,13 +270,14 @@ void RunningMode::Load()
 	obstacleHintText.setOutlineColor(sf::Color::Black);
 	obstacleHintText.setOutlineThickness(2.f);
 
-	scoreText.setFont(*fontPtr);
-	scoreText.setCharacterSize(32);
-	scoreText.setFillColor(sf::Color::White);
-	scoreText.setOutlineColor(sf::Color::Black);
-	scoreText.setOutlineThickness(2.f);
-	scoreText.setString(cScoreString + "000000");
-	scoreText.setPosition(Alignment::GetCenterOffset(scoreText.getGlobalBounds().width, cWorldWidth / 2.f), 15.f);
+	textureStorage.emplace_back();
+	auto & coinTexture = textureStorage.back();
+	if(!coinTexture.loadFromFile("texture/coin.png"))
+	{
+		throw std::runtime_error("Error loading texture/coin.png in RunningMode");
+	}
+	currencyDisplay = std::make_unique<CurrencyDisplayer>(coinTexture, *fontPtr);
+	currencyDisplay->CenterOn(cWorldWidth / 2.f, 25.f);
 
 	if(playerInventory.GetSensorUpgradeCount() > 3)
 	{
@@ -321,7 +313,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 	score.distance += elapsedSeconds * scrollVelocity;
 
-	UpdateScoreDisplay();
+	currencyDisplay->Update(elapsed);
 
 	// Anything affected by the scrolling velocity should be updated BEFORE this line
 	scrollVelocity += gameDifficulty.GetScrollIncrementVelocity() * elapsedSeconds;

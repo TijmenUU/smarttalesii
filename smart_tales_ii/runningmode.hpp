@@ -1,5 +1,6 @@
 #pragma once
 #include "background.hpp"
+#include "currencydisplayer.hpp"
 #include "difficulty.hpp"
 #include "gamemode.hpp"
 #include "baseobstacle.hpp"
@@ -31,7 +32,7 @@ private:
 	float scrollVelocity = 0.f; // pixels per second
 
 	Player::Score score;
-	sf::Text scoreText;
+	std::unique_ptr<CurrencyDisplayer> currencyDisplay;
 	std::vector<ScoreBubble> scoreBubbles;
 
 	PlayerSprite player;
@@ -41,7 +42,7 @@ protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 	void SpawnObstacle();
-	void SpawnScoreBubble(const Obstacle::Base & obstacle, const unsigned int score);
+	void SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score);
 	
 	void GameOver();
 	void Reset();
@@ -57,7 +58,6 @@ protected:
 	// if it returns true, game over
 	bool UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);
 	void UpdateHints();
-	void UpdateScoreDisplay();
 	void UpdateScoreBubbles(const sf::Time & elapsed);
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
