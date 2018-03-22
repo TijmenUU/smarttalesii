@@ -2,30 +2,63 @@
 #include "runningmode.hpp"
 #include "uioverlay.hpp"
 
+#include <array>
 #include <algorithm>
 #include <cassert>
 #include <iostream> // debug
 #include <string>
-#include <vector>
 
-const std::vector<std::string> cFontFiles =
-{
+const std::array<std::string, 1> cFontFiles = {
 	"font/commodore.ttf"
 };
 
-const std::vector<std::string> cFontNames =
-{
-	"commodore"
+const std::array<std::string, 10> cTextureFiles = {
+	"texture/coin.png",
+	"texture/paperclip.png",
+	"texture/passive_ir_beam.png",
+	"texture/runningbackground.png",
+	"texture/shopbackground.png",
+	"texture/upgradetile_door.png",
+	"texture/upgradetile_furniture.png",
+	"texture/upgradetile_light.png",
+	"texture/upgradetile_phone.png",
+	"texture/upgradetilebg.png"
+};
+
+const std::array<std::string, 16> cSpriteSheetFiles = {
+	"animation/active_ir.txt",
+	"animation/door.txt",
+	"animation/furniture.txt",
+	"animation/light.txt",
+	"animation/lightswitch.txt",
+	"animation/livetile.txt",
+	"animation/musicbutton.txt",
+	"animation/navigationbutton_large.txt",
+	"animation/passive_ir.txt",
+	"animation/pausebutton.txt",
+	"animation/phone.txt",
+	"animation/player_legs.txt",
+	"animation/player_upperbody.txt",
+	"animation/purchasebutton.txt",
+	"animation/scorebackground.txt",
+	"animation/sfxbutton.txt"
 };
 
 void Program::Load()
 {
+	auto & cache = ResourceCache::GetInstance();
+
 	for(size_t i = 0U; i < cFontFiles.size(); ++i)
 	{
-		if(!resourceCache.LoadFont(cFontFiles[i], cFontNames[i]))
-		{
-			throw std::runtime_error("Error loading file " + cFontFiles[i]);
-		}
+		cache.LoadFont(cFontFiles[i]);
+	}
+	for(size_t i = 0U; i < cTextureFiles.size(); ++i)
+	{
+		cache.LoadTexture(cTextureFiles[i]);
+	}
+	for(size_t i = 0U; i < cSpriteSheetFiles.size(); ++i)
+	{
+		cache.LoadSpriteSheet(cSpriteSheetFiles[i]);
 	}
 	// Set game starting gamemode
 	manager.PushGamemode(new RunningMode(resourceCache, manager, Player::Inventory()));
