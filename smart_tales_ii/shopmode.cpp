@@ -17,10 +17,10 @@ const std::array<Upgrade::Sensor, 4> cTileUpgrades = {
 };
 
 const std::array<std::string, 4> cTileImageTextures = {
-	"texture/upgradetile_image.png",
-	"texture/upgradetile_image.png",
-	"texture/upgradetile_image.png",
-	"texture/upgradetile_image.png"
+	"texture/upgradetile_light.png",
+	"texture/upgradetile_door.png",
+	"texture/upgradetile_phone.png",
+	"texture/upgradetile_furniture.png"
 };
 
 const std::array<std::string, 4> cTileDescriptions = {
