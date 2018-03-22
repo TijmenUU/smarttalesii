@@ -17,11 +17,12 @@ void ScrollingBackground::Load(const std::string & textureFile)
 	}
 	wallTexture.setRepeated(true);
 	wallTexture.setSmooth(false);
-
+#pragma warning(suppress: 4244) // The textures used are too small to overflow a float here
 	wallSpriteWidth = wallTexture.getSize().x;
 	const int repetitions = static_cast<int>(std::ceil(worldWidth / wallSpriteWidth)) + 2;
 
 	wallSprite.setTexture(wallTexture);
+#pragma warning(suppress: 4244) // Texture rect is pixel perfect, so the loss of precision from float to int is no problem
 	wallSprite.setTextureRect(sf::IntRect(0, 0, repetitions * wallSpriteWidth, wallTexture.getSize().y));
 
 	Reset();

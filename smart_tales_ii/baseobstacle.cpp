@@ -29,6 +29,7 @@ namespace Obstacle
 
 	void Base::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
 	{
+#pragma warning(suppress: 4244) // Int -> float conversion is safe, resolution will not exceed float precision
 		SetPosition(sf::Vector2f(windowWidth, floorYcoord - obstacleSprite.getGlobalBounds().height));
 	}
 

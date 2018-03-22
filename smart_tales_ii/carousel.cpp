@@ -24,7 +24,8 @@ void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
 	else
 	{
 		const float tileSize = 450.f + cTileSpacing;
-		const float tileCount = tiles.size();
+#pragma warning(suppress: 4244) // Tile count (size_t) should not exceed float precision in normal circumstances
+		const float tileCount = static_cast<float>(tiles.size());
 		tilePtr->SetPosition(sf::Vector2f(tileSize * tileCount + leftTilePosition.x, cTileYPos));
 	}
 	

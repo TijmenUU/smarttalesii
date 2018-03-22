@@ -59,7 +59,9 @@ Program::Program( const unsigned int _windowWidth,
 	window.setFramerateLimit(frameRateLimit);
 
 	auto view = window.getView();
+#pragma warning(suppress: 4244) // resolution should not exceed precision of float
 	view.setSize(_windowWidth, _windowHeight);
+#pragma warning(suppress: 4244) // half resolution should not exceed precision of float
 	view.setCenter(_windowWidth / 2, _windowHeight / 2);
 	window.setView(view);
 }

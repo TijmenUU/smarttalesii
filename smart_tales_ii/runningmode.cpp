@@ -127,10 +127,12 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 
 	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
 	{
+#pragma warning(suppress: 4244) // negative indexes should never occur
 		auto & obstacle = *(obstacles[i]);
 
 		if(obstacle.CanDespawn())
 		{
+#pragma warning(suppress: 4244) // obstacle vector size should never exceed precision of int64_t
 			obstacles.erase(obstacles.begin() + i);
 			continue; // make sure we cannot use the deleted obj anymore
 		}
@@ -211,8 +213,10 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 {
 	for(int64_t i = static_cast<int64_t>(scoreBubbles.size()) - 1; i >= 0; --i)
 	{
+#pragma warning(suppress: 4244) // scoreBubbles vector size should never exceed precision of int64_t
 		if(scoreBubbles[i].Update(elapsed))
 		{
+#pragma warning(suppress: 4244) // scoreBubbles vector size should never exceed precision of int64_t
 			scoreBubbles.erase(scoreBubbles.begin() + i);
 		}
 	}
@@ -253,6 +257,7 @@ void RunningMode::Load()
 	for(size_t i = 0; i < obstacleFactory.size(); ++i)
 	{
 		obstacleFactory[i]->SetPosition(sf::Vector2f(0.f, 0.f));
+#pragma warning(suppress: 4244) // conversion from float to int should not be a problem for resolutions
 		obstacleFactory[i]->SetSpawnPosition(cWorldWidth, cFloorY);
 	}
 

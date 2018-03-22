@@ -136,6 +136,7 @@ namespace VectorMathF
 		}
 
 		// compute the cross product of vectors (center -> a) x (center -> b)
+#pragma warning(suppress: 4244) // flooring behaviour of float->int is what we want here
 		int det = (a.x - center.x) * (b.y - center.y) - (b.x - center.x) * (a.y - center.y);
 
 		if (det < 0)
@@ -146,7 +147,9 @@ namespace VectorMathF
 
 		// points a and b are on the same line from the center
 		// check which point is closer to the center
+#pragma warning(suppress: 4244) // flooring behaviour float -> int is what we want here
 		int d1 = (a.x - center.x) * (a.x - center.x) + (a.y - center.y) * (a.y - center.y);
+#pragma warning(suppress: 4244) // flooring behaviour float -> int is what we want here
 		int d2 = (b.x - center.x) * (b.x - center.x) + (b.y - center.y) * (b.y - center.y);
 		return d1 > d2;
 	}
@@ -191,6 +194,6 @@ namespace VectorMathI
 	{
 		std::int32_t x = A.x - B.x; // no std::abs required for squaring
 		std::int32_t y = A.y - B.y; // no std::abs required for squaring
-		return std::sqrt(x * x + y * y);
+		return std::sqrt(static_cast<float>(x * x) + static_cast<float>(y * y));
 	}
 }
