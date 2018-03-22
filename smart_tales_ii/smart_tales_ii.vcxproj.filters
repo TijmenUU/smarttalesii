@@ -195,6 +195,9 @@
     <ClCompile Include="purchasebutton.cpp">
       <Filter>Source Files\game\objects\buttons</Filter>
     </ClCompile>
+    <ClCompile Include="currencydisplayer.cpp">
+      <Filter>Source Files\game\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="purchasebutton.hpp">
       <Filter>Header Files\game\objects\buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="currencydisplayer.hpp">
+      <Filter>Header Files\game\objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

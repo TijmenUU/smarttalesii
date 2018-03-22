@@ -24,6 +24,7 @@
     <ClCompile Include="background.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="carousel.cpp" />
+    <ClCompile Include="currencydisplayer.cpp" />
     <ClCompile Include="difficulty.cpp" />
     <ClCompile Include="doorobstacle.cpp" />
     <ClCompile Include="furnitureobstacle.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="background.hpp" />
     <ClInclude Include="button.hpp" />
     <ClInclude Include="carousel.hpp" />
+    <ClInclude Include="currencydisplayer.hpp" />
     <ClInclude Include="difficulty.hpp" />
     <ClInclude Include="doorobstacle.hpp" />
     <ClInclude Include="furnitureobstacle.hpp" />
