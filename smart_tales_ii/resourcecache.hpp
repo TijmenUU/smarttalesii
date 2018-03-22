@@ -1,14 +1,16 @@
 #pragma once
-#include <SFML/Graphics/Font.hpp>
+#include "animationsheet.hpp"
+
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <unordered_map>
-#include <vector>
 
 class ResourceCache
 {
 private:
 	std::unordered_map<std::string, sf::Font> fontStorage;
 	std::unordered_map<std::string, sf::Texture> textureStorage;
+	std::unordered_map<std::string, Animation::Sheet> sheetStorage;
 
 protected:
 	friend class Program;
@@ -18,6 +20,9 @@ protected:
 	// Throws an runtime_error if the file cannot be loaded
 	// Uses the filename without extension as name
 	void LoadTexture(const std::string & file);
+	// Throws an runtime_error if the file cannot be loaded
+	// Uses the filename without extension as name
+	void LoadSpriteSheet(const std::string & file);
 
 public:
 	static ResourceCache & GetInstance();

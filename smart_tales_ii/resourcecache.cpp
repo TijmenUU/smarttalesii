@@ -4,7 +4,7 @@
 
 ResourceCache & ResourceCache::GetInstance()
 {
-	ResourceCache singleton;
+	static ResourceCache singleton;
 	return singleton;
 }
 
@@ -27,6 +27,13 @@ void ResourceCache::LoadTexture(const std::string & file)
 	{
 		throw std::runtime_error("Error loading texture <" + file + ">");
 	}
+}
+
+void ResourceCache::LoadSpriteSheet(const std::string & file)
+{
+	const std::string name = Util::GetFileName(file);
+	sheetStorage[name] = Animation::Sheet();
+	sheetStorage[name].LoadFromFile(file);
 }
 
 sf::Font * ResourceCache::GetFont(const std::string & name)
