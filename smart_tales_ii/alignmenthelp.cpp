@@ -17,9 +17,9 @@ namespace Alignment
 		return center - (length / 2.f);
 	}
 
-	sf::Vector2f GetCenterOffset(const sf::FloatRect & rect, const sf::Vector2f & position)
+	sf::Vector2f GetCenterOffset(const sf::FloatRect & rect, const sf::Vector2f & center)
 	{
-		return sf::Vector2f(GetCenterOffset(rect.width + rect.left, position.x),
-			GetCenterOffset(rect.height + rect.top, position.y));
+		return sf::Vector2f(GetCenterOffset(rect.width, center.x) + rect.left,
+			GetCenterOffset(rect.height, center.y) + rect.top);
 	}
 }
