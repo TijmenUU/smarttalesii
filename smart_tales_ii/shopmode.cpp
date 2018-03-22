@@ -111,6 +111,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 			playerInventory.AddSensorUpgrade(cTileUpgrades[i]);
 		}
 		carousel.RefreshTiles(playerInventory);
+		std::cout << "Unlocked all upgradedes!\n";
 	}
 	// end debug
 	if(gotoGameButton.HandleInput(input))
