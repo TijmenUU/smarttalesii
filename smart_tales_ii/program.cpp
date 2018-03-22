@@ -8,6 +8,7 @@
 #include <iostream> // debug
 #include <string>
 
+#pragma region Loadfiles
 const std::array<std::string, 1> cFontFiles = {
 	"font/commodore.ttf"
 };
@@ -43,6 +44,7 @@ const std::array<std::string, 16> cSpriteSheetFiles = {
 	"animation/scorebackground.txt",
 	"animation/sfxbutton.txt"
 };
+#pragma endregion
 
 void Program::Load()
 {
@@ -60,12 +62,14 @@ void Program::Load()
 	{
 		cache.LoadSpriteSheet(cSpriteSheetFiles[i]);
 	}
+
 	// Set game starting gamemode
-	manager.PushGamemode(new RunningMode(resourceCache, manager, Player::Inventory()));
+	GameManager::GetInstance().PushGamemode(new RunningMode(Player::Inventory()));
 }
 
 void Program::Run()
 {
+	auto & manager = GameManager::GetInstance();
 	sf::Clock sfclock; // Don't do anything heavy after this (inb4 time warps)
 	do
 	{
