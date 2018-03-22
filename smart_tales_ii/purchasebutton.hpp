@@ -22,6 +22,5 @@ public:
 	bool HandleInput(const Inputhandler & input) override;
 
 	PurchaseButton(const Upgrade::Sensor upgradeToSell,
-		const unsigned int sellingPrice,
-		const Animation::Sheet & sheetRef);
+		const unsigned int sellingPrice);
 };

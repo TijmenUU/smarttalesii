@@ -34,10 +34,7 @@ public:
 	UpgradeTile(const Upgrade::Sensor upgrade,
 		const unsigned int price,
 		const std::string & description,
-		const sf::Texture & backgroundTexture,
 		const sf::Texture & productImage,
-		const sf::Texture & paperclipTexture,
-		Animation::Sheet & purchaseButtonSheet, 
 		sf::Font & font);
 };
 

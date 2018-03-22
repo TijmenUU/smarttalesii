@@ -18,8 +18,6 @@ class RunningMode : public Gamemode
 private:
 	ScrollingBackground background;
 
-	std::list<sf::Texture> textureStorage;
-	std::list<Animation::Sheet> spriteSheetStorage;
 	std::vector<std::unique_ptr<Obstacle::Base>> obstacleFactory;
 	Difficulty gameDifficulty;
 	
@@ -32,7 +30,7 @@ private:
 	float scrollVelocity = 0.f; // pixels per second
 
 	Player::Score score;
-	std::unique_ptr<CurrencyDisplayer> currencyDisplay;
+	CurrencyDisplayer currencyDisplay;
 	std::vector<ScoreBubble> scoreBubbles;
 
 	PlayerSprite player;
@@ -52,7 +50,6 @@ protected:
 	void OnEnter() override;
 
 	// May throw a runtime exception if it cannot load the required files and assets
-	Animation::Sheet & LoadSheet(const std::string file);
 	void Load() override;
 
 	// if it returns true, game over
@@ -62,5 +59,5 @@ protected:
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:
-	RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory);
+	RunningMode(const Player::Inventory & inventory);
 };

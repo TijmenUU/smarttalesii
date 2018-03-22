@@ -1,5 +1,7 @@
 #include "upgradetile.hpp"
 
+#include "resourcecache.hpp"
+
 #include <iomanip>
 #include <iostream> // debug
 #include <sstream>
@@ -75,17 +77,13 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 UpgradeTile::UpgradeTile(const Upgrade::Sensor upgrade,
 	const unsigned int price,
 	const std::string & description,
-	const sf::Texture & backgroundTexture,
 	const sf::Texture & productImage,
-	const sf::Texture & paperclipTexture,
-	Animation::Sheet & purchaseButtonSheet,
 	sf::Font & font)
-	: SaleTile(font),
-	background(backgroundTexture),
+	: background(ResourceCache::GetInstance().GetTexture("upgradetilebg")),
 	image(productImage),
-	paperclip(paperclipTexture),
+	paperclip(ResourceCache::GetInstance().GetTexture("paperclip")),
 	upgradePriceText("", font, 30U),
-	purchaseButton(upgrade, price, purchaseButtonSheet),
+	purchaseButton(upgrade, price),
 	upgradeDescription(description, font, 26U)
 {
 	std::stringstream ss;

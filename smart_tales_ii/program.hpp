@@ -9,11 +9,7 @@ class Program
 {
 private:
 	sf::RenderWindow window;
-	ResourceCache resourceCache;
-
 	Inputhandler inputhandler;
-	GameManager manager;
-
 public:
 	// May throw a runtime exception if it cannot load the required files and assets
 	void Load();

@@ -7,11 +7,11 @@
 
 void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(*backgroundSprite, states);
+	target.draw(backgroundSprite, states);
 	target.draw(title, states);
 	target.draw(currencyEarned, states);
 	target.draw(newBalance, states);
-	target.draw(*gotoShopButton, states);
+	target.draw(gotoShopButton, states);
 }
 
 bool ScoreMode::SurpressUpdate() const
@@ -22,33 +22,23 @@ bool ScoreMode::SurpressUpdate() const
 void ScoreMode::Load()
 {
 	//manager.PopAllBelow(this);
-	manager.PushGamemode(new UIOverlay(resourceCache, manager, false));
+	GameManager::GetInstance().PushGamemode(new UIOverlay(false));
 
-	sf::Font * fontPtr = resourceCache.GetFont("commodore");
-	if(fontPtr == nullptr)
-	{
-		throw std::runtime_error("Error fetching commodore font in ScoreMode.");
-	}
+	auto & cache = ResourceCache::GetInstance();
+	sf::Font & font = cache.GetFont("commodore");
 
-	backgroundSheet.LoadFromFile("animation/scorebackground.txt");
-	//backgroundTexture->setSmooth(false);
+	backgroundSprite.setPosition(0.f, 0.f);
+	backgroundSprite.setScale(4.f, 4.f);
+	backgroundSprite.SetAnimation("zoom");
 
-	backgroundSprite = std::make_unique<Animation::Sprite>(backgroundSheet);
-	backgroundSprite->setPosition(0.f, 0.f);
-	backgroundSprite->setScale(4.f, 4.f);
-	backgroundSprite->SetAnimation("zoom");
-
-	navigationButtonSheet.LoadFromFile("animation/navigationbutton_large.txt");
-
-	gotoShopButton = std::make_unique<TextButton>(navigationButtonSheet);
-	gotoShopButton->SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton->GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
-	sf::Text buttonText("Go to shop", *fontPtr, 30U);
-	buttonText.setOutlineThickness(1.f);
+	gotoShopButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
+	sf::Text buttonText("Go to shop", font, 30U);
+	buttonText.setOutlineThickness(2.f);
 	buttonText.setOutlineColor(sf::Color(120, 63, 0));
-	buttonText.setFillColor(sf::Color(181, 105, 0));
-	gotoShopButton->SetText(buttonText);
+	buttonText.setFillColor(sf::Color::White);
+	gotoShopButton.SetText(buttonText);
 
-	title.setFont(*fontPtr);
+	title.setFont(font);
 	title.setCharacterSize(36);
 	title.setFillColor(sf::Color::White);
 	title.setOutlineColor(sf::Color::Black);
@@ -56,7 +46,7 @@ void ScoreMode::Load()
 	title.setString("Score Screen");
 	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 0.f);
 
-	currencyEarned.setFont(*fontPtr);
+	currencyEarned.setFont(font);
 	currencyEarned.setCharacterSize(24);
 	currencyEarned.setFillColor(sf::Color::White);
 	currencyEarned.setOutlineColor(sf::Color::Black);
@@ -64,7 +54,7 @@ void ScoreMode::Load()
 	currencyEarned.setString("Currency earned: " + std::to_string(playerScore.GetTotalCurrency()));
 	currencyEarned.setPosition(Alignment::GetCenterOffset(currencyEarned.getGlobalBounds().width, cWorldWidth / 2.f), 200.f);
 
-	newBalance.setFont(*fontPtr);
+	newBalance.setFont(font);
 	newBalance.setCharacterSize(24);
 	newBalance.setFillColor(sf::Color::White);
 	newBalance.setOutlineColor(sf::Color::Black);
@@ -75,19 +65,20 @@ void ScoreMode::Load()
 
 void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	if(gotoShopButton->HandleInput(input))
+	if(gotoShopButton.HandleInput(input))
 	{
 		playerInventory.AddCurrency(playerScore.GetTotalCurrency());
-		manager.PushGamemode(new ShopMode(resourceCache, manager, playerInventory));
+		GameManager::GetInstance().PushGamemode(new ShopMode(playerInventory));
 		return;
 	}
 
-	backgroundSprite->Update(elapsed);
+	backgroundSprite.Update(elapsed);
 }
 
-ScoreMode::ScoreMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Score & score, const Player::Inventory & inventory)
-	:	Gamemode(resourceCacheRef, managerRef),
-	playerScore(score),
-	playerInventory(inventory)
+ScoreMode::ScoreMode(const Player::Score & score, const Player::Inventory & inventory)
+	:	playerScore(score),
+	playerInventory(inventory),
+	backgroundSprite(ResourceCache::GetInstance().GetSpriteSheet("scorebackground")),
+	gotoShopButton(ResourceCache::GetInstance().GetSpriteSheet("navigationbutton_large"))
 {
 }

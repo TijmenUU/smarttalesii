@@ -15,8 +15,6 @@ class Gamemode : public sf::Drawable
 private:
 protected:
 	friend class GameManager;
-	ResourceCache & resourceCache;
-	GameManager & manager;
 
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
 
@@ -29,6 +27,6 @@ protected:
 	virtual void Update(const sf::Time & elapsed, const Inputhandler & input) = 0;
 
 public:
-	Gamemode(ResourceCache & resourceCacheRef, GameManager & managerRef);
+	Gamemode() = default;
 	virtual ~Gamemode() = default;
 };

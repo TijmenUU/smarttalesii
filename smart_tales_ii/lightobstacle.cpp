@@ -1,6 +1,7 @@
 #include "lightobstacle.hpp"
 
 #include "alignmenthelp.hpp"
+#include "resourcecache.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
@@ -61,11 +62,6 @@ namespace Obstacle
 		return Alignment::GetRectangleCenter(lightSwitch.getGlobalBounds());
 	}
 
-	sf::Vector2f Light::GetScoreBubbleSpawnPosition() const
-	{
-		return lightSwitch.getPosition();
-	}
-
 	sf::Vector2f Light::GetHintPosition() const
 	{
 		const auto bounds = lightSwitch.getGlobalBounds();
@@ -102,21 +98,17 @@ namespace Obstacle
 		return new Light(*this);
 	}
 
-	Light::Light(const Animation::Sheet & lightSwitchSheet,
-		sf::Texture & storage,
-		const Animation::Sheet & obstacleSheet,
-		const Animation::Sheet & sensorSheet,
-		const bool playerHasSensor)
-		: GestureSensorBase(obstacleSheet, sensorSheet, 2U, 50.f, Type::Light, playerHasSensor),
+	Light::Light(const bool playerHasSensor)
+		: GestureSensorBase(ResourceCache::GetInstance().GetSpriteSheet("light"),
+			ResourceCache::GetInstance().GetSpriteSheet("passive_ir"),
+			2U,
+			50.f,
+			Type::Light,
+			playerHasSensor),
+		sensorBeam(ResourceCache::GetInstance().GetTexture("passive_ir_beam")),
 		showBeam(playerHasSensor),
-		lightSwitch(lightSwitchSheet)
+		lightSwitch(ResourceCache::GetInstance().GetSpriteSheet("lightswitch"))
 	{
 		lightSwitch.SetAnimation("idle");
-
-		if(!storage.loadFromFile("texture/passive_ir_sensor_beam.png"))
-		{
-			throw std::runtime_error("Error loading texture/passive_ir_sensor_beam.png in Light obstacle.");
-		}
-		sensorBeam.setTexture(storage, true);
 	}
 }

@@ -13,13 +13,9 @@ void WinOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void WinOverlay::Load()
 {
-	sf::Font * fontPtr = resourceCache.GetFont("commodore");
-	if(fontPtr == nullptr)
-	{
-		throw std::runtime_error("Error fetching commodore font in PausedMode.");
-	}
+	sf::Font & font = ResourceCache::GetInstance().GetFont("commodore");
 
-	title.setFont(*fontPtr);
+	title.setFont(font);
 	title.setCharacterSize(46);
 	title.setFillColor(sf::Color::Transparent);
 	title.setOutlineColor(sf::Color::Transparent);
@@ -27,7 +23,7 @@ void WinOverlay::Load()
 	title.setString("Win overlay");
 	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 80.f);
 
-	body.setFont(*fontPtr);
+	body.setFont(font);
 	body.setCharacterSize(32);
 	body.setFillColor(sf::Color::Transparent);
 	body.setOutlineColor(sf::Color::Transparent);
@@ -39,7 +35,7 @@ void WinOverlay::Load()
 	background.setSize(sf::Vector2f(cWorldWidth, cWorldHeight));
 	background.setFillColor(sf::Color::Transparent);
 
-	manager.PushGamemode(new UIOverlay(resourceCache, manager, false));
+	GameManager::GetInstance().PushGamemode(new UIOverlay(false));
 }
 
 void WinOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
@@ -72,8 +68,7 @@ void WinOverlay::Show()
 	idleTimeOut = 0.f;
 }
 
-WinOverlay::WinOverlay(ResourceCache & resourceCacheRef, GameManager & managerRef, const float timeOut)
-	: Gamemode(resourceCacheRef, managerRef),
-	idleTimeOut(timeOut)
+WinOverlay::WinOverlay(const float timeOut)
+	: idleTimeOut(timeOut)
 {
 }

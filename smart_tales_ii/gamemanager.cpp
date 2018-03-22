@@ -22,6 +22,12 @@ void GameManager::Update(const sf::Time & elapsed,
 	}
 }
 
+GameManager & GameManager::GetInstance()
+{
+	static GameManager m;
+	return m;
+}
+
 void GameManager::PushGamemode(Gamemode * gamemode)
 {
 	gamemodes.emplace_back(gamemode);

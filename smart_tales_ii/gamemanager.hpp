@@ -22,6 +22,7 @@ protected:
 		const sf::View & view);
 
 public:
+	static GameManager & GetInstance();
 	// Calls Load on gamemode, thus it may throw an runtime_error exception
 	void PushGamemode(Gamemode * gamemode);
 	bool RemoveGamemode(Gamemode * gamemode);
@@ -29,4 +30,10 @@ public:
 	// Inclusive, pops until it finds gamemode, pops that too and then stops
 	bool PopUntill(Gamemode * gamemode);
 	bool PopAllBelow(Gamemode * gamemode);
+
+	GameManager() = default;
+	GameManager(const GameManager &) = delete;
+	GameManager(const GameManager &&) = delete;
+	GameManager & operator = (GameManager &) = delete;
+	GameManager & operator = (GameManager &&) = delete;
 };

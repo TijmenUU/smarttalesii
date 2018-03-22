@@ -12,9 +12,7 @@ private:
 	sf::Text pauseText;
 	const bool pauseEnabled;
 
-	Animation::Sheet sheetStorage[3];
-
-	std::unique_ptr<Button> sfxMuteButton, musicMuteButton, gamePauseButton;
+	Button sfxMuteButton, musicMuteButton, gamePauseButton;
 
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
@@ -24,7 +22,5 @@ protected:
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:
-	UIOverlay(ResourceCache & resourceCacheRef, 
-		GameManager & managerRef, 
-		const bool canPause = true);
+	UIOverlay(const bool canPause = true);
 };

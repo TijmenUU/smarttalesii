@@ -22,22 +22,8 @@
 // Config files
 const std::string cGameDifficultyFile = "difficulty.txt";
 
-// Resources
-const std::string cBackgroundWallTexture = "texture/runningbackground.png";
-	// Obstacles
-const std::string cFurnitureObstacleFile = "animation/furniture.txt";
-const std::string cFurnitureSensorFile = "animation/livetile.txt";
-const std::string cDoorObstacleFile = "animation/door.txt";
-const std::string cDoorSensorFile = "animation/active_ir.txt";
-const std::string cPhoneObstacleFile = "animation/phone.txt";
-	// no phone sensor
-const std::string cLightObstacleFile = "animation/light.txt";
-const std::string cLightSensorFile = "animation/passive_ir.txt";
-const std::string cLightSwitchFile = "animation/lightswitch.txt";
-
 // Utility consts
 const float cFloorY = 520.f; // in pixels
-const std::string cScoreString = "SCORE ";
 
 void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -55,7 +41,7 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 	target.draw(player, states);
 
-	target.draw(*currencyDisplay, states);
+	target.draw(currencyDisplay, states);
 
 	if(drawObstacleHint)
 		target.draw(obstacleHintText, states);
@@ -78,20 +64,14 @@ void RunningMode::SpawnObstacle()
 
 void RunningMode::SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score)
 {
-	auto * fontPtr = resourceCache.GetFont("commodore");
-	if(fontPtr == nullptr)
-	{
-		std::cerr << "Error loading font commodore for score bubble.\n";
-		return;
-	}
-
-	scoreBubbles.emplace_back(*fontPtr, mousePos, score);
+	scoreBubbles.emplace_back(mousePos, score);
 }
 
 void RunningMode::GameOver()
 {
+	auto & manager = GameManager::GetInstance();
 	manager.Pop(); // delete our created overlay
-	manager.PushGamemode(new ScoreMode(resourceCache, manager, score, playerInventory));
+	manager.PushGamemode(new ScoreMode(score, playerInventory));
 	return;
 }
 
@@ -147,7 +127,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 			
 			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
 			SpawnScoreBubble(input.PointingDeviceWorldPosition(), currencyScore);
-			currencyDisplay->SetValue(score.GetTotalCurrency());
+			currencyDisplay.SetValue(score.GetTotalCurrency());
 		}
 		else if(obstacle.GetKillBounds().intersects(playerBounds))
 		{
@@ -213,37 +193,16 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 	}
 }
 
-Animation::Sheet & RunningMode::LoadSheet(const std::string file)
-{
-	spriteSheetStorage.emplace_back();
-	spriteSheetStorage.back().LoadFromFile(file);
-
-	return spriteSheetStorage.back();
-}
-
 void RunningMode::Load()
 {
+	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);
 
-	background.Load(cBackgroundWallTexture);
-	
-	obstacleFactory.emplace_back(new Obstacle::Furniture(LoadSheet(cFurnitureObstacleFile),
-		LoadSheet(cFurnitureSensorFile),
-		playerInventory.HasObstacleCounter(Obstacle::Type::Furniture)));
-	
-	obstacleFactory.emplace_back(new Obstacle::Door(LoadSheet(cDoorObstacleFile),
-		LoadSheet(cDoorSensorFile),
-		playerInventory.HasObstacleCounter(Obstacle::Type::Door)));
-
-	textureStorage.emplace_back();
-	obstacleFactory.emplace_back(new Obstacle::Light(LoadSheet(cLightSwitchFile),
-		textureStorage.back(),
-		LoadSheet(cLightObstacleFile),
-		LoadSheet(cLightSensorFile),
-		playerInventory.HasObstacleCounter(Obstacle::Type::Light)));
-	
-	obstacleFactory.emplace_back(new Obstacle::Phone(LoadSheet(cPhoneObstacleFile),
-		playerInventory.HasObstacleCounter(Obstacle::Type::Phone)));
+	auto & cache = ResourceCache::GetInstance();
+	obstacleFactory.emplace_back(new Obstacle::Furniture(playerInventory.HasObstacleCounter(Obstacle::Type::Furniture)));	
+	obstacleFactory.emplace_back(new Obstacle::Door(playerInventory.HasObstacleCounter(Obstacle::Type::Door)));
+	obstacleFactory.emplace_back(new Obstacle::Light(playerInventory.HasObstacleCounter(Obstacle::Type::Light)));	
+	obstacleFactory.emplace_back(new Obstacle::Phone(playerInventory.HasObstacleCounter(Obstacle::Type::Phone)));
 
 	for(size_t i = 0; i < obstacleFactory.size(); ++i)
 	{
@@ -254,38 +213,25 @@ void RunningMode::Load()
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
-	player.Load(playerInventory);
 	const auto playerBounds = player.GetGlobalBounds();
 	player.SetPosition(sf::Vector2f(playerBounds.width, cFloorY - playerBounds.height));
 
-	sf::Font * fontPtr = resourceCache.GetFont("commodore");
-	if(fontPtr == nullptr)
-	{
-		throw std::runtime_error("Error fetching commodore font in RunningMode.");
-	}
-
-	obstacleHintText.setFont(*fontPtr);
+	sf::Font & font = cache.GetFont("commodore");
+	obstacleHintText.setFont(font);
 	obstacleHintText.setCharacterSize(26);
 	obstacleHintText.setFillColor(sf::Color::White);
 	obstacleHintText.setOutlineColor(sf::Color::Black);
 	obstacleHintText.setOutlineThickness(2.f);
 
-	textureStorage.emplace_back();
-	auto & coinTexture = textureStorage.back();
-	if(!coinTexture.loadFromFile("texture/coin.png"))
-	{
-		throw std::runtime_error("Error loading texture/coin.png in RunningMode");
-	}
-	currencyDisplay = std::make_unique<CurrencyDisplayer>(coinTexture, *fontPtr);
-	currencyDisplay->CenterOn(cWorldWidth / 2.f, 25.f);
+	currencyDisplay.CenterOn(cWorldWidth / 2.f, 25.f);
 
 	if(playerInventory.GetSensorUpgradeCount() > 3)
 	{
-		manager.PushGamemode(new WinOverlay(resourceCache, manager));
+		manager.PushGamemode(new WinOverlay());
 	}
 	else
 	{
-		manager.PushGamemode(new UIOverlay(resourceCache, manager));
+		manager.PushGamemode(new UIOverlay());
 	}
 }
 
@@ -313,7 +259,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 	score.distance += elapsedSeconds * scrollVelocity;
 
-	currencyDisplay->Update(elapsed);
+	currencyDisplay.Update(elapsed);
 
 	// Anything affected by the scrolling velocity should be updated BEFORE this line
 	scrollVelocity += gameDifficulty.GetScrollIncrementVelocity() * elapsedSeconds;
@@ -343,10 +289,10 @@ void RunningMode::OnEnter()
 	Reset();
 }
 
-RunningMode::RunningMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory)
-	: Gamemode(resourceCacheRef, managerRef),
-	background(cWorldWidth),
-	playerInventory(inventory)
+RunningMode::RunningMode(const Player::Inventory & inventory)
+	: background(cWorldWidth),
+	playerInventory(inventory),
+	player(inventory)
 {
 
 }

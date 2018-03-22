@@ -20,7 +20,6 @@ namespace Obstacle
 
 	public:
 		sf::Vector2f GetNeutralizationPosition() const override;
-		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
 		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
@@ -30,10 +29,6 @@ namespace Obstacle
 
 		Base * Clone() const override;
 
-		Light(const Animation::Sheet & lightSwitchSheet,
-			sf::Texture & storage,
-			const Animation::Sheet & obstacleSheet,
-			const Animation::Sheet & sensorSheet, 
-			const bool playerHasSensor);
+		Light(const bool playerHasSensor);
 	};
 }

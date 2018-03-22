@@ -13,9 +13,8 @@ private:
 	const Player::Score playerScore;
 	Player::Inventory playerInventory;
 	
-	Animation::Sheet backgroundSheet, navigationButtonSheet;
-	std::unique_ptr<Animation::Sprite> backgroundSprite;
-	std::unique_ptr<TextButton> gotoShopButton;
+	Animation::Sprite backgroundSprite;
+	TextButton gotoShopButton;
 	sf::Text title, currencyEarned, newBalance;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
@@ -26,8 +25,6 @@ public:
 	void Load() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
-	ScoreMode(ResourceCache & resourceCacheRef, 
-		GameManager & managerRef, 
-		const Player::Score & score, 
+	ScoreMode(const Player::Score & score, 
 		const Player::Inventory & inventory);
 };

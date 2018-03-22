@@ -1,6 +1,7 @@
 #include "currencydisplayer.hpp"
 
 #include "alignmenthelp.hpp"
+#include "resourcecache.hpp"
 
 #include <iomanip>
 #include <sstream>
@@ -66,9 +67,9 @@ void CurrencyDisplayer::Update(const sf::Time & elapsed)
 	}
 }
 
-CurrencyDisplayer::CurrencyDisplayer(const sf::Texture & coinTexture, sf::Font & font)
-	: coin(coinTexture),
-	text("00000", font, 32)
+CurrencyDisplayer::CurrencyDisplayer()
+	: coin(ResourceCache::GetInstance().GetTexture("coin")),
+	text("00000", ResourceCache::GetInstance().GetFont("commodore"), 32)
 {
 	text.setFillColor(sf::Color::White);
 	text.setOutlineColor(sf::Color::Black);

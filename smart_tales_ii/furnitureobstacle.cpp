@@ -1,6 +1,7 @@
 #include "furnitureobstacle.hpp"
 
 #include "alignmenthelp.hpp"
+#include "resourcecache.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
@@ -52,14 +53,9 @@ namespace Obstacle
 		}
 	}
 
-	sf::Vector2f Furniture::GetScoreBubbleSpawnPosition() const
-	{
-		return cLocalHintPosition + obstacleSprite.getPosition();
-	}
-
 	sf::Vector2f Furniture::GetHintPosition() const
 	{
-		return GetScoreBubbleSpawnPosition();
+		return cLocalHintPosition + obstacleSprite.getPosition();
 	}
 
 	bool Furniture::CanDespawn() const
@@ -103,10 +99,13 @@ namespace Obstacle
 		return new Furniture(*this);
 	}
 
-	Furniture::Furniture(const Animation::Sheet & obstacleSheet,
-		const Animation::Sheet & sensorSheet, 
-		const bool playerHasSensor)
-		: GestureSensorBase(obstacleSheet, sensorSheet, 8, 50.f, Type::Furniture, playerHasSensor)
+	Furniture::Furniture(const bool playerHasSensor)
+		: GestureSensorBase(ResourceCache::GetInstance().GetSpriteSheet("furniture"),
+			ResourceCache::GetInstance().GetSpriteSheet("livetile"),
+			8,
+			50.f,
+			Type::Furniture,
+			playerHasSensor)
 	{
 	}
 }
