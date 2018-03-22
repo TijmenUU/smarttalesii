@@ -4,7 +4,7 @@
 
 void UIOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	if(pauseEnabled)
+	if(gamePauseButton->IsEnabled())
 	{
 		if(gamePauseButton->IsDown())
 		{
@@ -50,6 +50,10 @@ void UIOverlay::Load()
 	sfxMuteButton = std::make_unique<Button>(Button(sheetStorage[0]));
 	musicMuteButton = std::make_unique<Button>(Button(sheetStorage[1]));
 	gamePauseButton = std::make_unique<Button>(Button(sheetStorage[2]));
+	if(!pauseEnabled)
+	{
+		gamePauseButton->Disable();
+	}
 
 	const float buttonSpacing = 60.f + 15.f;
 	sf::Vector2f buttonPosition(1280.f - buttonSpacing, 15.f);
@@ -62,15 +66,15 @@ void UIOverlay::Load()
 
 void UIOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	if(sfxMuteButton->Update(elapsed, input))
+	if(sfxMuteButton->HandleInput(input))
 	{
 		// TODO do something with the changed mute state
 	}
-	else if(musicMuteButton->Update(elapsed, input))
+	else if(musicMuteButton->HandleInput(input))
 	{
 		// TODO do something with the changed mute state
 	}
-	else if(pauseEnabled && gamePauseButton->Update(elapsed, input))
+	else if(gamePauseButton->HandleInput(input))
 	{
 		// TODO do something with the changed paused state? (optionally)
 	}

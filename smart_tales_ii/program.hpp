@@ -8,7 +8,6 @@
 class Program
 {
 private:
-	unsigned int windowWidth, windowHeight;
 	sf::RenderWindow window;
 	ResourceCache resourceCache;
 

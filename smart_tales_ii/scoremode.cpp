@@ -73,7 +73,7 @@ void ScoreMode::Load()
 
 void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	if(gotoShopButton->Update(elapsed, input))
+	if(gotoShopButton->HandleInput(input))
 	{
 		playerInventory.AddCurrency(playerScore.GetTotalCurrency());
 		manager.PushGamemode(new ShopMode(resourceCache, manager, playerInventory));

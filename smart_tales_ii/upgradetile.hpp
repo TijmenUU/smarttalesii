@@ -1,20 +1,17 @@
 #pragma once
 #include "tile.hpp"
 #include "upgrades.hpp"
-#include "textbutton.hpp"
+#include "purchasebutton.hpp"
 
 class UpgradeTile : public SaleTile
 {
 private:
-	Upgrade::Sensor upgrade;
 	sf::Sprite tileSprite;
 	sf::Sprite upgradeImage;
-	unsigned int upgradePrice;
 	sf::Text upgradePriceText;
-	TextButton purchaseButton;
+	PurchaseButton purchaseButton;
 	sf::Text upgradeDescription;
 
-	void UpdateButton(const Player::Inventory & inventory);
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
@@ -25,11 +22,8 @@ public:
 	void SetTileBackground(const sf::Texture & t);
 	void SetUpgrade(const Upgrade::Sensor s);
 	void SetImage(const sf::Texture & t);
-	void SetPrice(const unsigned int price, sf::Font & font);
-	void SetPrice(const unsigned int price, const sf::Text & text);
-	void SetDescription(const std::string & description, sf::Font & font);
-	void SetDescription(const sf::Text & text);
-	void SetButtonText(const sf::Text & text);
+	void SetPrice(const unsigned int price);
+	void SetDescription(const std::string & description);
 
 	void Refresh(const Player::Inventory & inventory) override;
 
@@ -40,6 +34,6 @@ public:
 		const float horizontalDisplacement,
 		const bool allowInteraction = true) override;
 
-	UpgradeTile(const Animation::Sheet & purchaseButtonSheet);
+	UpgradeTile(const Animation::Sheet & purchaseButtonSheet, sf::Font & font);
 };
 

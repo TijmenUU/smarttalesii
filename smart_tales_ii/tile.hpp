@@ -9,6 +9,8 @@
 class SaleTile : public sf::Drawable
 {
 protected:
+	sf::Font & fontRef;
+
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
 
 public:
@@ -25,6 +27,6 @@ public:
 		const float horizontalDisplacement,
 		const bool allowInteraction = true) = 0;
 
-	SaleTile() = default;
+	SaleTile(sf::Font & font);
 	virtual ~SaleTile() = default;
 };

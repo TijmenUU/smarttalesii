@@ -31,10 +31,10 @@ const std::array<std::string, 4> cTileDescriptions = {
 };
 
 const std::array<unsigned int, 4> cTilePrices = {
-	400,
-	600,
-	800,
-	1000
+	200,
+	250,
+	300,
+	400
 };
 
 void ShopMode::LoadTiles()
@@ -60,17 +60,17 @@ void ShopMode::LoadTiles()
 			throw std::runtime_error("Error fetching <" + cTileImageTextures[i] + "> in Shopmode.");
 		}
 
-		UpgradeTile * upgradeTile = new UpgradeTile(purchaseButtonSheet);
+		UpgradeTile * upgradeTile = new UpgradeTile(purchaseButtonSheet, *fontPtr);
 		upgradeTile->SetTileBackground(tileBackgroundTexture);
 		upgradeTile->SetUpgrade(cTileUpgrades[i]);
 		upgradeTile->SetImage(tileImageTextures[i]);
-		upgradeTile->SetPrice(cTilePrices[i], *fontPtr);
-		upgradeTile->SetDescription(cTileDescriptions[i], *fontPtr);
-		upgradeTile->SetButtonText(buttonTemplateText);
+		upgradeTile->SetPrice(cTilePrices[i]);
+		upgradeTile->SetDescription(cTileDescriptions[i]);
 
 		carousel.AddSaleTile(upgradeTile);
 	}
 
+	// Important to set the purchase button states after changing prices!
 	carousel.RefreshTiles(playerInventory);
 }
 
@@ -131,7 +131,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		carousel.RefreshTiles(playerInventory);
 	}
 	// end debug
-	if(gotoGameButton->Update(elapsed, input))
+	if(gotoGameButton->HandleInput(input))
 	{
 		manager.PushGamemode(new RunningMode(resourceCache, manager, playerInventory));
 		return;

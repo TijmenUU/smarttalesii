@@ -1,10 +1,5 @@
 #include "button.hpp"
 
-void Button::draw(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	target.draw(buttonSprite, states);
-}
-
 void Button::UpdateButtonVisual()
 {
 	if(isDown)
@@ -17,7 +12,12 @@ void Button::UpdateButtonVisual()
 	}
 }
 
-bool Button::GetInteraction(const Inputhandler & input)
+void Button::draw(sf::RenderTarget & target, sf::RenderStates states) const
+{
+	target.draw(buttonSprite, states);
+}
+
+bool Button::Interacts(const Inputhandler & input)
 {
 	if(input.PointingDeviceReleasedEvent() && isEnabled)
 	{
@@ -33,20 +33,30 @@ bool Button::GetInteraction(const Inputhandler & input)
 	return false;
 }
 
-bool Button::Update(const sf::Time & elapsed, const Inputhandler & input)
+bool Button::HandleInput(const Inputhandler & input)
 {
-	bool retval = GetInteraction(input);
-	if(retval)
+	if(isEnabled && Interacts(input))
+	{
 		UpdateButtonVisual();
+		return true;
+	}
 
+	return false;
+}
+
+void Button::Update(const sf::Time & elapsed)
+{
 	buttonSprite.Update(elapsed);
-
-	return retval;
 }
 
 bool Button::IsDown() const
 {
 	return isDown;
+}
+
+bool Button::IsEnabled() const
+{
+	return isEnabled;
 }
 
 bool Button::SetAnimation(const std::string & animation)

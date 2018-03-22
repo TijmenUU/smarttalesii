@@ -30,6 +30,7 @@
     <ClCompile Include="gestureobstacle.cpp" />
     <ClCompile Include="lightobstacle.cpp" />
     <ClCompile Include="phoneobstacle.cpp" />
+    <ClCompile Include="purchasebutton.cpp" />
     <ClCompile Include="resourcecache.cpp" />
     <ClCompile Include="gamemode.cpp" />
     <ClCompile Include="gamemanager.cpp" />
@@ -69,6 +70,7 @@
     <ClInclude Include="gestureobstacle.hpp" />
     <ClInclude Include="lightobstacle.hpp" />
     <ClInclude Include="phoneobstacle.hpp" />
+    <ClInclude Include="purchasebutton.hpp" />
     <ClInclude Include="resourcecache.hpp" />
     <ClInclude Include="gamemode.hpp" />
     <ClInclude Include="gamemanager.hpp" />

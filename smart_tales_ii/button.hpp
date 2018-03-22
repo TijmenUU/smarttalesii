@@ -4,20 +4,25 @@
 
 class Button : public sf::Drawable
 {
+private:
+	void UpdateButtonVisual();
+
 protected:
 	bool isDown;
 	bool isEnabled;
 	Animation::Sprite buttonSprite;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-	virtual void UpdateButtonVisual();
+	// Returns whether the state changed
+	bool Interacts(const Inputhandler & input);
 
 public:
-	virtual bool GetInteraction(const Inputhandler & input);
-	// return value indicates change of button state (gone pressed or gone up == true)
-	virtual bool Update(const sf::Time & elapsed, const Inputhandler & input);
+	virtual bool HandleInput(const Inputhandler & input);
+	// Update the animated sprite
+	virtual void Update(const sf::Time & elapsed);
 
-	virtual bool IsDown() const;
+	bool IsDown() const;
+	bool IsEnabled() const;
 
 	virtual bool SetAnimation(const std::string & animation);
 

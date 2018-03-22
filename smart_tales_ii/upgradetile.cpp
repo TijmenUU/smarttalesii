@@ -15,28 +15,6 @@ const sf::Vector2f cButtonSize(145, 82);
 const sf::Vector2f cDescriptionPosition(35, 270);
 const sf::Vector2f cDescriptionSize(380, 230);
 
-void UpgradeTile::UpdateButton(const Player::Inventory & inventory)
-{
-	if(inventory.HasSensorUpgrade(upgrade))
-	{
-		purchaseButton.Disable();
-		purchaseButton.SetAnimation("bought");
-		purchaseButton.SetString("Bought");
-	}
-	else if(!inventory.CanAfford(upgradePrice))
-	{
-		purchaseButton.Disable();
-		purchaseButton.SetAnimation("too-expensive");
-		purchaseButton.SetString("Can't\nafford");
-	}
-	else
-	{
-		purchaseButton.Enable();
-		purchaseButton.SetAnimation("buy");
-		purchaseButton.SetString("Buy");
-	}
-}
-
 void UpgradeTile::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(tileSprite, states);
@@ -72,7 +50,7 @@ void UpgradeTile::SetTileBackground(const sf::Texture & t)
 
 void UpgradeTile::SetUpgrade(const Upgrade::Sensor s)
 {
-	upgrade = s;
+	purchaseButton.SetUpgrade(s);
 }
 
 void UpgradeTile::SetImage(const sf::Texture & t)
@@ -80,43 +58,25 @@ void UpgradeTile::SetImage(const sf::Texture & t)
 	upgradeImage.setTexture(t, true);
 }
 
-void UpgradeTile::SetPrice(const unsigned int price, sf::Font & font)
+void UpgradeTile::SetPrice(const unsigned int price)
 {
-	upgradePrice = price;
+	purchaseButton.SetPrice(price);
 	std::stringstream ss;
 	ss << std::setfill('0') << std::setw(4);
 	ss << price;
 
-	upgradePriceText.setFont(font);
 	upgradePriceText.setString(ss.str());
 }
 
-void UpgradeTile::SetPrice(const unsigned int price, const sf::Text & text)
+void UpgradeTile::SetDescription(const std::string & description)
 {
-	upgradePrice = price;
-	upgradePriceText = text;
-}
-
-void UpgradeTile::SetDescription(const std::string & description, sf::Font & font)
-{
-	upgradeDescription.setFont(font);
 	upgradeDescription.setString(description);
 	//upgradeDescription.set
 }
 
-void UpgradeTile::SetDescription(const sf::Text & text)
-{
-	upgradeDescription = text;
-}
-
-void UpgradeTile::SetButtonText(const sf::Text & text)
-{
-	purchaseButton.SetText(text);
-}
-
 void UpgradeTile::Refresh(const Player::Inventory & inventory)
 {
-	UpdateButton(inventory);
+	purchaseButton.Refresh(inventory);
 }
 
 bool UpgradeTile::Update(const sf::Time & elapsed, 
@@ -125,28 +85,29 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 	const float horizontalDisplacement,
 	const bool allowInteraction)
 {
-	bool retval = false;
-	if(allowInteraction && purchaseButton.GetInteraction(input))
-	{
-		inventory.RemoveCurrency(upgradePrice);
-		std::cout << "Bought upgrade for " << upgradePrice << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
-		inventory.AddSensorUpgrade(upgrade);
-		UpdateButton(inventory);
-
-		retval = true;
-	}
-
-	if(horizontalDisplacement != 0)
+	if(horizontalDisplacement != 0.f)
 	{
 		sf::Vector2f newposition = tileSprite.getPosition();
 		newposition.x += horizontalDisplacement;
 		SetPosition(newposition);
 	}
+	else if(allowInteraction && purchaseButton.HandleInput(input))
+	{
+		inventory.RemoveCurrency(purchaseButton.GetPrice());
+		std::cout << "Bought upgrade for " << purchaseButton.GetPrice() << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
+		inventory.AddSensorUpgrade(purchaseButton.GetUpgrade());
 
-	return retval;
+		return true;
+	}
+
+	return false;
 }
 
-UpgradeTile::UpgradeTile(const Animation::Sheet & purchaseButtonSheet)
-	: purchaseButton(purchaseButtonSheet)
+UpgradeTile::UpgradeTile(const Animation::Sheet & purchaseButtonSheet, sf::Font & font)
+	: SaleTile(font),
+	purchaseButton(purchaseButtonSheet)
 {
+	upgradePriceText.setFont(font);
+	purchaseButton.SetFont(font);
+	upgradeDescription.setFont(font);
 }

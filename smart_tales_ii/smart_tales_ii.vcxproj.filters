@@ -192,6 +192,9 @@
     <ClCompile Include="animationsheet.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="purchasebutton.cpp">
+      <Filter>Source Files\game\objects\buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="animationsheet.hpp">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="purchasebutton.hpp">
+      <Filter>Header Files\game\objects\buttons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
