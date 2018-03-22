@@ -20,5 +20,5 @@ protected:
 public:
 	void Show();
 
-	WinOverlay(ResourceCache & resourceCacheRef, GameManager & managerRef, const float timeOut = 15.f);
+	WinOverlay(const float timeOut = 15.f);
 };

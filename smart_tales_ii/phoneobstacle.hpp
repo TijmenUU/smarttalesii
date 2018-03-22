@@ -12,7 +12,6 @@ namespace Obstacle
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 
 	public:
-		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
 		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
@@ -28,7 +27,6 @@ namespace Obstacle
 
 		Base * Clone() const override;
 
-		Phone(const Animation::Sheet & obstacleSheet,
-			const bool playerHasSensor);
+		Phone(const bool playerHasSensor);
 	};
 }

@@ -1,5 +1,7 @@
 #include "purchasebutton.hpp"
 
+#include "resourcecache.hpp"
+
 void PurchaseButton::SetPurchased()
 {
 	Disable();
@@ -52,9 +54,8 @@ bool PurchaseButton::HandleInput(const Inputhandler & input)
 }
 
 PurchaseButton::PurchaseButton(const Upgrade::Sensor upgradeToSell,
-	const unsigned int sellingPrice,
-	const Animation::Sheet & sheetRef)
-	: Button(sheetRef),
+	const unsigned int sellingPrice)
+	: Button(ResourceCache::GetInstance().GetSpriteSheet("purchasebutton")),
 	upgrade(upgradeToSell),
 	price(sellingPrice)
 {

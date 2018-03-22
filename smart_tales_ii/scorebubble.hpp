@@ -18,5 +18,5 @@ public:
 	// Return value indicates it is to be removed
 	bool Update(const sf::Time & elapsed);
 
-	ScoreBubble(sf::Font & fontRef, const sf::Vector2f spawnPosition, const unsigned int score);
+	ScoreBubble(const sf::Vector2f spawnPosition, const unsigned int score);
 };

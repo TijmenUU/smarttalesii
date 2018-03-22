@@ -1,5 +1,6 @@
 #include "doorobstacle.hpp"
 
+#include "resourcecache.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
@@ -54,14 +55,9 @@ namespace Obstacle
 		}
 	}
 
-	sf::Vector2f Door::GetScoreBubbleSpawnPosition() const
-	{
-		return cLocalHintPosition + obstacleSprite.getPosition();
-	}
-
 	sf::Vector2f Door::GetHintPosition() const
 	{
-		return GetScoreBubbleSpawnPosition();
+		return obstacleSprite.getPosition() + cLocalHintPosition;
 	}
 
 	bool Door::CanDespawn() const
@@ -90,10 +86,13 @@ namespace Obstacle
 		return new Door(*this);
 	}
 
-	Door::Door(const Animation::Sheet & obstacleSheet, 
-		const Animation::Sheet & sensorSheet, 
-		bool playerHasSensor)
-		: GestureSensorBase(obstacleSheet, sensorSheet, 48, 50.f, Type::Door, playerHasSensor)
+	Door::Door(bool playerHasSensor)
+		: GestureSensorBase(ResourceCache::GetInstance().GetSpriteSheet("door"), 
+			ResourceCache::GetInstance().GetSpriteSheet("active_ir"), 
+			48, 
+			50.f, 
+			Type::Door, 
+			playerHasSensor)
 	{
 		if(sensorEnabled)
 		{

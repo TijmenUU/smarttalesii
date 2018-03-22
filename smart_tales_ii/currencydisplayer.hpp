@@ -21,5 +21,5 @@ public:
 
 	void Update(const sf::Time & elapsed);
 
-	CurrencyDisplayer(const sf::Texture & coinTexture, sf::Font & font);
+	CurrencyDisplayer();
 };

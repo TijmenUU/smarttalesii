@@ -12,17 +12,11 @@ class ShopMode : public Gamemode
 private:
 	Player::Inventory playerInventory;
 
-	sf::Texture tileBackgroundTexture, paperclipTexture;
-	std::vector<sf::Texture> tileImageTextures;
-	Animation::Sheet purchaseButtonSheet;
-	Animation::Sheet navigationButtonSheet;
-
-	sf::Texture backgroundTexture;
 	sf::Sprite background;
 	SaleTileCarousel carousel;
 	sf::Text title;
 	
-	std::unique_ptr<TextButton> gotoGameButton;
+	TextButton gotoGameButton;
 
 	void LoadTiles();
 
@@ -33,5 +27,5 @@ public:
 	void Load() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
-	ShopMode(ResourceCache & resourceCacheRef, GameManager & managerRef, const Player::Inventory & inventory);
+	ShopMode(const Player::Inventory & inventory);
 };

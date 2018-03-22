@@ -1,5 +1,7 @@
 #include "phoneobstacle.hpp"
 
+#include "resourcecache.hpp"
+
 namespace Obstacle
 {
 	const sf::Vector2f cLocalHintPosition(45, -30);
@@ -21,14 +23,9 @@ namespace Obstacle
 		return obstacleSprite.getGlobalBounds().contains(input.PointingDeviceWorldPosition());
 	}
 
-	sf::Vector2f Phone::GetScoreBubbleSpawnPosition() const
-	{
-		return cLocalHintPosition + obstacleSprite.getPosition();
-	}
-
 	sf::Vector2f Phone::GetHintPosition() const
 	{
-		return GetScoreBubbleSpawnPosition();
+		return cLocalHintPosition + obstacleSprite.getPosition();
 	}
 
 	bool Phone::CanDespawn() const
@@ -70,8 +67,12 @@ namespace Obstacle
 		return new Phone(*this);
 	}
 
-	Phone::Phone(const Animation::Sheet & obstacleSheet, const bool playerHasSensor)
-		: GestureBase(4, 50.f, Type::Phone, obstacleSheet, playerHasSensor)
+	Phone::Phone(const bool playerHasSensor)
+		: GestureBase(4,
+			50.f,
+			Type::Phone,
+			ResourceCache::GetInstance().GetSpriteSheet("phone"),
+			playerHasSensor)
 	{
 	}
 }

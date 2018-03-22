@@ -8,9 +8,6 @@
 class PlayerSprite : public sf::Drawable
 {
 private:
-	Animation::Sheet upperBodySheet;
-	Animation::Sheet legsSheet;
-
 	Animation::Sprite upperBodySprite;
 	Animation::Sprite legsSprite;
 
@@ -33,6 +30,6 @@ public:
 	void Load(const Player::Inventory & inventory);
 	void Update(const sf::Time & elapsed);
 
-	PlayerSprite();
+	PlayerSprite(const Player::Inventory & inventory);
 };
 

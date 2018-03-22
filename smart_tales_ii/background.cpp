@@ -1,5 +1,7 @@
 #include "background.hpp"
 
+#include "resourcecache.hpp"
+
 #include <cmath>
 #include <stdexcept>
 #include <string>
@@ -7,25 +9,6 @@
 void ScrollingBackground::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(wallSprite, states);
-}
-
-void ScrollingBackground::Load(const std::string & textureFile)
-{
-	if(!wallTexture.loadFromFile(textureFile))
-	{
-		throw std::runtime_error("Cannot load texture file " + textureFile);
-	}
-	wallTexture.setRepeated(true);
-	wallTexture.setSmooth(false);
-#pragma warning(suppress: 4244) // The textures used are too small to overflow a float here
-	wallSpriteWidth = wallTexture.getSize().x;
-	const int repetitions = static_cast<int>(std::ceil(worldWidth / wallSpriteWidth)) + 2;
-
-	wallSprite.setTexture(wallTexture);
-#pragma warning(suppress: 4244) // Texture rect is pixel perfect, so the loss of precision from float to int is no problem
-	wallSprite.setTextureRect(sf::IntRect(0, 0, repetitions * wallSpriteWidth, wallTexture.getSize().y));
-
-	Reset();
 }
 
 void ScrollingBackground::Reset()
@@ -49,4 +32,17 @@ void ScrollingBackground::Update(const sf::Time & elapsed, const float scrollVel
 ScrollingBackground::ScrollingBackground(const float _worldWidth)
 	: worldWidth(_worldWidth)
 {
+	auto & cache = ResourceCache::GetInstance();
+	auto & wallTexture = cache.GetMutableTexture("runningbackground");
+	wallTexture.setRepeated(true);
+	wallTexture.setSmooth(false);
+#pragma warning(suppress: 4244) // The textures used are too small to overflow a float here
+	wallSpriteWidth = wallTexture.getSize().x;
+	const int repetitions = static_cast<int>(std::ceil(worldWidth / wallSpriteWidth)) + 2;
+
+	wallSprite.setTexture(wallTexture);
+#pragma warning(suppress: 4244) // Texture rect is pixel perfect, so the loss of precision from float to int is no problem
+	wallSprite.setTextureRect(sf::IntRect(0, 0, repetitions * wallSpriteWidth, wallTexture.getSize().y));
+
+	Reset();
 }

@@ -18,7 +18,6 @@ namespace Obstacle
 		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 
 	public:
-		sf::Vector2f GetScoreBubbleSpawnPosition() const override;
 		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
@@ -33,8 +32,6 @@ namespace Obstacle
 
 		Base * Clone() const override;
 
-		Furniture(const Animation::Sheet & obstacleSheet,
-			const Animation::Sheet & sensorSheet, 
-			const bool playerHasSensor);
+		Furniture(const bool playerHasSensor);
 	};
 }

@@ -1,5 +1,7 @@
 #include "scorebubble.hpp"
 
+#include "resourcecache.hpp"
+
 #include <cmath>
 #include <iomanip>
 #include <sstream>
@@ -29,13 +31,13 @@ bool ScoreBubble::Update(const sf::Time & elapsed)
 	return ShouldRemove();
 }
 
-ScoreBubble::ScoreBubble(sf::Font & fontRef, const sf::Vector2f spawnPosition, const unsigned int score)
+ScoreBubble::ScoreBubble(const sf::Vector2f spawnPosition, const unsigned int score)
 {
 	std::stringstream ss;
 	ss << '+' << score;
 
 	text.setString(ss.str());
-	text.setFont(fontRef);
+	text.setFont(ResourceCache::GetInstance().GetFont("commodore"));
 	text.setCharacterSize(20);
 	text.setFillColor(sf::Color::White);
 	text.setOutlineColor(sf::Color::Black);

@@ -19,9 +19,3 @@ void Gamemode::OnEnter()
 {
 	return;
 }
-
-Gamemode::Gamemode(ResourceCache & resourceCacheRef, GameManager & managerRef)
-	: resourceCache(resourceCacheRef),
-	manager(managerRef)
-{
-}

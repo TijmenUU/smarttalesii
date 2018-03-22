@@ -1,9 +1,8 @@
 #include "playersprite.hpp"
 
-#include <cassert>
+#include "resourcecache.hpp"
 
-const std::string cUpperBodyFile("animation/player_upperbody.txt");
-const std::string cLegsFile("animation/player_legs.txt");
+#include <cassert>
 
 const float cShowoffLength = 1.f;
 
@@ -45,22 +44,6 @@ sf::FloatRect PlayerSprite::GetGlobalBounds() const
 	return upperBodySprite.getGlobalBounds();
 }
 
-void PlayerSprite::Load(const Player::Inventory & inventory)
-{
-	upperBodySheet.LoadFromFile(cUpperBodyFile);
-	legsSheet.LoadFromFile(cLegsFile);
-
-	if(inventory.HasSensorUpgrade(Upgrade::Sensor::HealthBand))
-	{
-		legsSprite.SetAnimation("run");
-		upperBodySprite.SetAnimation("run-enhanced");
-	}
-	else
-	{
-		SetAnimation("run");
-	}
-}
-
 void PlayerSprite::Update(const sf::Time & elapsed)
 {
 	if(showingOff)
@@ -77,8 +60,17 @@ void PlayerSprite::Update(const sf::Time & elapsed)
 	upperBodySprite.Update(legsSprite); // body is parented to legs
 }
 
-PlayerSprite::PlayerSprite()
-	: upperBodySprite(upperBodySheet),
-	legsSprite(legsSheet)
+PlayerSprite::PlayerSprite(const Player::Inventory & inventory)
+	: upperBodySprite(ResourceCache::GetInstance().GetSpriteSheet("player_upperbody")),
+	legsSprite(ResourceCache::GetInstance().GetSpriteSheet("player_legs"))
 {
+	if(inventory.HasSensorUpgrade(Upgrade::Sensor::HealthBand))
+	{
+		legsSprite.SetAnimation("run");
+		upperBodySprite.SetAnimation("run-enhanced");
+	}
+	else
+	{
+		SetAnimation("run");
+	}
 }

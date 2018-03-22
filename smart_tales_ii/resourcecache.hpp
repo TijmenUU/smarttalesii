@@ -27,8 +27,11 @@ protected:
 public:
 	static ResourceCache & GetInstance();
 
-	sf::Font * GetFont(const std::string & name);
-	sf::Texture * GetTexture(const std::string & name);
+	sf::Font & GetFont(const std::string & name);
+	const sf::Texture & GetTexture(const std::string & name) const;
+	// Dangerous, use GetTexture() instead
+	sf::Texture & GetMutableTexture(const std::string & name);
+	const Animation::Sheet & GetSpriteSheet(const std::string & name) const;
 
 	ResourceCache() = default;
 	ResourceCache(const ResourceCache &) = delete;

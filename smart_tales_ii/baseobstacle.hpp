@@ -27,7 +27,6 @@ namespace Obstacle
 		virtual const sf::Vector2f & GetPosition() const;
 		virtual sf::Vector2f GetObstacleCenter() const;
 		virtual sf::Vector2f GetNeutralizationPosition() const;
-		virtual sf::Vector2f GetScoreBubbleSpawnPosition() const = 0;
 		virtual sf::Vector2f GetHintPosition() const = 0;
 
 		virtual bool IsUnharmful() const;

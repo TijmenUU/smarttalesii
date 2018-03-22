@@ -36,20 +36,38 @@ void ResourceCache::LoadSpriteSheet(const std::string & file)
 	sheetStorage[name].LoadFromFile(file);
 }
 
-sf::Font * ResourceCache::GetFont(const std::string & name)
+sf::Font & ResourceCache::GetFont(const std::string & name)
 {
 	auto searchResult = fontStorage.find(name);
 	if(searchResult == fontStorage.end())
-		return nullptr;
+		throw std::runtime_error("Cannot fetch font resource with name <" + name + ">");
 
-	return &(searchResult->second);
+	return searchResult->second;
 }
 
-sf::Texture * ResourceCache::GetTexture(const std::string & name)
+const sf::Texture & ResourceCache::GetTexture(const std::string & name) const
 {
 	auto searchResult = textureStorage.find(name);
 	if(searchResult == textureStorage.end())
-		return nullptr;
+		throw std::runtime_error("Cannot fetch texture resource with name <" + name + ">");
 
-	return &(searchResult->second);
+	return searchResult->second;
+}
+
+sf::Texture & ResourceCache::GetMutableTexture(const std::string & name)
+{
+	auto searchResult = textureStorage.find(name);
+	if(searchResult == textureStorage.end())
+		throw std::runtime_error("Cannot fetch mutable texture resource with name <" + name + ">");
+
+	return searchResult->second;
+}
+
+const Animation::Sheet & ResourceCache::GetSpriteSheet(const std::string & name) const
+{
+	auto searchResult = sheetStorage.find(name);
+	if(searchResult == sheetStorage.end())
+		throw std::runtime_error("Cannot fetch texture resource with name <" + name + ">");
+
+	return searchResult->second;
 }
