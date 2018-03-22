@@ -1,26 +1,27 @@
 #pragma once
 #include "playerinventory.hpp"
-#include "textbutton.hpp"
+#include "button.hpp"
 #include "upgrades.hpp"
 
-class PurchaseButton : public TextButton
+class PurchaseButton : public Button
 {
 private:
 	Upgrade::Sensor upgrade;
 	unsigned int price;
+	bool isPurchased = false;
 
-	void Purchase();
+	void SetPurchased();
 
 public:
-	void SetUpgrade(const Upgrade::Sensor upgradeToSell);
-	void SetPrice(const unsigned int upgradePrice);
-
 	Upgrade::Sensor GetUpgrade() const;
 	unsigned int GetPrice() const;
+	bool IsPurchased() const;
 
 	void Refresh(const Player::Inventory & inventory);
 
 	bool HandleInput(const Inputhandler & input) override;
 
-	PurchaseButton(const Animation::Sheet & sheetRef);
+	PurchaseButton(const Upgrade::Sensor upgradeToSell,
+		const unsigned int sellingPrice,
+		const Animation::Sheet & sheetRef);
 };

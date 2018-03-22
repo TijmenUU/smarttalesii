@@ -12,11 +12,13 @@ class ShopMode : public Gamemode
 private:
 	Player::Inventory playerInventory;
 
-	sf::Texture tileBackgroundTexture;
+	sf::Texture tileBackgroundTexture, paperclipTexture;
 	std::vector<sf::Texture> tileImageTextures;
 	Animation::Sheet purchaseButtonSheet;
 	Animation::Sheet navigationButtonSheet;
 
+	sf::Texture backgroundTexture;
+	sf::Sprite background;
 	SaleTileCarousel carousel;
 	sf::Text title;
 	

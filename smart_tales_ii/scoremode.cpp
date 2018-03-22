@@ -43,7 +43,9 @@ void ScoreMode::Load()
 	gotoShopButton = std::make_unique<TextButton>(navigationButtonSheet);
 	gotoShopButton->SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton->GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
 	sf::Text buttonText("Go to shop", *fontPtr, 30U);
-	buttonText.setFillColor(sf::Color::White);
+	buttonText.setOutlineThickness(1.f);
+	buttonText.setOutlineColor(sf::Color(120, 63, 0));
+	buttonText.setFillColor(sf::Color(181, 105, 0));
 	gotoShopButton->SetText(buttonText);
 
 	title.setFont(*fontPtr);

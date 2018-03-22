@@ -43,6 +43,10 @@ void ShopMode::LoadTiles()
 	{
 		throw std::runtime_error("Error fetching upgradetilebg.png in Shopmode.");
 	}
+	if(!paperclipTexture.loadFromFile("texture/paperclip.png"))
+	{
+		throw std::runtime_error("Error fetching paperclip.png in Shopmode.");
+	}
 
 	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
@@ -60,12 +64,15 @@ void ShopMode::LoadTiles()
 			throw std::runtime_error("Error fetching <" + cTileImageTextures[i] + "> in Shopmode.");
 		}
 
-		UpgradeTile * upgradeTile = new UpgradeTile(purchaseButtonSheet, *fontPtr);
-		upgradeTile->SetTileBackground(tileBackgroundTexture);
-		upgradeTile->SetUpgrade(cTileUpgrades[i]);
-		upgradeTile->SetImage(tileImageTextures[i]);
-		upgradeTile->SetPrice(cTilePrices[i]);
-		upgradeTile->SetDescription(cTileDescriptions[i]);
+		UpgradeTile * upgradeTile = new UpgradeTile(
+			cTileUpgrades[i],
+			cTilePrices[i],
+			cTileDescriptions[i],
+			tileBackgroundTexture,
+			tileImageTextures[i],
+			paperclipTexture,
+			purchaseButtonSheet, 
+			*fontPtr);
 
 		carousel.AddSaleTile(upgradeTile);
 	}
@@ -76,6 +83,7 @@ void ShopMode::LoadTiles()
 
 void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	target.draw(background, states);
 	target.draw(title, states);
 	target.draw(*gotoGameButton, states);
 	target.draw(carousel, states);
@@ -86,10 +94,17 @@ void ShopMode::Load()
 	manager.PopAllBelow(this);
 	manager.PushGamemode(new UIOverlay(resourceCache, manager, false));
 
+	if(!backgroundTexture.loadFromFile("texture/shopbackground.png"))
+	{
+		throw std::runtime_error("Error loading texture/shopbackground.png in Shopmode.");
+	}
+	background.setTexture(backgroundTexture, true);
+	background.setPosition(0.f, 0.f);
+
 	sf::Font * fontPtr = resourceCache.GetFont("commodore");
 	if(fontPtr == nullptr)
 	{
-		throw std::runtime_error("Error fetching commodore font in RunningMode.");
+		throw std::runtime_error("Error fetching commodore font in Shopmode.");
 	}
 
 	title.setFont(*fontPtr);
@@ -106,8 +121,10 @@ void ShopMode::Load()
 
 	const auto buttonBounds = gotoGameButton->GetGlobalbounds();
 	gotoGameButton->SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
-	sf::Text buttonText("Back to running", *fontPtr, 26U);
-	buttonText.setFillColor(sf::Color::White);
+	sf::Text buttonText("Back to running", *fontPtr, 30U);
+	buttonText.setOutlineThickness(1.f);
+	buttonText.setOutlineColor(sf::Color(120, 63, 0));
+	buttonText.setFillColor(sf::Color(181, 105, 0));
 	gotoGameButton->SetText(buttonText);
 
 	LoadTiles();

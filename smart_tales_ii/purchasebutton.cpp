@@ -1,20 +1,10 @@
 #include "purchasebutton.hpp"
 
-void PurchaseButton::Purchase()
+void PurchaseButton::SetPurchased()
 {
 	Disable();
 	SetAnimation("bought");
-	SetString("Bought");
-}
-
-void PurchaseButton::SetUpgrade(const Upgrade::Sensor upgradeToSell)
-{
-	upgrade = upgradeToSell;
-}
-
-void PurchaseButton::SetPrice(const unsigned int upgradePrice)
-{
-	price = upgradePrice;
+	isPurchased = true;
 }
 
 Upgrade::Sensor PurchaseButton::GetUpgrade() const
@@ -27,23 +17,26 @@ unsigned int PurchaseButton::GetPrice() const
 	return price;
 }
 
+bool PurchaseButton::IsPurchased() const
+{
+	return isPurchased;
+}
+
 void PurchaseButton::Refresh(const Player::Inventory & inventory)
 {
 	if(inventory.HasSensorUpgrade(upgrade))
 	{
-		Purchase();
+		SetPurchased();
 	}
 	else if(!inventory.CanAfford(price))
 	{
 		Disable();
 		SetAnimation("too-expensive");
-		SetString("Can't\nafford");
 	}
 	else
 	{
 		Enable();
 		SetAnimation("buy");
-		SetString("Buy");
 	}
 }
 
@@ -51,14 +44,18 @@ bool PurchaseButton::HandleInput(const Inputhandler & input)
 {
 	if(isEnabled && Interacts(input))
 	{
-		Purchase();
+		SetPurchased();
 		return true;
 	}
 
 	return false;
 }
 
-PurchaseButton::PurchaseButton(const Animation::Sheet & sheetRef)
-	: TextButton(sheetRef)
+PurchaseButton::PurchaseButton(const Upgrade::Sensor upgradeToSell,
+	const unsigned int sellingPrice,
+	const Animation::Sheet & sheetRef)
+	: Button(sheetRef),
+	upgrade(upgradeToSell),
+	price(sellingPrice)
 {
 }

@@ -3,11 +3,14 @@
 #include "upgrades.hpp"
 #include "purchasebutton.hpp"
 
+#include <string>
+
 class UpgradeTile : public SaleTile
 {
 private:
-	sf::Sprite tileSprite;
-	sf::Sprite upgradeImage;
+	sf::Sprite background;
+	sf::Sprite image;
+	sf::Sprite paperclip;
 	sf::Text upgradePriceText;
 	PurchaseButton purchaseButton;
 	sf::Text upgradeDescription;
@@ -19,12 +22,6 @@ public:
 	virtual sf::Vector2f GetPosition() const override;
 	virtual sf::Vector2f GetSize() const override;
 
-	void SetTileBackground(const sf::Texture & t);
-	void SetUpgrade(const Upgrade::Sensor s);
-	void SetImage(const sf::Texture & t);
-	void SetPrice(const unsigned int price);
-	void SetDescription(const std::string & description);
-
 	void Refresh(const Player::Inventory & inventory) override;
 
 	// Returns whether the interaction was handled
@@ -34,6 +31,13 @@ public:
 		const float horizontalDisplacement,
 		const bool allowInteraction = true) override;
 
-	UpgradeTile(const Animation::Sheet & purchaseButtonSheet, sf::Font & font);
+	UpgradeTile(const Upgrade::Sensor upgrade,
+		const unsigned int price,
+		const std::string & description,
+		const sf::Texture & backgroundTexture,
+		const sf::Texture & productImage,
+		const sf::Texture & paperclipTexture,
+		Animation::Sheet & purchaseButtonSheet, 
+		sf::Font & font);
 };
 
