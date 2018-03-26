@@ -16,10 +16,16 @@ void CurrencyDisplayer::draw(sf::RenderTarget & target, sf::RenderStates states)
 void CurrencyDisplayer::UpdateText()
 {
 	std::stringstream ss;
+	ss << label;
 	ss << std::setfill('0') << std::setw(decimalPlaces);
 	ss << currentValue;
 
 	text.setString(ss.str());
+}
+
+bool CurrencyDisplayer::IsDoneAnimating() const
+{
+	return targetValue == currentValue;
 }
 
 void CurrencyDisplayer::CenterOn(const float x, const float y)
@@ -61,23 +67,33 @@ void CurrencyDisplayer::Update(const sf::Time & elapsed)
 	if(currentValue != targetValue)
 	{
 		unsigned int change = 0U;
-		unsigned int difference = std::abs(static_cast<int>(currentValue) - static_cast<int>(targetValue));
-		if(difference > 1000)
+
+		if(animatesFast)
 		{
-			change = 1000;
-		}
-		else if(difference > 100)
-		{
-			change = 100;
-		}
-		else if(difference > 10)
-		{
-			change = 10;
+			// NOTE potential overflow when casting to signed, unlikely but possible
+			unsigned int difference = std::abs(static_cast<int>(currentValue) - static_cast<int>(targetValue));
+			if(difference > 1000)
+			{
+				change = 1000;
+			}
+			else if(difference > 100)
+			{
+				change = 100;
+			}
+			else if(difference > 10)
+			{
+				change = 10;
+			}
+			else
+			{
+				change = 1;
+			}
 		}
 		else
 		{
 			change = 1;
 		}
+		
 
 		if(currentValue < targetValue)
 		{
@@ -91,13 +107,22 @@ void CurrencyDisplayer::Update(const sf::Time & elapsed)
 	}
 }
 
-CurrencyDisplayer::CurrencyDisplayer(const unsigned int numberCharCount)
+CurrencyDisplayer::CurrencyDisplayer(const unsigned int numberCharCount, 
+	const std::string && leadingLabel, 
+	const unsigned int initialValue,
+	const bool fastAnimation)
 	: coin(ResourceCache::GetInstance().GetTexture("coin")),
 	text("", ResourceCache::GetInstance().GetFont("commodore"), 32),
-	decimalPlaces(numberCharCount)
+	label(leadingLabel),
+	animatesFast(fastAnimation),
+	decimalPlaces(numberCharCount),
+	targetValue(initialValue),
+	currentValue(initialValue)
 {
 	text.setString(std::string(numberCharCount, '0'));
 	text.setFillColor(sf::Color::White);
 	text.setOutlineColor(sf::Color::Black);
 	text.setOutlineThickness(2.f);
+
+	UpdateText();
 }

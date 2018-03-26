@@ -15,7 +15,6 @@
 
 #include <array>
 #include <iomanip>
-#include <iostream> // debug
 #include <memory>
 #include <sstream>
 
@@ -67,11 +66,11 @@ void RunningMode::SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned
 	scoreBubbles.emplace_back(mousePos, score);
 }
 
-void RunningMode::GameOver()
+void RunningMode::GameOver(const Obstacle::Type cause)
 {
 	auto & manager = GameManager::GetInstance();
 	manager.Pop(); // delete our created overlay
-	manager.PushGamemode(new ScoreMode(score, playerInventory));
+	manager.PushGamemode(new ScoreMode(score, playerInventory, Obstacle::GetGameOverString(cause)));
 	return;
 }
 
@@ -133,13 +132,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 		{
 			if(!obstacle.IsUnharmful())
 			{
-				// debug
-				std::cout << "Run over! Currency earned this run: " << score.GetTotalCurrency();
-				std::cout << " with a distance of " << score.distance;
-				std::cout << " covered and a scroll velocity of " << scrollVelocity << '\n';
-				std::cout << "\tKilled by a <" << Obstacle::GetString(obstacle.GetType()) << ">\n";
-				// end debug
-				GameOver();
+				GameOver(obstacle.GetType());
 
 				return true;
 			}
@@ -240,7 +233,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	// debug
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 	{
-		GameOver();
+		GameOver(Obstacle::Type::Unknown);
 		return;
 	}
 	// end debug
@@ -291,8 +284,9 @@ void RunningMode::OnEnter()
 
 RunningMode::RunningMode(const Player::Inventory & inventory)
 	: background(cWorldWidth),
-	playerInventory(inventory),
-	player(inventory)
+	currencyDisplay(5U, "score "),
+	player(inventory),
+	playerInventory(inventory)
 {
 
 }

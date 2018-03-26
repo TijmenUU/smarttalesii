@@ -42,7 +42,7 @@ protected:
 	void SpawnObstacle();
 	void SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score);
 	
-	void GameOver();
+	void GameOver(const Obstacle::Type cause);
 	void Reset();
 
 	bool SurpressDraw() const override;

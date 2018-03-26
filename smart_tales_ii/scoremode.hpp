@@ -1,5 +1,6 @@
 #pragma once
 #include "animatedsprite.hpp"
+#include "currencydisplayer.hpp"
 #include "textbutton.hpp"
 #include "gamemode.hpp"
 #include "playerscore.hpp"
@@ -14,8 +15,10 @@ private:
 	Player::Inventory playerInventory;
 	
 	Animation::Sprite backgroundSprite;
+	sf::Text gameOverText;
+	CurrencyDisplayer earnedCurrency, balanceCurrency;
 	TextButton gotoShopButton;
-	sf::Text currencyEarned, newBalance;
+	float animationTimeOut = 0.f;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
@@ -26,5 +29,6 @@ public:
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 	ScoreMode(const Player::Score & score, 
-		const Player::Inventory & inventory);
+		const Player::Inventory & inventory,
+		const std::string & gameOverMsg);
 };

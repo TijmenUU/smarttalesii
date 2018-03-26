@@ -17,4 +17,6 @@ namespace Obstacle
 	std::string GetString(const Type t);
 
 	std::string GetHintString(const Type t);
+
+	std::string GetGameOverString(const Type t);
 }

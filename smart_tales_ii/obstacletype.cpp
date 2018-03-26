@@ -57,4 +57,26 @@ namespace Obstacle
 			return std::string();
 		}
 	}
+
+	std::string GetGameOverString(const Type t)
+	{
+		switch(t)
+		{
+			case Type::Furniture:
+			return "You hit some furniture!";
+
+			case Type::Door:
+			return "You walked into a door!";
+
+			case Type::Light:
+			return "You forgot to turn\non the lights!";
+
+			case Type::Phone:
+			return "You missed the phone call!";
+
+			default:
+			case Type::Unknown:
+			return "Did you just cheat?";
+		}
+	}
 }
