@@ -15,7 +15,7 @@ private:
 	
 	Animation::Sprite backgroundSprite;
 	TextButton gotoShopButton;
-	sf::Text title, currencyEarned, newBalance;
+	sf::Text currencyEarned, newBalance;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 

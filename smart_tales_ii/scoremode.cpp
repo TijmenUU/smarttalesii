@@ -8,7 +8,6 @@
 void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(backgroundSprite, states);
-	target.draw(title, states);
 	target.draw(currencyEarned, states);
 	target.draw(newBalance, states);
 	target.draw(gotoShopButton, states);
@@ -37,14 +36,6 @@ void ScoreMode::Setup()
 	buttonText.setOutlineColor(sf::Color(120, 63, 0));
 	buttonText.setFillColor(sf::Color::White);
 	gotoShopButton.SetText(buttonText);
-
-	title.setFont(font);
-	title.setCharacterSize(36);
-	title.setFillColor(sf::Color::White);
-	title.setOutlineColor(sf::Color::Black);
-	title.setOutlineThickness(2.f);
-	title.setString("Score Screen");
-	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 0.f);
 
 	currencyEarned.setFont(font);
 	currencyEarned.setCharacterSize(24);
