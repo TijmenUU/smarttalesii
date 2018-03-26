@@ -6,7 +6,8 @@ class CurrencyDisplayer : public sf::Drawable
 private:
 	sf::Sprite coin;
 	sf::Text text;
-
+	
+	unsigned int decimalPlaces = 5U;
 	unsigned int targetValue = 0U;
 	unsigned int currentValue = 0U;
 
@@ -17,9 +18,10 @@ protected:
 
 public:
 	void CenterOn(const float x, const float y);
+	void CenterOn(const sf::Vector2f & v);
 	void SetValue(const unsigned int v, const bool animate = true);
 
 	void Update(const sf::Time & elapsed);
 
-	CurrencyDisplayer();
+	CurrencyDisplayer(const unsigned int numberCharCount = 5U);
 };

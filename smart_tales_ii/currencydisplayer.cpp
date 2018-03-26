@@ -16,7 +16,7 @@ void CurrencyDisplayer::draw(sf::RenderTarget & target, sf::RenderStates states)
 void CurrencyDisplayer::UpdateText()
 {
 	std::stringstream ss;
-	ss << std::setfill('0') << std::setw(5);
+	ss << std::setfill('0') << std::setw(decimalPlaces);
 	ss << currentValue;
 
 	text.setString(ss.str());
@@ -34,6 +34,11 @@ void CurrencyDisplayer::CenterOn(const float x, const float y)
 
 	const float coinYOffset = coinBounds.height / 2.f;
 	coin.setPosition(x + textXOffset + hor_padding, y - coinYOffset);
+}
+
+void CurrencyDisplayer::CenterOn(const sf::Vector2f & v)
+{
+	CenterOn(v.x, v.y);
 }
 
 void CurrencyDisplayer::SetValue(const unsigned int v, const bool animate)
@@ -86,10 +91,12 @@ void CurrencyDisplayer::Update(const sf::Time & elapsed)
 	}
 }
 
-CurrencyDisplayer::CurrencyDisplayer()
+CurrencyDisplayer::CurrencyDisplayer(const unsigned int numberCharCount)
 	: coin(ResourceCache::GetInstance().GetTexture("coin")),
-	text("00000", ResourceCache::GetInstance().GetFont("commodore"), 32)
+	text("", ResourceCache::GetInstance().GetFont("commodore"), 32),
+	decimalPlaces(numberCharCount)
 {
+	text.setString(std::string(numberCharCount, '0'));
 	text.setFillColor(sf::Color::White);
 	text.setOutlineColor(sf::Color::Black);
 	text.setOutlineThickness(2.f);
