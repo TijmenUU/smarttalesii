@@ -9,7 +9,7 @@
 /* Tile layout */
 const sf::Vector2f cImagePosition(35, 35);
 const sf::Vector2f cPaperclipPosition(0, -40);
-const sf::Vector2f cPricePosition(260, 90);
+const sf::Vector2f cPricePosition(310, 107);
 const sf::Vector2f cButtonPosition(250, 130);
 const sf::Vector2f cDescriptionPosition(70, 270);
 
@@ -19,7 +19,7 @@ void UpgradeTile::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(image, states);
 	target.draw(paperclip, states);
 	if(!purchaseButton.IsPurchased())
-		target.draw(upgradePriceText, states);
+		target.draw(priceText, states);
 	target.draw(purchaseButton, states);
 	target.draw(upgradeDescription, states);
 }
@@ -29,7 +29,7 @@ void UpgradeTile::SetPosition(const sf::Vector2f & p)
 	background.setPosition(p);
 	image.setPosition(p + cImagePosition);
 	paperclip.setPosition(p + cPaperclipPosition);
-	upgradePriceText.setPosition(p + cPricePosition);
+	priceText.CenterOn(p + cPricePosition);
 	purchaseButton.SetPosition(p + cButtonPosition);
 	upgradeDescription.setPosition(p + cDescriptionPosition);
 }
@@ -82,18 +82,13 @@ UpgradeTile::UpgradeTile(const Upgrade::Sensor upgrade,
 	: background(ResourceCache::GetInstance().GetTexture("upgradetilebg")),
 	image(productImage),
 	paperclip(ResourceCache::GetInstance().GetTexture("paperclip")),
-	upgradePriceText("", font, 30U),
+	priceText(3U),
 	purchaseButton(upgrade, price),
 	upgradeDescription(description, font, 26U)
 {
-	std::stringstream ss;
-	ss << std::setfill('0') << std::setw(3);
-	ss << price;
-
-	const sf::Color textColor(0, 15, 85);
-
-	upgradePriceText.setString(ss.str());
-	upgradePriceText.setFillColor(textColor);
-
-	upgradeDescription.setFillColor(textColor);
+	priceText.SetValue(price, false);
+	
+	upgradeDescription.setFillColor(sf::Color::White);
+	upgradeDescription.setOutlineColor(sf::Color::Black);
+	upgradeDescription.setOutlineThickness(2.f);
 }

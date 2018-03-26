@@ -1,7 +1,9 @@
 #pragma once
 #include "tile.hpp"
-#include "upgrades.hpp"
+
+#include "currencydisplayer.hpp"
 #include "purchasebutton.hpp"
+#include "upgrades.hpp"
 
 #include <string>
 
@@ -11,7 +13,7 @@ private:
 	sf::Sprite background;
 	sf::Sprite image;
 	sf::Sprite paperclip;
-	sf::Text upgradePriceText;
+	CurrencyDisplayer priceText;
 	PurchaseButton purchaseButton;
 	sf::Text upgradeDescription;
 
