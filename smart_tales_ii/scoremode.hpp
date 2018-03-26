@@ -22,7 +22,7 @@ private:
 public:
 	bool SurpressUpdate() const override;
 
-	void Load() override;
+	void Setup() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 	ScoreMode(const Player::Score & score, 

@@ -11,7 +11,7 @@ void WinOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(body, states);
 }
 
-void WinOverlay::Load()
+void WinOverlay::Setup()
 {
 	sf::Font & font = ResourceCache::GetInstance().GetFont("commodore");
 

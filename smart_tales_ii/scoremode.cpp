@@ -19,7 +19,7 @@ bool ScoreMode::SurpressUpdate() const
 	return true;
 }
 
-void ScoreMode::Load()
+void ScoreMode::Setup()
 {
 	//manager.PopAllBelow(this);
 	GameManager::GetInstance().PushGamemode(new UIOverlay(false));

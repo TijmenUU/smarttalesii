@@ -18,7 +18,7 @@ protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 	bool SurpressUpdate() const override;
-	void Load() override;
+	void Setup() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:

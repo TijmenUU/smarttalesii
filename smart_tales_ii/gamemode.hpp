@@ -23,7 +23,7 @@ protected:
 	virtual void OnExit();
 	virtual void OnEnter();
 
-	virtual void Load() = 0;
+	virtual void Setup() = 0;
 	virtual void Update(const sf::Time & elapsed, const Inputhandler & input) = 0;
 
 public:

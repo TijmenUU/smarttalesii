@@ -31,7 +31,7 @@ GameManager & GameManager::GetInstance()
 void GameManager::PushGamemode(Gamemode * gamemode)
 {
 	gamemodes.emplace_back(gamemode);
-	gamemode->Load();
+	gamemode->Setup();
 	gamemode->OnEnter();
 }
 

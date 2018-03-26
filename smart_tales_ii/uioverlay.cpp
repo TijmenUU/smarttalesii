@@ -22,7 +22,7 @@ bool UIOverlay::SurpressUpdate() const
 	return gamePauseButton.IsDown();
 }
 
-void UIOverlay::Load()
+void UIOverlay::Setup()
 {
 	pauseOverlay.setPosition(0.f, 0.f);
 	pauseOverlay.setFillColor(sf::Color(0, 0, 0, 65));

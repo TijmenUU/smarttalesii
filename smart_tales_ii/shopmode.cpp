@@ -66,7 +66,7 @@ void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(carousel, states);
 }
 
-void ShopMode::Load()
+void ShopMode::Setup()
 {
 	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);

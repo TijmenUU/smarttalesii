@@ -50,7 +50,7 @@ protected:
 	void OnEnter() override;
 
 	// May throw a runtime exception if it cannot load the required files and assets
-	void Load() override;
+	void Setup() override;
 
 	// if it returns true, game over
 	bool UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input);

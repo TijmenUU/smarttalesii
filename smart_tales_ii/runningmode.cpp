@@ -193,7 +193,7 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 	}
 }
 
-void RunningMode::Load()
+void RunningMode::Setup()
 {
 	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);
