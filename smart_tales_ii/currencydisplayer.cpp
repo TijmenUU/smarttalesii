@@ -55,13 +55,32 @@ void CurrencyDisplayer::Update(const sf::Time & elapsed)
 {
 	if(currentValue != targetValue)
 	{
-		if(currentValue < targetValue)
+		unsigned int change = 0U;
+		unsigned int difference = std::abs(static_cast<int>(currentValue) - static_cast<int>(targetValue));
+		if(difference > 1000)
 		{
-			++currentValue;
+			change = 1000;
+		}
+		else if(difference > 100)
+		{
+			change = 100;
+		}
+		else if(difference > 10)
+		{
+			change = 10;
 		}
 		else
 		{
-			--currentValue;
+			change = 1;
+		}
+
+		if(currentValue < targetValue)
+		{
+			currentValue += change;
+		}
+		else
+		{
+			currentValue -= change;
 		}
 		UpdateText();
 	}
