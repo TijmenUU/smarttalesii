@@ -2,6 +2,7 @@
 #include "gamemode.hpp"
 
 #include "carousel.hpp"
+#include "currencydisplayer.hpp"
 #include "playerinventory.hpp"
 #include "textbutton.hpp"
 
@@ -14,7 +15,7 @@ private:
 
 	sf::Sprite background;
 	SaleTileCarousel carousel;
-	sf::Text title;
+	CurrencyDisplayer currencyDisplay;
 	
 	TextButton gotoGameButton;
 

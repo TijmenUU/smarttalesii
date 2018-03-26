@@ -61,7 +61,7 @@ void ShopMode::LoadTiles()
 void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(background, states);
-	target.draw(title, states);
+	target.draw(currencyDisplay, states);
 	target.draw(gotoGameButton, states);
 	target.draw(carousel, states);
 }
@@ -76,13 +76,8 @@ void ShopMode::Setup()
 
 	auto & font = ResourceCache::GetInstance().GetFont("commodore");
 
-	title.setFont(font);
-	title.setCharacterSize(48);
-	title.setFillColor(sf::Color::White);
-	title.setOutlineColor(sf::Color::Black);
-	title.setOutlineThickness(2.f);
-	title.setString("Shop");
-	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 0.f);
+	currencyDisplay.SetValue(playerInventory.GetCurrency(), false);
+	currencyDisplay.CenterOn(cWorldWidth / 2.f, 25.f);
 
 	const auto buttonBounds = gotoGameButton.GetGlobalbounds();
 	gotoGameButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
@@ -101,6 +96,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
 	{
 		playerInventory.AddCurrency(40);
+		currencyDisplay.SetValue(playerInventory.GetCurrency(), false);
 		std::cout << "Gave you 40 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
 		carousel.RefreshTiles(playerInventory);
 	}
@@ -119,7 +115,17 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		GameManager::GetInstance().PushGamemode(new RunningMode(playerInventory));
 		return;
 	}
+
+	const auto currency = playerInventory.GetCurrency();
 	carousel.Update(elapsed, input, playerInventory);
+	if(currency != playerInventory.GetCurrency())
+	{
+		currencyDisplay.SetValue(playerInventory.GetCurrency());
+	}
+	else
+	{
+		currencyDisplay.Update(elapsed);
+	}
 }
 
 ShopMode::ShopMode(const Player::Inventory & inventory)
