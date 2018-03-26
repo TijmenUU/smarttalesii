@@ -34,8 +34,6 @@ void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
 
 void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & input, Player::Inventory & inventory)
 {
-	bool hasInteracted = false;
-
 	if(input.PointingDevicePressedEvent())
 	{
 		wasMouseDown = true;
@@ -59,16 +57,16 @@ void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & inp
 		const float distanceTravelledTotal = VectorMathF::Distance(mouseStartPosition, input.PointingDeviceWorldPosition());
 		if(distanceTravelledTotal < cTapBias)
 		{
+			bool hasInteracted = false;
 			for(size_t i = 0; i < tiles.size(); ++i)
 			{
 				hasInteracted = hasInteracted || tiles[i]->Update(elapsed, input, inventory, 0.f);
 			}
+			if(hasInteracted)
+			{
+				RefreshTiles(inventory);
+			}
 		}
-	}
-
-	if(hasInteracted)
-	{
-		RefreshTiles(inventory);
 	}
 }
 
