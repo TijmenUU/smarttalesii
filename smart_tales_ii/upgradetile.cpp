@@ -1,5 +1,6 @@
 #include "upgradetile.hpp"
 
+#include "alignmenthelp.hpp"
 #include "resourcecache.hpp"
 
 #include <iomanip>
@@ -11,7 +12,7 @@ const sf::Vector2f cImagePosition(35, 35);
 const sf::Vector2f cPaperclipPosition(0, -40);
 const sf::Vector2f cPricePosition(310, 107);
 const sf::Vector2f cButtonPosition(250, 130);
-const sf::Vector2f cDescriptionPosition(70, 270);
+const sf::Vector2f cDescriptionCenter(245, 395);
 
 void UpgradeTile::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
@@ -31,7 +32,9 @@ void UpgradeTile::SetPosition(const sf::Vector2f & p)
 	paperclip.setPosition(p + cPaperclipPosition);
 	priceText.CenterOn(p + cPricePosition);
 	purchaseButton.SetPosition(p + cButtonPosition);
-	upgradeDescription.setPosition(p + cDescriptionPosition);
+
+	const auto bounds = upgradeDescription.getLocalBounds();
+	upgradeDescription.setPosition(Alignment::GetCenterOffset(bounds.width, p.x + cDescriptionCenter.x) + bounds.left, p.y + 300.f);
 }
 
 sf::Vector2f UpgradeTile::GetPosition() const

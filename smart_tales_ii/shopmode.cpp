@@ -24,10 +24,10 @@ const std::array<std::string, 4> cTileImageTextures = {
 };
 
 const std::array<std::string, 4> cTileDescriptions = {
-	"Passive Infrared\nSensor",
-	"Active Infrared\nSensor",
-	"Health monitoring\nwristband",
-	"Live tile"
+	"This detects\nmovement and\nautomatically\nturns on the\nlights!",
+	"Doors like in\nsupermarkets,\nfully automated!",
+	"Allow the doctor\nto monitor my\ncondition without\na call!",
+	"Automagical\nremoval of\nin-the-way\nfurniture!"
 };
 
 const std::array<unsigned int, 4> cTilePrices = {
