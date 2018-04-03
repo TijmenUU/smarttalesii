@@ -22,7 +22,7 @@ void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void ScoreMode::OnEnter()
 {
-	GameManager::GetInstance().SetMusicVolume(50.f);
+	SoundManager::GetInstance().SetMusicVolume(50.f);
 }
 
 bool ScoreMode::SurpressUpdate() const

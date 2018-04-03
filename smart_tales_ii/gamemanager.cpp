@@ -8,14 +8,7 @@ void GameManager::Update(const sf::Time & elapsed,
 	const Inputhandler & input,
 	const sf::View & view)
 {
-	// update sound fx as well
-	for(int64_t i = static_cast<int64_t>(soundEffects.size()) - 1; i >= 0; --i)
-	{
-		if(soundEffects[i].getStatus() != sf::SoundSource::Playing)
-		{
-			soundEffects.erase(soundEffects.begin() + i);
-		}
-	}
+	SoundManager::GetInstance().Update(elapsed);
 
 	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
 	{
@@ -93,96 +86,6 @@ bool GameManager::PopAllBelow(Gamemode * gamemode)
 		gamemodes.erase(gamemodes.begin());
 	}
 	return false;
-}
-
-void GameManager::StopMusic()
-{
-	if(currentMusicPtr != nullptr)
-	{
-		currentMusicPtr->stop();
-	}
-}
-
-void GameManager::PlayMusic(sf::Music & music)
-{
-	if(musicMuted)
-	{
-		return;
-	}
-
-	if(currentMusicPtr != nullptr)
-	{
-		currentMusicPtr->stop();
-	}
-	currentMusicPtr = &music;
-	currentMusicPtr->play();
-}
-
-float GameManager::GetMusicVolume() const
-{
-	if(currentMusicPtr != nullptr)
-	{
-		return currentMusicPtr->getVolume();
-	}
-	return -1.f;
-}
-
-void GameManager::SetMusicVolume(const float volume)
-{
-	if(currentMusicPtr != nullptr)
-	{
-		currentMusicPtr->setVolume(volume);
-	}
-}
-
-void GameManager::SetMucicMute(const bool muted)
-{
-	musicMuted = muted;
-	if(musicMuted)
-	{
-		StopMusic();
-	}
-	else
-	{
-		if(currentMusicPtr != nullptr)
-		{
-			currentMusicPtr->play();
-		}
-	}
-}
-
-bool GameManager::IsMusicMuted() const
-{
-	return musicMuted;
-}
-
-void GameManager::PlaySFX(const sf::SoundBuffer & buffer, const float volume)
-{
-	// Limit the number of simultaneous sound effects, 256 according to the SFML
-	// docs but we stay way clear of that number. 256 is including any music tracks
-	// playing.
-	if(sfxMuted || soundEffects.size() > 128)
-	{
-		return;
-	}
-
-	soundEffects.emplace_back(buffer);
-	soundEffects.back().setVolume(volume);
-	soundEffects.back().play();
-}
-
-void GameManager::SetSFXMuted(const bool muted)
-{
-	sfxMuted = muted;
-	if(sfxMuted)
-	{
-		soundEffects.clear();
-	}
-}
-
-bool GameManager::IsSFXMuted() const
-{
-	return sfxMuted;
 }
 
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const

@@ -106,7 +106,7 @@ void RunningMode::OnEnter()
 	auto & music = ResourceCache::GetInstance().GetMusic("pixelland");
 	music.setVolume(100);
 	music.setLoop(true);
-	GameManager::GetInstance().PlayMusic(music);
+	SoundManager::GetInstance().CrossFadeMusic(music);
 }
 
 bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)

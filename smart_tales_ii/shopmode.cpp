@@ -70,9 +70,9 @@ void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void ShopMode::OnEnter()
 {
 	auto & music = ResourceCache::GetInstance().GetMusic("casabossanova");
-	music.setVolume(75);
+	music.setVolume(50);
 	music.setLoop(true);
-	GameManager::GetInstance().PlayMusic(music);
+	SoundManager::GetInstance().CrossFadeMusic(music);
 }
 
 void ShopMode::Setup()
