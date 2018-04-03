@@ -151,6 +151,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 				obstacle.IsActive())
 			{
 				player.ShowOff();
+				dynamic_cast<Obstacle::Phone *>(obstacles[i].get())->Neutralize();
 			}	
 		}
 	}

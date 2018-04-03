@@ -64,7 +64,14 @@ namespace Obstacle
 			{
 				currentTimeout = cRingingTimeout;
 				auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("phone-ring");
-				SoundManager::GetInstance().PlaySFX(sfx);
+				if(sensorEnabled)
+				{
+					SoundManager::GetInstance().PlaySFX(sfx, 25.f);
+				}
+				else
+				{
+					SoundManager::GetInstance().PlaySFX(sfx);
+				}
 			}
 		}
 

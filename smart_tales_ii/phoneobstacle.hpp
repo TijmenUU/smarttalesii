@@ -11,10 +11,11 @@ namespace Obstacle
 
 	protected:
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-		void Neutralize() override;
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 
 	public:
+		void Neutralize() override;
+
 		sf::Vector2f GetHintPosition() const override;
 
 		bool CanDespawn() const override;
