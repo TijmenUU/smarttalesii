@@ -79,6 +79,11 @@ void SoundManager::PlayMusic(sf::Music & music)
 
 void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 {
+	if(musicMuted)
+	{
+		return;
+	}
+
 	if(currentMusicPtr == nullptr)
 	{
 		PlayMusic(next);
