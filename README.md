@@ -19,7 +19,7 @@ Should build on Linux too, as there are no platform specific libraries or APIs u
 Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for binaries if you cannot or do not want to build it yourself.
 
 ## License
-The project and all its assets are licensed under the MIT License unless otherwise specified.
+See the license file for all the licenses this project uses.
 
 ## About
 This is a bachelors project for the University of Utrecht, 2017-2018. In short the project is about generating awareness of Ambient Assisted Living (AAL), with a focus on the elderly. The game attempts to do this through providing a small but fun experience in the form of a small game.

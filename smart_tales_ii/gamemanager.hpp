@@ -1,6 +1,7 @@
 #pragma once
-#include "resourcecache.hpp"
 #include "gamemode.hpp"
+#include "resourcecache.hpp"
+#include "soundmanager.hpp"
 
 #include <memory>
 #include <SFML/Graphics.hpp>

@@ -1,6 +1,7 @@
 #include "doorobstacle.hpp"
 
 #include "resourcecache.hpp"
+#include "soundmanager.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
@@ -23,6 +24,8 @@ namespace Obstacle
 			obstacleSprite.SetAnimation("neutralized");
 		}
 		neutralized = true;
+		auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("door-open");
+		SoundManager::GetInstance().PlaySFX(sfx);
 	}
 
 	bool Door::IsInteractionInBounds(const Inputhandler & input) const

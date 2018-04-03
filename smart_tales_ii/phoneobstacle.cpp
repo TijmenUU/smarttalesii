@@ -1,6 +1,7 @@
 #include "phoneobstacle.hpp"
 
 #include "resourcecache.hpp"
+#include "soundmanager.hpp"
 
 namespace Obstacle
 {
@@ -16,6 +17,8 @@ namespace Obstacle
 	{
 		neutralized = true;
 		obstacleSprite.SetAnimation("neutralized");
+		auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("phone-pickup");
+		SoundManager::GetInstance().PlaySFX(sfx);
 	}
 
 	bool Phone::IsInteractionInBounds(const Inputhandler & input) const
@@ -55,6 +58,14 @@ namespace Obstacle
 		if(!neutralized)
 		{
 			HandleInput(input);
+
+			currentTimeout -= elapsed.asSeconds();
+			if(currentTimeout <= 0.f)
+			{
+				currentTimeout = cRingingTimeout;
+				auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("phone-ring");
+				SoundManager::GetInstance().PlaySFX(sfx);
+			}
 		}
 
 		obstacleSprite.Update(elapsed);

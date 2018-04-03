@@ -198,6 +198,9 @@
     <ClCompile Include="currencydisplayer.cpp">
       <Filter>Source Files\game\objects</Filter>
     </ClCompile>
+    <ClCompile Include="soundmanager.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="currencydisplayer.hpp">
       <Filter>Header Files\game\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="soundmanager.hpp">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

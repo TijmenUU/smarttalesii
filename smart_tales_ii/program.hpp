@@ -18,7 +18,6 @@ public:
 
 	Program(const unsigned int _windowWidth,
 		const unsigned int _windowHeight,
-		const std::string windowTitle = "test",
-		const unsigned int frameRateLimit = 60U);
+		const std::string windowTitle = "test");
 	~Program();
 };

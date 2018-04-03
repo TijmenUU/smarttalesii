@@ -2,6 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "resourcecache.hpp"
+#include "soundmanager.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
@@ -25,6 +26,8 @@ namespace Obstacle
 			playerNeutralized = true;
 			Neutralize();
 			lightSwitch.SetAnimation("activated");
+			auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("switch");
+			SoundManager::GetInstance().PlaySFX(sfx);
 			showBeam = false;
 		}
 	}

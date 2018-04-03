@@ -8,6 +8,8 @@ void GameManager::Update(const sf::Time & elapsed,
 	const Inputhandler & input,
 	const sf::View & view)
 {
+	SoundManager::GetInstance().Update(elapsed);
+
 	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
 	{
 #pragma warning(suppress: 4244) // gamemodes size should not exceed int64_t precision
@@ -56,6 +58,7 @@ void GameManager::Pop()
 {
 	if(gamemodes.size() > 0)
 	{
+		gamemodes.back()->OnExit();
 		gamemodes.erase(gamemodes.end() - 1);
 	}
 }
@@ -79,6 +82,7 @@ bool GameManager::PopAllBelow(Gamemode * gamemode)
 {
 	while(gamemodes.size() > 0 && gamemodes.front().get() != gamemode)
 	{
+		gamemodes.front()->OnExit();
 		gamemodes.erase(gamemodes.begin());
 	}
 	return false;

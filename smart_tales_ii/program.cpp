@@ -44,6 +44,21 @@ const std::array<std::string, 16> cSpriteSheetFiles = {
 	"animation/scorebackground.txt",
 	"animation/sfxbutton.txt"
 };
+
+const std::array<std::string, 2> cMusicFiles = {
+	"music/casabossanova.ogg",
+	"music/pixelland.ogg"
+};
+
+const std::array<std::string, 7> cAudioFiles = {
+	"sfx/coin.ogg",
+	"sfx/door-open.ogg",
+	"sfx/kaching.ogg",
+	"sfx/phone-pickup.ogg",
+	"sfx/phone-ring.ogg",
+	"sfx/switch.ogg",
+	"sfx/woosh.ogg"
+};
 #pragma endregion
 
 void Program::Load()
@@ -61,6 +76,14 @@ void Program::Load()
 	for(size_t i = 0U; i < cSpriteSheetFiles.size(); ++i)
 	{
 		cache.LoadSpriteSheet(cSpriteSheetFiles[i]);
+	}
+	for(size_t i = 0U; i < cMusicFiles.size(); ++i)
+	{
+		cache.LoadMusic(cMusicFiles[i]);
+	}
+	for(size_t i = 0U; i < cAudioFiles.size(); ++i)
+	{
+		cache.LoadSound(cAudioFiles[i]);
 	}
 
 	// Set game starting gamemode
@@ -89,11 +112,11 @@ void Program::Run()
 
 Program::Program( const unsigned int _windowWidth,
 						const unsigned int _windowHeight,
-						const std::string windowTitle,
-						const unsigned int frameRateLimit)
+						const std::string windowTitle)
 	: window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle)
 {
-	window.setFramerateLimit(frameRateLimit);
+	//window.setFramerateLimit(frameRateLimit);
+	window.setVerticalSyncEnabled(true);
 
 	auto view = window.getView();
 #pragma warning(suppress: 4244) // resolution should not exceed precision of float

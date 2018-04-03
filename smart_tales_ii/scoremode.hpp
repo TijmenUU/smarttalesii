@@ -22,6 +22,9 @@ private:
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
+protected:
+	void OnEnter() override;
+
 public:
 	bool SurpressUpdate() const override;
 

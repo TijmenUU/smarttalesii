@@ -40,6 +40,7 @@
     <ClCompile Include="obstacletype.cpp" />
     <ClCompile Include="baseobstacle.cpp" />
     <ClCompile Include="animationsheet.cpp" />
+    <ClCompile Include="soundmanager.cpp" />
     <ClCompile Include="uioverlay.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="playersprite.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="obstacletype.hpp" />
     <ClInclude Include="baseobstacle.hpp" />
     <ClInclude Include="animationsheet.hpp" />
+    <ClInclude Include="soundmanager.hpp" />
     <ClInclude Include="uioverlay.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="playersprite.hpp" />
@@ -168,7 +170,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\Coding\_lib\x86\sfml_2_4_2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;freetype.lib;jpeg.lib;sfml-window-s-d.lib;opengl32.lib;gdi32.lib;sfml-system-s-d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;freetype.lib;jpeg.lib;sfml-window-s-d.lib;opengl32.lib;gdi32.lib;sfml-audio-s-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-system-s-d.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
@@ -204,7 +206,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>D:\Coding\_lib\x86\sfml_2_4_2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;freetype.lib;jpeg.lib;sfml-window-s.lib;opengl32.lib;gdi32.lib;sfml-system-s.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s.lib;freetype.lib;jpeg.lib;sfml-window-s.lib;opengl32.lib;gdi32.lib;sfml-audio-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;sfml-system-s.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(SolutionDir)bin\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PostBuildEvent>
