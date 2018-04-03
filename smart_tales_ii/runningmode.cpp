@@ -289,7 +289,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 RunningMode::RunningMode(const Player::Inventory & inventory)
 	: background(cWorldWidth),
-	currencyDisplay(5U, "score "),
+	currencyDisplay(5U),
 	player(inventory),
 	playerInventory(inventory)
 {
