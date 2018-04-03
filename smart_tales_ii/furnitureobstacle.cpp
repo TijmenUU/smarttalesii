@@ -2,6 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "resourcecache.hpp"
+#include "soundmanager.hpp"
 #include "vectormath.hpp"
 
 namespace Obstacle
@@ -39,6 +40,8 @@ namespace Obstacle
 		{
 			playerNeutralized = true;
 			Neutralize();
+			auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("woosh");
+			SoundManager::GetInstance().PlaySFX(sfx);
 			const auto mousepos = input.PointingDeviceWorldPosition();
 			Fall(mousepos - gestureStart, mousepos);
 		}

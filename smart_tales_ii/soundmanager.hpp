@@ -12,7 +12,7 @@ private:
 	float fadeOutVolumePerSecond = 0.f;
 	float fadeTargetVolume = 100.f;
 
-	std::array<sf::Sound, 64> sounds;
+	std::array<sf::Sound, 32> sounds;
 	bool sfxMuted = false;
 
 	void StopAllSounds();

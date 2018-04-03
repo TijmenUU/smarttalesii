@@ -6,6 +6,9 @@ namespace Obstacle
 	class Phone : public GestureBase
 	{
 	private:
+		const float cRingingTimeout = 2.5f;
+		float currentTimeout = 0.f;
+
 	protected:
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 		void Neutralize() override;

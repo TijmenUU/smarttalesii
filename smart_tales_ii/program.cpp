@@ -49,6 +49,16 @@ const std::array<std::string, 2> cMusicFiles = {
 	"music/casabossanova.ogg",
 	"music/pixelland.ogg"
 };
+
+const std::array<std::string, 7> cAudioFiles = {
+	"sfx/coin.ogg",
+	"sfx/door-open.ogg",
+	"sfx/kaching.ogg",
+	"sfx/phone-pickup.ogg",
+	"sfx/phone-ring.ogg",
+	"sfx/switch.ogg",
+	"sfx/woosh.ogg"
+};
 #pragma endregion
 
 void Program::Load()
@@ -70,6 +80,10 @@ void Program::Load()
 	for(size_t i = 0U; i < cMusicFiles.size(); ++i)
 	{
 		cache.LoadMusic(cMusicFiles[i]);
+	}
+	for(size_t i = 0U; i < cAudioFiles.size(); ++i)
+	{
+		cache.LoadSound(cAudioFiles[i]);
 	}
 
 	// Set game starting gamemode
