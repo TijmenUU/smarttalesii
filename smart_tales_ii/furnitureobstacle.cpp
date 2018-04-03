@@ -14,6 +14,8 @@ namespace Obstacle
 
 	void Furniture::Fall(const sf::Vector2f & force, const sf::Vector2f & forceOrigin)
 	{
+		auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("woosh");
+		SoundManager::GetInstance().PlaySFX(sfx);
 		isFalling = true;
 
 		if(forceOrigin.x < Alignment::GetRectangleCenter(obstacleSprite.getGlobalBounds()).x)
@@ -40,8 +42,6 @@ namespace Obstacle
 		{
 			playerNeutralized = true;
 			Neutralize();
-			auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("woosh");
-			SoundManager::GetInstance().PlaySFX(sfx);
 			const auto mousepos = input.PointingDeviceWorldPosition();
 			Fall(mousepos - gestureStart, mousepos);
 		}
