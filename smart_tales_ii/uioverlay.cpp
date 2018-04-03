@@ -40,28 +40,40 @@ void UIOverlay::Setup()
 	auto bounds = pauseText.getGlobalBounds();
 	pauseText.setPosition(cWorldWidth / 2.f - bounds.width / 2.f, cWorldHeight / 2.f);
 
+	const auto & manager = GameManager::GetInstance();
 	const float buttonSpacing = 60.f + 15.f;
 	sf::Vector2f buttonPosition(1280.f - buttonSpacing, 15.f);
 	gamePauseButton.SetPosition(buttonPosition);
 	buttonPosition.x -= buttonSpacing;
 	musicMuteButton.SetPosition(buttonPosition);
+	musicMuteButton.SetDown(manager.IsMusicMuted());
 	buttonPosition.x -= buttonSpacing;
 	sfxMuteButton.SetPosition(buttonPosition);
+	sfxMuteButton.SetDown(manager.IsSFXMuted());
 }
 
 void UIOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
 	if(sfxMuteButton.HandleInput(input))
 	{
-		// TODO do something with the changed mute state
+		GameManager::GetInstance().SetSFXMuted(sfxMuteButton.IsDown());
 	}
 	else if(musicMuteButton.HandleInput(input))
 	{
-		// TODO do something with the changed mute state
+		GameManager::GetInstance().SetMucicMute(musicMuteButton.IsDown());
 	}
 	else if(gamePauseButton.HandleInput(input))
 	{
-		// TODO do something with the changed paused state? (optionally)
+		auto & manager = GameManager::GetInstance();
+		if(gamePauseButton.IsDown())
+		{
+			originalVolume = manager.GetMusicVolume();
+			manager.SetMusicVolume(10.f);
+		}
+		else
+		{
+			manager.SetMusicVolume(originalVolume);
+		}
 	}
 }
 

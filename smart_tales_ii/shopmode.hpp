@@ -24,6 +24,8 @@ private:
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
+	void OnEnter() override;
+
 public:
 	void Setup() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;

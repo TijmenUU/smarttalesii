@@ -3,6 +3,7 @@
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
 #include "uioverlay.hpp"
+#include "resourcecache.hpp"
 #include "runningmode.hpp"
 #include "upgradetile.hpp"
 
@@ -64,6 +65,14 @@ void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(currencyDisplay, states);
 	target.draw(gotoGameButton, states);
 	target.draw(carousel, states);
+}
+
+void ShopMode::OnEnter()
+{
+	auto & music = ResourceCache::GetInstance().GetMusic("casabossanova");
+	music.setVolume(75);
+	music.setLoop(true);
+	GameManager::GetInstance().PlayMusic(music);
 }
 
 void ShopMode::Setup()

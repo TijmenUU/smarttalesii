@@ -56,6 +56,7 @@ void GameManager::Pop()
 {
 	if(gamemodes.size() > 0)
 	{
+		gamemodes.back()->OnExit();
 		gamemodes.erase(gamemodes.end() - 1);
 	}
 }
@@ -79,9 +80,97 @@ bool GameManager::PopAllBelow(Gamemode * gamemode)
 {
 	while(gamemodes.size() > 0 && gamemodes.front().get() != gamemode)
 	{
+		gamemodes.front()->OnExit();
 		gamemodes.erase(gamemodes.begin());
 	}
 	return false;
+}
+
+void GameManager::StopMusic()
+{
+	if(currentMusicPtr != nullptr)
+	{
+		currentMusicPtr->stop();
+	}
+}
+
+void GameManager::PlayMusic(sf::Music & music)
+{
+	if(musicMuted)
+	{
+		return;
+	}
+
+	if(currentMusicPtr != nullptr)
+	{
+		currentMusicPtr->stop();
+	}
+	currentMusicPtr = &music;
+	currentMusicPtr->play();
+}
+
+float GameManager::GetMusicVolume() const
+{
+	if(currentMusicPtr != nullptr)
+	{
+		return currentMusicPtr->getVolume();
+	}
+	return -1.f;
+}
+
+void GameManager::SetMusicVolume(const float volume)
+{
+	if(currentMusicPtr != nullptr)
+	{
+		currentMusicPtr->setVolume(volume);
+	}
+}
+
+void GameManager::SetMucicMute(const bool muted)
+{
+	musicMuted = muted;
+	if(musicMuted)
+	{
+		StopMusic();
+	}
+	else
+	{
+		if(currentMusicPtr != nullptr)
+		{
+			currentMusicPtr->play();
+		}
+	}
+}
+
+bool GameManager::IsMusicMuted() const
+{
+	return musicMuted;
+}
+
+void GameManager::PlaySFX(const sf::SoundBuffer & buffer, const float volume)
+{
+	if(sfxMuted)
+	{
+		return;
+	}
+
+	soundEffects.emplace_back(buffer);
+	soundEffects.back().setVolume(volume);
+	soundEffects.back().play();
+}
+
+void GameManager::SetSFXMuted(const bool muted)
+{
+	sfxMuted = muted;
+	if(sfxMuted)
+	{
+		soundEffects.clear();
+	}
+}
+
+bool GameManager::IsSFXMuted() const
+{
+	return sfxMuted;
 }
 
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const

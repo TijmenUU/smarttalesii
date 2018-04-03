@@ -44,6 +44,11 @@ const std::array<std::string, 16> cSpriteSheetFiles = {
 	"animation/scorebackground.txt",
 	"animation/sfxbutton.txt"
 };
+
+const std::array<std::string, 2> cMusicFiles = {
+	"music/casabossanova.ogg",
+	"music/pixelland.ogg"
+};
 #pragma endregion
 
 void Program::Load()
@@ -61,6 +66,10 @@ void Program::Load()
 	for(size_t i = 0U; i < cSpriteSheetFiles.size(); ++i)
 	{
 		cache.LoadSpriteSheet(cSpriteSheetFiles[i]);
+	}
+	for(size_t i = 0U; i < cMusicFiles.size(); ++i)
+	{
+		cache.LoadMusic(cMusicFiles[i]);
 	}
 
 	// Set game starting gamemode

@@ -3,6 +3,7 @@
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"
 #include "uioverlay.hpp"
+#include "resourcecache.hpp"
 #include "scoremode.hpp"
 #include "vectormath.hpp"
 #include "winoverlay.hpp"
@@ -97,6 +98,15 @@ bool RunningMode::SurpressDraw() const
 bool RunningMode::SurpressUpdate() const
 {
 	return true;
+}
+
+void RunningMode::OnEnter()
+{
+	Reset();
+	auto & music = ResourceCache::GetInstance().GetMusic("pixelland");
+	music.setVolume(100);
+	music.setLoop(true);
+	GameManager::GetInstance().PlayMusic(music);
 }
 
 bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler & input)
@@ -275,11 +285,6 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 			SpawnObstacle();
 		}
 	}
-}
-
-void RunningMode::OnEnter()
-{
-	Reset();
 }
 
 RunningMode::RunningMode(const Player::Inventory & inventory)
