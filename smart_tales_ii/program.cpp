@@ -112,11 +112,11 @@ void Program::Run()
 
 Program::Program( const unsigned int _windowWidth,
 						const unsigned int _windowHeight,
-						const std::string windowTitle,
-						const unsigned int frameRateLimit)
+						const std::string windowTitle)
 	: window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle)
 {
-	window.setFramerateLimit(frameRateLimit);
+	//window.setFramerateLimit(frameRateLimit);
+	window.setVerticalSyncEnabled(true);
 
 	auto view = window.getView();
 #pragma warning(suppress: 4244) // resolution should not exceed precision of float
