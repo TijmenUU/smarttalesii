@@ -2,6 +2,7 @@
 
 #include "alignmenthelp.hpp"
 #include "resourcecache.hpp"
+#include "soundmanager.hpp"
 
 #include <iomanip>
 #include <iostream> // debug
@@ -70,6 +71,8 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 		inventory.RemoveCurrency(purchaseButton.GetPrice());
 		std::cout << "Bought upgrade for " << purchaseButton.GetPrice() << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
 		inventory.AddSensorUpgrade(purchaseButton.GetUpgrade());
+		auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("kaching");
+		SoundManager::GetInstance().PlaySFX(sfx);
 
 		return true;
 	}
