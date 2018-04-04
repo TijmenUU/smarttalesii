@@ -7,6 +7,7 @@ Repository of the Smart Tales sequel, codename Smart Tales II. See the original 
 Currently the project requires the following:
 - Microsoft's Visual Studio 2017 (VS2017) with Visual C++
 - Simple and Fast Multimedia Library (SFML) version 2.4.2
+- OpenAL, see https://www.openal.org/downloads/ . Required for running the release as well.
 
 Should build on Linux too, as there are no platform specific libraries or APIs used. However, this has not been tested yet.
 
