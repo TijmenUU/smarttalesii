@@ -7,19 +7,19 @@ Repository of the Smart Tales sequel, codename Smart Tales II. See the original 
 Currently the project requires the following:
 - Microsoft's Visual Studio 2017 (VS2017) with Visual C++
 - Simple and Fast Multimedia Library (SFML) version 2.4.2
-- OpenAL, see https://www.openal.org/downloads/ . Required for running the release as well.
+- A gamepad
 
-Should build on Linux too, as there are no platform specific libraries or APIs used. However, this has not been tested yet.
+The gamepad is **required** in some cases, most likely when the computer has been used with gamepads before. There is a weird issue with the Windows API in some cases that makes the game stutter if there is no gamepad connected. It seems to only happen on computers that have or had a gamepad connected to them (could be drivers). If this applies to you; before launching the game connect your gamepad and press a few random buttons, also moving the thumbsticks. That procedure seems to get rid of the stuttering in the game.
+
+*Note: the game itself does not use the gamepad as input device, it is a problem with Windows*
 
 ## Branches
 - master: the most recent stable version of the game. It may miss some upcoming features, but it should build no problems on *Windows*. See the branch *linux* for building a stable linux compatible binary.
 - GameplayEvaluation: the first basic prototype of the game, for testing the fundamental game mechanics.
-- linux: branch with a version that is stable on Linux. The makefile on the master branch is not guarranteed to work, but build
-- win-perf-fix: branch with a workaround for performance issues with certain Windows platforms. This branch is hopefully temporary until a more sensible fix is available. PeekMessageW is currently blocking for 10s of milliseconds, which causes massive lag spikes.
-from this branch should work no problem. May be severely outdated (see commits). Feel free to try your luck with the master branch + makefile in that case.
+- linux: branch with a version that is stable on Linux. The master branch is not guarranteed to be stable on Linux, but could well be.
 
 ## Releases
-Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for binaries if you cannot or do not want to build it yourself.
+Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for Windows binaries if you cannot or do not want to build it yourself.
 
 ## License
 See the license file for all the licenses this project uses.
