@@ -15,7 +15,7 @@ Should build on Linux too, as there are no platform specific libraries or APIs u
 - master: the most recent stable version of the game. It may miss some upcoming features, but it should build no problems on *Windows*. See the branch *linux* for building a stable linux compatible binary.
 - GameplayEvaluation: the first basic prototype of the game, for testing the fundamental game mechanics.
 - linux: branch with a version that is stable on Linux. The makefile on the master branch is not guarranteed to work, but build
-- performance-diag: branch with a workaround for performance issues with certain Windows platforms. This branch is hopefully temporary until a more sensible fix is available. PeekMessageW is currently blocking for 10s of milliseconds, which causes massive lag spikes.
+- win-perf-fix: branch with a workaround for performance issues with certain Windows platforms. This branch is hopefully temporary until a more sensible fix is available. PeekMessageW is currently blocking for 10s of milliseconds, which causes massive lag spikes.
 from this branch should work no problem. May be severely outdated (see commits). Feel free to try your luck with the master branch + makefile in that case.
 
 ## Releases
