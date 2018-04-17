@@ -241,10 +241,21 @@ void RunningMode::Setup()
 
 void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K) && GameManager::GetInstance().GetDebugFlag())
+	if(GameManager::GetInstance().GetDebugFlag())
 	{
-		GameOver(Obstacle::Type::Unknown);
-		return;
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+		{
+			GameOver(Obstacle::Type::Unknown);
+			return;
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
+		{
+			scrollVelocity *= 0.95f;
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
+		{
+			scrollVelocity *= 1.05f;
+		}
 	}
 
 	background.Update(elapsed, -scrollVelocity);
