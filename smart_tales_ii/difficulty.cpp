@@ -6,21 +6,25 @@
 #include <sstream>
 #include <stdexcept>
 
+#include <iostream> // debug
+
 enum class DifficultyProperty
 {
 	Unknown = -1,
 	StartVelocity,
-	VelocityIncrement,
+	VelocityControl,
 	MaxVelocity,
-	HintBorder
+	HintBorder,
+	VelocityIncrementPerUpgrade,
 };
 
-const std::array<std::string, 5> cDifficultyProperties =
+const std::array<std::string, 6> cDifficultyProperties =
 {
 	"start-velocity",
-	"velocity-increment",
+	"velocity-control",
 	"max-velocity",
-	"hint-border"
+	"hint-border",
+	"velocity-increment-per-upgrade"
 };
 
 DifficultyProperty ToDifficultyProperty(std::string s)
@@ -37,19 +41,21 @@ DifficultyProperty ToDifficultyProperty(std::string s)
 	return DifficultyProperty::Unknown;
 }
 
-float Difficulty::GetStartScrollVelocity() const
+float Difficulty::GetStartScrollVelocity(const unsigned int upgradeCount) const
 {
-	return startVelocity;
+	return startVelocity + (static_cast<float>(upgradeCount) * speedIncrementPerUpgrade);
 }
 
-float Difficulty::GetScrollIncrementVelocity() const
+float Difficulty::GetScrollVelocity(const unsigned int upgradeCount, const float elapsedSeconds) const
 {
-	return incrementVelocity;
-}
+	const float velocity = GetStartScrollVelocity(upgradeCount) + ((elapsedSeconds * elapsedSeconds) / velocityControl);
+	std::cout << "Velocity: " << velocity << '\n'; // debug
+	if(velocity > maxVelocity)
+	{
+		return maxVelocity;
+	}
 
-float Difficulty::GetMaxScrollVelocity() const
-{
-	return maxVelocity;
+	return velocity;
 }
 
 float Difficulty::GetHintBorderXCoord() const
@@ -60,7 +66,7 @@ float Difficulty::GetHintBorderXCoord() const
 void Difficulty::LoadFromFile(const std::string & definitionFile)
 {
 	std::vector<std::string> lines = Platform::LoadTextFile(definitionFile, true, true);
-	
+
 	for(size_t i = 0; i < lines.size(); ++i)
 	{
 		auto & line = lines[i];
@@ -76,8 +82,8 @@ void Difficulty::LoadFromFile(const std::string & definitionFile)
 			ss >> startVelocity;
 			break;
 
-			case DifficultyProperty::VelocityIncrement:
-			ss >> incrementVelocity;
+			case DifficultyProperty::VelocityControl:
+			ss >> velocityControl;
 			break;
 
 			case DifficultyProperty::MaxVelocity:
@@ -86,6 +92,10 @@ void Difficulty::LoadFromFile(const std::string & definitionFile)
 
 			case DifficultyProperty::HintBorder:
 			ss >> hintBorderX;
+			break;
+
+			case DifficultyProperty::VelocityIncrementPerUpgrade:
+			ss >> speedIncrementPerUpgrade;
 			break;
 
 			default:

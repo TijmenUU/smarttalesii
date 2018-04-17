@@ -27,6 +27,7 @@ private:
 	bool drawObstacleHint = false;
 	const float spawnTimeout = 2.5f; // in seconds
 	float currentTimeout = 0.f; // in seconds
+	sf::Clock runningClock;
 	float scrollVelocity = 0.f; // pixels per second
 
 	Player::Score score;

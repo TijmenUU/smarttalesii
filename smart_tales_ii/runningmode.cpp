@@ -83,8 +83,9 @@ void RunningMode::Reset()
 
 	obstacleSpawnIndex = 0;
 	currentTimeout = 0.f;
-	// TODO tweak this initial scroll velocity expression
-	scrollVelocity = gameDifficulty.GetStartScrollVelocity() + playerInventory.GetSensorUpgradeCount() * 25.f;
+	
+	runningClock.restart();
+	scrollVelocity = gameDifficulty.GetScrollVelocity(playerInventory.GetSensorUpgradeCount(), 0.f);
 
 	score.Reset();
 	scoreBubbles.clear();
@@ -277,11 +278,8 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	currencyDisplay.Update(elapsed);
 
 	// Anything affected by the scrolling velocity should be updated BEFORE this line
-	scrollVelocity += gameDifficulty.GetScrollIncrementVelocity() * elapsedSeconds;
-	if(scrollVelocity > gameDifficulty.GetMaxScrollVelocity())
-	{
-		scrollVelocity = gameDifficulty.GetMaxScrollVelocity();
-	}
+	scrollVelocity = gameDifficulty.GetScrollVelocity(playerInventory.GetSensorUpgradeCount(),
+		runningClock.getElapsedTime().asSeconds());
 
 	// TODO add better spawn algorithm
 	currentTimeout += elapsedSeconds;

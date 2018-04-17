@@ -1,7 +1,12 @@
 # velocities are in pixels per second
 # hint border is in pixels with origin at top left
 
-start-velocity			100
-velocity-increment	2
-max-velocity			1280
-hint-border				960
+# velocity-control is part of the scroll speed velocity function
+# In short: the bigger the value, the slower the increment per second
+# Function: scroll-velocity = start-velocity + ((elapsedSeconds * elapsedSeconds) / velocity-control);
+
+start-velocity							150
+velocity-control						10
+max-velocity							2000
+hint-border								960
+velocity-increment-per-upgrade	100
