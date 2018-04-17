@@ -3,13 +3,15 @@ spritesheet-source "spritesheet/phone.png"
 animation active
 	frame-start-x 0
 	frame-start-y 0
-	frame-width 96
-	frame-height 80
-	frame-count 1
+	frame-width 140
+	frame-height 160
+	frame-count 6
+	frame-time 64
+	loop
 
 animation neutralized
-	frame-start-x 96
+	frame-start-x 840
 	frame-start-y 0
-	frame-width 96
-	frame-height 80
+	frame-width 140
+	frame-height 160
 	frame-count 1
