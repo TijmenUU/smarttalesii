@@ -6,8 +6,6 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <iostream> // debug
-
 enum class DifficultyProperty
 {
 	Unknown = -1,
@@ -49,7 +47,6 @@ float Difficulty::GetStartScrollVelocity(const unsigned int upgradeCount) const
 float Difficulty::GetScrollVelocity(const unsigned int upgradeCount, const float elapsedSeconds) const
 {
 	const float velocity = GetStartScrollVelocity(upgradeCount) + ((elapsedSeconds * elapsedSeconds) / velocityControl);
-	std::cout << "Velocity: " << velocity << '\n'; // debug
 	if(velocity > maxVelocity)
 	{
 		return maxVelocity;
