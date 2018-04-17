@@ -112,7 +112,8 @@ void Program::Run()
 
 Program::Program( const unsigned int _windowWidth,
 						const unsigned int _windowHeight,
-						const std::string windowTitle)
+						const std::string windowTitle,
+						const bool isDebugging)
 	: window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle)
 {
 	//window.setFramerateLimit(frameRateLimit);
@@ -124,6 +125,8 @@ Program::Program( const unsigned int _windowWidth,
 #pragma warning(suppress: 4244) // half resolution should not exceed precision of float
 	view.setCenter(_windowWidth / 2, _windowHeight / 2);
 	window.setView(view);
+
+	GameManager::GetInstance().SetDebugFlag(isDebugging);
 }
 
 Program::~Program()

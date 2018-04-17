@@ -241,13 +241,12 @@ void RunningMode::Setup()
 
 void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	// debug
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K) && GameManager::GetInstance().GetDebugFlag())
 	{
 		GameOver(Obstacle::Type::Unknown);
 		return;
 	}
-	// end debug
+
 	background.Update(elapsed, -scrollVelocity);
 
 	UpdateScoreBubbles(elapsed);

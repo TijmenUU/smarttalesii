@@ -101,15 +101,14 @@ void ShopMode::Setup()
 
 void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
-	// debug
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M) && GameManager::GetInstance().GetDebugFlag())
 	{
 		playerInventory.AddCurrency(40);
 		currencyDisplay.SetValue(playerInventory.GetCurrency(), false);
 		std::cout << "Gave you 40 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
 		carousel.RefreshTiles(playerInventory);
 	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && GameManager::GetInstance().GetDebugFlag())
 	{
 		for(size_t i = 0; i < cTileUpgrades.size(); ++i)
 		{
@@ -118,7 +117,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		carousel.RefreshTiles(playerInventory);
 		std::cout << "Unlocked all upgradedes!\n";
 	}
-	// end debug
+
 	if(gotoGameButton.HandleInput(input))
 	{
 		GameManager::GetInstance().PushGamemode(new RunningMode(playerInventory));

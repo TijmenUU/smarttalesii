@@ -12,6 +12,7 @@ class GameManager : public sf::Drawable
 {
 private:
 	std::vector<std::unique_ptr<Gamemode>> gamemodes;
+	bool debugFlag = false;
 
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 	
@@ -31,6 +32,9 @@ public:
 	// Inclusive, pops until it finds gamemode, pops that too and then stops
 	bool PopUntill(Gamemode * gamemode);
 	bool PopAllBelow(Gamemode * gamemode);
+
+	void SetDebugFlag(const bool flag);
+	bool GetDebugFlag() const;
 
 	GameManager() = default;
 	GameManager(const GameManager &) = delete;

@@ -1,16 +1,22 @@
 #include "program.hpp"
 
 #include <iostream>
+#include <string>
 
 const unsigned int windowWidth = 1280U;
 const unsigned int windowHeight = 720U;
 
 int main(int argc, char ** argv)
 {
+	bool debug = false;
+	if(argc >= 2 && std::string(argv[1]).compare("debug") == 0)
+	{
+		debug = true;
+	}
 	Program * p;
 	try
 	{
-		p = new Program(windowWidth, windowHeight, "Smart Tales II");
+		p = new Program(windowWidth, windowHeight, "Smart Tales II", debug);
 		p->Load();
 	}
 	catch(const std::runtime_error & e)

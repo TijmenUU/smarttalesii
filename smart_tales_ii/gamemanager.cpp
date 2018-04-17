@@ -88,6 +88,16 @@ bool GameManager::PopAllBelow(Gamemode * gamemode)
 	return false;
 }
 
+void GameManager::SetDebugFlag(const bool flag)
+{
+	debugFlag = flag;
+}
+
+bool GameManager::GetDebugFlag() const
+{
+	return debugFlag;
+}
+
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	// Painters algorithm, so first figure out where to start
