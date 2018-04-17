@@ -151,6 +151,7 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 				obstacle.IsActive())
 			{
 				player.ShowOff();
+#pragma warning(suppress: 4244) // Obstacle count should never reach the limits of unsigned int
 				dynamic_cast<Obstacle::Phone *>(obstacles[i].get())->Neutralize();
 			}	
 		}
