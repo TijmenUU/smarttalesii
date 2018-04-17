@@ -44,7 +44,7 @@ void PurchaseButton::Refresh(const Player::Inventory & inventory)
 
 bool PurchaseButton::HandleInput(const Inputhandler & input)
 {
-	if(isEnabled && Interacts(input))
+	if(Interacts(input))
 	{
 		SetPurchased();
 		return true;
