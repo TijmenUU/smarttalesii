@@ -94,8 +94,8 @@ ScoreMode::ScoreMode(const Player::Score & score,
 	playerInventory(inventory),
 	backgroundSprite(ResourceCache::GetInstance().GetSpriteSheet("scorebackground")),
 	gameOverText(gameOverMsg, ResourceCache::GetInstance().GetFont("commodore"), 36),
-	earnedCurrency(5U, "Currency earned: ", score.GetTotalCurrency(), false),
-	balanceCurrency(5U, "Balance: ", inventory.GetCurrency(), false),
+	earnedCurrency(5U, "Currency earned: ", score.GetTotalCurrency(), true),
+	balanceCurrency(5U, "Balance: ", inventory.GetCurrency(), true),
 	gotoShopButton(ResourceCache::GetInstance().GetSpriteSheet("navigationbutton_large"))
 {
 }
