@@ -33,7 +33,7 @@ namespace Obstacle
 		if(!neutralized)
 		{
 			HandleInput(input);
-			
+
 			if(sensorEnabled)
 				UpdateSensorTrigger(playerBounds);
 		}

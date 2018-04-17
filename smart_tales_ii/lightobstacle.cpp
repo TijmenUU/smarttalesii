@@ -12,6 +12,15 @@ namespace Obstacle
 	const sf::Vector2f cLocalSwitchPosition(-100, 250);
 	const float cInteractionRadius = 50.f;
 
+	void Light::Neutralize()
+	{
+		GestureSensorBase::Neutralize();
+		lightSwitch.SetAnimation("activated");
+		auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("switch");
+		SoundManager::GetInstance().PlaySFX(sfx);
+		showBeam = false;
+	}
+
 	bool Light::IsInteractionInBounds(const Inputhandler & input) const
 	{
 		const auto center = Alignment::GetRectangleCenter(lightSwitch.getGlobalBounds());
@@ -25,10 +34,6 @@ namespace Obstacle
 		{
 			playerNeutralized = true;
 			Neutralize();
-			lightSwitch.SetAnimation("activated");
-			auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("switch");
-			SoundManager::GetInstance().PlaySFX(sfx);
-			showBeam = false;
 		}
 	}
 

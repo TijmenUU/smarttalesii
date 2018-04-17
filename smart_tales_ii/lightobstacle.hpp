@@ -11,6 +11,7 @@ namespace Obstacle
 		Animation::Sprite lightSwitch;
 
 	protected:
+		void Neutralize() override;
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
 		void HandleInput(const Inputhandler & input) override;
 		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;

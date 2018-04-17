@@ -11,7 +11,7 @@ namespace Obstacle
 
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 		void Neutralize() override;
-		
+
 		virtual void UpdateSensorTrigger(const sf::FloatRect & playerBounds) = 0;
 
 	public:
@@ -22,11 +22,11 @@ namespace Obstacle
 			const float horizontalDisplacement,
 			const sf::FloatRect & playerBounds) override;
 
-		GestureSensorBase(const Animation::Sheet & obstacleSheet, 
+		GestureSensorBase(const Animation::Sheet & obstacleSheet,
 			const Animation::Sheet & sensorSheet,
-			const uint8_t gestureFlag, 
-			const float gestureMinWorldTravel, 
-			const Type t, 
+			const uint8_t gestureFlag,
+			const float gestureMinWorldTravel,
+			const Type t,
 			const bool playerHasSensor);
 	};
 }
