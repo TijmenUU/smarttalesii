@@ -79,7 +79,6 @@ void UIOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 UIOverlay::UIOverlay(const bool canPause)
 	: pauseOverlay(sf::Vector2f(cWorldWidth, cWorldHeight)),
-	pauseEnabled(canPause),
 	sfxMuteButton(ResourceCache::GetInstance().GetSpriteSheet("sfxbutton")),
 	musicMuteButton(ResourceCache::GetInstance().GetSpriteSheet("musicbutton")),
 	gamePauseButton(ResourceCache::GetInstance().GetSpriteSheet("pausebutton"), canPause)

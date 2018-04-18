@@ -10,7 +10,6 @@ class UIOverlay : public Gamemode
 private:
 	sf::RectangleShape pauseOverlay;
 	sf::Text pauseText;
-	const bool pauseEnabled;
 	float originalVolume;
 
 	Button sfxMuteButton, musicMuteButton, gamePauseButton;
