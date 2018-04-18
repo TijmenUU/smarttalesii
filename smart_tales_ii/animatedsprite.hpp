@@ -21,8 +21,14 @@ namespace Animation
 	public:
 		virtual bool IsAnimationFinished() const;
 
-		virtual void FlipHorizontally();
-		virtual void FlipVertically();
+		// This flip call is not free, so be careful with lots
+		// of repeated calls to this function
+		virtual void SetHorizontalFlip(const bool v);
+		// This flip call is not free, so be careful with lots
+		// of repeated calls to this function
+		virtual void SetVerticalFlip(const bool v);
+		bool IsFlippedHorizontally() const;
+		bool IsFlippedVertically() const;
 		
 		bool SetAnimation(const std::string & name);
 

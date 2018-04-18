@@ -40,14 +40,26 @@ namespace Animation
 		return currentFrame >= currentAnimation->frameCount;
 	}
 
-	void Sprite::FlipHorizontally()
+	void Sprite::SetHorizontalFlip(const bool v)
 	{
-		isFlippedHorizontally = !isFlippedHorizontally;
+		isFlippedHorizontally = v;
+		UpdateTextureRect();
 	}
 
-	void Sprite::FlipVertically()
+	void Sprite::SetVerticalFlip(const bool v)
 	{
-		isFlippedVertically = !isFlippedVertically;
+		isFlippedVertically = v;
+		UpdateTextureRect();
+	}
+
+	bool Sprite::IsFlippedHorizontally() const
+	{
+		return isFlippedHorizontally;
+	}
+
+	bool Sprite::IsFlippedVertically() const
+	{
+		return isFlippedVertically;
 	}
 
 	bool Sprite::SetAnimation(const std::string & name)

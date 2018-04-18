@@ -45,7 +45,7 @@ namespace Obstacle
 			// TODO possibly fix this if necessary, would require custom animation
 			if((gestureInfo & static_cast<uint8_t>(GestureType::Horizontal_LeftToRight)) && !sensorEnabled)
 			{
-				obstacleSprite.FlipHorizontally();
+				obstacleSprite.SetHorizontalFlip(true);
 			}
 		}
 	}
