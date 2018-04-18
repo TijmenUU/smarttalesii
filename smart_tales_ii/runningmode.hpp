@@ -3,7 +3,7 @@
 #include "currencydisplayer.hpp"
 #include "difficulty.hpp"
 #include "gamemode.hpp"
-#include "baseobstacle.hpp"
+#include "obstaclespawner.hpp"
 #include "playersprite.hpp"
 #include "playerinventory.hpp"
 #include "playerscore.hpp"
@@ -18,15 +18,13 @@ class RunningMode : public Gamemode
 private:
 	ScrollingBackground background;
 
-	std::vector<std::unique_ptr<Obstacle::Base>> obstacleFactory;
 	Difficulty gameDifficulty;
 	
 	std::vector<std::unique_ptr<Obstacle::Base>> obstacles;
-	size_t obstacleSpawnIndex = 0;
+	ObstacleSpawner obstacleSpawner;
 	sf::Text obstacleHintText;
 	bool drawObstacleHint = false;
-	const float spawnTimeout = 2.5f; // in seconds
-	float currentTimeout = 0.f; // in seconds
+	
 	sf::Clock runningClock;
 	float scrollVelocity = 0.f; // pixels per second
 
@@ -40,7 +38,6 @@ private:
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-	void SpawnObstacle();
 	void SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score);
 	
 	void GameOver(const Obstacle::Type cause);

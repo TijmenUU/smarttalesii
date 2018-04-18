@@ -8,12 +8,6 @@
 #include "vectormath.hpp"
 #include "winoverlay.hpp"
 
-// Obstacles
-#include "furnitureobstacle.hpp"
-#include "doorobstacle.hpp"
-#include "lightobstacle.hpp"
-#include "phoneobstacle.hpp"
-
 #include <array>
 #include <iomanip>
 #include <memory>
@@ -47,21 +41,6 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(obstacleHintText, states);
 }
 
-void RunningMode::SpawnObstacle()
-{
-	currentTimeout = 0;
-
-	if(obstacleSpawnIndex >= obstacleFactory.size())
-	{
-		obstacleSpawnIndex = 0;
-	}
-
-	auto * copy = obstacleFactory[obstacleSpawnIndex]->Clone();
-	obstacles.emplace_back(copy);
-	
-	++obstacleSpawnIndex;
-}
-
 void RunningMode::SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score)
 {
 	scoreBubbles.emplace_back(mousePos, score);
@@ -80,9 +59,7 @@ void RunningMode::Reset()
 	background.Reset();
 
 	obstacles.clear();
-
-	obstacleSpawnIndex = 0;
-	currentTimeout = 0.f;
+	obstacleSpawner.Reset();
 	
 	runningClock.restart();
 	scrollVelocity = gameDifficulty.GetScrollVelocity(playerInventory.GetSensorUpgradeCount(), 0.f);
@@ -204,25 +181,14 @@ void RunningMode::Setup()
 	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);
 
-	auto & cache = ResourceCache::GetInstance();
-	obstacleFactory.emplace_back(new Obstacle::Furniture(playerInventory.HasObstacleCounter(Obstacle::Type::Furniture)));	
-	obstacleFactory.emplace_back(new Obstacle::Door(playerInventory.HasObstacleCounter(Obstacle::Type::Door)));
-	obstacleFactory.emplace_back(new Obstacle::Light(playerInventory.HasObstacleCounter(Obstacle::Type::Light)));	
-	obstacleFactory.emplace_back(new Obstacle::Phone(playerInventory.HasObstacleCounter(Obstacle::Type::Phone)));
-
-	for(size_t i = 0; i < obstacleFactory.size(); ++i)
-	{
-		obstacleFactory[i]->SetPosition(sf::Vector2f(0.f, 0.f));
-#pragma warning(suppress: 4244) // conversion from float to int should not be a problem for resolutions
-		obstacleFactory[i]->SetSpawnPosition(cWorldWidth, cFloorY);
-	}
+	obstacleSpawner.Load(playerInventory, cFloorY);
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
 	const auto playerBounds = player.GetGlobalBounds();
 	player.SetPosition(sf::Vector2f(playerBounds.width, cFloorY - playerBounds.height));
 
-	sf::Font & font = cache.GetFont("commodore");
+	sf::Font & font = ResourceCache::GetInstance().GetFont("commodore");
 	obstacleHintText.setFont(font);
 	obstacleHintText.setCharacterSize(26);
 	obstacleHintText.setFillColor(sf::Color::White);
@@ -281,20 +247,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	scrollVelocity = gameDifficulty.GetScrollVelocity(playerInventory.GetSensorUpgradeCount(),
 		runningClock.getElapsedTime().asSeconds());
 
-	// TODO add better spawn algorithm
-	currentTimeout += elapsedSeconds;
-	if(obstacles.size() == 0)
-	{
-		SpawnObstacle();
-	}
-	else
-	{
-		const auto obstacleBounds = obstacles.back()->GetKillBounds();
-		if(currentTimeout > spawnTimeout && obstacleBounds.width + obstacleBounds.left < cWorldWidth)
-		{
-			SpawnObstacle();
-		}
-	}
+	obstacleSpawner.Update(elapsed, obstacles);
 }
 
 RunningMode::RunningMode(const Player::Inventory & inventory)

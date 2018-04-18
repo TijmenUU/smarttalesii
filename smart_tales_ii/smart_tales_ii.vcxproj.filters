@@ -201,6 +201,9 @@
     <ClCompile Include="soundmanager.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="obstaclespawner.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -318,6 +321,9 @@
       <Filter>Header Files\game\objects</Filter>
     </ClInclude>
     <ClInclude Include="soundmanager.hpp">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="obstaclespawner.hpp">
       <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>

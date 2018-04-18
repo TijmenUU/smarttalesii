@@ -9,4 +9,4 @@ start-velocity							150
 velocity-control						10
 max-velocity							2000
 hint-border								960
-velocity-increment-per-upgrade	100
+velocity-increment-per-upgrade	150

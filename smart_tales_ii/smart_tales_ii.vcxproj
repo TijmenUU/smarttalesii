@@ -30,6 +30,7 @@
     <ClCompile Include="furnitureobstacle.cpp" />
     <ClCompile Include="gestureobstacle.cpp" />
     <ClCompile Include="lightobstacle.cpp" />
+    <ClCompile Include="obstaclespawner.cpp" />
     <ClCompile Include="phoneobstacle.cpp" />
     <ClCompile Include="purchasebutton.cpp" />
     <ClCompile Include="resourcecache.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="furnitureobstacle.hpp" />
     <ClInclude Include="gestureobstacle.hpp" />
     <ClInclude Include="lightobstacle.hpp" />
+    <ClInclude Include="obstaclespawner.hpp" />
     <ClInclude Include="phoneobstacle.hpp" />
     <ClInclude Include="purchasebutton.hpp" />
     <ClInclude Include="resourcecache.hpp" />
