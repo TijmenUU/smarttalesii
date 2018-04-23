@@ -4,7 +4,7 @@
 #include "gamemanager.hpp"
 #include "uioverlay.hpp"
 #include "resourcecache.hpp"
-#include "scoremode.hpp"
+#include "scoreoverlay.hpp"
 #include "vectormath.hpp"
 #include "winoverlay.hpp"
 

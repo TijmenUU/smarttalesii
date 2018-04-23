@@ -114,9 +114,6 @@
     <ClCompile Include="shopmode.cpp">
       <Filter>Source Files\game\modes</Filter>
     </ClCompile>
-    <ClCompile Include="scoremode.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
     <ClCompile Include="playerinventory.cpp">
       <Filter>Source Files\game\player</Filter>
     </ClCompile>
@@ -204,6 +201,9 @@
     <ClCompile Include="obstaclespawner.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="scoreoverlay.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -234,9 +234,6 @@
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="shopmode.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="scoremode.hpp">
       <Filter>Header Files\game\modes</Filter>
     </ClInclude>
     <ClInclude Include="playerinventory.hpp">
@@ -325,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="obstaclespawner.hpp">
       <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="scoreoverlay.hpp">
+      <Filter>Header Files\game\modes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

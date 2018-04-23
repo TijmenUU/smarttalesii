@@ -1,4 +1,4 @@
-#include "scoremode.hpp"
+#include "scoreoverlay.hpp"
 
 #include "alignmenthelp.hpp"
 #include "gamemanager.hpp"

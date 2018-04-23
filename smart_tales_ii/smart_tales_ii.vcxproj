@@ -46,7 +46,7 @@
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="playersprite.cpp" />
     <ClCompile Include="playerinventory.cpp" />
-    <ClCompile Include="scoremode.cpp" />
+    <ClCompile Include="scoreoverlay.cpp" />
     <ClCompile Include="gesturesensorobstacle.cpp" />
     <ClCompile Include="shopmode.cpp" />
     <ClCompile Include="textbutton.cpp" />
@@ -88,7 +88,7 @@
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="playersprite.hpp" />
     <ClInclude Include="playerinventory.hpp" />
-    <ClInclude Include="scoremode.hpp" />
+    <ClInclude Include="scoreoverlay.hpp" />
     <ClInclude Include="gesturesensorobstacle.hpp" />
     <ClInclude Include="shopmode.hpp" />
     <ClInclude Include="textbutton.hpp" />
