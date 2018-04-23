@@ -126,9 +126,6 @@
     <ClCompile Include="carousel.cpp">
       <Filter>Source Files\game\objects\shop</Filter>
     </ClCompile>
-    <ClCompile Include="tile.cpp">
-      <Filter>Source Files\game\objects\shop</Filter>
-    </ClCompile>
     <ClCompile Include="background.cpp">
       <Filter>Source Files\game\objects\running</Filter>
     </ClCompile>
@@ -248,9 +245,6 @@
     <ClInclude Include="carousel.hpp">
       <Filter>Header Files\game\objects\shop</Filter>
     </ClInclude>
-    <ClInclude Include="tile.hpp">
-      <Filter>Header Files\game\objects\shop</Filter>
-    </ClInclude>
     <ClInclude Include="background.hpp">
       <Filter>Header Files\game\objects\running</Filter>
     </ClInclude>
@@ -325,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="scoreoverlay.hpp">
       <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="salestile.hpp">
+      <Filter>Header Files\game\objects\shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

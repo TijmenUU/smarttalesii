@@ -50,7 +50,6 @@
     <ClCompile Include="gesturesensorobstacle.cpp" />
     <ClCompile Include="shopmode.cpp" />
     <ClCompile Include="textbutton.cpp" />
-    <ClCompile Include="tile.cpp" />
     <ClCompile Include="upgrades.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="runningmode.cpp" />
@@ -92,7 +91,7 @@
     <ClInclude Include="gesturesensorobstacle.hpp" />
     <ClInclude Include="shopmode.hpp" />
     <ClInclude Include="textbutton.hpp" />
-    <ClInclude Include="tile.hpp" />
+    <ClInclude Include="salestile.hpp" />
     <ClInclude Include="upgrades.hpp" />
     <ClInclude Include="program.hpp" />
     <ClInclude Include="runningmode.hpp" />
