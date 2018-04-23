@@ -31,7 +31,7 @@ public:
 	void Setup() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
-	ScoreOverlay(const Player::Score & score, 
+	ScoreOverlay(const Player::Score & score,
 		const Player::Inventory & inventory,
-		const std::string & gameOverMsg);
+		const Obstacle::Type gameOverCause);
 };

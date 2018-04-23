@@ -89,11 +89,11 @@ void ScoreOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 ScoreOverlay::ScoreOverlay(const Player::Score & score, 
 	const Player::Inventory & inventory, 
-	const std::string & gameOverMsg)
+	const Obstacle::Type gameOverCause)
 	:	playerScore(score),
 	playerInventory(inventory),
 	backgroundSprite(ResourceCache::GetInstance().GetSpriteSheet("scorebackground")),
-	gameOverText(gameOverMsg, ResourceCache::GetInstance().GetFont("commodore"), 36),
+	gameOverText("" /* TODO convert cause to txt */, ResourceCache::GetInstance().GetFont("commodore"), 36),
 	earnedCurrency(5U, "Currency earned: ", score.GetTotalCurrency(), true),
 	balanceCurrency(5U, "Balance: ", inventory.GetCurrency(), true),
 	gotoShopButton(ResourceCache::GetInstance().GetSpriteSheet("navigationbutton_large"))
