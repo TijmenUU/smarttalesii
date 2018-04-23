@@ -1,5 +1,6 @@
 #include "program.hpp"
 #include "runningmode.hpp"
+#include "temporaryoverlay.hpp"
 #include "uioverlay.hpp"
 
 #include <array>
@@ -87,7 +88,9 @@ void Program::Load()
 	}
 
 	// Set game starting gamemode
-	GameManager::GetInstance().PushGamemode(new RunningMode(Player::Inventory()));
+	auto & manager = GameManager::GetInstance();
+	manager.PushGamemode(new RunningMode(Player::Inventory()));
+	manager.PushGamemode(new TemporaryOverlay("Evade all obstacles!"));
 }
 
 void Program::Run()

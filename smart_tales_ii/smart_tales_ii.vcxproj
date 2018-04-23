@@ -42,6 +42,7 @@
     <ClCompile Include="baseobstacle.cpp" />
     <ClCompile Include="animationsheet.cpp" />
     <ClCompile Include="soundmanager.cpp" />
+    <ClCompile Include="temporaryoverlay.cpp" />
     <ClCompile Include="uioverlay.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="playersprite.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="baseobstacle.hpp" />
     <ClInclude Include="animationsheet.hpp" />
     <ClInclude Include="soundmanager.hpp" />
+    <ClInclude Include="temporaryoverlay.hpp" />
     <ClInclude Include="uioverlay.hpp" />
     <ClInclude Include="platform.hpp" />
     <ClInclude Include="playersprite.hpp" />

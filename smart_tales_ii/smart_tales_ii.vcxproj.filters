@@ -201,6 +201,9 @@
     <ClCompile Include="scoreoverlay.cpp">
       <Filter>Source Files\game\modes</Filter>
     </ClCompile>
+    <ClCompile Include="temporaryoverlay.cpp">
+      <Filter>Source Files\game\modes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="salestile.hpp">
       <Filter>Header Files\game\objects\shop</Filter>
+    </ClInclude>
+    <ClInclude Include="temporaryoverlay.hpp">
+      <Filter>Header Files\game\modes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
