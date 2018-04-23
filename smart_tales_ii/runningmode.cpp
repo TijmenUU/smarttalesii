@@ -50,7 +50,7 @@ void RunningMode::GameOver(const Obstacle::Type cause)
 {
 	auto & manager = GameManager::GetInstance();
 	manager.Pop(); // delete our created overlay
-	manager.PushGamemode(new ScoreOverlay(score, playerInventory, Obstacle::GetGameOverString(cause)));
+	manager.PushGamemode(new ScoreOverlay(score, playerInventory, cause));
 	return;
 }
 
