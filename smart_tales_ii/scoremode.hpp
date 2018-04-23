@@ -8,7 +8,7 @@
 
 #include <memory>
 
-class ScoreMode : public Gamemode
+class ScoreOverlay : public Gamemode
 {
 private:
 	const Player::Score playerScore;
@@ -31,7 +31,7 @@ public:
 	void Setup() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
-	ScoreMode(const Player::Score & score, 
+	ScoreOverlay(const Player::Score & score, 
 		const Player::Inventory & inventory,
 		const std::string & gameOverMsg);
 };

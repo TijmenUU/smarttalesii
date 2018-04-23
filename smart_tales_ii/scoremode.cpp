@@ -7,7 +7,7 @@
 
 const float cAnimationTimeOut = 4.f;
 
-void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
+void ScoreOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(backgroundSprite, states);
 
@@ -20,17 +20,17 @@ void ScoreMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	}
 }
 
-void ScoreMode::OnEnter()
+void ScoreOverlay::OnEnter()
 {
 	SoundManager::GetInstance().SetMusicVolume(50.f);
 }
 
-bool ScoreMode::SurpressUpdate() const
+bool ScoreOverlay::SurpressUpdate() const
 {
 	return true;
 }
 
-void ScoreMode::Setup()
+void ScoreOverlay::Setup()
 {
 	//manager.PopAllBelow(this);
 	GameManager::GetInstance().PushGamemode(new UIOverlay(false));
@@ -64,7 +64,7 @@ void ScoreMode::Setup()
 	gotoShopButton.SetText(buttonText);
 }
 
-void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
+void ScoreOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
 	backgroundSprite.Update(elapsed);
 
@@ -87,7 +87,7 @@ void ScoreMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 	}
 }
 
-ScoreMode::ScoreMode(const Player::Score & score, 
+ScoreOverlay::ScoreOverlay(const Player::Score & score, 
 	const Player::Inventory & inventory, 
 	const std::string & gameOverMsg)
 	:	playerScore(score),
