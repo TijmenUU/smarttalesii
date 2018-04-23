@@ -43,10 +43,9 @@ sf::Vector2f UpgradeTile::GetPosition() const
 	return background.getPosition();
 }
 
-sf::Vector2f UpgradeTile::GetSize() const
+sf::FloatRect UpgradeTile::GetGlobalBounds() const
 {
-	const auto bounds = background.getGlobalBounds();
-	return sf::Vector2f(bounds.width, bounds.height);
+	return background.getGlobalBounds();
 }
 
 void UpgradeTile::Refresh(const Player::Inventory & inventory)
@@ -54,19 +53,9 @@ void UpgradeTile::Refresh(const Player::Inventory & inventory)
 	purchaseButton.Refresh(inventory);
 }
 
-bool UpgradeTile::Update(const sf::Time & elapsed, 
-	const Inputhandler & input, 
-	Player::Inventory & inventory, 
-	const float horizontalDisplacement,
-	const bool allowInteraction)
+bool UpgradeTile::HandleInput(const Inputhandler & input, Player::Inventory & inventory)
 {
-	if(horizontalDisplacement != 0.f)
-	{
-		sf::Vector2f newposition = background.getPosition();
-		newposition.x += horizontalDisplacement;
-		SetPosition(newposition);
-	}
-	else if(allowInteraction && purchaseButton.HandleInput(input))
+	if(purchaseButton.HandleInput(input))
 	{
 		inventory.RemoveCurrency(purchaseButton.GetPrice());
 		std::cout << "Bought upgrade for " << purchaseButton.GetPrice() << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
@@ -76,8 +65,15 @@ bool UpgradeTile::Update(const sf::Time & elapsed,
 
 		return true;
 	}
-
 	return false;
+}
+
+void UpgradeTile::Update(const sf::Time & elapsed, 
+	const float horizontalDisplacement)
+{
+	sf::Vector2f newposition = background.getPosition();
+	newposition.x += horizontalDisplacement;
+	SetPosition(newposition);
 }
 
 UpgradeTile::UpgradeTile(const Upgrade::Sensor upgrade,

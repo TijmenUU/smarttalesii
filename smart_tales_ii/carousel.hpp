@@ -1,5 +1,5 @@
 #pragma once
-#include "tile.hpp"
+#include "salestile.hpp"
 
 class SaleTileCarousel : public sf::Drawable
 {

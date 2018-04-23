@@ -1,5 +1,6 @@
 #include "carousel.hpp"
 
+#include "gamemode.hpp" // for world dimensions
 #include "vectormath.hpp"
 
 const float cTileSpacing = 50.f;
@@ -45,9 +46,25 @@ void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & inp
 		const float horizontalDistance = input.PointingDeviceWorldPosition().x - previousMousePosition.x;
 		previousMousePosition = input.PointingDeviceWorldPosition();
 
+		if(horizontalDistance == 0.f)
+			return;
+
+		if(horizontalDistance < 0.f)
+		{
+			const auto lastbounds = tiles.back()->GetGlobalBounds();
+			if(lastbounds.left + lastbounds.width < cWorldWidth)
+				return;
+		}
+		else
+		{
+			const auto firstbounds = tiles.front()->GetGlobalBounds();
+			if(firstbounds.left > 0.f)
+				return;
+		}
+
 		for(size_t i = 0; i < tiles.size(); ++i)
 		{
-			tiles[i]->Update(elapsed, input, inventory, horizontalDistance, false);
+			tiles[i]->Update(elapsed, horizontalDistance);
 		}
 	}
 	else if(input.PointingDeviceReleasedEvent())
@@ -60,11 +77,12 @@ void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & inp
 			bool hasInteracted = false;
 			for(size_t i = 0; i < tiles.size(); ++i)
 			{
-				hasInteracted = hasInteracted || tiles[i]->Update(elapsed, input, inventory, 0.f);
-			}
-			if(hasInteracted)
-			{
-				RefreshTiles(inventory);
+				hasInteracted = hasInteracted || tiles[i]->HandleInput(input, inventory);
+				if(hasInteracted)
+				{
+					RefreshTiles(inventory);
+					return;
+				}
 			}
 		}
 	}
