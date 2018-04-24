@@ -10,7 +10,6 @@ namespace Obstacle
 	const sf::Vector2f cLocalInteractionCenter(160, 380);
 	const sf::Vector2f cLocalHintPosition(160, 150);
 	const float cInteractionRadius = 200.f;
-	const float cSensorTriggerDistance = 50.f;
 
 	void Door::Neutralize()
 	{
