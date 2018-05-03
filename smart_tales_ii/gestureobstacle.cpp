@@ -50,14 +50,16 @@ namespace Obstacle
 		return GestureType::None;
 	}
 
-	void GestureBase::HandleInput(const Inputhandler & input)
+	bool GestureBase::HandleInput(const Inputhandler & input)
 	{
 		const uint8_t gestureInfo = static_cast<uint8_t>(TrackGestures(input));
 		if(gestureInfo & gestureFlag)
 		{
-			playerNeutralized = true;
 			Neutralize();
+			return true;
 		}
+
+		return false;
 	}
 
 	GestureBase::GestureBase(const uint8_t _gestureFlag,

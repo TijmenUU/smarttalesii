@@ -33,12 +33,11 @@ namespace Obstacle
 		return VectorMathF::Distance(pos, obstacleSprite.getPosition() + cLocalInteractionCenter) < cInteractionRadius;
 	}
 
-	void Door::HandleInput(const Inputhandler & input)
+	bool Door::HandleInput(const Inputhandler & input)
 	{
 		const uint8_t gestureInfo = static_cast<uint8_t>(TrackGestures(input));
 		if(gestureInfo & gestureFlag)
 		{
-			playerNeutralized = true;
 			Neutralize();
 
 			// TODO possibly fix this if necessary, would require custom animation
@@ -46,15 +45,23 @@ namespace Obstacle
 			{
 				obstacleSprite.SetHorizontalFlip(true);
 			}
+
+			return true;
 		}
+
+		return false;
 	}
 
-	void Door::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
+	bool Door::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
 	{
 		if(playerBounds.left + playerBounds.width > sensorSprite.getPosition().x)
 		{
 			Neutralize();
+
+			return true;
 		}
+
+		return false;
 	}
 
 	sf::Vector2f Door::GetHintPosition() const

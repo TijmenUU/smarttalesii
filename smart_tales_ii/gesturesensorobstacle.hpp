@@ -12,12 +12,13 @@ namespace Obstacle
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 		void Neutralize() override;
 
-		virtual void UpdateSensorTrigger(const sf::FloatRect & playerBounds) = 0;
+		// Returns whether the sensor triggered
+		virtual bool UpdateSensorTrigger(const sf::FloatRect & playerBounds) = 0;
 
 	public:
 		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
 
-		void Update(const sf::Time & elapsed,
+		UpdateResult Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
 			const sf::FloatRect & playerBounds) override;

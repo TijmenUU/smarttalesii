@@ -24,7 +24,8 @@ namespace Obstacle
 
 		virtual bool IsInteractionInBounds(const Inputhandler & input) const = 0;
 		virtual GestureType TrackGestures(const Inputhandler & input);
-		virtual void HandleInput(const Inputhandler & input);
+		// Returns whether user input neutralized this obstacle
+		virtual bool HandleInput(const Inputhandler & input);
 
 	public:
 		GestureBase(const uint8_t _gestureFlag,

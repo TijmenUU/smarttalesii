@@ -10,9 +10,9 @@ namespace Obstacle
 		void Neutralize() override;
 
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
-		void HandleInput(const Inputhandler & input) override;
+		bool HandleInput(const Inputhandler & input) override;
 
-		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
+		bool UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 
 	public:
 		sf::Vector2f GetHintPosition() const override;

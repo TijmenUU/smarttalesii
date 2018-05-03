@@ -22,11 +22,6 @@ namespace Obstacle
 		return !neutralized;
 	}
 
-	bool Base::IsNeutralizedByPlayer() const
-	{
-		return playerNeutralized;
-	}
-
 	void Base::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
 	{
 #pragma warning(suppress: 4244) // Int -> float conversion is safe, resolution will not exceed float precision

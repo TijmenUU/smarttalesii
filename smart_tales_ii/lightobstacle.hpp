@@ -13,10 +13,10 @@ namespace Obstacle
 	protected:
 		void Neutralize() override;
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
-		void HandleInput(const Inputhandler & input) override;
+		bool HandleInput(const Inputhandler & input) override;
 		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
 
-		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
+		bool UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 		void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 	public:

@@ -8,6 +8,14 @@
 
 namespace Obstacle
 {
+	enum class UpdateResult
+	{
+		None = 0,
+		PlayerKilled = 1,
+		ObstacleNeutralizedByPlayer = 2,
+		ObstacleNeutralizedBySensor = 3
+	};
+
 	class Base : public sf::Drawable
 	{
 	private:
@@ -15,7 +23,6 @@ namespace Obstacle
 		Type type;
 		Animation::Sprite obstacleSprite;
 		bool neutralized = false;
-		bool playerNeutralized = false;
 		bool sensorEnabled;
 
 		virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
@@ -31,14 +38,14 @@ namespace Obstacle
 
 		virtual bool IsUnharmful() const;
 		virtual bool IsActive() const;
-		virtual bool IsNeutralizedByPlayer() const;
 		virtual bool CanDespawn() const = 0;
 
 		virtual void SetPosition(const sf::Vector2f & p) = 0;
 		virtual void Move(const float x, const float y) = 0;
 		virtual void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord);
 
-		virtual void Update(const sf::Time & elapsed,
+		// Returns a status flag
+		virtual UpdateResult Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
 			const sf::FloatRect & playerBounds) = 0;

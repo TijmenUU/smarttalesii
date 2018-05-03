@@ -35,25 +35,32 @@ namespace Obstacle
 		return obstacleSprite.getGlobalBounds().contains(input.PointingDeviceWorldPosition());
 	}
 
-	void Furniture::HandleInput(const Inputhandler & input)
+	bool Furniture::HandleInput(const Inputhandler & input)
 	{
 		const uint8_t gestureInfo = static_cast<uint8_t>(TrackGestures(input));
 		if(gestureInfo & gestureFlag)
 		{
-			playerNeutralized = true;
 			Neutralize();
 			const auto mousepos = input.PointingDeviceWorldPosition();
 			Fall(mousepos - gestureStart, mousepos);
+
+			return true;
 		}
+
+		return false;
 	}
 
-	void Furniture::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
+	bool Furniture::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
 	{
 		if(playerBounds.intersects(sensorSprite.getGlobalBounds()))
 		{
 			Neutralize();
 			Fall(sf::Vector2f(0, 1), sf::Vector2f(0, 0));
+
+			return true;
 		}
+
+		return false;
 	}
 
 	sf::Vector2f Furniture::GetHintPosition() const
@@ -82,7 +89,7 @@ namespace Obstacle
 		SetPosition(pos);
 	}
 
-	void Furniture::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
+	UpdateResult Furniture::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
 	{
 		if(isFalling)
 		{
@@ -93,8 +100,10 @@ namespace Obstacle
 		}
 		else
 		{
-			GestureSensorBase::Update(elapsed, input, horizontalDisplacement, playerBounds);
+			return GestureSensorBase::Update(elapsed, input, horizontalDisplacement, playerBounds);
 		}
+
+		return UpdateResult::None;
 	}
 
 	Base * Furniture::Clone() const

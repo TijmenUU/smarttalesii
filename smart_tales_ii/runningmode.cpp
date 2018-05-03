@@ -92,47 +92,48 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 	const auto playerBounds = player.GetGlobalBounds();
 	const float displacement = elapsed.asSeconds() * -scrollVelocity;
 
-	for(int64_t i = static_cast<int64_t>(obstacles.size()) - 1; i >= 0; --i)
+	auto iter = obstacles.begin();
+	while(iter != obstacles.end())
 	{
-#pragma warning(suppress: 4244) // negative indexes should never occur
-		auto & obstacle = *(obstacles[i]);
+		auto & obstacle = *(*iter); // beautiful double deref
 
 		if(obstacle.CanDespawn())
 		{
-#pragma warning(suppress: 4244) // obstacle vector size should never exceed precision of int64_t
-			obstacles.erase(obstacles.begin() + i);
+			iter = obstacles.erase(iter);
 			continue; // make sure we cannot use the deleted obj anymore
 		}
 
-		const auto wasNeutralized = obstacle.IsNeutralizedByPlayer();
-		obstacle.Update(elapsed, input, displacement, playerBounds);
-		
-		if(wasNeutralized != obstacle.IsNeutralizedByPlayer())
+		const auto updateResult = obstacle.Update(elapsed, input, displacement, playerBounds);
+		switch(updateResult)
 		{
-			const auto obstacleCenter = obstacle.GetNeutralizationPosition();
-			const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.GetPosition());
-			
-			const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
-			SpawnScoreBubble(input.PointingDeviceWorldPosition(), currencyScore);
-			currencyDisplay.SetValue(score.GetTotalCurrency());
-		}
-		else if(obstacle.GetKillBounds().intersects(playerBounds))
-		{
-			if(!obstacle.IsUnharmful())
-			{
-				GameOver(obstacle.GetType());
+			case Obstacle::UpdateResult::PlayerKilled:
+			GameOver(obstacle.GetType());
+			return true;
 
-				return true;
+			case Obstacle::UpdateResult::ObstacleNeutralizedByPlayer:
+			{
+				const auto obstacleCenter = obstacle.GetNeutralizationPosition();
+				const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.GetPosition());
+
+				const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
+				SpawnScoreBubble(input.PointingDeviceWorldPosition(), currencyScore);
+				currencyDisplay.SetValue(score.GetTotalCurrency());
 			}
-			else if(obstacle.GetType() == Obstacle::Type::Phone && 
-				!player.IsShowingOff() && 
-				obstacle.IsActive())
+			break;
+
+			case Obstacle::UpdateResult::ObstacleNeutralizedBySensor:
+			if(obstacle.GetType() == Obstacle::Type::Phone)
 			{
 				player.ShowOff();
-#pragma warning(suppress: 4244) // Obstacle count should never reach the limits of unsigned int
-				dynamic_cast<Obstacle::Phone *>(obstacles[i].get())->Neutralize();
-			}	
+			}
+			break;
+
+			default:
+			break;
 		}
+
+		// Advance the iterator
+		++iter;
 	}
 
 	return false;

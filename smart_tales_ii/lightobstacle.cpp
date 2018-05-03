@@ -28,13 +28,16 @@ namespace Obstacle
 		return distance < cInteractionRadius;
 	}
 
-	void Light::HandleInput(const Inputhandler & input)
+	bool Light::HandleInput(const Inputhandler & input)
 	{
 		if(input.PointingDeviceReleasedEvent() && IsInteractionInBounds(input))
 		{
-			playerNeutralized = true;
 			Neutralize();
+
+			return true;
 		}
+
+		return false;
 	}
 
 	void Light::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
@@ -42,7 +45,7 @@ namespace Obstacle
 		SetPosition(sf::Vector2f(windowWidth - cLocalSensorBeamPosition.x, 0.f));
 	}
 
-	void Light::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
+	bool Light::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
 	{
 		const auto bounds = sensorBeam.getGlobalBounds();
 		if(playerBounds.left + playerBounds.width > (bounds.left + bounds.width / 2.f))
@@ -50,7 +53,11 @@ namespace Obstacle
 			Neutralize();
 			lightSwitch.SetAnimation("activated");
 			showBeam = false;
+
+			return true;
 		}
+
+		return false;
 	}
 
 	void Light::draw(sf::RenderTarget & target, sf::RenderStates states) const

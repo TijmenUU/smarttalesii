@@ -14,8 +14,8 @@ namespace Obstacle
 		void Fall(const sf::Vector2f & force, const sf::Vector2f & forceOrigin);
 
 		bool IsInteractionInBounds(const Inputhandler & input) const override;
-		void HandleInput(const Inputhandler & input) override;
-		void UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
+		bool HandleInput(const Inputhandler & input) override;
+		bool UpdateSensorTrigger(const sf::FloatRect & playerBounds) override;
 
 	public:
 		sf::Vector2f GetHintPosition() const override;
@@ -25,7 +25,7 @@ namespace Obstacle
 		virtual void SetPosition(const sf::Vector2f & p) override;
 		virtual void Move(const float x, const float y) override;
 
-		void Update(const sf::Time & elapsed,
+		UpdateResult Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
 			const sf::FloatRect & playerBounds) override;

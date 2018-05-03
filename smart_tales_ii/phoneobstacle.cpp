@@ -53,11 +53,28 @@ namespace Obstacle
 		SetPosition(sf::Vector2f(windowWidth, floorYcoord - (cSpawnHeight + obstacleSprite.getGlobalBounds().width)));
 	}
 
-	void Phone::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
+	UpdateResult Phone::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
 	{
 		if(!neutralized)
 		{
-			HandleInput(input);
+			if(HandleInput(input))
+				return UpdateResult::ObstacleNeutralizedByPlayer;
+
+			if(sensorEnabled)
+			{
+				if(obstacleSprite.getGlobalBounds().intersects(playerBounds))
+				{
+					Neutralize();
+					return UpdateResult::ObstacleNeutralizedBySensor;
+				}
+			}
+			else
+			{
+				if(playerBounds.intersects(GetKillBounds()))
+				{
+					return UpdateResult::PlayerKilled;
+				}
+			}
 
 			currentTimeout -= elapsed.asSeconds();
 			if(currentTimeout <= 0.f)
@@ -78,6 +95,8 @@ namespace Obstacle
 		obstacleSprite.Update(elapsed);
 
 		Move(horizontalDisplacement, 0.f);
+
+		return UpdateResult::None;
 	}
 
 	Base * Phone::Clone() const

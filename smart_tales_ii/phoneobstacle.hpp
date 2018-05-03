@@ -24,7 +24,7 @@ namespace Obstacle
 		void Move(const float x, const float y) override;
 		void SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord) override;
 
-		void Update(const sf::Time & elapsed,
+		UpdateResult Update(const sf::Time & elapsed,
 			const Inputhandler & input,
 			const float horizontalDisplacement,
 			const sf::FloatRect & playerBounds) override;

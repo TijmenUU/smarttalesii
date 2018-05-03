@@ -25,23 +25,36 @@ namespace Obstacle
 		SetPosition(sf::Vector2f(windowWidth + offset.x, floorYcoord - obstacleSprite.getGlobalBounds().height));
 	}
 
-	void GestureSensorBase::Update(const sf::Time & elapsed,
+	UpdateResult GestureSensorBase::Update(const sf::Time & elapsed,
 		const Inputhandler & input, 
 		const float horizontalDisplacement, 
 		const sf::FloatRect & playerBounds)
 	{
 		if(!neutralized)
 		{
-			HandleInput(input);
+			if(HandleInput(input))
+				return UpdateResult::ObstacleNeutralizedByPlayer;
 
 			if(sensorEnabled)
-				UpdateSensorTrigger(playerBounds);
+			{
+				if(UpdateSensorTrigger(playerBounds))
+					return UpdateResult::ObstacleNeutralizedBySensor;
+			}
+			else
+			{
+				if(playerBounds.intersects(GetKillBounds()))
+				{
+					return UpdateResult::PlayerKilled;
+				}
+			}
 		}
 
 		obstacleSprite.Update(elapsed);
 		sensorSprite.Update(elapsed);
 
 		Move(horizontalDisplacement, 0.f);
+
+		return UpdateResult::None;
 	}
 
 	GestureSensorBase::GestureSensorBase(const Animation::Sheet & obstacleSheet,
