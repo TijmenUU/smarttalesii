@@ -18,7 +18,6 @@ protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
-	bool IsShowingOff() const;
 	void ShowOff();
 
 	bool SetAnimation(const std::string & name);
@@ -27,7 +26,6 @@ public:
 	const sf::Vector2f & GetPosition() const;
 	sf::FloatRect GetGlobalBounds() const;
 
-	void Load(const Player::Inventory & inventory);
 	void Update(const sf::Time & elapsed);
 
 	PlayerSprite(const Player::Inventory & inventory);

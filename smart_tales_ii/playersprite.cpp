@@ -12,11 +12,6 @@ void PlayerSprite::draw(sf::RenderTarget & target, sf::RenderStates states) cons
 	target.draw(upperBodySprite, states);
 }
 
-bool PlayerSprite::IsShowingOff() const
-{
-	return showingOff;
-}
-
 void PlayerSprite::ShowOff()
 {
 	showingOff = true;
