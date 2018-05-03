@@ -1,10 +1,11 @@
 #pragma once
 #include "animatedsprite.hpp"
 #include "currencydisplayer.hpp"
-#include "textbutton.hpp"
 #include "gamemode.hpp"
+#include "gameovermessage.hpp"
 #include "playerscore.hpp"
 #include "playerinventory.hpp"
+#include "textbutton.hpp"
 
 #include <memory>
 
@@ -15,7 +16,7 @@ private:
 	Player::Inventory playerInventory;
 	
 	Animation::Sprite backgroundSprite;
-	sf::Text gameOverText;
+	GameoverMessage gameoverMsg;
 	CurrencyDisplayer earnedCurrency, balanceCurrency;
 	TextButton gotoShopButton;
 	float animationTimeOut = 0.f;

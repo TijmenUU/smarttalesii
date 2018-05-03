@@ -79,6 +79,12 @@
     <Filter Include="Source Files\game\upgrades">
       <UniqueIdentifier>{524af921-5660-4c2c-8dcc-ef0a0b62e7fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\objects\score">
+      <UniqueIdentifier>{971dabe2-b407-4e92-9133-72395f696fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\objects\score">
+      <UniqueIdentifier>{d04bd2da-48fb-4a2c-a11b-eeda8da0c299}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -204,6 +210,9 @@
     <ClCompile Include="temporaryoverlay.cpp">
       <Filter>Source Files\game\modes</Filter>
     </ClCompile>
+    <ClCompile Include="gameovermessage.cpp">
+      <Filter>Source Files\game\objects\score</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -328,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="temporaryoverlay.hpp">
       <Filter>Header Files\game\modes</Filter>
+    </ClInclude>
+    <ClInclude Include="gameovermessage.hpp">
+      <Filter>Header Files\game\objects\score</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

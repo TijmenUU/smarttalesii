@@ -28,6 +28,7 @@
     <ClCompile Include="difficulty.cpp" />
     <ClCompile Include="doorobstacle.cpp" />
     <ClCompile Include="furnitureobstacle.cpp" />
+    <ClCompile Include="gameovermessage.cpp" />
     <ClCompile Include="gestureobstacle.cpp" />
     <ClCompile Include="lightobstacle.cpp" />
     <ClCompile Include="obstaclespawner.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="difficulty.hpp" />
     <ClInclude Include="doorobstacle.hpp" />
     <ClInclude Include="furnitureobstacle.hpp" />
+    <ClInclude Include="gameovermessage.hpp" />
     <ClInclude Include="gestureobstacle.hpp" />
     <ClInclude Include="lightobstacle.hpp" />
     <ClInclude Include="obstaclespawner.hpp" />
