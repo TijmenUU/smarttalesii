@@ -25,7 +25,9 @@ private:
 	sf::Text obstacleHintText;
 	bool drawObstacleHint = false;
 	
-	sf::Clock runningClock;
+	// We have to use a secondary running time keeping variable so that the game pause
+	// works correctly, instead of using a more obvious sf::Clock object.
+	unsigned int runningtimeMs = 0U;
 	float scrollVelocity = 0.f; // pixels per second
 
 	Player::Score score;

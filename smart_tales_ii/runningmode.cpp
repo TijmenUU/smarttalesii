@@ -61,7 +61,7 @@ void RunningMode::Reset()
 	obstacles.clear();
 	obstacleSpawner.Reset();
 	
-	runningClock.restart();
+	runningtimeMs = 0U;
 	scrollVelocity = gameDifficulty.GetScrollVelocity(playerInventory.GetSensorUpgradeCount(), 0.f);
 
 	score.Reset();
@@ -246,8 +246,9 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 	// Anything affected by the scrolling velocity should be updated BEFORE this line
 	scrollVelocity = gameDifficulty.GetScrollVelocity(playerInventory.GetSensorUpgradeCount(),
-		runningClock.getElapsedTime().asSeconds());
+		sf::milliseconds(runningtimeMs).asSeconds());
 
+	runningtimeMs += elapsed.asMilliseconds();
 	obstacleSpawner.Update(elapsed, obstacles);
 }
 
