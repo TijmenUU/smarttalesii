@@ -16,12 +16,12 @@ void WinOverlay::Setup()
 	sf::Font & font = ResourceCache::GetInstance().GetFont("commodore");
 
 	title.setFont(font);
-	title.setCharacterSize(46);
+	title.setCharacterSize(42);
 	title.setFillColor(sf::Color::Transparent);
 	title.setOutlineColor(sf::Color::Transparent);
 	title.setOutlineThickness(2.f);
-	title.setString("Win overlay");
-	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 80.f);
+	title.setString("Game Over! Or is it?");
+	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 200.f);
 
 	body.setFont(font);
 	body.setCharacterSize(32);
@@ -29,7 +29,7 @@ void WinOverlay::Setup()
 	body.setOutlineColor(sf::Color::Transparent);
 	body.setOutlineThickness(2.f);
 	body.setString("Victory is the child of\npreparation and determination.\n\n-Sean Hampton");
-	body.setPosition(Alignment::GetCenterOffset(body.getGlobalBounds().width, cWorldWidth / 2.f), 180.f);
+	body.setPosition(Alignment::GetCenterOffset(body.getGlobalBounds().width, cWorldWidth / 2.f), 250.f);
 
 	background.setPosition(0, 0);
 	background.setSize(sf::Vector2f(cWorldWidth, cWorldHeight));
