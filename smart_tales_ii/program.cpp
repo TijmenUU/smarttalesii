@@ -105,7 +105,9 @@ void Program::Run()
 		manager.Update(sfclock.restart(), inputhandler, window.getView());
 		// end update
 
-		window.clear(sf::Color::Black);
+		// We can disable clearing the window since we know each
+		// valid gamestate covers the entire screen
+		//window.clear(sf::Color::Black);
 		// draw
 		window.draw(manager);
 		// end draw
