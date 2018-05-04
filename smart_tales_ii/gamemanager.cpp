@@ -39,14 +39,12 @@ void GameManager::PushGamemode(Gamemode * gamemode)
 
 bool GameManager::RemoveGamemode(Gamemode * gamemode)
 {
-	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
+	for(auto iter = gamemodes.begin(); iter != gamemodes.end(); ++iter)
 	{
-#pragma warning(suppress: 4244) // gamemodes size should not exceed int64_t precision
-		if(gamemodes[i].get() == gamemode)
+		if(iter->get() == gamemode)
 		{
 			gamemode->OnExit();
-#pragma warning(suppress: 4244) // gamemodes size should not exceed int64_t precision
-			gamemodes.erase(gamemodes.begin() + i);
+			gamemodes.erase(iter);
 			return true;
 		}
 	}
