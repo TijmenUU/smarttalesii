@@ -40,8 +40,6 @@ private:
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-	void SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score);
-	
 	void GameOver(const Obstacle::Type cause);
 	void Reset();
 

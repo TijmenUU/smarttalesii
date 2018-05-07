@@ -41,11 +41,6 @@ void RunningMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 		target.draw(obstacleHintText, states);
 }
 
-void RunningMode::SpawnScoreBubble(const sf::Vector2f & mousePos, const unsigned int score)
-{
-	scoreBubbles.emplace_back(mousePos, score);
-}
-
 void RunningMode::GameOver(const Obstacle::Type cause)
 {
 	auto & manager = GameManager::GetInstance();
@@ -116,8 +111,9 @@ bool RunningMode::UpdateObstacles(const sf::Time & elapsed, const Inputhandler &
 				const float playerObstacleDist = VectorMathF::Distance(obstacleCenter, player.GetPosition());
 
 				const auto currencyScore = score.GetNeutralizationCurrency(playerObstacleDist);
-				SpawnScoreBubble(input.PointingDeviceWorldPosition(), currencyScore);
-				currencyDisplay.SetValue(score.GetTotalCurrency());
+				// spawn score bubble
+				scoreBubbles.emplace_back(input.PointingDeviceWorldPosition(), currencyScore);
+				currencyDisplay.SetValue(score.GetTotalCurrency() + playerInventory.GetCurrency());
 			}
 			break;
 
@@ -254,7 +250,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 RunningMode::RunningMode(const Player::Inventory & inventory)
 	: background(cWorldWidth),
-	currencyDisplay(5U),
+	currencyDisplay(5U, "", inventory.GetCurrency()),
 	player(inventory),
 	playerInventory(inventory)
 {
