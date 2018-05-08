@@ -55,24 +55,25 @@ namespace Obstacle
 
 	UpdateResult Phone::Update(const sf::Time & elapsed, const Inputhandler & input, const float horizontalDisplacement, const sf::FloatRect & playerBounds)
 	{
+		UpdateResult retval = UpdateResult::None;
+
 		if(!neutralized)
 		{
 			if(HandleInput(input))
-				return UpdateResult::ObstacleNeutralizedByPlayer;
-
-			if(sensorEnabled)
+				retval = UpdateResult::ObstacleNeutralizedByPlayer;
+			else if(sensorEnabled)
 			{
 				if(obstacleSprite.getGlobalBounds().intersects(playerBounds))
 				{
 					Neutralize();
-					return UpdateResult::ObstacleNeutralizedBySensor;
+					retval = UpdateResult::ObstacleNeutralizedBySensor;
 				}
 			}
 			else
 			{
 				if(playerBounds.intersects(GetKillBounds()))
 				{
-					return UpdateResult::PlayerKilled;
+					retval = UpdateResult::PlayerKilled;
 				}
 			}
 
@@ -96,7 +97,7 @@ namespace Obstacle
 
 		Move(horizontalDisplacement, 0.f);
 
-		return UpdateResult::None;
+		return retval;
 	}
 
 	Base * Phone::Clone() const
