@@ -23,6 +23,9 @@ bld/
 [Oo]bj/
 [Ll]og/
 *.exe
+# Linux build files
+/bin/smarttalesii
+/smart_tales_ii/build
 
 # Visual Studio 2015 cache/options directory
 .vs/
