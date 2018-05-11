@@ -20,8 +20,8 @@ void WinOverlay::Setup()
 	title.setFillColor(sf::Color::Transparent);
 	title.setOutlineColor(sf::Color::Transparent);
 	title.setOutlineThickness(2.f);
-	title.setString("Game Over! Or is it?");
-	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 200.f);
+	title.setString("When life is a game, don't make it\n      too hard on yourself!");
+	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 125.f);
 
 	body.setFont(font);
 	body.setCharacterSize(32);
