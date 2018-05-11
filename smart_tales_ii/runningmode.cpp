@@ -221,6 +221,12 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		{
 			scrollVelocity *= 1.05f;
 		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		{
+			auto & manager = GameManager::GetInstance();
+			manager.PopAllAbove(this);
+			manager.PushGamemode(new WinOverlay(0.f));
+		}
 	}
 
 	background.Update(elapsed, -scrollVelocity);
