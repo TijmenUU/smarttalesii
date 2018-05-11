@@ -26,12 +26,19 @@ protected:
 public:
 	static GameManager & GetInstance();
 	// Calls Load on gamemode, thus it may throw an runtime_error exception
-	void PushGamemode(Gamemode * gamemode);
-	bool RemoveGamemode(Gamemode * gamemode);
+	void PushGamemode(Gamemode * const gamemode);
+	bool RemoveGamemode(Gamemode * const gamemode);
+	// Pops the top element (added last) from the gamestate
+	// stack
 	void Pop();
-	// Inclusive, pops until it finds gamemode, pops that too and then stops
-	bool PopUntill(Gamemode * gamemode);
-	bool PopAllBelow(Gamemode * gamemode);
+	// Pops everything "above" (added later) the provided
+	// pointer. If the pointer does not exist in the gamestate stack
+	// the entire stack will be popped.
+	void PopAllAbove(const Gamemode * const gamemode);
+	// Pops everything "below" (added before) the provided
+	// pointer. If the pointer does not exist in the gamestate stack
+	// the entire stack will be popped.
+	void PopAllBelow(const Gamemode * const gamemode);
 
 	void SetDebugFlag(const bool flag);
 	bool GetDebugFlag() const;

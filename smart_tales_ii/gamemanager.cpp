@@ -30,14 +30,14 @@ GameManager & GameManager::GetInstance()
 	return m;
 }
 
-void GameManager::PushGamemode(Gamemode * gamemode)
+void GameManager::PushGamemode(Gamemode * const gamemode)
 {
 	gamemodes.emplace_back(gamemode);
 	gamemode->Setup();
 	gamemode->OnEnter();
 }
 
-bool GameManager::RemoveGamemode(Gamemode * gamemode)
+bool GameManager::RemoveGamemode(Gamemode * const gamemode)
 {
 	for(auto iter = gamemodes.begin(); iter != gamemodes.end(); ++iter)
 	{
@@ -61,29 +61,21 @@ void GameManager::Pop()
 	}
 }
 
-bool GameManager::PopUntill(Gamemode * gamemode)
+void GameManager::PopAllAbove(const Gamemode * const gamemode)
 {
 	while(gamemodes.size() > 0 && gamemodes.back().get() != gamemode)
 	{
 		Pop();
 	}
-	if(gamemodes.size() > 0)
-	{
-		Pop();
-		return true;
-	}
-
-	return false;
 }
 
-bool GameManager::PopAllBelow(Gamemode * gamemode)
+void GameManager::PopAllBelow(const Gamemode * const gamemode)
 {
 	while(gamemodes.size() > 0 && gamemodes.front().get() != gamemode)
 	{
 		gamemodes.front()->OnExit();
 		gamemodes.erase(gamemodes.begin());
 	}
-	return false;
 }
 
 void GameManager::SetDebugFlag(const bool flag)
