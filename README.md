@@ -20,7 +20,7 @@ Be sure to update the project with the correct directories for the local SFML de
 - A modern compiler supporting C++14
 - make
 
-Check if `/smart_tales_ii/makefile` uses the correct environment settings. By default it uses `CC` as `clang++-6.0` and includes the sfml dependencies in `LFLAGS` through `lsfml-...`.
+Check if `/smart_tales_ii/makefile` uses the correct environment settings. By default it uses `CC` as `clang++-6.0` and includes the sfml dependencies in `LIBS` through `lsfml-...`. Don't forget to include your custom include directory in `CFLAGS` if you have a custom SFML build.
 
 Now simply run `make all` in `/smart_tales_ii/` after which a binary will be build to `/bin/smarttalesii`. It may require you to set the correct permissions on the files it uses, if incorrectly set it may complain about not finding or able to open certain assets. The compiled `smarttalesii` binary also is required to be run in the `/bin` directory, else it cannot find its resources.
 
