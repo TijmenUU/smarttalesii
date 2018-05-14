@@ -7,6 +7,7 @@ namespace Obstacle
 {
 	const sf::Vector2f cLocalHintPosition(45, -30);
 	const float cSpawnHeight = 135.f; // pixels
+	const float cRingingTimeout = 2.5f;
 
 	void Phone::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	{

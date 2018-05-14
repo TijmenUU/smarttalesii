@@ -1,3 +1,15 @@
+/*
+	gameovermessage.hpp
+
+	Utility object used in the ScoreOverlay class
+
+	Defines the catchphrases and information lines in the
+	cpp file.
+
+	Each construction gets the next catchphrase / information
+	pair until it reaches the last one where it loops around.
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 

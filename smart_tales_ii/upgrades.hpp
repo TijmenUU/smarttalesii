@@ -1,3 +1,12 @@
+/*
+	upgrades.hpp
+
+	These utility functions define the available upgrades
+	and the obstacles affected by them.
+
+	Upgrades are of type enum class Sensor
+*/
+
 #pragma once
 #include "obstacletype.hpp"
 

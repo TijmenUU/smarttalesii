@@ -29,8 +29,7 @@ void ScrollingBackground::Update(const sf::Time & elapsed, const float scrollVel
 	wallSprite.setPosition(position);
 }
 
-ScrollingBackground::ScrollingBackground(const float _worldWidth)
-	: worldWidth(_worldWidth)
+ScrollingBackground::ScrollingBackground(const float width)
 {
 	auto & cache = ResourceCache::GetInstance();
 	auto & wallTexture = cache.GetMutableTexture("runningbackground");
@@ -38,7 +37,7 @@ ScrollingBackground::ScrollingBackground(const float _worldWidth)
 	wallTexture.setSmooth(false);
 #pragma warning(suppress: 4244) // The textures used are too small to overflow a float here
 	wallSpriteWidth = wallTexture.getSize().x;
-	const int repetitions = static_cast<int>(std::ceil(worldWidth / wallSpriteWidth)) + 2;
+	const int repetitions = static_cast<int>(std::ceil(width / wallSpriteWidth)) + 2;
 
 	wallSprite.setTexture(wallTexture);
 #pragma warning(suppress: 4244) // Texture rect is pixel perfect, so the loss of precision from float to int is no problem

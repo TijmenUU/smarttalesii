@@ -1,3 +1,16 @@
+/*
+	resourcecache.hpp
+
+	A very simple and naive implementation of a resource cache
+	that allows the requesting of assets by string keys. The
+	cache uses unordered_maps so repeated fetches may be slow.
+
+	It is expected to be loaded once and then used. Pointers
+	will remain valid after a load, but iterators are invalidated.
+
+	Don't use the constructor, use ResourceCache::GetInstance()
+*/
+
 #pragma once
 #include "animationsheet.hpp"
 

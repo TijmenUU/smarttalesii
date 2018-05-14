@@ -1,3 +1,15 @@
+/*
+	playerinventory.hpp
+
+	This class simply keeps track of what the player owns.
+	This includes:
+		-	Upgrades (Sensor)
+		-	Currency
+
+	It provides methods to easily check if the player has
+	either of these in sufficient quantities.
+*/
+
 #pragma once
 #include "obstacletype.hpp"
 #include "upgrades.hpp"

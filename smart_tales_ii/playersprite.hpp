@@ -1,3 +1,14 @@
+/*
+	playersprite.hpp
+
+	This class concerns itself soley with drawing the player sprite
+	for the RunningMode gamemode. It supports the single custom
+	animation for running past a phone obstacle (PlayerSprite::ShowOff())
+
+	Upper body and legs are seperated for this reason, so that the
+	upper body may be animated independently from the legs.
+*/
+
 #pragma once
 #include "animatedsprite.hpp"
 

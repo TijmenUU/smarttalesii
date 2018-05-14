@@ -67,6 +67,16 @@ void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(carousel, states);
 }
 
+bool ShopMode::SurpressDraw() const
+{
+	return true;
+}
+
+bool ShopMode::SurpressUpdate() const
+{
+	return true;
+}
+
 void ShopMode::OnEnter()
 {
 	auto & music = ResourceCache::GetInstance().GetMusic("casabossanova");

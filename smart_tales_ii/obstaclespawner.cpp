@@ -1,6 +1,10 @@
 #include "obstaclespawner.hpp"
 
-#include "gamemode.hpp"
+// obstacles
+#include "doorobstacle.hpp"
+#include "furnitureobstacle.hpp"
+#include "lightobstacle.hpp"
+#include "phoneobstacle.hpp"
 
 void ObstacleSpawner::InsertObstacle(std::vector<std::unique_ptr<Obstacle::Base>>& v) const
 {
@@ -14,7 +18,7 @@ void ObstacleSpawner::Reset()
 	currentSpawnTimeout = 0.f;
 }
 
-void ObstacleSpawner::Load(const Player::Inventory & inventory, const float floorYposition)
+void ObstacleSpawner::Load(const Player::Inventory & inventory, const float spawnXposition, const float floorYposition)
 {
 	obstacleFactory.emplace_back(new Obstacle::Furniture(inventory.HasObstacleCounter(Obstacle::Type::Furniture)));
 	obstacleFactory.emplace_back(new Obstacle::Door(inventory.HasObstacleCounter(Obstacle::Type::Door)));
@@ -25,14 +29,14 @@ void ObstacleSpawner::Load(const Player::Inventory & inventory, const float floo
 	{
 		obstacleFactory[i]->SetPosition(sf::Vector2f(0.f, 0.f));
 #pragma warning(suppress: 4244) // conversion from float to int should not be a problem for resolutions
-		obstacleFactory[i]->SetSpawnPosition(cWorldWidth, floorYposition);
+		obstacleFactory[i]->SetSpawnPosition(spawnXposition, floorYposition);
 	}
 
 	// set our normal distribution to the obstacleFactory range
 	dist.param(std::uniform_int_distribution<unsigned int>::param_type(0, obstacleFactory.size() - 1));
 }
 
-void ObstacleSpawner::Update(const sf::Time elapsed, std::vector<std::unique_ptr<Obstacle::Base>>& toInsertIn)
+void ObstacleSpawner::Update(const sf::Time elapsed, std::vector<std::unique_ptr<Obstacle::Base>>& toInsertIn, const float worldRightBorderX)
 {
 	currentSpawnTimeout += elapsed.asSeconds();
 	if(currentSpawnTimeout > spawnTimeout)
@@ -48,7 +52,7 @@ void ObstacleSpawner::Update(const sf::Time elapsed, std::vector<std::unique_ptr
 		const auto bounds = lastObstacleSpawned->GetKillBounds();
 		// Make sure this obstacle is fully on screen
 		// before we spawn the next obstacle in!
-		if(bounds.left + bounds.width < cWorldWidth)
+		if(bounds.left + bounds.width < worldRightBorderX)
 		{
 			currentSpawnTimeout = 0.f;
 			InsertObstacle(toInsertIn);

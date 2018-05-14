@@ -1,3 +1,11 @@
+/*
+	scorebubble.hpp
+
+	This class is nothing more than a number floating upwards.
+
+	It has a lifetime and velocity defined in its cpp file.
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 

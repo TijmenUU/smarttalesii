@@ -1,3 +1,14 @@
+/*
+	scoreoverlay.hpp
+
+	A score overlay for the gameover event in RunningMode.
+	It shows the player currency gained, some information
+	on AAL and provides a button to go to the shop.
+
+	It does not surpress the update of underlying gamemodes
+	It does not surpress the drawing of underlying gamemodes
+*/
+
 #pragma once
 #include "animatedsprite.hpp"
 #include "currencydisplayer.hpp"

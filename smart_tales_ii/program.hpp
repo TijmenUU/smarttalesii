@@ -1,3 +1,10 @@
+/*
+	program.hpp
+
+	This class holds all the bare essentials used by the game.
+	It is responsible for loading the assets, keeping the input
+	state updated and contains the game loop in Run()
+*/
 #pragma once
 #include "resourcecache.hpp"
 #include "gamemanager.hpp"

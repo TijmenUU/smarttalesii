@@ -1,3 +1,12 @@
+/*
+	purchasebutton.hpp
+
+	Specialized button that holds the upgrade unlock logic.
+
+	Only used by the upgradetile from the carousel in the shop
+	gamemode.
+*/
+
 #pragma once
 #include "playerinventory.hpp"
 #include "button.hpp"

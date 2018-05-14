@@ -1,3 +1,17 @@
+/*
+	runningmode.hpp
+
+	A large class representing the main game.
+	It has a few debug options:
+		- keyboard key K to kill yourself
+		- keyboard key W to instantly win
+		- keyboard key - to slow down the scrolling velocity
+		- keyboard key + to speed up the scrolling velocity
+
+	It surpresses the update of underlying gamemodes
+	It surpresses the drawing of underlying gamemodes
+*/
+
 #pragma once
 #include "background.hpp"
 #include "currencydisplayer.hpp"

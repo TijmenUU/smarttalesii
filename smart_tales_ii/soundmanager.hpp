@@ -1,3 +1,16 @@
+/*
+	soundmanager.hpp
+
+	A class that provides a single interface for playing sounds
+	and music throughout this application. 
+	
+	Use the SoundManager::GetInstance() instead of constructing
+	one yourself.
+
+	Don't forget to Update it in case of using the crossfade
+	functionality. (GameManager class is defined as friend here)
+*/
+
 #pragma once
 #include <array>
 #include <SFML/Audio.hpp>

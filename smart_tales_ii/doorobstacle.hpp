@@ -1,3 +1,10 @@
+/*
+	doorobstacle.hpp
+
+	This class implements the door obstacle and defines
+	a whole bunch of variables for this in its cpp file
+*/
+
 #pragma once
 #include "gesturesensorobstacle.hpp"
 

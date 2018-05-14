@@ -1,3 +1,13 @@
+/*
+	currencydisplayer.hpp
+
+	This object draws a given number with a coin icon to the right of it.
+	It supports animating the number, use SetValue for that and initialize
+	the object with the starting value.
+
+	Needs to be updated if the animating of the value is used.
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 

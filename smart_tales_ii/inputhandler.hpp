@@ -1,3 +1,14 @@
+/*
+	inputhandler.hpp
+
+	An utility class that stores all the input related events (and then some)
+	to itself every time it's Update function is called. 
+
+	Since the SFML interface already provides a keydown state this class only
+	provides events for the mouse and keyboard. On a key release and on a key press,
+	but not during a key press. See sf::Keyboard::isKeyPressed for that
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -20,8 +31,9 @@ private:
 
 	void ClearState();
 public:
-	// goes through all the recorded events since last update
-	// assumes nothing else called pollEvent on it in the mean time!
+	// Goes through all the recorded events since the last Update call
+	// Assumes nothing else called pollEvent on the given window in the mean time!
+	// Replaces the current state!
 	void Update(sf::RenderWindow & window);
 
 	bool DidWindowResize() const;

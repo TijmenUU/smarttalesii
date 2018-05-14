@@ -1,3 +1,17 @@
+/*
+	gamemanager.hpp
+
+	The Gamemanager class keeps a stack of active gamemodes. Later 
+	gamemodes added are "on top" of the stack and are thus updated
+	before the other gamemodes.
+
+	A gamemode may surpress the update and drawing of the gamemodes "below" it.
+
+	The debug flag is also stored in the manager class
+
+	Don't use the constructor, use GameManager::GetInstance instead
+*/
+
 #pragma once
 #include "gamemode.hpp"
 #include "resourcecache.hpp"

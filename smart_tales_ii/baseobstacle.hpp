@@ -1,3 +1,13 @@
+/*
+	baseobstacle.hpp
+
+	Basic obstacle virtual class that centers around the
+	obstacle sprite. Pretty much the interface RunningMode
+	expects from it and not much more.
+
+	This class is virtual.
+*/
+
 #pragma once
 #include "animatedsprite.hpp"
 #include "inputhandler.hpp"

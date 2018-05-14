@@ -1,3 +1,14 @@
+/*
+	gestureobstacle.hpp
+
+	Expanded base obstacle with support for gestures
+
+	Defines the logic for how the gesture obstacle
+	is neutralized by user input.
+
+	This class is virtual.
+*/
+
 #pragma once
 #include "baseobstacle.hpp"
 

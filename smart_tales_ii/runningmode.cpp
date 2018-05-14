@@ -178,7 +178,7 @@ void RunningMode::Setup()
 	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);
 
-	obstacleSpawner.Load(playerInventory, cFloorY);
+	obstacleSpawner.Load(playerInventory, cFloorY, cWorldWidth);
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
@@ -251,7 +251,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		sf::milliseconds(runningtimeMs).asSeconds());
 
 	runningtimeMs += elapsed.asMilliseconds();
-	obstacleSpawner.Update(elapsed, obstacles);
+	obstacleSpawner.Update(elapsed, obstacles, cWorldWidth);
 }
 
 RunningMode::RunningMode(const Player::Inventory & inventory)

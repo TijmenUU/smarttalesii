@@ -1,11 +1,14 @@
-#pragma once
-#include "playerinventory.hpp"
+/*
+	obstaclespawner.hpp
 
-// obstacle definitions
-#include "furnitureobstacle.hpp"
-#include "doorobstacle.hpp"
-#include "lightobstacle.hpp"
-#include "phoneobstacle.hpp"
+	A helper class that inserts the next "random" object on
+	a given interval. The order is seeded and uses a uniform
+	distribution.
+*/
+
+#pragma once
+#include "baseobstacle.hpp"
+#include "playerinventory.hpp"
 
 #include <memory>
 #include <random>
@@ -27,8 +30,8 @@ private:
 public:
 	void Reset();
 
-	void Load(const Player::Inventory & inventory, const float floorYposition);
+	void Load(const Player::Inventory & inventory, const float spawnXposition, const float floorYposition);
 
-	void Update(const sf::Time elapsed, std::vector<std::unique_ptr<Obstacle::Base>> & toInsertIn);
+	void Update(const sf::Time elapsed, std::vector<std::unique_ptr<Obstacle::Base>> & toInsertIn, const float worldRightBorderX);
 };
 

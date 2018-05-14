@@ -1,3 +1,10 @@
+/*
+	vectormath.hpp
+
+	Utility functions that take a float vector (namespace VectorMathF)
+	or an integer vector (namespace VectorMathI)
+*/
+
 #pragma once
 #include <cstdint>
 #include <SFML/System/Vector2.hpp>

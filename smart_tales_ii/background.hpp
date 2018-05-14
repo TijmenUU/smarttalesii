@@ -1,3 +1,10 @@
+/*
+	background.hpp
+
+	This class simply scrolls the background by moving it back and
+	forth. As soon as the background is more than a single sprite
+	width over the edge, it moves a single sprite width back.
+*/
 #pragma once
 #include <SFML/Graphics.hpp>
 
@@ -7,8 +14,6 @@ class ScrollingBackground : public sf::Drawable
 private:
 	sf::Sprite wallSprite;
 	float wallSpriteWidth = -1;
-	sf::Vector2f scrollPosition = sf::Vector2f(0.f, 0.f);
-	const float worldWidth = -1;
 
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const;
@@ -17,5 +22,5 @@ public:
 	void Reset();
 	void Update(const sf::Time & elapsed, const float scrollVelocity);
 
-	ScrollingBackground(const float _worldWidth);
+	ScrollingBackground(const float width);
 };

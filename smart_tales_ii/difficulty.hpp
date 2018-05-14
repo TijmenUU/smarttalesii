@@ -1,3 +1,11 @@
+/*
+	difficulty.hpp
+
+	This is a simple helper class to read a difficulty
+	file and use those variables in the RunningMode
+	gamemode.
+*/
+
 #pragma once
 #include <string>
 

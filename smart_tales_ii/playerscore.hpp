@@ -1,3 +1,11 @@
+/*
+	playerscore.hpp
+
+	A simple object that keeps track of the player performance
+	in RunningMode. This also contains the reward function, for
+	neutralizing obstacles.
+*/
+
 #pragma once
 
 namespace Player

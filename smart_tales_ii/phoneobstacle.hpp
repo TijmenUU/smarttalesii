@@ -1,3 +1,10 @@
+/*
+	phoneobstacle.hpp
+
+	This class implements the phone obstacle and defines
+	a whole bunch of variables for this in its cpp file
+*/
+
 #pragma once
 #include "gestureobstacle.hpp"
 
@@ -6,7 +13,6 @@ namespace Obstacle
 	class Phone : public GestureBase
 	{
 	private:
-		const float cRingingTimeout = 2.5f;
 		float currentTimeout = 0.f;
 
 	protected:

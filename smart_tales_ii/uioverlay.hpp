@@ -1,3 +1,16 @@
+/*
+	uioverlay.hpp
+
+	The overlay that has 3 buttons to:
+	- Toggle mute sound effects
+	- Toggle mute music
+	- Toggle pause
+
+	It surpresses the update of underlying gamemodes 
+	when the pause button is toggled.
+	It does not surpress the drawing of underlying gamemodes
+*/
+
 #pragma once
 #include "button.hpp"
 #include "gamemode.hpp"

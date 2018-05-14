@@ -1,3 +1,18 @@
+/*
+	carousel.hpp
+
+	A simple horizontal scrolling carousel of SaleTile objects
+	and derrived ones.
+
+	It limits the scrolling to the leftmost (first) and rightmost
+	(last) tiles. So if instantiated with few tiles it may not
+	scroll at all if it fits the window width.
+
+	The scrolling is done by moving a minimal amount (bias) whilst the
+	pointing device is down. If it is less than the bias, it simply
+	handles it as a click event for one of the tiles.
+*/
+
 #pragma once
 #include "salestile.hpp"
 

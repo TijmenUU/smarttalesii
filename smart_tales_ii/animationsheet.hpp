@@ -1,3 +1,12 @@
+/*
+	animationsheet.hpp
+
+	The Sheet class loads an animation file and stores the associated texture
+	and defined animations. These are publicly available read only
+
+	The AnimatedSprite class uses this.
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -26,14 +35,14 @@ namespace Animation
 		std::unordered_map<std::string, Animation> animations;
 	
 	public:
-		virtual void LoadFromFile(const std::string & animationFile);
+		void LoadFromFile(const std::string & animationFile);
 
-		virtual sf::IntRect GetFrame(const Animation & anim, const unsigned int frameNumber) const;
+		sf::IntRect GetFrame(const Animation & anim, const unsigned int frameNumber) const;
 
 		// returns nullptr if no animation exists with the given name
-		virtual const Animation * GetAnimation(const std::string & name) const;
+		const Animation * GetAnimation(const std::string & name) const;
 		// returns empty string if it couldn't find a match
-		virtual std::string GetAnimationName(const Animation * ptr) const;
+		std::string GetAnimationName(const Animation * ptr) const;
 
 		const sf::Texture & GetTexture() const;
 	};

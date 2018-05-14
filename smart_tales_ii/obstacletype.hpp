@@ -1,3 +1,13 @@
+/*
+	obstacletype.hpp
+
+	Utility methods and the definition of all different
+	obstacle types that exist.
+
+	The displayed hint strings in the RunningMode gamemode
+	are defined in the cpp file.
+*/
+
 #pragma once
 #include "animatedsprite.hpp"
 
@@ -17,6 +27,4 @@ namespace Obstacle
 	std::string GetString(const Type t);
 
 	std::string GetHintString(const Type t);
-
-	std::string GetGameOverString(const Type t);
 }

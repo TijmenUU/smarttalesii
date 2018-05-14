@@ -1,3 +1,15 @@
+/*
+	gamemode.hpp
+
+	Base virtual class that exposes the expected interface
+	used by the GameManager class to use different gamemodes.
+
+	This file also defines the world dimensions, with the
+	origin at 0,0 (topleft for SFML).
+
+	This is a virtual class.
+*/
+
 #pragma once
 #include "inputhandler.hpp"
 #include "resourcecache.hpp"

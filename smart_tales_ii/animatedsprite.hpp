@@ -1,3 +1,13 @@
+/*
+	animatedsprite.hpp
+
+	An extended sf::Sprite class that uses the SpriteSheet class.
+	It animates the texture coordinates of the sprite accordingly.
+
+	After construction the Sprite still needs the animation to be
+	set. If it isn't set it is invisble.
+*/
+
 #pragma once
 #include "animationsheet.hpp"
 

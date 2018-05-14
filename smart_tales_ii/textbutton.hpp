@@ -1,3 +1,9 @@
+/*
+	textbutton.hpp
+
+	A button with text centered in it.
+*/
+
 #pragma once
 #include "button.hpp"
 

@@ -1,3 +1,10 @@
+/*
+	button.hpp
+
+	A basic textured button. It has a down and up
+	state and works like a toggle button by default.
+*/
+
 #pragma once
 #include "animatedsprite.hpp"
 #include "inputhandler.hpp"

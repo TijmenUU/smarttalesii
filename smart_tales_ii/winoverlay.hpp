@@ -1,3 +1,13 @@
+/*
+	winoverlay.hpp
+
+	The overlay presented to the player when he has
+	all upgrades purchased in the RunningMode gamemode
+
+	It does not surpress the update of underlying gamemodes
+	It does not surpress the drawing of underlying gamemodes
+*/
+
 #pragma once
 #include "gamemode.hpp"
 

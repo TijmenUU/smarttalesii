@@ -1,3 +1,11 @@
+/*
+	salestile.hpp
+
+	An abstract class used in the carousel in the shop gamemode.
+
+	It defines the base functionality expected from a carousel item.
+*/
+
 #pragma once
 #include "inputhandler.hpp"
 #include "playerinventory.hpp"

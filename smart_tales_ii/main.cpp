@@ -1,8 +1,17 @@
+/*
+	main.cpp
+
+	Any launch parameters given to the executable are parsed here, 
+	the program instantiated and loaded. If any errors occur during 
+	the loading of assets, the game will output the error to console.
+*/
+
 #include "program.hpp"
 #include "soundmanager.hpp"
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <string>
 
 const unsigned int windowWidth = 1280U;
@@ -17,7 +26,7 @@ enum class LaunchParameter
 
 LaunchParameter GetLaunchParameterToken(const std::string & s)
 {
-	const static std::array<std::string, 2> values = {"debug", "nosound"};
+	const std::array<std::string, 2> values = {"debug", "nosound"};
 	for(size_t i = 0; i < values.size(); ++i)
 	{
 		if(values[i].compare(s) == 0)
@@ -33,6 +42,7 @@ int main(int argc, char ** argv)
 {
 	bool debug = false;
 
+	// Parse the launch parameters
 	for(size_t i = 1; i < argc; ++i)
 	{
 		const auto result = GetLaunchParameterToken(argv[i]);
@@ -56,11 +66,14 @@ int main(int argc, char ** argv)
 		}
 	}
 
-	Program * p;
+	std::unique_ptr<Program> programPtr(new Program(windowWidth, 
+				windowHeight, 
+				"Smart Tales II", 
+				debug));
+
 	try
 	{
-		p = new Program(windowWidth, windowHeight, "Smart Tales II", debug);
-		p->Load();
+		programPtr->Load();
 	}
 	catch(const std::runtime_error & e)
 	{
@@ -70,8 +83,7 @@ int main(int argc, char ** argv)
 		return 1;
 	}
 	 
-	p->Run();
-	delete p;
+	programPtr->Run();
 
 	return 0;
 }

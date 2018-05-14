@@ -1,3 +1,14 @@
+/*
+	temporaryoverlay.hpp
+
+	An overlay that presents a piece of text and deletes itself
+	automatically after the lifetime is equal or greater than
+	the set timeout.
+
+	It does not surpress the update of underlying gamemodes
+	It does not surpress the drawing of underlying gamemodes
+*/
+
 #pragma once
 #include "gamemode.hpp"
 
