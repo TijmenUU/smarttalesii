@@ -178,7 +178,7 @@ void RunningMode::Setup()
 	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);
 
-	obstacleSpawner.Load(playerInventory, cFloorY, cWorldWidth);
+	obstacleSpawner.Load(playerInventory, cWorldWidth, cFloorY);
 
 	gameDifficulty.LoadFromFile(cGameDifficultyFile);//GetDifficulty(cGameDifficultyFile);
 	
