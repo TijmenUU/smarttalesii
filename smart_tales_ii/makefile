@@ -1,5 +1,5 @@
 CC = clang++-6.0
-CFLAGS = -std=c++14 -Wall
+CFLAGS = -std=c++14 -Wall -O3
 LFLAGS = -Wall
 LIBS = -lm -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 
