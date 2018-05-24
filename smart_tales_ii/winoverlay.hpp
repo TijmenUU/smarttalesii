@@ -31,5 +31,5 @@ protected:
 public:
 	void Show();
 
-	WinOverlay(const float timeOut = 15.f);
+	WinOverlay(const float timeOut = 15.f, const float cardTimeOut = 1.8f);
 };

@@ -57,19 +57,15 @@ void WinOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 			const sf::Color fillColor(255, 255, 255, colorValue);
 			title.setFillColor(fillColor);
 
-			first.SetFillColor(fillColor);
-			second.SetFillColor(fillColor);
-			third.SetFillColor(fillColor);
-
 			const sf::Color outlineColor(0, 0, 0, colorValue);
 			title.setOutlineColor(outlineColor);
 
-			first.SetOutlineColor(outlineColor);
-			second.SetOutlineColor(outlineColor);
-			third.SetOutlineColor(outlineColor);
-
 			background.setFillColor(sf::Color(0, 0, 0, colorValue / 2));
 		}
+
+		first.Update(elapsed);
+		second.Update(elapsed);
+		third.Update(elapsed);
 	}
 }
 
@@ -78,10 +74,10 @@ void WinOverlay::Show()
 	idleTimeOut = 0.f;
 }
 
-WinOverlay::WinOverlay(const float timeOut)
+WinOverlay::WinOverlay(const float timeOut, const float cardTimeOut)
 	: idleTimeOut(timeOut),
-	first("motionsensorlightbulb", "From simple motion\ntriggered lightbulbs..."),
-	second("tovertafel", "...to game tables\nby Active Cues..."),
-	third("sensara", "...to a complete sensor\nsuite by Sensara")
+	first("motionsensorlightbulb", "From simple motion\ntriggered lightbulbs...", cardTimeOut),
+	second("tovertafel", "...to game tables\nby Active Cues...", cardTimeOut * 2),
+	third("sensara", "...to a complete sensor\nsuite by Sensara", cardTimeOut * 3)
 {
 }
