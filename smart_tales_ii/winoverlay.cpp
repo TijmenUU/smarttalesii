@@ -30,7 +30,7 @@ void WinOverlay::Setup()
 	title.setString("When life is a game, don't make it\n      too hard on yourself!");
 	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
 
-	const float infoCardYPos = 200;
+	const float infoCardYPos = 240;
 	first.SetPosition(20, infoCardYPos);
 	second.SetPosition(440, infoCardYPos);
 	third.SetPosition(860, infoCardYPos);
