@@ -224,8 +224,9 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			auto & manager = GameManager::GetInstance();
-			manager.PopAllAbove(this);
+			manager.PopAllBelow(nullptr);
 			manager.PushGamemode(new WinOverlay(0.f));
+			return;
 		}
 	}
 
