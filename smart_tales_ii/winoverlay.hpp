@@ -10,6 +10,7 @@
 
 #pragma once
 #include "gamemode.hpp"
+#include "informationcard.hpp"
 
 class WinOverlay : public Gamemode
 {
@@ -18,6 +19,7 @@ private:
 	uint8_t fadeIncrement = 3U;
 	uint8_t colorValue = 0U;
 	sf::Text title;
+	InformationCard first, second, third;
 	sf::Text body;
 	sf::RectangleShape background;
 
