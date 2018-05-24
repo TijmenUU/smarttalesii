@@ -14,7 +14,7 @@ const std::array<std::string, 1> cFontFiles = {
 	"font/commodore.ttf"
 };
 
-const std::array<std::string, 10> cTextureFiles = {
+const std::array<std::string, 13> cTextureFiles = {
 	"texture/coin.png",
 	"texture/paperclip.png",
 	"texture/passive_ir_beam.png",
@@ -24,7 +24,10 @@ const std::array<std::string, 10> cTextureFiles = {
 	"texture/upgradetile_furniture.png",
 	"texture/upgradetile_light.png",
 	"texture/upgradetile_phone.png",
-	"texture/upgradetilebg.png"
+	"texture/upgradetilebg.png",
+	"texture/tovertafel.jpg",
+	"texture/sensara.jpg",
+	"texture/motionsensorlightbulb.jpg"
 };
 
 const std::array<std::string, 16> cSpriteSheetFiles = {
