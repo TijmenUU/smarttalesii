@@ -6,14 +6,16 @@
 
 void WinOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	if(idleTimeOut > 0.f)
+	{
+		return;
+	}
 	target.draw(background, states);
 	target.draw(title, states);
 
 	target.draw(first, states);
 	target.draw(second, states);
 	target.draw(third, states);
-
-	target.draw(body, states);
 }
 
 void WinOverlay::Setup()
@@ -26,16 +28,9 @@ void WinOverlay::Setup()
 	title.setOutlineColor(sf::Color::Transparent);
 	title.setOutlineThickness(2.f);
 	title.setString("When life is a game, don't make it\n      too hard on yourself!");
-	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 75.f);
+	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
 
-	//body.setFont(font);
-	//body.setCharacterSize(32);
-	//body.setFillColor(sf::Color::Transparent);
-	//body.setOutlineColor(sf::Color::Transparent);
-	//body.setOutlineThickness(2.f);
-	//body.setString("Victory is the child of\npreparation and determination.\n\n-Sean Hampton");
-	//body.setPosition(Alignment::GetCenterOffset(body.getGlobalBounds().width, cWorldWidth / 2.f), 250.f);
-	const float infoCardYPos = 175;
+	const float infoCardYPos = 200;
 	first.SetPosition(20, infoCardYPos);
 	second.SetPosition(440, infoCardYPos);
 	third.SetPosition(860, infoCardYPos);
@@ -61,11 +56,17 @@ void WinOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 			const sf::Color fillColor(255, 255, 255, colorValue);
 			title.setFillColor(fillColor);
-			body.setFillColor(fillColor);
+
+			first.SetFillColor(fillColor);
+			second.SetFillColor(fillColor);
+			third.SetFillColor(fillColor);
 
 			const sf::Color outlineColor(0, 0, 0, colorValue);
 			title.setOutlineColor(outlineColor);
-			body.setOutlineColor(outlineColor);
+
+			first.SetOutlineColor(outlineColor);
+			second.SetOutlineColor(outlineColor);
+			third.SetOutlineColor(outlineColor);
 
 			background.setFillColor(sf::Color(0, 0, 0, colorValue / 2));
 		}

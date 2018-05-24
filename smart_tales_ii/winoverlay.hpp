@@ -20,7 +20,6 @@ private:
 	uint8_t colorValue = 0U;
 	sf::Text title;
 	InformationCard first, second, third;
-	sf::Text body;
 	sf::RectangleShape background;
 
 protected:
