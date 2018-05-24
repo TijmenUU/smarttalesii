@@ -41,7 +41,8 @@ void SoundManager::Update(const sf::Time & elapsed)
 			nextMusicPtr = nullptr;
 
 			currentMusicPtr->setVolume(fadeTargetVolume);
-			currentMusicPtr->play();
+			if(!musicMuted)
+				currentMusicPtr->play();
 		}
 	}
 }
@@ -79,13 +80,16 @@ void SoundManager::PlayMusic(sf::Music & music)
 
 void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 {
-	if(musicMuted)
+	if(musicMuted) // if muted we don't fade, we just switch and not play
 	{
+		fadeTime = 0.f;
+		currentMusicPtr = &next;
 		return;
 	}
 
-	if(currentMusicPtr == nullptr)
+	if(currentMusicPtr == nullptr) // Nothing to cross fade into
 	{
+		fadeTime = 0.f;
 		PlayMusic(next);
 		return;
 	}
