@@ -8,6 +8,17 @@ void InformationCard::draw(sf::RenderTarget & target, sf::RenderStates states) c
 	target.draw(subtitle, states);
 }
 
+void InformationCard::SetFillColor(const sf::Color & c)
+{
+	subtitle.setFillColor(c);
+	image.setColor(c);
+}
+
+void InformationCard::SetOutlineColor(const sf::Color & c)
+{
+	subtitle.setOutlineColor(c);
+}
+
 void InformationCard::SetPosition(const float x, const float y)
 {
 	const float padding = 10.f;
