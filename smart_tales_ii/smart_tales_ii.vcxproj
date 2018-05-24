@@ -30,6 +30,7 @@
     <ClCompile Include="furnitureobstacle.cpp" />
     <ClCompile Include="gameovermessage.cpp" />
     <ClCompile Include="gestureobstacle.cpp" />
+    <ClCompile Include="informationcard.cpp" />
     <ClCompile Include="lightobstacle.cpp" />
     <ClCompile Include="obstaclespawner.cpp" />
     <ClCompile Include="phoneobstacle.cpp" />
@@ -74,6 +75,7 @@
     <ClInclude Include="furnitureobstacle.hpp" />
     <ClInclude Include="gameovermessage.hpp" />
     <ClInclude Include="gestureobstacle.hpp" />
+    <ClInclude Include="informationcard.hpp" />
     <ClInclude Include="lightobstacle.hpp" />
     <ClInclude Include="obstaclespawner.hpp" />
     <ClInclude Include="phoneobstacle.hpp" />

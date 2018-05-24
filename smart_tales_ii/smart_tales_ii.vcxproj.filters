@@ -85,6 +85,12 @@
     <Filter Include="Header Files\game\objects\score">
       <UniqueIdentifier>{d04bd2da-48fb-4a2c-a11b-eeda8da0c299}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game\objects\win">
+      <UniqueIdentifier>{42ba2077-200c-4f57-9a23-82ec0d99224e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\objects\win">
+      <UniqueIdentifier>{28f7befd-4410-43bf-9ed2-da3cde642d75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -213,6 +219,9 @@
     <ClCompile Include="gameovermessage.cpp">
       <Filter>Source Files\game\objects\score</Filter>
     </ClCompile>
+    <ClCompile Include="informationcard.cpp">
+      <Filter>Source Files\game\objects\win</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.hpp">
@@ -340,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="gameovermessage.hpp">
       <Filter>Header Files\game\objects\score</Filter>
+    </ClInclude>
+    <ClInclude Include="informationcard.hpp">
+      <Filter>Header Files\game\objects\win</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
