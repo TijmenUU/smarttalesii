@@ -37,4 +37,4 @@ See the license file for all the licenses this project uses.
 ## About
 This is a bachelors project for the University of Utrecht, 2017-2018. In short the project is about generating awareness of Ambient Assisted Living (AAL), with a focus on the elderly. The game attempts to do this through providing a small but fun experience in the form of a small game.
 
-The project is supervised by Fabiano Dalpiaz (@fabianodalp) and executed by Tijmen van Nesselrooij (@TijmenUU).
+The project is executed by Tijmen van Nesselrooij (@TijmenUU) and supervised by Fabiano Dalpiaz (@fabianodalp).
