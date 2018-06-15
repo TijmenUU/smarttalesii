@@ -29,7 +29,7 @@ static std::string GetInformationStr()
 		"That same year tripping over accounted for 23%\nof the total causes.", // Cijferrapportage Valongevallen 65 jaar en ouder, 2016
 		"Nobody likes sitting still at home all day,\nnot even the elderly.", // AAL Forum 2016: elderly want to have an active part in society
 		"A lot of elderly are actually a bit scared of IT,\nwhilst it could help them a lot.", // The elderly are afraid of using IT systems, KLEINBERGER et al 2007
-		"Not really, simple but helpful aids like automatic\nlights only look at temperature differences." // Privacy, Identity and Security in Ambient Intelligence, Friedewald et al 2005
+		"Not really, simple but helpful aids like automatic\nlights only look at temperature differences." // Privacy, Identity and Security in Ambient Intelligence, Friedewald et al 2007
 	};
 	static unsigned int idx = 0U;
 
