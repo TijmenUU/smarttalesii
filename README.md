@@ -27,6 +27,7 @@ Now simply run `make all` in `/smart_tales_ii/` after which a binary will be bui
 ## Branches
 - master: the most recent stable version of the game.
 - GameplayEvaluation: the first basic prototype of the game, for testing the fundamental game mechanics.
+- ExperimentEvaluation: the version of the game used for the first evaluation round with 11 participants (Q2 2018).
 
 ## Releases
 Check the [releases](https://github.com/TijmenUU/smarttalesii/releases) for Windows binaries if you cannot or do not want to build it yourself.
