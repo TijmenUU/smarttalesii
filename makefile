@@ -7,9 +7,11 @@ LIBS = -lm -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 BIN = ../bin/smarttalesii
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build
+# Specify where to find the source files
+SRC_DIR = ./smart_tales_ii
 
 # List of all .cpp source files.
-CPP = $(wildcard ./*.cpp)
+CPP = $(wildcard $(SRC_DIR)/*.cpp)
 
 # All .o files go to build dir.
 OBJ = $(CPP:%.cpp=$(BUILD_DIR)/%.o)
@@ -40,4 +42,4 @@ syntax: $(CPP)
 
 .PHONY: clean
 clean:
-	-rm $(BIN) $(OBJ) $(DEP) 2> /dev/null
+	rm $(BIN) $(OBJ) $(DEP)
