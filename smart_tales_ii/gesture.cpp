@@ -2,7 +2,8 @@
 #include "vectormath.hpp"
 
 #include <cmath>
-#include <cstdio>
+//#include <iomanip>
+//#include <sstream>
 
 bool SwipeGesture::IsInProgress() const
 {
@@ -30,15 +31,14 @@ float SwipeGesture::GetInteractionRadius() const
 }
 
 // debug
-std::string ToString(const sf::Vector2f & vec)
-{
-	std::string result;
-	result.resize(256);
-	auto finalSize = sprintf_s(&result[0], 256, "X%.2f Y%.2f", vec.x, vec.y);
-	result.resize(finalSize);
-
-	return result;
-}
+//std::string ToString(const sf::Vector2f & vec)
+//{
+//	std::stringstream ss;
+//	ss << std::fixed << std::setprecision(2);
+//	ss << 'X' << vec.x << " Y" << vec.y;
+//
+//	return ss.str();
+//}
 
 SwipeType SwipeGesture::Update(const Inputhandler & input)
 {
