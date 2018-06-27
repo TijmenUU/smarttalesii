@@ -4,7 +4,7 @@ LFLAGS = -Wall
 LIBS = -lm -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 
 # Final binary
-BIN = ../bin/smarttalesii
+BIN = ./bin/smarttalesii
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build
 # Specify where to find the source files
