@@ -1,7 +1,7 @@
 #pragma once
 #include "inputhandler.hpp"
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class Gamemode : public sf::Drawable
 {

@@ -3,7 +3,7 @@
 #include "gesture.hpp"
 #include "inputhandler.hpp"
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class Obstacle : public sf::Drawable
 {

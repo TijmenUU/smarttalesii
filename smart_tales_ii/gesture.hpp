@@ -2,7 +2,7 @@
 #include "definitions.hpp"
 #include "inputhandler.hpp"
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 class SwipeGesture
