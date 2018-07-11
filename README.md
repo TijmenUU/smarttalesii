@@ -67,7 +67,7 @@ A word of caution: this project was written with the intend to be self documenti
 ### Adding new game modes / overlays
 All game modes need to derive from the base class `Gamemode` publicly. The expected interface can be observed in `gamemode.hpp`. The game uses a simple stack to keep track of the different game modes in the `GameManager` class. You will have to find an appropriate place to `push` your new gamemode onto the stack using:
 `GameManager::GetInstance().PushGamemode(YourGameModePointer)`
-Before you ask, yes, it was meant to take unique pointers but I (@TijmenUU) never got around implementing it (`std::move`). For now you can just push a raw pointer, since we are not catching exceptions anyways.
+Before you ask, yes, it was meant to take unique pointers but I (@TijmenUU) never got around implementing it (`std::move`). For now you can just push a raw pointer, since we are not catching exceptions anyways. Do **not** delete this pointer after pushing it, the GameManager will take care of cleaning up for you!
 
 For each gamemode, take careful note of the following functions (they have a spelling error in them!):
 - `SurpressDraw()` if this returns true (it defaults to false) it suppresses the draw calls of any game modes "below" it on the stack (i.e. any gamemode added before it)
