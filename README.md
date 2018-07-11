@@ -4,7 +4,7 @@ This is the repository of the Smart Tales sequel, Smart Tales II. The original S
 Work on Smart Tales II has halted for now but for anyone interested in hacking/extending this project: keep on reading!
 
 # Getting Started
-Smart Tales II is written in portable `C++` and was build using free tools: it uses the [Simple and Fast Multimedia Library](https://www.sfml-dev.org/index.php) (SFML) for the audio, visuals and input handling. For creating the art [Pain.NET](https://www.getpaint.net/) was used, which can be found in the `.pdn` files. Smart Tales supports both Linux and Windows currently, offering a `makefile` and `Visual Studio 2017 project` for each respectively. Let's get to building the project so you can see for yourself. If you're in a situation where you cannot build the game yourself, grab a release copy for it in the [releases](https://github.com/TijmenUU/smarttalesii/releases). There are currently only Windows releases available.
+Smart Tales II is written in portable `C++` and was build using free tools: it uses the [Simple and Fast Multimedia Library](https://www.sfml-dev.org/index.php) (SFML) for the audio, visuals and input handling. For creating the art [Paint.NET](https://www.getpaint.net/) was used, which can be found in the `.pdn` files. Smart Tales supports both Linux and Windows currently, offering a `makefile` and `Visual Studio 2017 project` for each respectively. Let's get to building the project so you can see for yourself. If you're in a situation where you cannot build the game yourself, grab a release copy for it in the [releases](https://github.com/TijmenUU/smarttalesii/releases). There are currently only Windows releases available.
 
 ## Building Smart Tales II
 ### Windows
@@ -31,7 +31,7 @@ If all went well you can `cd bin` and run the game `./smarttalesii`.
 - The game stutters
    - Also a problem unique to Windows. It seems that any PC that uses gamepads, such as xbox controllers, have some intense lag spikes from time to time. The solution at the time of writing this was to connect a controller to the PC, launch the game and pause it, fiddle with the controller a bit and then resume the game.
 - How do I open the `.pdn` files in the `art` directory?
-   - For Linux: you can't. For Windows: get [Pain.NET](https://www.getpaint.net/). The game itself loads in PNG and JPG assets, so feel free to alter those in the `bin/texture` and `bin/spritesheet`
+   - For Linux: you can't. For Windows: get [Paint.NET](https://www.getpaint.net/). The game itself loads in PNG and JPG assets, so feel free to alter those in the `bin/texture` and `bin/spritesheet`
 - The art assets are super tiny!
    - They were all drawn targeting a 320x180 resolution and then upscaled by 400% (you'll get 1280x720). I (@TijmenUU) used this out of laziness, since SFML supports upscaling without filters as well.
 - I have no sound!
