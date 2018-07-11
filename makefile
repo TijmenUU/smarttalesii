@@ -1,4 +1,4 @@
-CC = clang++
+CC = g++
 CFLAGS = -std=c++14 -Wall -O3
 LFLAGS = -Wall
 LIBS = -lm -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
