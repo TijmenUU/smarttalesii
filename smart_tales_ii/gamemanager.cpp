@@ -29,8 +29,11 @@ GameManager & GameManager::GetInstance()
 void GameManager::PushGamemode(std::unique_ptr<Gamemode> && gamemode)
 {
 	gamemodes.push_back(std::move(gamemode));
-	gamemodes.back()->Setup();
-	gamemodes.back()->OnEnter();
+	// Store the object before calling the Setup and OnEnter functions as these
+	// may put new gamemodes on this stack!
+	auto & insertedMode = gamemodes.back();
+	insertedMode->Setup();
+	insertedMode->OnEnter();
 }
 
 bool GameManager::RemoveGamemode(Gamemode * const gamemode)
