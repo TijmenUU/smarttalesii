@@ -1,22 +1,33 @@
-CC    ?= g++
-CFLAGS = -std=c++14 -Wall -O3
+CC     = g++
+CFLAGS = -std=c++17 -Wall -O2
 LFLAGS = -Wall
-LIBS   = -lm -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+LIBS   = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 
 # Final binary
-BIN       = ./bin/smarttalesii
+BIN       = bin/smarttalesii
 # Put all auto generated stuff to this build dir.
-BUILD_DIR = ./build
+BUILD_DIR = build
 # Specify where to find the source files
-SRC_DIR   = ./smart_tales_ii
+SRC_DIR   = smart_tales_ii
 
 # List of all .cpp source files.
 CPP = $(wildcard $(SRC_DIR)/*.cpp)
 
 # All .o files go to build dir.
-OBJ = $(patsubst %.cpp, $(BUILD_DIR)/%.o, $(CPP))
+OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(CPP))
 # Gcc/Clang will create these .d files containing dependencies.
 DEP = $(patsubst %.o, %.d, $(OBJ))
+
+.PHONY: all syntax clean
+
+all: $(BIN)
+
+syntax: $(CPP)
+	$(CC) -fsyntax-only $(CPP)
+	
+clean:
+	-rm -rf $(BUILD_DIR)
+	-rm $(BIN)
 
 # Include all .d files
 -include $(DEP)
@@ -26,22 +37,13 @@ DEP = $(patsubst %.o, %.d, $(OBJ))
 # by calling `-include $(DEP)`.
 # The @D you're seeing here and elsewhere simply means the directory of the file
 # we're making.
-$(BUILD_DIR)/%.o : %.cpp
-	mkdir -p $(@D)
+$(BUILD_DIR):
+	mkdir -p $@
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(BUILD_DIR)
 	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 # Actual target of the binary - depends on all .o files.
-$(BIN) : $(OBJ)
+$(BIN): $(OBJ)
 	mkdir -p $(@D)
-	$(CC) $(LFLAGS) $(OBJ) $(LIBS) -o $(BIN)
-
-.PHONY: all
-all: $(BIN)
-
-.PHONY: syntax
-syntax: $(CPP)
-	$(CC) -fsyntax-only $(CPP)
-
-.PHONY: clean
-clean:
-	rm $(BIN) $(OBJ) $(DEP)
+	$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) $(LIBS) -o $(BIN)
