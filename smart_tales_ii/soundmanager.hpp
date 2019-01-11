@@ -18,22 +18,26 @@
 class SoundManager
 {
 private:
-	sf::Music * currentMusicPtr = nullptr, * nextMusicPtr = nullptr;
-	bool musicMuted = false;
-	float fadeTime = 0.f;
-	float fadeInVolumePerSecond = 0.f;
-	float fadeOutVolumePerSecond = 0.f;
-	float fadeTargetVolume = 100.f;
+	sf::Music * currentMusicPtr, * nextMusicPtr;
+	
+	bool musicMuted;
+	bool sfxMuted;
+	
+	float fadeTime;
+	float currentFadeTime;
+	float fadeInVolumePerSecond;
+	float fadeOutVolumePerSecond;
 
 	std::array<sf::Sound, 32> sounds;
-	bool sfxMuted = false;
-
-	void StopAllSounds();
-	void InsertSound(const sf::SoundBuffer & buffer, const float volume);
 
 protected:
 	friend class GameManager;
+	
+	void StopAllSounds();
+	void InsertSound(const sf::SoundBuffer & buffer, const float volume);
 	void Update(const sf::Time & elapsed);
+
+	SoundManager();
 
 public:
 	static SoundManager & GetInstance();
@@ -50,7 +54,6 @@ public:
 	void SetSFXMute(const bool muted);
 	bool IsSFXMuted() const;
 
-	SoundManager() = default;
 	SoundManager(const SoundManager &) = delete;
 	SoundManager(const SoundManager &&) = delete;
 	SoundManager & operator = (SoundManager &) = delete;

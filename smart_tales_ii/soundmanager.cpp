@@ -1,6 +1,7 @@
 #include "soundmanager.hpp"
 
 #include <cassert>
+#include <cstdio> // DEBUG DEBUG DEBUG
 
 void SoundManager::StopAllSounds()
 {
@@ -12,6 +13,9 @@ void SoundManager::StopAllSounds()
 
 void SoundManager::InsertSound(const sf::SoundBuffer & buffer, const float volume)
 {
+	// Limit the number of simultaneous sound effects, 256 according to the SFML
+	// docs but we stay way clear of that number. 256 is including any music tracks
+	// playing.
 	for(auto & sound : sounds)
 	{
 		if(sound.getStatus() == sf::SoundStream::Stopped)
@@ -26,24 +30,35 @@ void SoundManager::InsertSound(const sf::SoundBuffer & buffer, const float volum
 
 void SoundManager::Update(const sf::Time & elapsed)
 {
-	if(fadeTime > 0.f)
+	if(currentFadeTime < fadeTime)
 	{
-		const float step = elapsed.asSeconds();
-		fadeTime -= step;
-		currentMusicPtr->setVolume(std::max(0.f,currentMusicPtr->getVolume() - step * fadeOutVolumePerSecond));
-		nextMusicPtr->setVolume(std::min(100.f, nextMusicPtr->getVolume() + step * fadeInVolumePerSecond));
-		if(fadeTime < 0.f)
+		currentFadeTime += elapsed.asSeconds();
+		if(currentFadeTime > fadeTime)
 		{
-			fadeTime = 0.f;
 			currentMusicPtr->stop();
 			currentMusicPtr = nextMusicPtr;
+			currentMusicPtr->setVolume(fadeTime * fadeInVolumePerSecond);
 			nextMusicPtr = nullptr;
-
-			currentMusicPtr->setVolume(fadeTargetVolume);
-			if(!musicMuted)
-				currentMusicPtr->play();
+		}
+		else
+		{
+			currentMusicPtr->setVolume((fadeTime - currentFadeTime) * fadeOutVolumePerSecond);
+			nextMusicPtr->setVolume(currentFadeTime * fadeInVolumePerSecond);
 		}
 	}
+}
+
+SoundManager::SoundManager()
+	: currentMusicPtr(nullptr),
+	nextMusicPtr(nullptr),
+	musicMuted(false),
+	sfxMuted(false),
+	fadeTime(0.f),
+	currentFadeTime(0.f),
+	fadeInVolumePerSecond(0.f),
+	fadeOutVolumePerSecond(0.f),
+	sounds()
+{
 }
 
 SoundManager & SoundManager::GetInstance()
@@ -58,7 +73,18 @@ void SoundManager::StopMusic()
 	if(currentMusicPtr != nullptr)
 	{
 		currentMusicPtr->stop();
-		fadeTime = 0.f;
+
+		// Handle possible cross fading currently going on
+		if(nextMusicPtr != nullptr)
+		{
+			currentMusicPtr = nextMusicPtr;
+			currentMusicPtr->stop();
+			currentMusicPtr->setVolume(fadeTime * fadeInVolumePerSecond);
+			nextMusicPtr = nullptr;
+
+			currentFadeTime = 1.f;
+			fadeTime = 0.f;
+		}
 	}
 }
 
@@ -79,24 +105,48 @@ void SoundManager::PlayMusic(sf::Music & music)
 
 void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 {
+	if(&next == currentMusicPtr)
+	{
+		std::puts("Not cross fading because next == current music."); // DEBUG
+		return;
+	}	
+	
 	if(musicMuted) // if muted we don't fade, we just switch and not play
 	{
 		fadeTime = 0.f;
+		currentFadeTime = 1.f;
 		currentMusicPtr = &next;
+		std::puts("Not cross fading because music is muted."); // DEBUG
 		return;
 	}
 
-	if(currentMusicPtr == nullptr) // Nothing to cross fade into
+	if(currentMusicPtr == nullptr || time <= 0.f) // Nothing to cross fade into
 	{
 		fadeTime = 0.f;
-		PlayMusic(next);
+		currentFadeTime = 1.f;
+		currentMusicPtr = &next;
+		currentMusicPtr->play();
+		std::puts("Not cross fading because no music is playing."); // DEBUG
 		return;
 	}
 
-	fadeTargetVolume = next.getVolume();
-	assert(fadeTargetVolume >= 0.f && fadeTargetVolume <= 100.f);
+	if(currentFadeTime < fadeTime)
+	{
+		if(&next == nextMusicPtr)
+		{
+			std::puts("Not cross fading because already cross fading to given music."); // DEBUG
+			return;
+		}
+		std::puts("Was already cross fading, moving next into current..."); // DEBUG
+		// We're crossfading while we're crossfading: bad!
+		currentMusicPtr->stop();
+		currentMusicPtr = nextMusicPtr;
+	}
+
+	std::puts("Cross fading into new music normally."); // DEBUG
+	currentFadeTime = 0.f;
 	fadeTime = time;
-	fadeInVolumePerSecond = fadeTargetVolume / time;
+	fadeInVolumePerSecond = next.getVolume() / time;
 	fadeOutVolumePerSecond = currentMusicPtr->getVolume() / time;
 	nextMusicPtr = &next;
 }
@@ -107,7 +157,7 @@ float SoundManager::GetMusicVolume() const
 	{
 		return currentMusicPtr->getVolume();
 	}
-	return -1.f;
+	return 0.f;
 }
 
 void SoundManager::SetMusicVolume(const float volume)
@@ -115,7 +165,20 @@ void SoundManager::SetMusicVolume(const float volume)
 	assert(volume >= 0.f && volume <= 100.f);
 	if(currentMusicPtr != nullptr)
 	{
-		currentMusicPtr->setVolume(volume);
+		if(volume <= 0.f)
+		{
+			StopMusic();
+		}
+		else if(currentFadeTime < fadeTime)
+		{
+			fadeInVolumePerSecond  = volume / fadeTime;
+			fadeOutVolumePerSecond = volume / fadeTime;
+			// Actual volumes are updated next Update tick
+		}
+		else
+		{
+			currentMusicPtr->setVolume(volume);
+		}
 	}
 }
 
@@ -126,12 +189,9 @@ void SoundManager::SetMusicMute(const bool muted)
 	{
 		StopMusic();
 	}
-	else
+	else if(currentMusicPtr != nullptr)
 	{
-		if(currentMusicPtr != nullptr)
-		{
-			currentMusicPtr->play();
-		}
+		currentMusicPtr->play();
 	}
 }
 
@@ -143,9 +203,6 @@ bool SoundManager::IsMusicMuted() const
 void SoundManager::PlaySFX(const sf::SoundBuffer & buffer, const float volume)
 {
 	assert(volume >= 0.f && volume <= 100.f);
-	// Limit the number of simultaneous sound effects, 256 according to the SFML
-	// docs but we stay way clear of that number. 256 is including any music tracks
-	// playing.
 	if(sfxMuted)
 	{
 		return;
