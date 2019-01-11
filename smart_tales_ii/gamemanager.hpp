@@ -40,7 +40,7 @@ protected:
 public:
 	static GameManager & GetInstance();
 	// Calls Load on gamemode, thus it may throw an runtime_error exception
-	void PushGamemode(Gamemode * const gamemode);
+	void PushGamemode(std::unique_ptr<Gamemode> && gamemode);
 	bool RemoveGamemode(Gamemode * const gamemode);
 	// Pops the top element (added last) from the gamestate
 	// stack

@@ -89,7 +89,7 @@ void ShopMode::Setup()
 {
 	auto & manager = GameManager::GetInstance();
 	manager.PopAllBelow(this);
-	manager.PushGamemode(new UIOverlay(false));
+	manager.PushGamemode(std::make_unique<UIOverlay>(false));
 
 	background.setPosition(0.f, 0.f);
 
@@ -133,7 +133,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 
 	if(gotoGameButton.HandleInput(input))
 	{
-		GameManager::GetInstance().PushGamemode(new RunningMode(playerInventory));
+		GameManager::GetInstance().PushGamemode(std::make_unique<RunningMode>(playerInventory));
 		return;
 	}
 

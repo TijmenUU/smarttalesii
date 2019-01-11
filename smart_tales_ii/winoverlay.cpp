@@ -39,7 +39,7 @@ void WinOverlay::Setup()
 	background.setSize(sf::Vector2f(cWorldWidth, cWorldHeight));
 	background.setFillColor(sf::Color::Transparent);
 
-	GameManager::GetInstance().PushGamemode(new UIOverlay(false));
+	GameManager::GetInstance().PushGamemode(std::make_unique<UIOverlay>(false));
 }
 
 void WinOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)

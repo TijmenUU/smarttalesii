@@ -67,9 +67,9 @@ int main(int argc, char ** argv)
 	}
 
 	std::unique_ptr<Program> programPtr(new Program(windowWidth, 
-				windowHeight, 
-				"Smart Tales II", 
-				debug));
+		windowHeight, 
+		"Smart Tales II", 
+		debug));
 
 	try
 	{

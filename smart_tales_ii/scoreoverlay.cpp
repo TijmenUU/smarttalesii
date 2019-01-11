@@ -33,7 +33,7 @@ bool ScoreOverlay::SuppressUpdate() const
 void ScoreOverlay::Setup()
 {
 	//manager.PopAllBelow(this);
-	GameManager::GetInstance().PushGamemode(new UIOverlay(false));
+	GameManager::GetInstance().PushGamemode(std::make_unique<UIOverlay>(false));
 
 	auto & cache = ResourceCache::GetInstance();
 	sf::Font & font = cache.GetFont("commodore");
@@ -67,7 +67,7 @@ void ScoreOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 		if(gotoShopButton.HandleInput(input))
 		{
 			playerInventory.AddCurrency(playerScore.GetTotalCurrency());
-			GameManager::GetInstance().PushGamemode(new ShopMode(playerInventory));
+			GameManager::GetInstance().PushGamemode(std::make_unique<ShopMode>(playerInventory));
 			return;
 		}
 

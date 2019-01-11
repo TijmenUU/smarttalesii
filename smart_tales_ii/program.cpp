@@ -4,6 +4,7 @@
 #include "uioverlay.hpp"
 
 #include <array>
+#include <memory>
 #include <string>
 
 #pragma region Loadfiles
@@ -89,8 +90,8 @@ void Program::Load()
 
 	// Set game starting gamemode
 	auto & manager = GameManager::GetInstance();
-	manager.PushGamemode(new RunningMode(Player::Inventory()));
-	manager.PushGamemode(new TemporaryOverlay("Evade all obstacles!"));
+	manager.PushGamemode(std::make_unique<RunningMode>(Player::Inventory()));
+	manager.PushGamemode(std::make_unique<TemporaryOverlay>("Evade all obstacles!"));
 }
 
 void Program::Run()

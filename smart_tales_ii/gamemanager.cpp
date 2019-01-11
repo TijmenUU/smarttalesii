@@ -26,11 +26,11 @@ GameManager & GameManager::GetInstance()
 	return m;
 }
 
-void GameManager::PushGamemode(Gamemode * const gamemode)
+void GameManager::PushGamemode(std::unique_ptr<Gamemode> && gamemode)
 {
-	gamemodes.emplace_back(gamemode);
-	gamemode->Setup();
-	gamemode->OnEnter();
+	gamemodes.push_back(std::move(gamemode));
+	gamemodes.back()->Setup();
+	gamemodes.back()->OnEnter();
 }
 
 bool GameManager::RemoveGamemode(Gamemode * const gamemode)

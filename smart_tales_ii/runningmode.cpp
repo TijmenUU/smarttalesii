@@ -45,7 +45,7 @@ void RunningMode::GameOver(const Obstacle::Type cause)
 {
 	auto & manager = GameManager::GetInstance();
 	manager.Pop(); // delete our created overlay
-	manager.PushGamemode(new ScoreOverlay(score, playerInventory, cause));
+	manager.PushGamemode(std::make_unique<ScoreOverlay>(score, playerInventory, cause));
 	return;
 }
 
@@ -196,11 +196,11 @@ void RunningMode::Setup()
 
 	if(playerInventory.GetSensorUpgradeCount() > 3)
 	{
-		manager.PushGamemode(new WinOverlay());
+		manager.PushGamemode(std::make_unique<WinOverlay>());
 	}
 	else
 	{
-		manager.PushGamemode(new UIOverlay());
+		manager.PushGamemode(std::make_unique<UIOverlay>());
 	}
 }
 
@@ -225,7 +225,7 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		{
 			auto & manager = GameManager::GetInstance();
 			manager.PopAllBelow(nullptr);
-			manager.PushGamemode(new WinOverlay(0.f));
+			manager.PushGamemode(std::make_unique<WinOverlay>(0.f));
 			return;
 		}
 	}
