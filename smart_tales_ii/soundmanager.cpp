@@ -90,16 +90,18 @@ void SoundManager::StopMusic()
 
 void SoundManager::PlayMusic(sf::Music & music)
 {
-	if(musicMuted)
-	{
-		return;
-	}
-
 	if(currentMusicPtr != nullptr)
 	{
 		currentMusicPtr->stop();
 	}
 	currentMusicPtr = &music;
+
+	if(musicMuted)
+	{
+		std::puts("SoundManager::PlayMusic: music is muted."); // DEBUG
+		return;
+	}
+	std::puts("SoundManager::PlayMusic: playing music."); // DEBUG
 	currentMusicPtr->play();
 }
 
@@ -162,6 +164,7 @@ float SoundManager::GetMusicVolume() const
 
 void SoundManager::SetMusicVolume(const float volume)
 {
+	std::printf("SoundManager::SetMusicVolume: set volume to %f.\n", volume); // DEBUG
 	assert(volume >= 0.f && volume <= 100.f);
 	if(currentMusicPtr != nullptr)
 	{
@@ -187,10 +190,12 @@ void SoundManager::SetMusicMute(const bool muted)
 	musicMuted = muted;
 	if(musicMuted)
 	{
+		std::puts("SoundManager::SetMusicMute: Muting music."); // DEBUG
 		StopMusic();
 	}
 	else if(currentMusicPtr != nullptr)
 	{
+		std::puts("SoundManager::SetMusicMute: Unmuting music."); // DEBUG
 		currentMusicPtr->play();
 	}
 }
