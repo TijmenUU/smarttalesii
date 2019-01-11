@@ -107,12 +107,6 @@ void SoundManager::PlayMusic(sf::Music & music)
 
 void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 {
-	if(&next == currentMusicPtr)
-	{
-		std::puts("Not cross fading because next == current music."); // DEBUG
-		return;
-	}	
-	
 	if(musicMuted) // if muted we don't fade, we just switch and not play
 	{
 		fadeTime = 0.f;
@@ -150,7 +144,10 @@ void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 	fadeTime = time;
 	fadeInVolumePerSecond = next.getVolume() / time;
 	fadeOutVolumePerSecond = currentMusicPtr->getVolume() / time;
+	
 	nextMusicPtr = &next;
+	nextMusicPtr->setVolume(0.f);
+	nextMusicPtr->play();
 }
 
 float SoundManager::GetMusicVolume() const
