@@ -38,8 +38,8 @@ private:
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-	bool SurpressDraw() const override;
-	bool SurpressUpdate() const override;
+	bool SuppressDraw() const override;
+	bool SuppressUpdate() const override;
 
 	void OnEnter() override;
 

@@ -67,12 +67,12 @@ void ShopMode::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(carousel, states);
 }
 
-bool ShopMode::SurpressDraw() const
+bool ShopMode::SuppressDraw() const
 {
 	return true;
 }
 
-bool ShopMode::SurpressUpdate() const
+bool ShopMode::SuppressUpdate() const
 {
 	return true;
 }

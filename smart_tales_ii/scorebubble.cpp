@@ -2,8 +2,6 @@
 
 #include "resourcecache.hpp"
 
-#include <cmath>
-#include <iomanip>
 #include <sstream>
 
 const float cTimeAliveLimit = 1.5f; // in seconds

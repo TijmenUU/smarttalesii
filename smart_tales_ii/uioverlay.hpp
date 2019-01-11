@@ -30,7 +30,7 @@ private:
 protected:
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-	bool SurpressUpdate() const override;
+	bool SuppressUpdate() const override;
 	void Setup() override;
 	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 

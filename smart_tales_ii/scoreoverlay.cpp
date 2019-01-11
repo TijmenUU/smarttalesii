@@ -25,7 +25,7 @@ void ScoreOverlay::OnEnter()
 	SoundManager::GetInstance().SetMusicVolume(50.f);
 }
 
-bool ScoreOverlay::SurpressUpdate() const
+bool ScoreOverlay::SuppressUpdate() const
 {
 	return true;
 }

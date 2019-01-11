@@ -17,7 +17,7 @@ void UIOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(musicMuteButton, states);
 }
 
-bool UIOverlay::SurpressUpdate() const
+bool UIOverlay::SuppressUpdate() const
 {
 	return gamePauseButton.IsDown();
 }

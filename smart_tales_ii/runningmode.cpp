@@ -63,12 +63,12 @@ void RunningMode::Reset()
 	scoreBubbles.clear();
 }
 
-bool RunningMode::SurpressDraw() const
+bool RunningMode::SuppressDraw() const
 {
 	return true;
 }
 
-bool RunningMode::SurpressUpdate() const
+bool RunningMode::SuppressUpdate() const
 {
 	return true;
 }

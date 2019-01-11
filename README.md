@@ -69,9 +69,9 @@ All game modes need to derive from the base class `Gamemode` publicly. The expec
 `GameManager::GetInstance().PushGamemode(YourGameModePointer)`
 Before you ask, yes, it was meant to take unique pointers but I (@TijmenUU) never got around implementing it (`std::move`). For now you can just push a raw pointer, since we are not catching exceptions anyways. Do **not** delete this pointer after pushing it, the GameManager will take care of cleaning up for you!
 
-For each gamemode, take careful note of the following functions (they have a spelling error in them!):
-- `SurpressDraw()` if this returns true (it defaults to false) it suppresses the draw calls of any game modes "below" it on the stack (i.e. any gamemode added before it)
-- `SurpressUpdate()` if this returns true (it defaults to false) it suppresses the update calls of any game modes "below" it on the stack. This is used to pause the game in the ui overlay class.
+For each gamemode, take careful note of the following functions:
+- `SuppressDraw()` if this returns true (it defaults to false) it suppresses the draw calls of any game modes "below" it on the stack (i.e. any gamemode added before it)
+- `SuppressUpdate()` if this returns true (it defaults to false) it suppresses the update calls of any game modes "below" it on the stack. This is used to pause the game in the ui overlay class.
 
 For reference:
 - The UI overlay is perhaps the simplest overlay that the game has. Check out the source files `uioverlay.hpp` and `uioverlay.cpp`.

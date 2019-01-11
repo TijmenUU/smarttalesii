@@ -1,11 +1,11 @@
 #include "gamemode.hpp"
 
-bool Gamemode::SurpressDraw() const
+bool Gamemode::SuppressDraw() const
 {
 	return false;
 }
 
-bool Gamemode::SurpressUpdate() const
+bool Gamemode::SuppressUpdate() const
 {
 	return false;
 }

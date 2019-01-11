@@ -57,8 +57,8 @@ protected:
 	void GameOver(const Obstacle::Type cause);
 	void Reset();
 
-	bool SurpressDraw() const override;
-	bool SurpressUpdate() const override;
+	bool SuppressDraw() const override;
+	bool SuppressUpdate() const override;
 	void OnEnter() override;
 
 	// May throw a runtime exception if it cannot load the required files and assets

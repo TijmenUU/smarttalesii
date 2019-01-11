@@ -30,8 +30,8 @@ protected:
 
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
 
-	virtual bool SurpressDraw() const;
-	virtual bool SurpressUpdate() const;
+	virtual bool SuppressDraw() const;
+	virtual bool SuppressUpdate() const;
 	virtual void OnExit();
 	virtual void OnEnter();
 
