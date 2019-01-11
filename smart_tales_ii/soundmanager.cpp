@@ -1,7 +1,6 @@
 #include "soundmanager.hpp"
 
 #include <cassert>
-#include <cstdio> // DEBUG DEBUG DEBUG
 
 void SoundManager::StopAllSounds()
 {
@@ -98,10 +97,8 @@ void SoundManager::PlayMusic(sf::Music & music)
 
 	if(musicMuted)
 	{
-		std::puts("SoundManager::PlayMusic: music is muted."); // DEBUG
 		return;
 	}
-	std::puts("SoundManager::PlayMusic: playing music."); // DEBUG
 	currentMusicPtr->play();
 }
 
@@ -112,7 +109,7 @@ void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 		fadeTime = 0.f;
 		currentFadeTime = 1.f;
 		currentMusicPtr = &next;
-		std::puts("Not cross fading because music is muted."); // DEBUG
+
 		return;
 	}
 
@@ -122,7 +119,7 @@ void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 		currentFadeTime = 1.f;
 		currentMusicPtr = &next;
 		currentMusicPtr->play();
-		std::puts("Not cross fading because no music is playing."); // DEBUG
+
 		return;
 	}
 
@@ -130,16 +127,14 @@ void SoundManager::CrossFadeMusic(sf::Music & next, const float time)
 	{
 		if(&next == nextMusicPtr)
 		{
-			std::puts("Not cross fading because already cross fading to given music."); // DEBUG
 			return;
 		}
-		std::puts("Was already cross fading, moving next into current..."); // DEBUG
+
 		// We're crossfading while we're crossfading: bad!
 		currentMusicPtr->stop();
 		currentMusicPtr = nextMusicPtr;
 	}
 
-	std::puts("Cross fading into new music normally."); // DEBUG
 	currentFadeTime = 0.f;
 	fadeTime = time;
 	fadeInVolumePerSecond = next.getVolume() / time;
@@ -161,7 +156,6 @@ float SoundManager::GetMusicVolume() const
 
 void SoundManager::SetMusicVolume(const float volume)
 {
-	std::printf("SoundManager::SetMusicVolume: set volume to %f.\n", volume); // DEBUG
 	assert(volume >= 0.f && volume <= 100.f);
 	if(currentMusicPtr != nullptr)
 	{
@@ -187,12 +181,10 @@ void SoundManager::SetMusicMute(const bool muted)
 	musicMuted = muted;
 	if(musicMuted)
 	{
-		std::puts("SoundManager::SetMusicMute: Muting music."); // DEBUG
 		StopMusic();
 	}
 	else if(currentMusicPtr != nullptr)
 	{
-		std::puts("SoundManager::SetMusicMute: Unmuting music."); // DEBUG
 		currentMusicPtr->play();
 	}
 }
