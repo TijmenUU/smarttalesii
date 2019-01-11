@@ -4,8 +4,8 @@
 #include "resourcecache.hpp"
 #include "soundmanager.hpp"
 
+#include <cstdio>
 #include <iomanip>
-#include <iostream> // debug
 #include <sstream>
 
 /* Tile layout */
@@ -58,7 +58,7 @@ bool UpgradeTile::HandleInput(const Inputhandler & input, Player::Inventory & in
 	if(purchaseButton.HandleInput(input))
 	{
 		inventory.RemoveCurrency(purchaseButton.GetPrice());
-		std::cout << "Bought upgrade for " << purchaseButton.GetPrice() << " moneys, making your balance " << inventory.GetCurrency() << ".\n"; // debug
+		std::printf("Bought upgrade for %u, making your balance %u.\n", purchaseButton.GetPrice(), inventory.GetCurrency());
 		inventory.AddSensorUpgrade(purchaseButton.GetUpgrade());
 		auto & sfx = ResourceCache::GetInstance().GetSoundBuffer("kaching");
 		SoundManager::GetInstance().PlaySFX(sfx);

@@ -1,7 +1,6 @@
 #include "soundmanager.hpp"
 
 #include <cassert>
-#include <cmath>
 
 void SoundManager::StopAllSounds()
 {

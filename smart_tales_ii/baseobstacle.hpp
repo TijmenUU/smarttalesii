@@ -13,7 +13,7 @@
 #include "inputhandler.hpp"
 #include "obstacletype.hpp"
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 #include <vector>
 
 namespace Obstacle

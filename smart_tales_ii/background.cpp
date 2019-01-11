@@ -3,7 +3,6 @@
 #include "resourcecache.hpp"
 
 #include <cmath>
-#include <stdexcept>
 #include <string>
 
 void ScrollingBackground::draw(sf::RenderTarget & target, sf::RenderStates states) const

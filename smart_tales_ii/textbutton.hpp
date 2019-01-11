@@ -6,6 +6,7 @@
 
 #pragma once
 #include "button.hpp"
+#include <SFML/Graphics/Text.hpp>
 
 class TextButton : public Button
 {

@@ -10,7 +10,7 @@
 #include "soundmanager.hpp"
 
 #include <algorithm>
-#include <iostream>
+#include <cstdio>
 #include <memory>
 #include <string>
 
@@ -77,9 +77,9 @@ int main(int argc, char ** argv)
 	}
 	catch(const std::runtime_error & e)
 	{
-		std::cout << "Error during game initialization: " << e.what() << std::endl;
-		std::cout << "Press any key to exit...";
-		std::cin.get();
+		std::printf("Error during game initialization: %s\n", e.what());
+		std::printf("Press any key to exit...");
+		std::getchar();
 		return 1;
 	}
 	 

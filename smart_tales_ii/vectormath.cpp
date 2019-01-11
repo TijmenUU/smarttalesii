@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <cmath>
-#include <SFML/Graphics/Vertex.hpp>
 
 namespace VectorMathF
 {

@@ -1,9 +1,5 @@
 #include "gamemanager.hpp"
 
-#include <cassert>
-#include <cmath>
-#include <ctime>
-
 void GameManager::Update(const sf::Time & elapsed,
 	const Inputhandler & input,
 	const sf::View & view)

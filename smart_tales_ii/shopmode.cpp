@@ -8,7 +8,7 @@
 #include "upgradetile.hpp"
 
 #include <array>
-#include <iostream> // debug
+#include <cstdio> // debug
  
 const std::array<Upgrade::Sensor, 4> cTileUpgrades = {
 	Upgrade::Sensor::PassiveInfrared,
@@ -117,7 +117,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 		{
 			playerInventory.AddCurrency(40);
 			currencyDisplay.SetValue(playerInventory.GetCurrency(), false);
-			std::cout << "Gave you 40 moneys, current balance is: " << playerInventory.GetCurrency() << '\n';
+			std::printf("Gave you 40 money, current balance is: %u\n", playerInventory.GetCurrency());
 			carousel.RefreshTiles(playerInventory);
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -127,7 +127,7 @@ void ShopMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 				playerInventory.AddSensorUpgrade(cTileUpgrades[i]);
 			}
 			carousel.RefreshTiles(playerInventory);
-			std::cout << "Unlocked all upgradedes!\n";
+			std::puts("Unlocked all upgradedes!");
 		}
 	}
 

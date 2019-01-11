@@ -23,7 +23,6 @@
 #include "playerscore.hpp"
 #include "scorebubble.hpp"
 
-#include <list>
 #include <vector>
 #include <memory>
 

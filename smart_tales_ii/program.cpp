@@ -4,9 +4,6 @@
 #include "uioverlay.hpp"
 
 #include <array>
-#include <algorithm>
-#include <cassert>
-#include <iostream> // debug
 #include <string>
 
 #pragma region Loadfiles
