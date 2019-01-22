@@ -18,9 +18,12 @@ OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(CPP))
 # Gcc/Clang will create these .d files containing dependencies.
 DEP = $(patsubst %.o, %.d, $(OBJ))
 
-.PHONY: all syntax clean
+.PHONY: all check syntax clean
 
 all: $(BIN)
+
+check: $(BIN)
+	cd bin && ./smarttalesii debug
 
 syntax: $(CPP)
 	$(CC) -fsyntax-only $(CPP)
