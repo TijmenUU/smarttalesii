@@ -65,13 +65,17 @@ A word of caution: this project was written with the intend to be self documenti
    - smart_tales_ii.sln -> the VS2017 project file for Windows users
 
 ### Adding new game modes / overlays
-All game modes need to derive from the base class `Gamemode` publicly. The expected interface can be observed in `gamemode.hpp`. The game uses a simple stack to keep track of the different game modes in the `GameManager` class. You will have to find an appropriate place to `push` your new gamemode onto the stack using:
+All game modes need to derive from the base class `Gamemode` publicly. The expected interface can be observed in `gamemode.hpp`. The game uses a simple vector to keep track of the different game modes in the `GameManager` class. You will have to find an appropriate place to `push` your new gamemode onto the it using:
 `GameManager::GetInstance().PushGamemode(std::make_unique<MyGameModeType>(constructor, arguments));`
 See `void Program::Load()` in `program.cpp` for practical examples of the above.
 
 For each gamemode, take careful note of the following functions:
-- `SuppressDraw()` if this returns true (it defaults to false) it suppresses the draw calls of any game modes "below" it on the stack (i.e. any gamemode added before it)
-- `SuppressUpdate()` if this returns true (it defaults to false) it suppresses the update calls of any game modes "below" it on the stack. This is used to pause the game in the ui overlay class.
+- `SuppressDraw()` if this returns true (it defaults to false) it suppresses the draw calls of any game modes added before itself. 
+- `SuppressUpdate()` if this returns true (it defaults to false) it suppresses the update calls of any game modes before itself.
+
+If the game mode vector contains `[ A, B, C ]` and B surpresses, it means that B and C get handled normally and A is not drawn nor updated. Note that to get this order A is inserted before B, C is inserted before A.
+
+For updates the game mode vector is iterated backwards. For drawing the vector is iterated **forwards** due to the use of the painter's algorithm. This ensures that any game mode added _later_ gets drawn on top of the rest. See `GameManager::Update` and `GameManager::draw`.
 
 For reference:
 - The UI overlay is perhaps the simplest overlay that the game has. Check out the source files `uioverlay.hpp` and `uioverlay.cpp`.
@@ -102,6 +106,3 @@ See the license file for all the licenses this project uses.
 This is a bachelors project for the University of Utrecht, 2017-2018. In short the project is about generating awareness of Ambient Assisted Living (AAL), with a focus on the elderly. The game attempts to do this through providing a small but fun experience in the form of a small game.
 
 The project is executed by Tijmen van Nesselrooij (@TijmenUU) and supervised by Fabiano Dalpiaz (@fabianodalp).
-
-
-
