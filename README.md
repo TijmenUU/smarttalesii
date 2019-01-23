@@ -12,9 +12,9 @@ On Windows we have made it pretty easy to get going, simply clone this repositor
 
 ### Linux
 Depending on what Linux distribution you're running you will have to fetch the `sfml` development files through your specific package manager. On Arch it is:
-`sudo pacman -S sfml`
+- `sudo pacman -S sfml`
 But if you're running Ubuntu it probably is something like:
-`sudo apt-get install libsfml-dev`
+- `sudo apt-get install libsfml-dev`
 
 Now make sure that you have:
 - a `C++` compiler, the `makefile` in the repository assumes you are using `g++` but feel free to change this (alter the `CC` variable). A way to check if you have an appropriate compiler installed is to write `g++ --version`. If that outputs a version of 5 or more you should be good to go (this is the first version with `C++14` compliance). For `clang++` you need version 3.4 or later.
