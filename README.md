@@ -13,6 +13,7 @@ On Windows we have made it pretty easy to get going, simply clone this repositor
 ### Linux
 Depending on what Linux distribution you're running you will have to fetch the `sfml` development files through your specific package manager. On Arch it is:
 - `sudo pacman -S sfml`
+
 But if you're running Ubuntu it probably is something like:
 - `sudo apt-get install libsfml-dev`
 
