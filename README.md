@@ -73,7 +73,7 @@ For each gamemode, take careful note of the following functions:
 - `SuppressDraw()` if this returns true (it defaults to false) it suppresses the draw calls of any game modes added before itself. 
 - `SuppressUpdate()` if this returns true (it defaults to false) it suppresses the update calls of any game modes before itself.
 
-If the game mode vector contains `[ A, B, C ]` and B surpresses, it means that B and C get handled normally and A is not drawn nor updated. Note that to get this order A is inserted before B, C is inserted before A.
+If the game mode vector contains `[ A, B, C ]` and B surpresses, it means that B and C get handled normally and A is not drawn nor updated. Note that to get this order A is inserted before B, B is inserted before C.
 
 For updates the game mode vector is iterated backwards. For drawing the vector is iterated **forwards** due to the use of the painter's algorithm. This ensures that any game mode added _later_ gets drawn on top of the rest. See `GameManager::Update` and `GameManager::draw`.
 
