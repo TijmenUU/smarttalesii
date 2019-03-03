@@ -72,7 +72,9 @@ A word of caution: this project was written with the intend to be self documenti
 
 ### Adding new game modes / overlays
 All game modes need to derive from the base class `Gamemode` publicly. The expected interface can be observed in `gamemode.hpp`. The game uses a simple vector to keep track of the different game modes in the `GameManager` class. You will have to find an appropriate place to `push` your new gamemode onto the it using:
-`GameManager::GetInstance().PushGamemode(std::make_unique<MyGameModeType>(constructor, arguments));`
+```cpp
+GameManager::GetInstance().PushGamemode(std::make_unique<MyGameModeType>(/* Constructor arguments*/));
+```
 See `void Program::Load()` in `program.cpp` for practical examples of the above.
 
 For each gamemode, take careful note of the following functions:
