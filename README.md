@@ -8,7 +8,7 @@ Smart Tales II is written in portable `C++` and was build using free tools: it u
 
 ## Building Smart Tales II
 ### Windows
-On Windows we have made it pretty easy to get going, simply clone this repository and open it (`smart_tales_ii.sln`) with [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) (VS2017). It comes complete with all the `x64` dependencies, but if you really want to target `x86` then grab a [32-bit copy](https://www.sfml-dev.org/download/sfml/2.5.0/) of SFML and set it up.
+On Windows we have made it pretty easy to get going, simply clone this repository and open it (`smart_tales_ii.sln`) with [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) (VS2017). It comes complete with all the `x64` dependencies, but if you really want to target `x86` then grab a [32-bit copy](https://www.sfml-dev.org/download/sfml/2.5.1/) of SFML and set it up.
 
 ### Linux
 Depending on what Linux distribution you're running you will have to fetch the `sfml` development files through your specific package manager. On Arch it is:
