@@ -8,7 +8,7 @@ void GameManager::Update(const sf::Time & elapsed,
 
 	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
 	{
-#pragma warning(suppress: 4244) // gamemodes size should not exceed int64_t precision
+
 		Gamemode & gamemode = *(gamemodes[i]);
 		// This is done beforehand due to the gamemode potentially deleting itself in the update
 		if(gamemode.SuppressUpdate())
@@ -93,7 +93,7 @@ void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	int64_t start = 0;
 	for(int64_t i = static_cast<int64_t>(gamemodes.size()) - 1; i >= 0; --i)
 	{
-#pragma warning(suppress: 4244) // gamemodes size should not exceed int64_t precision
+
 		if(gamemodes[i]->SuppressDraw())
 		{
 			start = i;
@@ -103,7 +103,7 @@ void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 	for(int64_t i = start; i < gamemodes.size(); ++i)
 	{
-#pragma warning(suppress: 4244) // gamemodes size should not exceed int64_t precision
+
 		target.draw(*(gamemodes[i]), states);
 	}
 }

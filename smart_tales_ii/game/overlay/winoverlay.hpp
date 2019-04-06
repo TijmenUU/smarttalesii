@@ -10,7 +10,7 @@
 
 #pragma once
 #include "../ui/informationcard.hpp"
-#include "gamemode.hpp"
+#include "../mode/gamemode.hpp"
 
 class WinOverlay : public Gamemode
 {

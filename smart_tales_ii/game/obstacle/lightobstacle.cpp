@@ -22,7 +22,7 @@ namespace Obstacle
 
 	bool Light::IsInteractionInBounds(const Inputhandler & input) const
 	{
-		const auto center = Alignment::GetRectangleCenter(lightSwitch.getGlobalBounds());
+		const auto center = Util::GetRectangleCenter(lightSwitch.getGlobalBounds());
 		const auto distance = VectorMathF::Distance(center, input.PointingDeviceWorldPosition());
 		return distance < cInteractionRadius;
 	}
@@ -73,13 +73,13 @@ namespace Obstacle
 
 	sf::Vector2f Light::GetNeutralizationPosition() const
 	{
-		return Alignment::GetRectangleCenter(lightSwitch.getGlobalBounds());
+		return Util::GetRectangleCenter(lightSwitch.getGlobalBounds());
 	}
 
 	sf::Vector2f Light::GetHintPosition() const
 	{
 		const auto bounds = lightSwitch.getGlobalBounds();
-		auto pos = Alignment::GetRectangleCenter(bounds);
+		auto pos = Util::GetRectangleCenter(bounds);
 		pos.y -= bounds.height;
 		return pos;
 	}

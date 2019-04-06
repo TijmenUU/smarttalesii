@@ -1,6 +1,6 @@
+#include "../../util/alignmenthelp.hpp"
 #include "../resourcecache.hpp"
 #include "../soundmanager.hpp"
-#include "../util/alignmenthelp.hpp"
 #include <cstdio>
 #include <iomanip>
 #include <sstream>
@@ -33,7 +33,7 @@ void UpgradeTile::SetPosition(const sf::Vector2f & p)
 	purchaseButton.SetPosition(p + cButtonPosition);
 
 	const auto bounds = upgradeDescription.getLocalBounds();
-	upgradeDescription.setPosition(Alignment::GetCenterOffset(bounds.width, p.x + cDescriptionCenter.x) + bounds.left, p.y + 300.f);
+	upgradeDescription.setPosition(Util::GetCenterOffset(bounds.width, p.x + cDescriptionCenter.x) + bounds.left, p.y + 300.f);
 }
 
 sf::Vector2f UpgradeTile::GetPosition() const

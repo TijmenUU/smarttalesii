@@ -1,5 +1,5 @@
 #include "../../util/vectormath.hpp"
-#include "../gamemode.hpp" // for world dimensions
+#include "../mode/gamemode.hpp" // for world dimensions
 #include "carousel.hpp"
 
 const float cTileSpacing = 50.f;
@@ -24,7 +24,7 @@ void SaleTileCarousel::AddSaleTile(SaleTile * tilePtr)
 	else
 	{
 		const float tileSize = 450.f + cTileSpacing;
-#pragma warning(suppress: 4244) // Tile count (size_t) should not exceed float precision in normal circumstances
+
 		const float tileCount = static_cast<float>(tiles.size());
 		tilePtr->SetPosition(sf::Vector2f(tileSize * tileCount + leftTilePosition.x, cTileYPos));
 	}

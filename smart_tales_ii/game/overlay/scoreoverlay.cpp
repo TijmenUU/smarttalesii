@@ -49,7 +49,7 @@ void ScoreOverlay::Setup()
 	balanceCurrency.SetValue(playerScore.GetTotalCurrency() + playerInventory.GetCurrency());
 	balanceCurrency.CenterOn(horizontalCenterLine, 350.f);
 
-	gotoShopButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
+	gotoShopButton.SetPosition(sf::Vector2f(Util::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f), cWorldHeight - 120.f));
 	sf::Text buttonText("Go to shop", font, 30U);
 	buttonText.setOutlineThickness(2.f);
 	buttonText.setOutlineColor(sf::Color(120, 63, 0));

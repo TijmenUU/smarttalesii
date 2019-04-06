@@ -27,7 +27,7 @@ void WinOverlay::Setup()
 	title.setOutlineColor(sf::Color::Transparent);
 	title.setOutlineThickness(2.f);
 	title.setString("When life is a game, don't make it\n      too hard on yourself!");
-	title.setPosition(Alignment::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
+	title.setPosition(Util::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
 
 	const float infoCardYPos = 240;
 	first.SetPosition(20, infoCardYPos);

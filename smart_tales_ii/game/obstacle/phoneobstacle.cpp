@@ -49,7 +49,7 @@ namespace Obstacle
 
 	void Phone::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
 	{
-#pragma warning(suppress: 4244) // Int to float is safe, resolution will not exceed float precision
+
 		SetPosition(sf::Vector2f(windowWidth, floorYcoord - (cSpawnHeight + obstacleSprite.getGlobalBounds().width)));
 	}
 

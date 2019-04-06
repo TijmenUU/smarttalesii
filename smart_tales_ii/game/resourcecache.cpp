@@ -1,5 +1,5 @@
+#include "../util/string.hpp"
 #include "resourcecache.hpp"
-#include "util/string.hpp"
 
 ResourceCache & ResourceCache::GetInstance()
 {

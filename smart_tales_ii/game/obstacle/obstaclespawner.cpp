@@ -23,7 +23,6 @@ void ObstacleSpawner::Load(const Player::Inventory & inventory, const float spaw
 	for(size_t i = 0; i < obstacleFactory.size(); ++i)
 	{
 		obstacleFactory[i]->SetPosition(sf::Vector2f(0.f, 0.f));
-#pragma warning(suppress: 4244) // conversion from float to int should not be a problem for resolutions
 		obstacleFactory[i]->SetSpawnPosition(spawnXposition, floorYposition);
 	}
 

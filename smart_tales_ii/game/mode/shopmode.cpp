@@ -97,7 +97,7 @@ void ShopMode::Setup()
 	currencyDisplay.CenterOn(cWorldWidth / 2.f, 25.f);
 
 	const auto buttonBounds = gotoGameButton.GetGlobalbounds();
-	gotoGameButton.SetPosition(sf::Vector2f(Alignment::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
+	gotoGameButton.SetPosition(sf::Vector2f(Util::GetCenterOffset(buttonBounds.width, cWorldWidth / 2.f), cWorldHeight - (buttonBounds.height + 5.f)));
 	sf::Text buttonText("Back to running", font, 30U);
 	buttonText.setOutlineThickness(2.f);
 	buttonText.setOutlineColor(sf::Color(120, 63, 0));

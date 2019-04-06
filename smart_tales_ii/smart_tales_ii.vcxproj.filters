@@ -42,7 +42,6 @@
     <ClCompile Include="game\obstacle\base\baseobstacle.cpp" />
     <ClCompile Include="game\obstacle\base\gestureobstacle.cpp" />
     <ClCompile Include="game\obstacle\base\gesturesensorobstacle.cpp" />
-    <ClCompile Include="game\obstacle\base\obstacletype.cpp" />
     <ClCompile Include="game\obstacle\doorobstacle.cpp" />
     <ClCompile Include="game\obstacle\furnitureobstacle.cpp" />
     <ClCompile Include="game\obstacle\lightobstacle.cpp" />
@@ -53,6 +52,7 @@
     <ClCompile Include="game\player\playersprite.cpp" />
     <ClCompile Include="game\player\upgrades.cpp" />
     <ClCompile Include="game\scenery\background.cpp" />
+    <ClCompile Include="game\obstacle\obstacletype.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util\alignmenthelp.hpp" />
@@ -87,7 +87,6 @@
     <ClInclude Include="game\obstacle\base\baseobstacle.hpp" />
     <ClInclude Include="game\obstacle\base\gestureobstacle.hpp" />
     <ClInclude Include="game\obstacle\base\gesturesensorobstacle.hpp" />
-    <ClInclude Include="game\obstacle\base\obstacletype.hpp" />
     <ClInclude Include="game\obstacle\doorobstacle.hpp" />
     <ClInclude Include="game\obstacle\furnitureobstacle.hpp" />
     <ClInclude Include="game\obstacle\lightobstacle.hpp" />
@@ -99,5 +98,6 @@
     <ClInclude Include="game\player\playersprite.hpp" />
     <ClInclude Include="game\player\upgrades.hpp" />
     <ClInclude Include="game\scenery\background.hpp" />
+    <ClInclude Include="game\obstacle\obstacletype.hpp" />
   </ItemGroup>
 </Project>

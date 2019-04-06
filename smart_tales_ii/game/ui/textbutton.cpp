@@ -1,10 +1,10 @@
-#include "../util/alignmenthelp.hpp"
+#include "../../util/alignmenthelp.hpp"
 #include "textbutton.hpp"
 
 void TextButton::UpdateTextPosition()
 {
-	const auto center = Alignment::GetRectangleCenter(buttonSprite.getGlobalBounds());
-	const auto offset = Alignment::GetRectangleCenter(buttonText.getLocalBounds());
+	const auto center = Util::GetRectangleCenter(buttonSprite.getGlobalBounds());
+	const auto offset = Util::GetRectangleCenter(buttonText.getLocalBounds());
 	// We can use the offset alone because we're passing in global bounds, so it is already in world space
 	
 	buttonText.setPosition(center - offset);

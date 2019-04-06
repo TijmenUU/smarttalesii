@@ -148,7 +148,7 @@ void RunningMode::UpdateHints()
 				{
 					obstacleHintText.setString(Obstacle::GetHintString(obstacle.GetType()));
 					const auto hintPosition = obstacle.GetHintPosition();
-					obstacleHintText.setPosition(Alignment::GetCenterOffset(obstacleHintText.getLocalBounds(), hintPosition));
+					obstacleHintText.setPosition(Util::GetCenterOffset(obstacleHintText.getLocalBounds(), hintPosition));
 
 					drawObstacleHint = true;
 					break;
@@ -162,10 +162,10 @@ void RunningMode::UpdateScoreBubbles(const sf::Time & elapsed)
 {
 	for(int64_t i = static_cast<int64_t>(scoreBubbles.size()) - 1; i >= 0; --i)
 	{
-#pragma warning(suppress: 4244) // scoreBubbles vector size should never exceed precision of int64_t
+
 		if(scoreBubbles[i].Update(elapsed))
 		{
-#pragma warning(suppress: 4244) // scoreBubbles vector size should never exceed precision of int64_t
+
 			scoreBubbles.erase(scoreBubbles.begin() + i);
 		}
 	}

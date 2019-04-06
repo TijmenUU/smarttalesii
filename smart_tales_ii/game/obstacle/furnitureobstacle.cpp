@@ -17,7 +17,7 @@ namespace Obstacle
 		SoundManager::GetInstance().PlaySFX(sfx);
 		isFalling = true;
 
-		if(forceOrigin.x < Alignment::GetRectangleCenter(obstacleSprite.getGlobalBounds()).x)
+		if(forceOrigin.x < Util::GetRectangleCenter(obstacleSprite.getGlobalBounds()).x)
 		{
 			angularVelocity = -3.f;
 		}
