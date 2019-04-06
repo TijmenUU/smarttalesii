@@ -46,7 +46,7 @@ If all went well you can `cd bin` and run the game `./smarttalesii`.
 	 ```
 
 ## Where to begin?
-A word of caution: this project was written with the intend to be self documenting code. This is obviously highly subjective, but that does mean there is no extensive documentation outside of the source code. I (@TijmenUU) expect you to read the source code for pointers. If you want to get an idea of the program flow, start in `main.cpp` as it contains the main entry point for the application. The VS2019 project contains filters to organise the source files (sorry Linux users!).
+A word of caution: this project was written with the intend to be self documenting code. This is obviously highly subjective, but that does mean there is no extensive documentation outside of the source code. I (@TijmenUU) expect you to read the source code for pointers. If you want to get an idea of the program flow, start in `main.cpp` as it contains the main entry point for the application.
 
 ### Project layout
 - smarttalesii -> the repository root folder
