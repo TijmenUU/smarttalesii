@@ -6,11 +6,10 @@
 	the loading of assets, the game will output the error to console.
 */
 
-#include "program.hpp"
-#include "soundmanager.hpp"
-
 #include <algorithm>
 #include <cstdio>
+#include "game/program.hpp"
+#include "game/soundmanager.hpp"
 #include <memory>
 #include <string>
 
