@@ -22,7 +22,8 @@ syntax: $(CPPS)
 	$(CC) -fsyntax-only $(CPPS)
 	
 clean:
-	-rm -rf $(BUILD_DIR)
+	-rm $(OBJS)
+	-rm $(DEPS)
 	-rm $(BINARY)
 
 -include $(DEPS)
