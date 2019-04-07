@@ -1,357 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\utils">
-      <UniqueIdentifier>{83c1c5d6-db6e-499c-ac33-1edb008dd542}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{9bc22a8c-02e8-4770-a226-984e8725fba7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game">
-      <UniqueIdentifier>{e3e935e7-5a48-40c8-a514-bfe59c000181}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game">
-      <UniqueIdentifier>{a9471f99-f1ff-4b27-adef-94da3b35f896}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects">
-      <UniqueIdentifier>{59f476f1-b1bf-4291-9770-d003c3f3c2ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects">
-      <UniqueIdentifier>{70e02f7a-9a9c-4326-8aa6-8b911a8b3c31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\modes">
-      <UniqueIdentifier>{4f89ebb3-cc40-4dd7-b598-f03d0ffbab73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\modes">
-      <UniqueIdentifier>{fde58331-89f8-43e9-84cb-4fe430830ee1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\player">
-      <UniqueIdentifier>{b6ad7d12-dfa2-4f08-832f-aeea632bc099}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\player">
-      <UniqueIdentifier>{eac0158d-995f-43a6-a879-219e99201ed8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\shop">
-      <UniqueIdentifier>{3c13de0d-04c4-48bb-b549-adfb8577d68f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\shop">
-      <UniqueIdentifier>{79ac7075-9f40-40e5-82f1-47c786b3cb20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\running">
-      <UniqueIdentifier>{057c8f85-8edc-45b8-8998-021236f187c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\running">
-      <UniqueIdentifier>{60f9d47b-7e50-4194-a6dc-2bbf937e0bf5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\buttons">
-      <UniqueIdentifier>{4a251553-c23b-4381-a7f4-dcdf670368e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\buttons">
-      <UniqueIdentifier>{f38e1ead-695b-4f93-a9ae-3b053be8600f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\upgrades">
-      <UniqueIdentifier>{d60fb9ba-16bb-4986-9464-2b9c2f551361}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\running\obstacle">
-      <UniqueIdentifier>{49bc88da-827c-432c-bf20-68760f30c19b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\running\obstacle">
-      <UniqueIdentifier>{8c2fc7d2-3a4d-4ea6-9ba4-0f1964628eda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\running\obstacle\base">
-      <UniqueIdentifier>{e61c1563-55f0-4f5e-9d51-1fbf6e908d36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\running\obstacle\base">
-      <UniqueIdentifier>{4dbb0b25-b809-4f99-98c4-6ffaeff8f6d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\upgrades">
-      <UniqueIdentifier>{524af921-5660-4c2c-8dcc-ef0a0b62e7fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\score">
-      <UniqueIdentifier>{971dabe2-b407-4e92-9133-72395f696fd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\score">
-      <UniqueIdentifier>{d04bd2da-48fb-4a2c-a11b-eeda8da0c299}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game\objects\win">
-      <UniqueIdentifier>{42ba2077-200c-4f57-9a23-82ec0d99224e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\game\objects\win">
-      <UniqueIdentifier>{28f7befd-4410-43bf-9ed2-da3cde642d75}</UniqueIdentifier>
+    <Filter Include="Source">
+      <UniqueIdentifier>{8f6e4552-068c-4fa5-9526-e118fe2c6768}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="inputhandler.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="platform.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="vectormath.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="gamemanager.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="runningmode.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="animatedsprite.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="difficulty.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="stringutil.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="shopmode.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="playerinventory.cpp">
-      <Filter>Source Files\game\player</Filter>
-    </ClCompile>
-    <ClCompile Include="playerscore.cpp">
-      <Filter>Source Files\game\player</Filter>
-    </ClCompile>
-    <ClCompile Include="gamemode.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="carousel.cpp">
-      <Filter>Source Files\game\objects\shop</Filter>
-    </ClCompile>
-    <ClCompile Include="background.cpp">
-      <Filter>Source Files\game\objects\running</Filter>
-    </ClCompile>
-    <ClCompile Include="playersprite.cpp">
-      <Filter>Source Files\game\objects\running</Filter>
-    </ClCompile>
-    <ClCompile Include="scorebubble.cpp">
-      <Filter>Source Files\game\objects\running</Filter>
-    </ClCompile>
-    <ClCompile Include="button.cpp">
-      <Filter>Source Files\game\objects\buttons</Filter>
-    </ClCompile>
-    <ClCompile Include="resourcecache.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="alignmenthelp.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="textbutton.cpp">
-      <Filter>Source Files\game\objects\buttons</Filter>
-    </ClCompile>
-    <ClCompile Include="upgrades.cpp">
-      <Filter>Source Files\game\upgrades</Filter>
-    </ClCompile>
-    <ClCompile Include="upgradetile.cpp">
-      <Filter>Source Files\game\objects\shop</Filter>
-    </ClCompile>
-    <ClCompile Include="doorobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="baseobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
-    </ClCompile>
-    <ClCompile Include="gesturesensorobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
-    </ClCompile>
-    <ClCompile Include="gestureobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
-    </ClCompile>
-    <ClCompile Include="obstacletype.cpp">
-      <Filter>Source Files\game\objects\running\obstacle\base</Filter>
-    </ClCompile>
-    <ClCompile Include="furnitureobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="lightobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="phoneobstacle.cpp">
-      <Filter>Source Files\game\objects\running\obstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="winoverlay.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="uioverlay.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="animationsheet.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="purchasebutton.cpp">
-      <Filter>Source Files\game\objects\buttons</Filter>
-    </ClCompile>
-    <ClCompile Include="currencydisplayer.cpp">
-      <Filter>Source Files\game\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="soundmanager.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="obstaclespawner.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="scoreoverlay.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="temporaryoverlay.cpp">
-      <Filter>Source Files\game\modes</Filter>
-    </ClCompile>
-    <ClCompile Include="gameovermessage.cpp">
-      <Filter>Source Files\game\objects\score</Filter>
-    </ClCompile>
-    <ClCompile Include="informationcard.cpp">
-      <Filter>Source Files\game\objects\win</Filter>
-    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="util\alignmenthelp.cpp" />
+    <ClCompile Include="util\platform.cpp" />
+    <ClCompile Include="util\string.cpp" />
+    <ClCompile Include="util\vectormath.cpp" />
+    <ClCompile Include="game\program.cpp" />
+    <ClCompile Include="game\difficulty.cpp" />
+    <ClCompile Include="game\gamemanager.cpp" />
+    <ClCompile Include="game\mode\gamemode.cpp" />
+    <ClCompile Include="game\mode\runningmode.cpp" />
+    <ClCompile Include="game\mode\shopmode.cpp" />
+    <ClCompile Include="game\overlay\scoreoverlay.cpp" />
+    <ClCompile Include="game\overlay\temporaryoverlay.cpp" />
+    <ClCompile Include="game\overlay\uioverlay.cpp" />
+    <ClCompile Include="game\overlay\winoverlay.cpp" />
+    <ClCompile Include="game\resourcecache.cpp" />
+    <ClCompile Include="game\soundmanager.cpp" />
+    <ClCompile Include="game\animation\animatedsprite.cpp" />
+    <ClCompile Include="game\animation\animationsheet.cpp" />
+    <ClCompile Include="game\inputhandler.cpp" />
+    <ClCompile Include="game\ui\button.cpp" />
+    <ClCompile Include="game\ui\carousel.cpp" />
+    <ClCompile Include="game\ui\currencydisplayer.cpp" />
+    <ClCompile Include="game\ui\gameovermessage.cpp" />
+    <ClCompile Include="game\ui\informationcard.cpp" />
+    <ClCompile Include="game\ui\purchasebutton.cpp" />
+    <ClCompile Include="game\ui\scorebubble.cpp" />
+    <ClCompile Include="game\ui\textbutton.cpp" />
+    <ClCompile Include="game\ui\upgradetile.cpp" />
+    <ClCompile Include="game\obstacle\base\baseobstacle.cpp" />
+    <ClCompile Include="game\obstacle\base\gestureobstacle.cpp" />
+    <ClCompile Include="game\obstacle\base\gesturesensorobstacle.cpp" />
+    <ClCompile Include="game\obstacle\doorobstacle.cpp" />
+    <ClCompile Include="game\obstacle\furnitureobstacle.cpp" />
+    <ClCompile Include="game\obstacle\lightobstacle.cpp" />
+    <ClCompile Include="game\obstacle\obstaclespawner.cpp" />
+    <ClCompile Include="game\obstacle\phoneobstacle.cpp" />
+    <ClCompile Include="game\player\playerinventory.cpp" />
+    <ClCompile Include="game\player\playerscore.cpp" />
+    <ClCompile Include="game\player\playersprite.cpp" />
+    <ClCompile Include="game\player\upgrades.cpp" />
+    <ClCompile Include="game\scenery\background.cpp" />
+    <ClCompile Include="game\obstacle\obstacletype.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="platform.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="inputhandler.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="vectormath.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="program.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gamemanager.hpp">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="runningmode.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="animatedsprite.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="difficulty.hpp">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="stringutil.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="shopmode.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="playerinventory.hpp">
-      <Filter>Header Files\game\player</Filter>
-    </ClInclude>
-    <ClInclude Include="playerscore.hpp">
-      <Filter>Header Files\game\player</Filter>
-    </ClInclude>
-    <ClInclude Include="gamemode.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="carousel.hpp">
-      <Filter>Header Files\game\objects\shop</Filter>
-    </ClInclude>
-    <ClInclude Include="background.hpp">
-      <Filter>Header Files\game\objects\running</Filter>
-    </ClInclude>
-    <ClInclude Include="playersprite.hpp">
-      <Filter>Header Files\game\objects\running</Filter>
-    </ClInclude>
-    <ClInclude Include="scorebubble.hpp">
-      <Filter>Header Files\game\objects\running</Filter>
-    </ClInclude>
-    <ClInclude Include="button.hpp">
-      <Filter>Header Files\game\objects\buttons</Filter>
-    </ClInclude>
-    <ClInclude Include="resourcecache.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="alignmenthelp.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="textbutton.hpp">
-      <Filter>Header Files\game\objects\buttons</Filter>
-    </ClInclude>
-    <ClInclude Include="upgrades.hpp">
-      <Filter>Header Files\game\upgrades</Filter>
-    </ClInclude>
-    <ClInclude Include="upgradetile.hpp">
-      <Filter>Header Files\game\objects\shop</Filter>
-    </ClInclude>
-    <ClInclude Include="doorobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="gestureobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
-    </ClInclude>
-    <ClInclude Include="baseobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
-    </ClInclude>
-    <ClInclude Include="gesturesensorobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
-    </ClInclude>
-    <ClInclude Include="obstacletype.hpp">
-      <Filter>Header Files\game\objects\running\obstacle\base</Filter>
-    </ClInclude>
-    <ClInclude Include="furnitureobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="lightobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="phoneobstacle.hpp">
-      <Filter>Header Files\game\objects\running\obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="winoverlay.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="uioverlay.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="animationsheet.hpp">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="purchasebutton.hpp">
-      <Filter>Header Files\game\objects\buttons</Filter>
-    </ClInclude>
-    <ClInclude Include="currencydisplayer.hpp">
-      <Filter>Header Files\game\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="soundmanager.hpp">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="obstaclespawner.hpp">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="scoreoverlay.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="salestile.hpp">
-      <Filter>Header Files\game\objects\shop</Filter>
-    </ClInclude>
-    <ClInclude Include="temporaryoverlay.hpp">
-      <Filter>Header Files\game\modes</Filter>
-    </ClInclude>
-    <ClInclude Include="gameovermessage.hpp">
-      <Filter>Header Files\game\objects\score</Filter>
-    </ClInclude>
-    <ClInclude Include="informationcard.hpp">
-      <Filter>Header Files\game\objects\win</Filter>
-    </ClInclude>
+    <ClInclude Include="util\alignmenthelp.hpp" />
+    <ClInclude Include="util\platform.hpp" />
+    <ClInclude Include="util\string.hpp" />
+    <ClInclude Include="util\vectormath.hpp" />
+    <ClInclude Include="game\program.hpp" />
+    <ClInclude Include="game\gamemanager.hpp" />
+    <ClInclude Include="game\difficulty.hpp" />
+    <ClInclude Include="game\mode\gamemode.hpp" />
+    <ClInclude Include="game\mode\runningmode.hpp" />
+    <ClInclude Include="game\mode\shopmode.hpp" />
+    <ClInclude Include="game\overlay\scoreoverlay.hpp" />
+    <ClInclude Include="game\overlay\temporaryoverlay.hpp" />
+    <ClInclude Include="game\overlay\uioverlay.hpp" />
+    <ClInclude Include="game\overlay\winoverlay.hpp" />
+    <ClInclude Include="game\resourcecache.hpp" />
+    <ClInclude Include="game\soundmanager.hpp" />
+    <ClInclude Include="game\animation\animatedsprite.hpp" />
+    <ClInclude Include="game\animation\animationsheet.hpp" />
+    <ClInclude Include="game\inputhandler.hpp" />
+    <ClInclude Include="game\ui\button.hpp" />
+    <ClInclude Include="game\ui\carousel.hpp" />
+    <ClInclude Include="game\ui\currencydisplayer.hpp" />
+    <ClInclude Include="game\ui\gameovermessage.hpp" />
+    <ClInclude Include="game\ui\informationcard.hpp" />
+    <ClInclude Include="game\ui\purchasebutton.hpp" />
+    <ClInclude Include="game\ui\salestile.hpp" />
+    <ClInclude Include="game\ui\scorebubble.hpp" />
+    <ClInclude Include="game\ui\textbutton.hpp" />
+    <ClInclude Include="game\ui\upgradetile.hpp" />
+    <ClInclude Include="game\obstacle\base\baseobstacle.hpp" />
+    <ClInclude Include="game\obstacle\base\gestureobstacle.hpp" />
+    <ClInclude Include="game\obstacle\base\gesturesensorobstacle.hpp" />
+    <ClInclude Include="game\obstacle\doorobstacle.hpp" />
+    <ClInclude Include="game\obstacle\furnitureobstacle.hpp" />
+    <ClInclude Include="game\obstacle\lightobstacle.hpp" />
+    <ClInclude Include="game\obstacle\obstacles.hpp" />
+    <ClInclude Include="game\obstacle\obstaclespawner.hpp" />
+    <ClInclude Include="game\obstacle\phoneobstacle.hpp" />
+    <ClInclude Include="game\player\playerinventory.hpp" />
+    <ClInclude Include="game\player\playerscore.hpp" />
+    <ClInclude Include="game\player\playersprite.hpp" />
+    <ClInclude Include="game\player\upgrades.hpp" />
+    <ClInclude Include="game\scenery\background.hpp" />
+    <ClInclude Include="game\obstacle\obstacletype.hpp" />
   </ItemGroup>
 </Project>

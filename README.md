@@ -4,11 +4,11 @@ This is the repository of the Smart Tales sequel, Smart Tales II. The original S
 Work on Smart Tales II has halted for now but for anyone interested in hacking/extending this project: keep on reading!
 
 # Getting Started
-Smart Tales II is written in portable `C++` and was build using free tools: it uses the [Simple and Fast Multimedia Library](https://www.sfml-dev.org/index.php) (SFML) for the audio, visuals and input handling. For creating the art [Paint.NET](https://www.getpaint.net/) was used, which can be found in the `.pdn` files. Smart Tales supports both Linux and Windows currently, offering a `makefile` and `Visual Studio 2017 project` for each respectively. Let's get to building the project so you can see for yourself. If you're in a situation where you cannot build the game yourself, grab a release copy for it in the [releases](https://github.com/TijmenUU/smarttalesii/releases). There are currently only Windows releases available.
+Smart Tales II is written in portable `C++` and was build using free tools: it uses the [Simple and Fast Multimedia Library](https://www.sfml-dev.org/index.php) (SFML) for the audio, visuals and input handling. For creating the art [Paint.NET](https://www.getpaint.net/) was used, which can be found in the `.pdn` files. Smart Tales supports both Linux and Windows currently, offering a `makefile` and `Visual Studio 2019 project` for each respectively. Let's get to building the project so you can see for yourself. If you're in a situation where you cannot build the game yourself, grab a release copy for it in the [releases](https://github.com/TijmenUU/smarttalesii/releases). There are currently only Windows releases available.
 
 ## Building Smart Tales II
 ### Windows
-On Windows we have made it pretty easy to get going, simply clone this repository and open it (`smart_tales_ii.sln`) with [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) (VS2017). It comes complete with all the `x64` dependencies, but if you really want to target `x86` then grab a [32-bit copy](https://www.sfml-dev.org/download/sfml/2.5.1/) of SFML and set it up.
+On Windows we have made it pretty easy to get going, simply clone this repository and open it (`smart_tales_ii.sln`) with [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (VS2019). It comes complete with all the `x64` dependencies, but if you really want to target `x86` then grab a [32-bit copy](https://www.sfml-dev.org/download/sfml/2.5.1/) of SFML and set it up.
 
 ### Linux
 Depending on what Linux distribution you're running you will have to fetch the `sfml` development files through your specific package manager. On Arch it is:
@@ -46,7 +46,9 @@ If all went well you can `cd bin` and run the game `./smarttalesii`.
 	 ```
 
 ## Where to begin?
-A word of caution: this project was written with the intend to be self documenting code. This is obviously highly subjective, but that does mean there is no extensive documentation outside of the source code. I (@TijmenUU) expect you to read the source code for pointers. If you want to get an idea of the program flow, start in `main.cpp` as it contains the main entry point for the application. The VS2017 project contains filters to organise the source files (sorry Linux users!).
+A word of caution: this project was written with the intend to be self documenting code. This is obviously highly subjective, but that does mean there is no extensive documentation outside of the source code. I (@TijmenUU) expect you to read the source code for pointers. If you want to get an idea of the program flow, start in `main.cpp` as it contains the main entry point for the application.
+
+**Tip**: When using Visual Studio, use the file view instead of the filter view. The button to toggle this on is called [Show All Files](https://blogs.msdn.microsoft.com/benwilli/2015/05/21/visual-studio-tip-8-adding-existing-files-with-show-all-files/). Using this view ensures you have the source file hierarchy structure and not just a flat list of files.
 
 ### Project layout
 - smarttalesii -> the repository root folder
@@ -60,15 +62,13 @@ A word of caution: this project was written with the intend to be self documenti
       - texture -> all textures used in the game (non animated sprites)
       - difficulty.txt -> file that defines variables that affect the game's difficulty. Play around with them!
       - *.dll -> Windows dependencies
-   - smart_tales_ii -> source directory containing all source files. The makefile expects all files to be in here without subdirectories.
-      - *.hpp -> header files, all have a comment at the top briefly stating their purpose
-      - *.cpp -> source files
-   - windeps -> the SFML x64 dependencies used by the included VS2017 project
+   - smart_tales_ii -> source directory containing all source files, named like this due to the Visual Studio project.
+   - windeps -> the SFML x64 dependencies used by the included VS2019 project
    - .gitignore -> stuff git should not track
    - LICENCE
    - README.md -> that's us
    - makefile -> build file for Linux users
-   - smart_tales_ii.sln -> the VS2017 project file for Windows users
+   - smart_tales_ii.sln -> the VS2019 project file for Windows users
 
 ### Adding new game modes / overlays
 All game modes need to derive from the base class `Gamemode` publicly. The expected interface can be observed in `gamemode.hpp`. The game uses a simple vector to keep track of the different game modes in the `GameManager` class. You will have to find an appropriate place to `push` your new gamemode onto the it using:

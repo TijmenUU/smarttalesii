@@ -3,50 +3,37 @@ CFLAGS = -std=c++17 -Wall -O2
 LFLAGS = -Wall
 LIBS   = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 
-# Final binary
-BIN       = bin/smarttalesii
-# Put all auto generated stuff to this build dir.
-BUILD_DIR = build
-# Specify where to find the source files
-SRC_DIR   = smart_tales_ii
+BINARY  = bin/smarttalesii
+SRC_DIR = smart_tales_ii
 
-# List of all .cpp source files.
-CPP = $(wildcard $(SRC_DIR)/*.cpp)
-
-# All .o files go to build dir.
-OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(CPP))
+CPPS = $(shell find $(SRC_DIR) -name *.cpp)
+OBJS = $(patsubst %.cpp, %.o, $(CPPS))
 # Gcc/Clang will create these .d files containing dependencies.
-DEP = $(patsubst %.o, %.d, $(OBJ))
+DEPS = $(patsubst %.o, %.d, $(OBJS))
 
 .PHONY: all check syntax clean
 
-all: $(BIN)
+all: $(BINARY)
 
-check: $(BIN)
+check: $(BINARY)
 	cd bin && ./smarttalesii debug
 
-syntax: $(CPP)
-	$(CC) -fsyntax-only $(CPP)
+syntax: $(CPPS)
+	$(CC) -fsyntax-only $(CPPS)
 	
 clean:
-	-rm -rf $(BUILD_DIR)
-	-rm $(BIN)
+	-rm $(OBJS)
+	-rm $(DEPS)
+	-rm $(BINARY)
 
-# Include all .d files
--include $(DEP)
+-include $(DEPS)
 
-# Build target for every single object file.
-# The potential dependency on header files is covered
-# by calling `-include $(DEP)`.
-# The @D you're seeing here and elsewhere simply means the directory of the file
-# we're making.
-$(BUILD_DIR):
-	mkdir -p $@
-
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+%.o: %.cpp
 	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
 # Actual target of the binary - depends on all .o files.
-$(BIN): $(OBJ)
+# The @D you're seeing here and elsewhere simply means the directory of the file
+# we're making.
+$(BINARY): $(OBJS)
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) $(LIBS) -o $(BIN)
+	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIBS) -o $(BINARY)
