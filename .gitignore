@@ -13,6 +13,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Do track this user file for tracking the working directory of the debugger
+!smart_tales_ii/smart_tales_ii.vcxproj.user
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
