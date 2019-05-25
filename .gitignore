@@ -295,3 +295,7 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 *.iobj
+
+# Linux build output
+*.o
+*.d
