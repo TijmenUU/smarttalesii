@@ -12,27 +12,26 @@
 */
 
 #pragma once
-#include "../ui/button.hpp"
 #include "../mode/gamemode.hpp"
+#include "../ui/button.hpp"
 #include <list>
 #include <memory>
 
-class UIOverlay : public Gamemode
-{
+class UIOverlay : public Gamemode {
 private:
-	sf::RectangleShape pauseOverlay;
-	sf::Text pauseText;
-	float originalVolume;
+    sf::RectangleShape pauseOverlay;
+    sf::Text pauseText;
+    float originalVolume;
 
-	Button sfxMuteButton, musicMuteButton, gamePauseButton;
+    Button sfxMuteButton, musicMuteButton, gamePauseButton;
 
 protected:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+    void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-	bool SuppressUpdate() const override;
-	void Setup() override;
-	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
+    bool SuppressUpdate() const override;
+    void Setup() override;
+    void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
 public:
-	UIOverlay(const bool canPause = true);
+    UIOverlay(const bool canPause = true);
 };

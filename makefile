@@ -11,7 +11,7 @@ OBJS = $(patsubst %.cpp, %.o, $(CPPS))
 # Gcc/Clang will create these .d files containing dependencies.
 DEPS = $(patsubst %.o, %.d, $(OBJS))
 
-.PHONY: all check syntax clean
+.PHONY: all check syntax clean format
 
 all: $(BINARY)
 
@@ -25,6 +25,10 @@ clean:
 	-rm $(OBJS)
 	-rm $(DEPS)
 	-rm $(BINARY)
+
+format:
+	clang-format -i ${CPPS}
+	clang-format -i $(shell find ${SRC_DIR} -name '*.hpp')
 
 -include $(DEPS)
 

@@ -18,47 +18,46 @@
 #include <string>
 #include <unordered_map>
 
-class ResourceCache
-{
+class ResourceCache {
 private:
-	std::unordered_map<std::string, sf::Font> fontStorage;
-	std::unordered_map<std::string, sf::Texture> textureStorage;
-	std::unordered_map<std::string, Animation::Sheet> sheetStorage;
-	std::unordered_map<std::string, sf::Music> musicStorage;
-	std::unordered_map<std::string, sf::SoundBuffer> soundBufferStorage;
+    std::unordered_map<std::string, sf::Font> fontStorage;
+    std::unordered_map<std::string, sf::Texture> textureStorage;
+    std::unordered_map<std::string, Animation::Sheet> sheetStorage;
+    std::unordered_map<std::string, sf::Music> musicStorage;
+    std::unordered_map<std::string, sf::SoundBuffer> soundBufferStorage;
 
 protected:
-	friend class Program;
-	// Throws an runtime_error if the file cannot be loaded
-	// Uses the filename without extension as name
-	void LoadFont(const std::string & file);
-	// Throws an runtime_error if the file cannot be loaded
-	// Uses the filename without extension as name
-	void LoadTexture(const std::string & file);
-	// Throws an runtime_error if the file cannot be loaded
-	// Uses the filename without extension as name
-	void LoadSpriteSheet(const std::string & file);
-	// Throws an runtime_error if the file cannot be loaded
-	// Uses the filename without extension as name
-	void LoadMusic(const std::string & file);
-	// Throws an runtime_error if the file cannot be loaded
-	// Uses the filename without extension as name
-	void LoadSound(const std::string & file);
+    friend class Program;
+    // Throws an runtime_error if the file cannot be loaded
+    // Uses the filename without extension as name
+    void LoadFont(const std::string & file);
+    // Throws an runtime_error if the file cannot be loaded
+    // Uses the filename without extension as name
+    void LoadTexture(const std::string & file);
+    // Throws an runtime_error if the file cannot be loaded
+    // Uses the filename without extension as name
+    void LoadSpriteSheet(const std::string & file);
+    // Throws an runtime_error if the file cannot be loaded
+    // Uses the filename without extension as name
+    void LoadMusic(const std::string & file);
+    // Throws an runtime_error if the file cannot be loaded
+    // Uses the filename without extension as name
+    void LoadSound(const std::string & file);
 
 public:
-	static ResourceCache & GetInstance();
+    static ResourceCache & GetInstance();
 
-	sf::Font & GetFont(const std::string & name);
-	const sf::Texture & GetTexture(const std::string & name) const;
-	// Dangerous, use GetTexture() instead
-	sf::Texture & GetMutableTexture(const std::string & name);
-	const Animation::Sheet & GetSpriteSheet(const std::string & name) const;
-	sf::Music & GetMusic(const std::string & name);
-	const sf::SoundBuffer & GetSoundBuffer(const std::string & name) const;
+    sf::Font & GetFont(const std::string & name);
+    const sf::Texture & GetTexture(const std::string & name) const;
+    // Dangerous, use GetTexture() instead
+    sf::Texture & GetMutableTexture(const std::string & name);
+    const Animation::Sheet & GetSpriteSheet(const std::string & name) const;
+    sf::Music & GetMusic(const std::string & name);
+    const sf::SoundBuffer & GetSoundBuffer(const std::string & name) const;
 
-	ResourceCache() = default;
-	ResourceCache(const ResourceCache &) = delete;
-	ResourceCache(const ResourceCache &&) = delete;
-	ResourceCache & operator = (ResourceCache &) = delete;
-	ResourceCache & operator = (ResourceCache &&) = delete;
+    ResourceCache() = default;
+    ResourceCache(const ResourceCache &) = delete;
+    ResourceCache(const ResourceCache &&) = delete;
+    ResourceCache & operator=(ResourceCache &) = delete;
+    ResourceCache & operator=(ResourceCache &&) = delete;
 };

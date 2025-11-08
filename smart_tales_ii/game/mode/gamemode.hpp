@@ -13,31 +13,30 @@
 #pragma once
 #include "../inputhandler.hpp"
 #include "../resourcecache.hpp"
-#include <memory>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 const float cWorldWidth = 1280.f; // in pixels
 const float cWorldHeight = 720.f; // in pixels
 
 class GameManager;
 
-class Gamemode : public sf::Drawable
-{
+class Gamemode : public sf::Drawable {
 private:
 protected:
-	friend class GameManager;
+    friend class GameManager;
 
-	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
+    virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const = 0;
 
-	virtual bool SuppressDraw() const;
-	virtual bool SuppressUpdate() const;
-	virtual void OnExit();
-	virtual void OnEnter();
+    virtual bool SuppressDraw() const;
+    virtual bool SuppressUpdate() const;
+    virtual void OnExit();
+    virtual void OnEnter();
 
-	virtual void Setup() = 0;
-	virtual void Update(const sf::Time & elapsed, const Inputhandler & input) = 0;
+    virtual void Setup() = 0;
+    virtual void Update(const sf::Time & elapsed, const Inputhandler & input) = 0;
 
 public:
-	Gamemode() = default;
-	virtual ~Gamemode() = default;
+    Gamemode() = default;
+    virtual ~Gamemode() = default;
 };

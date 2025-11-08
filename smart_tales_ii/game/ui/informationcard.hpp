@@ -10,21 +10,20 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class InformationCard : public sf::Drawable
-{
+class InformationCard : public sf::Drawable {
 private:
-	float fadeTimeOut;
-	int colorValue;
-	sf::Sprite image;
-	sf::Text subtitle;
+    float fadeTimeOut;
+    int colorValue;
+    sf::Sprite image;
+    sf::Text subtitle;
 
 protected:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+    void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
 public:
-	void Update(const sf::Time & elapsed);
+    void Update(const sf::Time & elapsed);
 
-	void SetPosition(const float x, const float y);
+    void SetPosition(const float x, const float y);
 
-	InformationCard(const std::string & textureFile, const std::string & description, const float _fadeTimeOut);
+    InformationCard(const std::string & textureFile, const std::string & description, const float _fadeTimeOut);
 };

@@ -1,33 +1,34 @@
-#include <fstream>
 #include "platform.hpp"
+#include <fstream>
 #include <stdexcept>
 
 namespace Util
 {
-	const char cCommentChar = '#';
+    const char cCommentChar = '#';
 
-	std::vector<std::string> LoadTextFile(const std::string & filelocation, const bool ignoreComments, const bool ignoreEmpty)
-	{
-		std::vector<std::string> result;
-		
-		std::ifstream inputfile;
-		inputfile.open(filelocation, std::ios::in);
-		if(!inputfile.is_open())
-		{
-			throw std::runtime_error("Error reading " + filelocation);
-		}
+    std::vector<std::string>
+    LoadTextFile(const std::string & filelocation, const bool ignoreComments, const bool ignoreEmpty)
+    {
+        std::vector<std::string> result;
 
-		while(inputfile.good())
-		{
-			std::string line;
-			std::getline(inputfile, line);
-			
-			if((ignoreEmpty && line.size() == 0U) || (ignoreComments && line[0] == cCommentChar))
-				continue;
+        std::ifstream inputfile;
+        inputfile.open(filelocation, std::ios::in);
+        if(!inputfile.is_open())
+        {
+            throw std::runtime_error("Error reading " + filelocation);
+        }
 
-			result.push_back(line);
-		}
+        while(inputfile.good())
+        {
+            std::string line;
+            std::getline(inputfile, line);
 
-		return result;
-	}
+            if((ignoreEmpty && line.size() == 0U) || (ignoreComments && line[0] == cCommentChar))
+                continue;
+
+            result.push_back(line);
+        }
+
+        return result;
+    }
 }

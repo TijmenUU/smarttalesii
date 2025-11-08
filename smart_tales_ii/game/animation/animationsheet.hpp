@@ -14,36 +14,35 @@
 
 namespace Animation
 {
-	// Helper struct
-	struct Animation
-	{
-		sf::Vector2u frameStart;	// offset in pixels
-		sf::Vector2u frameSize;		// in pixels
-		unsigned int frameMargin;	// in pixels
-		unsigned int frameCount;
-		unsigned int frameTime;		// in milliseconds
-		bool reverse;
-		bool loop;
+    // Helper struct
+    struct Animation
+    {
+        sf::Vector2u frameStart; // offset in pixels
+        sf::Vector2u frameSize; // in pixels
+        unsigned int frameMargin; // in pixels
+        unsigned int frameCount;
+        unsigned int frameTime; // in milliseconds
+        bool reverse;
+        bool loop;
 
-		Animation();
-	};
+        Animation();
+    };
 
-	class Sheet
-	{
-	private:
-		sf::Texture texture;
-		std::unordered_map<std::string, Animation> animations;
-	
-	public:
-		void LoadFromFile(const std::string & animationFile);
+    class Sheet {
+    private:
+        sf::Texture texture;
+        std::unordered_map<std::string, Animation> animations;
 
-		sf::IntRect GetFrame(const Animation & anim, const unsigned int frameNumber) const;
+    public:
+        void LoadFromFile(const std::string & animationFile);
 
-		// returns nullptr if no animation exists with the given name
-		const Animation * GetAnimation(const std::string & name) const;
-		// returns empty string if it couldn't find a match
-		std::string GetAnimationName(const Animation * ptr) const;
+        sf::IntRect GetFrame(const Animation & anim, const unsigned int frameNumber) const;
 
-		const sf::Texture & GetTexture() const;
-	};
+        // returns nullptr if no animation exists with the given name
+        const Animation * GetAnimation(const std::string & name) const;
+        // returns empty string if it couldn't find a match
+        std::string GetAnimationName(const Animation * ptr) const;
+
+        const sf::Texture & GetTexture() const;
+    };
 }
