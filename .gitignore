@@ -299,3 +299,7 @@ __pycache__/
 # Linux build output
 *.o
 *.d
+
+# Visual Studio Clangd (C++ language server)
+.cache/clangd/
+compile_commands.json

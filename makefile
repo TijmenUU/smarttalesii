@@ -1,7 +1,7 @@
-CC     = g++
-CFLAGS = -std=c++17 -Wall -O2
-LFLAGS = -Wall
-LIBS   = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+CC      = clang++
+CFLAGS  = -std=c++17 -Wall -O2
+LFLAGS  = -Wall
+LIBS    = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 
 BINARY  = bin/smarttalesii
 SRC_DIR = smart_tales_ii
