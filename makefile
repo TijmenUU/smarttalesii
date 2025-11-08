@@ -9,7 +9,7 @@ SRC_DIR = smart_tales_ii
 CPPS = $(shell find $(SRC_DIR) -name *.cpp)
 OBJS = $(patsubst %.cpp, %.o, $(CPPS))
 # Gcc/Clang will create these .d files containing dependencies.
-DEPS = $(patsubst %.o, %.d, $(OBJS))
+DEPS = $(patsubst %.cpp, %.d, $(CPPS))
 
 .PHONY: all check syntax clean format
 
