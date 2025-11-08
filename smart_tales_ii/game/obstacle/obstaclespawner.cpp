@@ -46,7 +46,7 @@ void ObstacleSpawner::Update(
         const auto bounds = lastObstacleSpawned->GetKillBounds();
         // Make sure this obstacle is fully on screen
         // before we spawn the next obstacle in!
-        if(bounds.left + bounds.width < worldRightBorderX)
+        if(bounds.position.x + bounds.size.x < worldRightBorderX)
         {
             currentSpawnTimeout = 0.f;
             InsertObstacle(toInsertIn);

@@ -53,7 +53,7 @@ namespace Obstacle
 
     bool Door::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
     {
-        if(playerBounds.left + playerBounds.width > sensorSprite.getPosition().x)
+        if(playerBounds.position.x + playerBounds.size.x > sensorSprite.getPosition().x)
         {
             Neutralize();
 
@@ -68,7 +68,7 @@ namespace Obstacle
     bool Door::CanDespawn() const
     {
         const auto bounds = obstacleSprite.getGlobalBounds();
-        return bounds.width + bounds.left < 0.f;
+        return bounds.size.x + bounds.position.x < 0.f;
     }
 
     void Door::SetPosition(const sf::Vector2f & p)

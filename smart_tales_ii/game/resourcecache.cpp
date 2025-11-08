@@ -11,11 +11,7 @@ void ResourceCache::LoadFont(const std::string & file)
 {
     const std::string name = Util::GetFileName(file);
 
-    fontStorage[name] = sf::Font();
-    if(!fontStorage[name].loadFromFile(file))
-    {
-        throw std::runtime_error("Error loading font <" + file + ">");
-    }
+    fontStorage[name] = sf::Font(file);
 }
 
 void ResourceCache::LoadTexture(const std::string & file)

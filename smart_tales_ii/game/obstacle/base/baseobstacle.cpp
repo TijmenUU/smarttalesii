@@ -12,7 +12,7 @@ namespace Obstacle
 
     void Base::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
     {
-        SetPosition(sf::Vector2f(windowWidth, floorYcoord - obstacleSprite.getGlobalBounds().height));
+        SetPosition(sf::Vector2f(windowWidth, floorYcoord - obstacleSprite.getGlobalBounds().size.y));
     }
 
     const sf::Vector2f Base::GetPosition() const { return obstacleSprite.getPosition(); }
@@ -20,7 +20,7 @@ namespace Obstacle
     sf::Vector2f Base::GetObstacleCenter() const
     {
         const auto bounds = obstacleSprite.getGlobalBounds();
-        return sf::Vector2f(bounds.left + (bounds.width / 2.f), bounds.top + (bounds.height / 2.f));
+        return sf::Vector2f(bounds.position.x + (bounds.size.x / 2.f), bounds.position.y + (bounds.size.y / 2.f));
     }
 
     sf::Vector2f Base::GetNeutralizationPosition() const { return GetObstacleCenter(); }

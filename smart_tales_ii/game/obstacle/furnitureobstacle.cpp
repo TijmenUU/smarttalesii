@@ -3,6 +3,7 @@
 #include "../../util/vectormath.hpp"
 #include "../resourcecache.hpp"
 #include "../soundmanager.hpp"
+#include <SFML/System/Angle.hpp>
 
 namespace Obstacle
 {
@@ -51,7 +52,7 @@ namespace Obstacle
 
     bool Furniture::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
     {
-        if(playerBounds.intersects(sensorSprite.getGlobalBounds()))
+        if(playerBounds.findIntersection(sensorSprite.getGlobalBounds()))
         {
             Neutralize();
             Fall(sf::Vector2f(0, 1), sf::Vector2f(0, 0));
@@ -67,7 +68,7 @@ namespace Obstacle
     bool Furniture::CanDespawn() const
     {
         const auto bounds = obstacleSprite.getGlobalBounds();
-        return bounds.width + bounds.left < 0.f;
+        return bounds.size.x + bounds.position.x < 0.f;
     }
 
     void Furniture::SetPosition(const sf::Vector2f & p)
@@ -93,10 +94,10 @@ namespace Obstacle
     {
         if(isFalling)
         {
-            obstacleSprite.move(fallVelocity.x + horizontalDisplacement, fallVelocity.y);
-            obstacleSprite.rotate(angularVelocity);
+            obstacleSprite.move({fallVelocity.x + horizontalDisplacement, fallVelocity.y});
+            obstacleSprite.rotate(sf::radians(angularVelocity));
 
-            sensorSprite.move(horizontalDisplacement, 0.f);
+            sensorSprite.move({horizontalDisplacement, 0.f});
         }
         else
         {

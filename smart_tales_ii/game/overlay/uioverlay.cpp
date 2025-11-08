@@ -20,13 +20,9 @@ bool UIOverlay::SuppressUpdate() const { return gamePauseButton.IsDown(); }
 
 void UIOverlay::Setup()
 {
-    pauseOverlay.setPosition(0.f, 0.f);
+    pauseOverlay.setPosition({0.f, 0.f});
     pauseOverlay.setFillColor(sf::Color(0, 0, 0, 65));
 
-    auto & cache = ResourceCache::GetInstance();
-    sf::Font & font = cache.GetFont("commodore");
-
-    pauseText.setFont(font);
     pauseText.setCharacterSize(32);
     pauseText.setFillColor(sf::Color::White);
     pauseText.setOutlineColor(sf::Color::Black);
@@ -34,7 +30,7 @@ void UIOverlay::Setup()
     pauseText.setString("Game is paused");
 
     auto bounds = pauseText.getGlobalBounds();
-    pauseText.setPosition(cWorldWidth / 2.f - bounds.width / 2.f, cWorldHeight / 2.f);
+    pauseText.setPosition({cWorldWidth / 2.f - bounds.size.x / 2.f, cWorldHeight / 2.f});
 
     const auto & smanager = SoundManager::GetInstance();
     const float buttonSpacing = 60.f + 15.f;
@@ -74,7 +70,7 @@ void UIOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 }
 
 UIOverlay::UIOverlay(const bool canPause)
- : pauseOverlay(sf::Vector2f(cWorldWidth, cWorldHeight)),
+ : pauseOverlay(sf::Vector2f(cWorldWidth, cWorldHeight)), pauseText(ResourceCache::GetInstance().GetFont("commodore")),
    sfxMuteButton(ResourceCache::GetInstance().GetSpriteSheet("sfxbutton")),
    musicMuteButton(ResourceCache::GetInstance().GetSpriteSheet("musicbutton")),
    gamePauseButton(ResourceCache::GetInstance().GetSpriteSheet("pausebutton"), canPause)

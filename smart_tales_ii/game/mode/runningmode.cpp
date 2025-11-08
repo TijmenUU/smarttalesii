@@ -70,7 +70,7 @@ void RunningMode::OnEnter()
     Reset();
     auto & music = ResourceCache::GetInstance().GetMusic("pixelland");
     music.setVolume(100);
-    music.setLoop(true);
+    music.setLooping(true);
     SoundManager::GetInstance().CrossFadeMusic(music);
 }
 
@@ -174,10 +174,8 @@ void RunningMode::Setup()
     gameDifficulty.LoadFromFile(cGameDifficultyFile); //GetDifficulty(cGameDifficultyFile);
 
     const auto playerBounds = player.GetGlobalBounds();
-    player.SetPosition(sf::Vector2f(playerBounds.width, cFloorY - playerBounds.height));
+    player.SetPosition(sf::Vector2f(playerBounds.size.x, cFloorY - playerBounds.size.y));
 
-    sf::Font & font = ResourceCache::GetInstance().GetFont("commodore");
-    obstacleHintText.setFont(font);
     obstacleHintText.setCharacterSize(26);
     obstacleHintText.setFillColor(sf::Color::White);
     obstacleHintText.setOutlineColor(sf::Color::Black);
@@ -199,20 +197,20 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 {
     if(GameManager::GetInstance().GetDebugFlag())
     {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::K))
         {
             GameOver(Obstacle::Type::Unknown);
             return;
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Subtract))
         {
             scrollVelocity *= 0.95f;
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Add))
         {
             scrollVelocity *= 1.05f;
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
         {
             auto & manager = GameManager::GetInstance();
             manager.PopAllBelow(nullptr);
@@ -248,6 +246,6 @@ void RunningMode::Update(const sf::Time & elapsed, const Inputhandler & input)
 }
 
 RunningMode::RunningMode(const Player::Inventory & inventory)
- : background(cWorldWidth), currencyDisplay(5U, "", inventory.GetCurrency()), player(inventory),
-   playerInventory(inventory)
+ : background(cWorldWidth), obstacleHintText(ResourceCache::GetInstance().GetFont("commodore")),
+   currencyDisplay(5U, "", inventory.GetCurrency()), player(inventory), playerInventory(inventory)
 { }

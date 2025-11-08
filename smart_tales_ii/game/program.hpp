@@ -6,11 +6,10 @@
 	state updated and contains the game loop in Run()
 */
 #pragma once
-#include "gamemanager.hpp"
+#include "inputhandler.hpp"
 #include "resourcecache.hpp"
 
 #include <SFML/Graphics.hpp>
-#include <memory>
 
 class Program {
 private:

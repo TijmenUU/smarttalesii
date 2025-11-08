@@ -37,13 +37,13 @@ void InformationCard::SetPosition(const float x, const float y)
 {
     const float padding = 10.f;
 
-    image.setPosition(x, y);
+    image.setPosition({x, y});
     const auto imgBounds = image.getLocalBounds();
 
     const auto textBounds = subtitle.getLocalBounds();
     subtitle.setPosition(
-        (imgBounds.width / 2 + x) - (textBounds.left + textBounds.width / 2),
-        padding + y + imgBounds.height + textBounds.top);
+        {(imgBounds.size.x / 2 + x) - (textBounds.position.x + textBounds.size.x / 2),
+         padding + y + imgBounds.size.y + textBounds.position.y});
 }
 
 InformationCard::InformationCard(
@@ -51,7 +51,7 @@ InformationCard::InformationCard(
     const std::string & description,
     const float _fadeTimeOut)
  : fadeTimeOut(_fadeTimeOut), colorValue(0), image(ResourceCache::GetInstance().GetTexture(textureFile)),
-   subtitle(description, ResourceCache::GetInstance().GetFont("commodore"), 22)
+   subtitle(ResourceCache::GetInstance().GetFont("commodore"), description, 22)
 {
     image.setColor(sf::Color::Transparent);
     subtitle.setFillColor(sf::Color::Transparent);

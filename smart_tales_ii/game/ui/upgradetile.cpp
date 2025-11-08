@@ -34,8 +34,7 @@ void UpgradeTile::SetPosition(const sf::Vector2f & p)
 
     const auto bounds = upgradeDescription.getLocalBounds();
     upgradeDescription.setPosition(
-        Util::GetCenterOffset(bounds.width, p.x + cDescriptionCenter.x) + bounds.left,
-        p.y + 300.f);
+        {Util::GetCenterOffset(bounds.size.x, p.x + cDescriptionCenter.x) + bounds.position.x, p.y + 300.f});
 }
 
 sf::Vector2f UpgradeTile::GetPosition() const { return background.getPosition(); }
@@ -77,7 +76,7 @@ UpgradeTile::UpgradeTile(
     sf::Font & font)
  : background(ResourceCache::GetInstance().GetTexture("upgradetilebg")), image(productImage),
    paperclip(ResourceCache::GetInstance().GetTexture("paperclip")), priceText(3U), purchaseButton(upgrade, price),
-   upgradeDescription(description, font, 26U)
+   upgradeDescription(font, description, 26U)
 {
     priceText.SetValue(price, false);
 

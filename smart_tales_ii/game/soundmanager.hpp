@@ -13,7 +13,7 @@
 
 #pragma once
 #include <SFML/Audio.hpp>
-#include <array>
+#include <vector>
 
 class SoundManager {
 private:
@@ -27,7 +27,7 @@ private:
     float fadeInVolumePerSecond;
     float fadeOutVolumePerSecond;
 
-    std::array<sf::Sound, 32> sounds;
+    std::vector<sf::Sound> sounds;
 
 protected:
     friend class GameManager;

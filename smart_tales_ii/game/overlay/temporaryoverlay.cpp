@@ -23,5 +23,5 @@ void TemporaryOverlay::Update(const sf::Time & elapsed, const Inputhandler & inp
 }
 
 TemporaryOverlay::TemporaryOverlay(const std::string & message, const float timeOutInSeconds)
- : text(message, ResourceCache::GetInstance().GetFont("commodore"), 38), timeout(timeOutInSeconds)
+ : text(ResourceCache::GetInstance().GetFont("commodore"), message, 38), timeout(timeOutInSeconds)
 { }

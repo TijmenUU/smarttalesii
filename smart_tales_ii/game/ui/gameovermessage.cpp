@@ -39,14 +39,14 @@ void GameoverMessage::draw(sf::RenderTarget & target, sf::RenderStates states) c
 }
 
 GameoverMessage::GameoverMessage(const float centerX, const float y)
- : catchPhrase(GetCatchphrase(), ResourceCache::GetInstance().GetFont("commodore"), 42),
-   information(GetInformationStr(), ResourceCache::GetInstance().GetFont("commodore"), 22)
+ : catchPhrase(ResourceCache::GetInstance().GetFont("commodore"), GetCatchphrase(), 42),
+   information(ResourceCache::GetInstance().GetFont("commodore"), GetInformationStr(), 22)
 {
     auto bounds = catchPhrase.getGlobalBounds();
     catchPhrase.setFillColor(sf::Color::White);
-    catchPhrase.setPosition(bounds.left + (centerX - (bounds.width / 2.f)), y);
+    catchPhrase.setPosition({bounds.position.x + (centerX - (bounds.size.x / 2.f)), y});
 
     bounds = information.getGlobalBounds();
     information.setFillColor(sf::Color::White);
-    information.setPosition(bounds.left + (centerX - (bounds.width / 2.f)), y + 55.f);
+    information.setPosition({bounds.position.x + (centerX - (bounds.size.x / 2.f)), y + 55.f});
 }

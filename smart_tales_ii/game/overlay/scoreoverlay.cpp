@@ -28,11 +28,8 @@ void ScoreOverlay::Setup()
     //manager.PopAllBelow(this);
     GameManager::GetInstance().PushGamemode(std::make_unique<UIOverlay>(false));
 
-    auto & cache = ResourceCache::GetInstance();
-    sf::Font & font = cache.GetFont("commodore");
-
-    backgroundSprite.setPosition(0.f, 0.f);
-    backgroundSprite.setScale(4.f, 4.f);
+    backgroundSprite.setPosition({0.f, 0.f});
+    backgroundSprite.setScale({4.f, 4.f});
     backgroundSprite.SetAnimation("zoom");
 
     const float horizontalCenterLine = 800.f;
@@ -45,9 +42,11 @@ void ScoreOverlay::Setup()
 
     gotoShopButton.SetPosition(
         sf::Vector2f(
-            Util::GetCenterOffset(gotoShopButton.GetGlobalbounds().width, cWorldWidth / 2.f),
+            Util::GetCenterOffset(gotoShopButton.GetGlobalbounds().size.x, cWorldWidth / 2.f),
             cWorldHeight - 120.f));
-    sf::Text buttonText("Go to shop", font, 30U);
+    sf::Text & buttonText = gotoShopButton.GetText();
+    buttonText.setString("Go to shop");
+    buttonText.setCharacterSize(30U);
     buttonText.setOutlineThickness(2.f);
     buttonText.setOutlineColor(sf::Color(120, 63, 0));
     buttonText.setFillColor(sf::Color::White);
@@ -85,5 +84,7 @@ ScoreOverlay::ScoreOverlay(
    backgroundSprite(ResourceCache::GetInstance().GetSpriteSheet("scorebackground")), gameoverMsg(800.f, 100.f),
    earnedCurrency(5U, "Currency earned: ", score.GetTotalCurrency(), true),
    balanceCurrency(5U, "Balance: ", inventory.GetCurrency(), true),
-   gotoShopButton(ResourceCache::GetInstance().GetSpriteSheet("navigationbutton_large"))
+   gotoShopButton(
+       ResourceCache::GetInstance().GetSpriteSheet("navigationbutton_large"),
+       ResourceCache::GetInstance().GetFont("commodore"))
 { }

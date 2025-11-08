@@ -19,22 +19,19 @@ void WinOverlay::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void WinOverlay::Setup()
 {
-    sf::Font & font = ResourceCache::GetInstance().GetFont("commodore");
-
-    title.setFont(font);
     title.setCharacterSize(42);
     title.setFillColor(sf::Color::Transparent);
     title.setOutlineColor(sf::Color::Transparent);
     title.setOutlineThickness(2.f);
     title.setString("When life is a game, don't make it\n      too hard on yourself!");
-    title.setPosition(Util::GetCenterOffset(title.getGlobalBounds().width, cWorldWidth / 2.f), 100.f);
+    title.setPosition({Util::GetCenterOffset(title.getGlobalBounds().size.x, cWorldWidth / 2.f), 100.f});
 
     const float infoCardYPos = 240;
     first.SetPosition(20, infoCardYPos);
     second.SetPosition(440, infoCardYPos);
     third.SetPosition(860, infoCardYPos);
 
-    background.setPosition(0, 0);
+    background.setPosition({0, 0});
     background.setSize(sf::Vector2f(cWorldWidth, cWorldHeight));
     background.setFillColor(sf::Color::Transparent);
 
@@ -71,7 +68,8 @@ void WinOverlay::Update(const sf::Time & elapsed, const Inputhandler & input)
 void WinOverlay::Show() { idleTimeOut = 0.f; }
 
 WinOverlay::WinOverlay(const float timeOut, const float cardTimeOut)
- : idleTimeOut(timeOut), first("motionsensorlightbulb", "From simple motion\ntriggered lightbulbs...", cardTimeOut),
+ : idleTimeOut(timeOut), title(ResourceCache::GetInstance().GetFont("commodore")),
+   first("motionsensorlightbulb", "From simple motion\ntriggered lightbulbs...", cardTimeOut),
    second("tovertafel", "...to game tables\nby Active Cues...", cardTimeOut * 2),
    third("sensara", "...to a complete sensor\nsuite by Sensara", cardTimeOut * 3)
 { }

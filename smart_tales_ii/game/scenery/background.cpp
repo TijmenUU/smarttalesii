@@ -8,7 +8,7 @@ void ScrollingBackground::draw(sf::RenderTarget & target, sf::RenderStates state
     target.draw(wallSprite, states);
 }
 
-void ScrollingBackground::Reset() { wallSprite.setPosition(0.f, 0.f); }
+void ScrollingBackground::Reset() { wallSprite.setPosition({0.f, 0.f}); }
 
 void ScrollingBackground::Update(const sf::Time & elapsed, const float scrollVelocity)
 {
@@ -24,6 +24,7 @@ void ScrollingBackground::Update(const sf::Time & elapsed, const float scrollVel
 }
 
 ScrollingBackground::ScrollingBackground(const float width)
+ : wallSprite(ResourceCache::GetInstance().GetMutableTexture("runningbackground"))
 {
     auto & cache = ResourceCache::GetInstance();
     auto & wallTexture = cache.GetMutableTexture("runningbackground");
@@ -33,9 +34,10 @@ ScrollingBackground::ScrollingBackground(const float width)
     wallSpriteWidth = wallTexture.getSize().x;
     const int repetitions = static_cast<int>(std::ceil(width / wallSpriteWidth)) + 2;
 
-    wallSprite.setTexture(wallTexture);
-
-    wallSprite.setTextureRect(sf::IntRect(0, 0, repetitions * wallSpriteWidth, wallTexture.getSize().y));
+    wallSprite.setTextureRect(
+        sf::IntRect(
+            {0, 0},
+            {static_cast<int>(repetitions * wallSpriteWidth), static_cast<int>(wallTexture.getSize().y)}));
 
     Reset();
 }

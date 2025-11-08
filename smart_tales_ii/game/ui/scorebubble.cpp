@@ -1,5 +1,6 @@
 #include "scorebubble.hpp"
 #include "../resourcecache.hpp"
+#include <SFML/Graphics/Text.hpp>
 #include <sstream>
 
 const float cTimeAliveLimit = 1.5f; // in seconds
@@ -22,12 +23,12 @@ bool ScoreBubble::Update(const sf::Time & elapsed)
 }
 
 ScoreBubble::ScoreBubble(const sf::Vector2f spawnPosition, const unsigned int score)
+ : text(ResourceCache::GetInstance().GetFont("commodore"))
 {
     std::stringstream ss;
     ss << '+' << score;
 
     text.setString(ss.str());
-    text.setFont(ResourceCache::GetInstance().GetFont("commodore"));
     text.setCharacterSize(20);
     text.setFillColor(sf::Color::White);
     text.setOutlineColor(sf::Color::Black);

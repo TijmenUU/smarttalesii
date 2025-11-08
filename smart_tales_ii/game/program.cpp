@@ -1,7 +1,7 @@
 #include "program.hpp"
+#include "gamemanager.hpp"
 #include "mode/runningmode.hpp"
 #include "overlay/temporaryoverlay.hpp"
-#include "overlay/uioverlay.hpp"
 #include <array>
 #include <memory>
 #include <string>
@@ -112,16 +112,16 @@ Program::Program(
     const unsigned int _windowHeight,
     const std::string windowTitle,
     const bool isDebugging)
- : window(sf::VideoMode(_windowWidth, _windowHeight, 32U), windowTitle)
+ : window(sf::VideoMode({_windowWidth, _windowHeight}, 32U), windowTitle)
 {
     //window.setFramerateLimit(frameRateLimit);
     window.setVerticalSyncEnabled(true);
 
     auto view = window.getView();
 
-    view.setSize(_windowWidth, _windowHeight);
+    view.setSize({static_cast<float>(_windowWidth), static_cast<float>(_windowHeight)});
 
-    view.setCenter(_windowWidth / 2, _windowHeight / 2);
+    view.setCenter({_windowWidth / 2.f, _windowHeight / 2.f});
     window.setView(view);
 
     GameManager::GetInstance().SetDebugFlag(isDebugging);

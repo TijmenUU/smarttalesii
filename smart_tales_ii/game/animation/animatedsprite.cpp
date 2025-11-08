@@ -8,13 +8,13 @@ namespace Animation
         sf::IntRect textureRect = baseFrame;
         if(isFlippedHorizontally)
         {
-            textureRect.left += textureRect.width;
-            textureRect.width *= -1;
+            textureRect.position.x += textureRect.size.x;
+            textureRect.size.x *= -1;
         }
         if(isFlippedVertically)
         {
-            textureRect.top += textureRect.height;
-            textureRect.height *= -1;
+            textureRect.position.y += textureRect.size.y;
+            textureRect.size.y *= -1;
         }
         setTextureRect(textureRect);
     }

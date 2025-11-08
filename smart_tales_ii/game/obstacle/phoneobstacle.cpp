@@ -28,16 +28,16 @@ namespace Obstacle
     bool Phone::CanDespawn() const
     {
         const auto bounds = obstacleSprite.getGlobalBounds();
-        return bounds.width + bounds.left < 0.f;
+        return bounds.size.x + bounds.position.x < 0.f;
     }
 
     void Phone::SetPosition(const sf::Vector2f & p) { obstacleSprite.setPosition(p); }
 
-    void Phone::Move(const float x, const float y) { obstacleSprite.move(x, y); }
+    void Phone::Move(const float x, const float y) { obstacleSprite.move({x, y}); }
 
     void Phone::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
     {
-        SetPosition(sf::Vector2f(windowWidth, floorYcoord - (cSpawnHeight + obstacleSprite.getGlobalBounds().width)));
+        SetPosition(sf::Vector2f(windowWidth, floorYcoord - (cSpawnHeight + obstacleSprite.getGlobalBounds().size.x)));
     }
 
     UpdateResult Phone::Update(
@@ -54,7 +54,7 @@ namespace Obstacle
                 retval = UpdateResult::ObstacleNeutralizedByPlayer;
             else if(sensorEnabled)
             {
-                if(obstacleSprite.getGlobalBounds().intersects(playerBounds))
+                if(obstacleSprite.getGlobalBounds().findIntersection(playerBounds))
                 {
                     Neutralize();
                     retval = UpdateResult::ObstacleNeutralizedBySensor;
@@ -62,7 +62,7 @@ namespace Obstacle
             }
             else
             {
-                if(playerBounds.intersects(GetKillBounds()))
+                if(playerBounds.findIntersection(GetKillBounds()))
                 {
                     retval = UpdateResult::PlayerKilled;
                 }

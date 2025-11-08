@@ -1,4 +1,5 @@
 #include "inputhandler.hpp"
+#include <SFML/Window/Mouse.hpp>
 #include <algorithm>
 
 void Inputhandler::ClearState()
@@ -18,63 +19,67 @@ void Inputhandler::Update(sf::RenderWindow & window)
 {
     ClearState();
 
-    sf::Event event;
-    while(window.pollEvent(event))
+    while(const std::optional event = window.pollEvent())
     {
-        //wchar_t input;
-        switch(event.type)
+        if(event->is<sf::Event::FocusGained>())
         {
-            case sf::Event::GainedFocus:
-                hasFocus = true;
-                break;
+            hasFocus = true;
+        }
 
-            case sf::Event::LostFocus:
-                hasFocus = false;
-                break;
+        if(event->is<sf::Event::FocusLost>())
+        {
+            hasFocus = false;
+        }
 
-            case sf::Event::Closed:
-                didWindowClose = true;
-                break;
+        if(event->is<sf::Event::Closed>())
+        {
+            didWindowClose = true;
+        }
 
-            case sf::Event::Resized:
-                didWindowResize = true;
-                break;
+        if(event->is<sf::Event::Resized>())
+        {
+            didWindowResize = true;
+        }
 
-            case sf::Event::TextEntered:
-                textEntered += static_cast<char>(event.text.unicode); // may cause issues when out of range (>127)
-                break;
+        if(const auto * textEntered = event->getIf<sf::Event::TextEntered>())
+        {
+            textEntered += static_cast<char>(textEntered->unicode); // may cause issues when out of range (>127)
+        }
 
-            case sf::Event::KeyPressed:
-                keyDownEvents.push_back(event.key.code);
-                break;
+        if(const auto * keyPressed = event->getIf<sf::Event::KeyPressed>())
+        {
+            keyDownEvents.push_back(keyPressed->code);
+        }
 
-            case sf::Event::KeyReleased:
-                keyUpEvents.push_back(event.key.code);
-                break;
+        if(const auto * keyReleased = event->getIf<sf::Event::KeyReleased>())
+        {
+            keyUpEvents.push_back(keyReleased->code);
+        }
 
-            case sf::Event::MouseButtonPressed:
-                buttonDownEvents.push_back(event.mouseButton.button);
-                break;
+        if(const auto * buttonPressed = event->getIf<sf::Event::MouseButtonPressed>())
+        {
+            buttonDownEvents.push_back(buttonPressed->button);
+        }
 
-            case sf::Event::MouseButtonReleased:
-                buttonUpEvents.push_back(event.mouseButton.button);
-                break;
+        if(const auto * buttonReleased = event->getIf<sf::Event::MouseButtonReleased>())
+        {
+            buttonUpEvents.push_back(buttonReleased->button);
+        }
 
-            case sf::Event::MouseMoved:
-                mousePixelPosition = sf::Mouse::getPosition(window);
-                cursorMoved = true;
-                break;
+        if(event->is<sf::Event::MouseMoved>())
+        {
+            mousePixelPosition = sf::Mouse::getPosition(window);
+            cursorMoved = true;
+        }
 
-            case sf::Event::MouseEntered:
-                cursorInWindow = true;
-                break;
+        if(event->is<sf::Event::MouseEntered>())
+        {
+            cursorInWindow = true;
+        }
 
-            case sf::Event::MouseLeft:
-                cursorInWindow = false;
-                break;
-
-            default:
-                break;
+        if(event->is<sf::Event::MouseLeft>())
+        {
+            cursorInWindow = false;
         }
     }
     // Always refreshing variables:
@@ -87,15 +92,16 @@ bool Inputhandler::DidWindowClose() const { return didWindowClose; }
 
 bool Inputhandler::WindowHasFocus() const { return hasFocus; }
 
-bool Inputhandler::PointingDeviceIsUp() const { return !sf::Mouse::isButtonPressed(sf::Mouse::Left); }
-bool Inputhandler::PointingDeviceIsDown() const { return sf::Mouse::isButtonPressed(sf::Mouse::Left); }
+bool Inputhandler::PointingDeviceIsUp() const { return !sf::Mouse::isButtonPressed(sf::Mouse::Button::Left); }
+bool Inputhandler::PointingDeviceIsDown() const { return sf::Mouse::isButtonPressed(sf::Mouse::Button::Left); }
 bool Inputhandler::PointingDevicePressedEvent() const
 {
-    return std::find(buttonDownEvents.begin(), buttonDownEvents.end(), sf::Mouse::Left) != buttonDownEvents.end();
+    return std::find(buttonDownEvents.begin(), buttonDownEvents.end(), sf::Mouse::Button::Left)
+        != buttonDownEvents.end();
 }
 bool Inputhandler::PointingDeviceReleasedEvent() const
 {
-    return std::find(buttonUpEvents.begin(), buttonUpEvents.end(), sf::Mouse::Left) != buttonUpEvents.end();
+    return std::find(buttonUpEvents.begin(), buttonUpEvents.end(), sf::Mouse::Button::Left) != buttonUpEvents.end();
 }
 const sf::Vector2i & Inputhandler::PointingDeviceWindowPosition() const { return mousePixelPosition; }
 const sf::Vector2f & Inputhandler::PointingDeviceWorldPosition() const { return mouseWorldPosition; }

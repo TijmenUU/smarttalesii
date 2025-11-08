@@ -47,7 +47,7 @@ namespace Obstacle
     bool Light::UpdateSensorTrigger(const sf::FloatRect & playerBounds)
     {
         const auto bounds = sensorBeam.getGlobalBounds();
-        if(playerBounds.left + playerBounds.width > (bounds.left + bounds.width / 2.f))
+        if(playerBounds.position.x + playerBounds.size.x > (bounds.position.x + bounds.size.x / 2.f))
         {
             Neutralize();
             lightSwitch.SetAnimation("activated");
@@ -80,14 +80,14 @@ namespace Obstacle
     {
         const auto bounds = lightSwitch.getGlobalBounds();
         auto pos = Util::GetRectangleCenter(bounds);
-        pos.y -= bounds.height;
+        pos.y -= bounds.size.y;
         return pos;
     }
 
     bool Light::CanDespawn() const
     {
         const auto bounds = obstacleSprite.getGlobalBounds();
-        return bounds.width + bounds.left < 0.f;
+        return bounds.size.x + bounds.position.x < 0.f;
     }
 
     void Light::SetPosition(const sf::Vector2f & p)

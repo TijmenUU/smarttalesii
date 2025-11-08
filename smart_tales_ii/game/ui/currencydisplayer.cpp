@@ -29,12 +29,12 @@ void CurrencyDisplayer::CenterOn(const float x, const float y)
     const auto textBounds = text.getLocalBounds();
     const float hor_padding = 10.f;
 
-    const auto textYOffset = (textBounds.height / 2.f) + textBounds.top;
-    const auto textXOffset = (textBounds.width / 2.f) + textBounds.left;
-    text.setPosition(x - textXOffset, y - textYOffset);
+    const auto textYOffset = (textBounds.size.y / 2.f) + textBounds.position.y;
+    const auto textXOffset = (textBounds.size.x / 2.f) + textBounds.position.x;
+    text.setPosition({x - textXOffset, y - textYOffset});
 
-    const float coinYOffset = coinBounds.height / 2.f;
-    coin.setPosition(x + textXOffset + hor_padding, y - coinYOffset);
+    const float coinYOffset = coinBounds.size.y / 2.f;
+    coin.setPosition({x + textXOffset + hor_padding, y - coinYOffset});
 }
 
 void CurrencyDisplayer::CenterOn(const sf::Vector2f & v) { CenterOn(v.x, v.y); }
@@ -104,7 +104,7 @@ CurrencyDisplayer::CurrencyDisplayer(
     const unsigned int initialValue,
     const bool fastAnimation)
  : coin(ResourceCache::GetInstance().GetTexture("coin")),
-   text("", ResourceCache::GetInstance().GetFont("commodore"), 32), label(leadingLabel), animatesFast(fastAnimation),
+   text(ResourceCache::GetInstance().GetFont("commodore"), "", 32), label(leadingLabel), animatesFast(fastAnimation),
    decimalPlaces(numberCharCount), targetValue(initialValue), currentValue(initialValue)
 {
     text.setString(std::string(numberCharCount, '0'));

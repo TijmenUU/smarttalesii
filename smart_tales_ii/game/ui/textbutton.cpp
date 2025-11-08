@@ -1,5 +1,6 @@
 #include "textbutton.hpp"
 #include "../../util/alignmenthelp.hpp"
+#include <SFML/Graphics/Text.hpp>
 
 void TextButton::UpdateTextPosition()
 {
@@ -42,6 +43,6 @@ void TextButton::SetFont(sf::Font & font)
     UpdateTextPosition();
 }
 
-TextButton::TextButton(const Animation::Sheet & buttonSheet, const bool enabled, const bool down)
- : Button(buttonSheet, enabled, down)
+TextButton::TextButton(const Animation::Sheet & buttonSheet, sf::Font & font, const bool enabled, const bool down)
+ : Button(buttonSheet, enabled, down), buttonText(font)
 { }

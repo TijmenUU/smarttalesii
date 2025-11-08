@@ -1,6 +1,7 @@
 #include "animationsheet.hpp"
 #include "../../util/platform.hpp"
 #include "../../util/string.hpp"
+#include <algorithm>
 #include <array>
 #include <cassert>
 #include <sstream>
@@ -186,10 +187,8 @@ namespace Animation
         assert(frameNumber < anim.frameCount);
 
         return sf::IntRect(
-            anim.frameStart.x + frameNumber * anim.frameSize.x,
-            anim.frameStart.y,
-            anim.frameSize.x,
-            anim.frameSize.y);
+            {static_cast<int>(anim.frameStart.x + frameNumber * anim.frameSize.x), static_cast<int>(anim.frameStart.y)},
+            {static_cast<int>(anim.frameSize.x), static_cast<int>(anim.frameSize.y)});
     }
 
     const Animation * Sheet::GetAnimation(const std::string & name) const

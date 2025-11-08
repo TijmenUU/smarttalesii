@@ -51,13 +51,13 @@ void SaleTileCarousel::Update(const sf::Time & elapsed, const Inputhandler & inp
         if(horizontalDistance < 0.f)
         {
             const auto lastbounds = tiles.back()->GetGlobalBounds();
-            if(lastbounds.left + lastbounds.width < cWorldWidth)
+            if(lastbounds.position.x + lastbounds.size.x < cWorldWidth)
                 return;
         }
         else
         {
             const auto firstbounds = tiles.front()->GetGlobalBounds();
-            if(firstbounds.left > 0.f)
+            if(firstbounds.position.x > 0.f)
                 return;
         }
 

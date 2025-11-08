@@ -16,13 +16,22 @@ void SoundManager::InsertSound(const sf::SoundBuffer & buffer, const float volum
     // playing.
     for(auto & sound: sounds)
     {
-        if(sound.getStatus() == sf::SoundStream::Stopped)
+        if(sound.getStatus() == sf::SoundStream::Status::Stopped)
         {
             sound.setBuffer(buffer);
             sound.setVolume(volume);
             sound.play();
-            break;
+            return;
         }
+    }
+
+    if(sounds.size() < 32)
+    {
+        sounds.emplace_back(buffer);
+
+        auto & sound = sounds.back();
+        sound.setVolume(volume);
+        sound.play();
     }
 }
 

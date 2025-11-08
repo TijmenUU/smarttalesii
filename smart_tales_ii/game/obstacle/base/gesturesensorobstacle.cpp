@@ -22,7 +22,7 @@ namespace Obstacle
     void GestureSensorBase::SetSpawnPosition(const unsigned int windowWidth, const float floorYcoord)
     {
         const auto offset = obstacleSprite.getPosition() - sensorSprite.getPosition();
-        SetPosition(sf::Vector2f(windowWidth + offset.x, floorYcoord - obstacleSprite.getGlobalBounds().height));
+        SetPosition(sf::Vector2f(windowWidth + offset.x, floorYcoord - obstacleSprite.getGlobalBounds().size.y));
     }
 
     UpdateResult GestureSensorBase::Update(
@@ -44,7 +44,7 @@ namespace Obstacle
             }
             else
             {
-                if(playerBounds.intersects(GetKillBounds()))
+                if(playerBounds.findIntersection(GetKillBounds()))
                 {
                     retval = UpdateResult::PlayerKilled;
                 }
