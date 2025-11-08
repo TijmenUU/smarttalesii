@@ -1,7 +1,6 @@
 CC      = clang++
 CFLAGS  = -std=c++17 -Wall -O2
-LFLAGS  = -Wall
-LIBS    = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+LFLAGS  = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 BINARY  = bin/smarttalesii
 SRC_DIR = smart_tales_ii
@@ -40,4 +39,4 @@ format:
 # we're making.
 $(BINARY): $(OBJS)
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIBS) -o $(BINARY)
+	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o $(BINARY)
