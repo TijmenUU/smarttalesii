@@ -27,7 +27,7 @@ void PlayerSprite::SetPosition(const sf::Vector2f & p)
     legsSprite.setPosition(p);
 }
 
-const sf::Vector2f & PlayerSprite::GetPosition() const { return upperBodySprite.getPosition(); }
+const sf::Vector2f PlayerSprite::GetPosition() const { return upperBodySprite.getPosition(); }
 
 sf::FloatRect PlayerSprite::GetGlobalBounds() const { return upperBodySprite.getGlobalBounds(); }
 

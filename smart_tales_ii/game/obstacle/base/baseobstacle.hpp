@@ -39,7 +39,7 @@ namespace Obstacle
     public:
         Type GetType() const;
         virtual sf::FloatRect GetKillBounds() const;
-        virtual const sf::Vector2f & GetPosition() const;
+        virtual const sf::Vector2f GetPosition() const;
         virtual sf::Vector2f GetObstacleCenter() const;
         virtual sf::Vector2f GetNeutralizationPosition() const;
         virtual sf::Vector2f GetHintPosition() const = 0;

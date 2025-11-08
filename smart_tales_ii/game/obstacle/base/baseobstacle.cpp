@@ -15,7 +15,7 @@ namespace Obstacle
         SetPosition(sf::Vector2f(windowWidth, floorYcoord - obstacleSprite.getGlobalBounds().height));
     }
 
-    const sf::Vector2f & Base::GetPosition() const { return obstacleSprite.getPosition(); }
+    const sf::Vector2f Base::GetPosition() const { return obstacleSprite.getPosition(); }
 
     sf::Vector2f Base::GetObstacleCenter() const
     {

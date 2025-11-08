@@ -31,7 +31,7 @@ public:
     bool SetAnimation(const std::string & name);
     void SetPosition(const sf::Vector2f & p);
 
-    const sf::Vector2f & GetPosition() const;
+    const sf::Vector2f GetPosition() const;
     sf::FloatRect GetGlobalBounds() const;
 
     void Update(const sf::Time & elapsed);

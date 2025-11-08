@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
     bool debug = false;
 
     // Parse the launch parameters
-    for(size_t i = 1; i < argc; ++i)
+    for(int i = 1; i < argc; ++i)
     {
         const auto result = GetLaunchParameterToken(argv[i]);
         switch(result)

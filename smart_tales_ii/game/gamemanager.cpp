@@ -91,7 +91,7 @@ void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
         }
     }
 
-    for(int64_t i = start; i < gamemodes.size(); ++i)
+    for(std::size_t i = start; i < gamemodes.size(); ++i)
     {
         target.draw(*(gamemodes[i]), states);
     }
