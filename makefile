@@ -1,5 +1,5 @@
 CC      = clang++
-CFLAGS  = -std=c++17 -Wall -O2
+CFLAGS  = -std=c++23 -Wall -Wextra -O2
 LFLAGS  = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 BINARY  = bin/smarttalesii
