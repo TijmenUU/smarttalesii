@@ -36,8 +36,6 @@ If all went well you can `cd bin` and run the game `./smarttalesii`.
 
 ## Troubleshooting
 
-- The game crashes after X minutes
-  - This has been a problem in the past on Windows, but using the latest OpenAL binaries solved this. You can try installing the latest [windows installer](https://www.openal.org/downloads/) and renaming `openal32.dll` to `openal32old.dll`.
 - The game stutters
   - Also a problem unique to Windows. It seems that any PC that uses gamepads, such as xbox controllers, have some intense lag spikes from time to time. The solution at the time of writing this was to connect a controller to the PC, launch the game and pause it, fiddle with the controller a bit and then resume the game.
 - How do I open the `.pdn` files in the `art` directory?
