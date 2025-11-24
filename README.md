@@ -6,13 +6,13 @@ Work on Smart Tales II has halted for now but for anyone interested in hacking/e
 
 # Getting Started
 
-Smart Tales II is written in portable `C++` and was build using free tools: it uses the [Simple and Fast Multimedia Library](https://www.sfml-dev.org/index.php) (SFML) for the audio, visuals and input handling. For creating the art [Paint.NET](https://www.getpaint.net/) was used, which can be found in the `.pdn` files. Smart Tales supports both Linux and Windows currently, offering a `makefile` and `Visual Studio 2019 project` for each respectively. Let's get to building the project so you can see for yourself. If you're in a situation where you cannot build the game yourself, grab a release copy for it in the [releases](https://github.com/TijmenUU/smarttalesii/releases). There are currently only Windows releases available.
+Smart Tales II is written in portable `C++` and was build using free tools: it uses the [Simple and Fast Multimedia Library](https://www.sfml-dev.org/index.php) (SFML) for the audio, visuals and input handling. For creating the art [Paint.NET](https://www.getpaint.net/) was used, which can be found in the `.pdn` files. Smart Tales supports both Linux and Windows currently, offering a `makefile` and `Visual Studio project` for each respectively. Let's get to building the project so you can see for yourself. If you're in a situation where you cannot build the game yourself, grab a release copy for it in the [releases](https://github.com/TijmenUU/smarttalesii/releases). There are currently only Windows releases available.
 
 ## Building Smart Tales II
 
 ### Windows
 
-On Windows we have made it pretty easy to get going, simply clone this repository and open it (`smart_tales_ii.sln`) with [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (VS2019). It comes complete with all the `x64` dependencies, but if you really want to target `x86` then grab a [32-bit copy](https://www.sfml-dev.org/download/sfml/2.5.1/) of SFML and set it up.
+On Windows we have made it pretty easy to get going, simply clone this repository and open it (`smart_tales_ii.sln`) with [Visual Studio](https://visualstudio.microsoft.com/downloads/) (tested with 2022). It comes complete with all the `x64` dependencies, but if you really want to target `x86` then grab a [32-bit copy](https://www.sfml-dev.org/download/sfml/) of SFML and set it up.
 
 ### Linux
 
@@ -26,7 +26,7 @@ But if you're running Ubuntu it probably is something like:
 
 Now make sure that you have:
 
-- a `C++` compiler, the `makefile` in the repository assumes you are using `g++` but feel free to change this (alter the `CC` variable). A way to check if you have an appropriate compiler installed is to write `g++ --version`. If that outputs a version of 5 or more you should be good to go (this is the first version with `C++14` compliance). For `clang++` you need version 3.4 or later.
+- a `C++` compiler, the `makefile` in the repository assumes you are using `clang` but feel free to modify this. To check if you have an appropriate compiler installed type `clang++ --version`, `cc --version` or `g++ --version` into a terminal. The compiler needs to support C++23 and this repository has been tested with GCC version 15 and Clang version 21.
 - `make` installed
 - `git` installed
 
