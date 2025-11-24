@@ -20,30 +20,29 @@
 #include "../ui/textbutton.hpp"
 #include <memory>
 
-class ShopMode : public Gamemode
-{
+class ShopMode : public Gamemode {
 private:
-	Player::Inventory playerInventory;
+    Player::Inventory playerInventory;
 
-	sf::Sprite background;
-	SaleTileCarousel carousel;
-	CurrencyDisplayer currencyDisplay;
-	
-	TextButton gotoGameButton;
+    sf::Sprite background;
+    SaleTileCarousel carousel;
+    CurrencyDisplayer currencyDisplay;
 
-	void LoadTiles();
+    TextButton gotoGameButton;
+
+    void LoadTiles();
 
 protected:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+    void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 
-	bool SuppressDraw() const override;
-	bool SuppressUpdate() const override;
+    bool SuppressDraw() const override;
+    bool SuppressUpdate() const override;
 
-	void OnEnter() override;
+    void OnEnter() override;
 
 public:
-	void Setup() override;
-	void Update(const sf::Time & elapsed, const Inputhandler & input) override;
+    void Setup() override;
+    void Update(const sf::Time & elapsed, const Inputhandler & input) override;
 
-	ShopMode(const Player::Inventory & inventory);
+    ShopMode(const Player::Inventory & inventory);
 };

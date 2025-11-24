@@ -9,18 +9,17 @@
 #include <SFML/Graphics.hpp>
 
 // TODO add random scrolling elements like paintings and clocks if time allows
-class ScrollingBackground : public sf::Drawable
-{
+class ScrollingBackground : public sf::Drawable {
 private:
-	sf::Sprite wallSprite;
-	float wallSpriteWidth = -1;
+    sf::Sprite wallSprite;
+    float wallSpriteWidth = -1;
 
 protected:
-	void draw(sf::RenderTarget & target, sf::RenderStates states) const;
+    void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 
 public:
-	void Reset();
-	void Update(const sf::Time & elapsed, const float scrollVelocity);
+    void Reset();
+    void Update(const sf::Time & elapsed, const float scrollVelocity);
 
-	ScrollingBackground(const float width);
+    ScrollingBackground(const float width);
 };

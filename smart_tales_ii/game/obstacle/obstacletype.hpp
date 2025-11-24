@@ -13,18 +13,18 @@
 
 namespace Obstacle
 {
-	enum class Type
-	{
-		Unknown = -1,
-		Furniture,
-		Door,
-		Light,
-		Phone
-	};
+    enum class Type
+    {
+        Unknown = -1,
+        Furniture,
+        Door,
+        Light,
+        Phone
+    };
 
-	Type GetType(std::string s);
+    Type GetType(std::string s);
 
-	std::string GetString(const Type t);
+    std::string GetString(const Type t);
 
-	std::string GetHintString(const Type t);
+    std::string GetHintString(const Type t);
 }

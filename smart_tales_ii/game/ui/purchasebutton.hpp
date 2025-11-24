@@ -12,24 +12,22 @@
 #include "../player/upgrades.hpp"
 #include "button.hpp"
 
-class PurchaseButton : public Button
-{
+class PurchaseButton : public Button {
 private:
-	Upgrade::Sensor upgrade;
-	unsigned int price;
-	bool isPurchased = false;
+    Upgrade::Sensor upgrade;
+    unsigned int price;
+    bool isPurchased = false;
 
-	void SetPurchased();
+    void SetPurchased();
 
 public:
-	Upgrade::Sensor GetUpgrade() const;
-	unsigned int GetPrice() const;
-	bool IsPurchased() const;
+    Upgrade::Sensor GetUpgrade() const;
+    unsigned int GetPrice() const;
+    bool IsPurchased() const;
 
-	void Refresh(const Player::Inventory & inventory);
+    void Refresh(const Player::Inventory & inventory);
 
-	bool HandleInput(const Inputhandler & input) override;
+    bool HandleInput(const Inputhandler & input) override;
 
-	PurchaseButton(const Upgrade::Sensor upgradeToSell,
-		const unsigned int sellingPrice);
+    PurchaseButton(const Upgrade::Sensor upgradeToSell, const unsigned int sellingPrice);
 };

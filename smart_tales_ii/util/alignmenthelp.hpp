@@ -20,11 +20,11 @@
 
 namespace Util
 {
-	sf::Vector2i GetRectangleCenter(const sf::IntRect & rect);
+    sf::Vector2i GetRectangleCenter(const sf::IntRect & rect);
 
-	sf::Vector2f GetRectangleCenter(const sf::FloatRect & rect);
+    sf::Vector2f GetRectangleCenter(const sf::FloatRect & rect);
 
-	float GetCenterOffset(const float length, const float center);
+    float GetCenterOffset(const float length, const float center);
 
-	sf::Vector2f GetCenterOffset(const sf::FloatRect & rect, const sf::Vector2f & center);
+    sf::Vector2f GetCenterOffset(const sf::FloatRect & rect, const sf::Vector2f & center);
 }

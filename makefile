@@ -1,7 +1,6 @@
-CC     = g++
-CFLAGS = -std=c++17 -Wall -O2
-LFLAGS = -Wall
-LIBS   = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+CC      = clang++
+CFLAGS  = -std=c++23 -Wall -Wextra -O2
+LFLAGS  = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 BINARY  = bin/smarttalesii
 SRC_DIR = smart_tales_ii
@@ -9,9 +8,9 @@ SRC_DIR = smart_tales_ii
 CPPS = $(shell find $(SRC_DIR) -name *.cpp)
 OBJS = $(patsubst %.cpp, %.o, $(CPPS))
 # Gcc/Clang will create these .d files containing dependencies.
-DEPS = $(patsubst %.o, %.d, $(OBJS))
+DEPS = $(patsubst %.cpp, %.d, $(CPPS))
 
-.PHONY: all check syntax clean
+.PHONY: all check syntax clean format
 
 all: $(BINARY)
 
@@ -26,6 +25,10 @@ clean:
 	-rm $(DEPS)
 	-rm $(BINARY)
 
+format:
+	clang-format -i ${CPPS}
+	clang-format -i $(shell find ${SRC_DIR} -name '*.hpp')
+
 -include $(DEPS)
 
 %.o: %.cpp
@@ -36,4 +39,4 @@ clean:
 # we're making.
 $(BINARY): $(OBJS)
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIBS) -o $(BINARY)
+	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o $(BINARY)

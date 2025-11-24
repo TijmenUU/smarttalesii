@@ -3,123 +3,110 @@
 
 namespace Animation
 {
-	void Sprite::UpdateTextureRect()
-	{
-		sf::IntRect textureRect = baseFrame;
-		if(isFlippedHorizontally)
-		{
-			textureRect.left += textureRect.width;
-			textureRect.width *= -1;
-		}
-		if(isFlippedVertically)
-		{
-			textureRect.top += textureRect.height;
-			textureRect.height *= -1;
-		}
-		setTextureRect(textureRect);
-	}
+    void Sprite::UpdateTextureRect()
+    {
+        sf::IntRect textureRect = baseFrame;
+        if(isFlippedHorizontally)
+        {
+            textureRect.position.x += textureRect.size.x;
+            textureRect.size.x *= -1;
+        }
+        if(isFlippedVertically)
+        {
+            textureRect.position.y += textureRect.size.y;
+            textureRect.size.y *= -1;
+        }
+        setTextureRect(textureRect);
+    }
 
-	void Sprite::GetFrame()
-	{
-		assert(currentAnimation != nullptr);
-		
-		if(currentAnimation->reverse)
-		{
-			baseFrame = sheet.GetFrame(*currentAnimation, currentAnimation->frameCount - (currentFrame + 1U));
-		}
-		else
-		{
-			baseFrame = sheet.GetFrame(*currentAnimation, currentFrame);
-		}
-		UpdateTextureRect();
-	}
+    void Sprite::GetFrame()
+    {
+        assert(currentAnimation != nullptr);
 
-	bool Sprite::IsAnimationFinished() const
-	{
-		return currentFrame >= currentAnimation->frameCount;
-	}
+        if(currentAnimation->reverse)
+        {
+            baseFrame = sheet.GetFrame(*currentAnimation, currentAnimation->frameCount - (currentFrame + 1U));
+        }
+        else
+        {
+            baseFrame = sheet.GetFrame(*currentAnimation, currentFrame);
+        }
+        UpdateTextureRect();
+    }
 
-	void Sprite::SetHorizontalFlip(const bool v)
-	{
-		isFlippedHorizontally = v;
-		UpdateTextureRect();
-	}
+    bool Sprite::IsAnimationFinished() const { return currentFrame >= currentAnimation->frameCount; }
 
-	void Sprite::SetVerticalFlip(const bool v)
-	{
-		isFlippedVertically = v;
-		UpdateTextureRect();
-	}
+    void Sprite::SetHorizontalFlip(const bool v)
+    {
+        isFlippedHorizontally = v;
+        UpdateTextureRect();
+    }
 
-	bool Sprite::IsFlippedHorizontally() const
-	{
-		return isFlippedHorizontally;
-	}
+    void Sprite::SetVerticalFlip(const bool v)
+    {
+        isFlippedVertically = v;
+        UpdateTextureRect();
+    }
 
-	bool Sprite::IsFlippedVertically() const
-	{
-		return isFlippedVertically;
-	}
+    bool Sprite::IsFlippedHorizontally() const { return isFlippedHorizontally; }
 
-	bool Sprite::SetAnimation(const std::string & name)
-	{
-		auto * candidate = sheet.GetAnimation(name);
-		if(candidate != nullptr)
-		{
-			currentFrameTime = 0U;
-			currentFrame = 0U;
-			currentAnimation = candidate;
-			GetFrame();
-			return true;
-		}
+    bool Sprite::IsFlippedVertically() const { return isFlippedVertically; }
 
-		return false;
-	}
+    bool Sprite::SetAnimation(const std::string & name)
+    {
+        auto * candidate = sheet.GetAnimation(name);
+        if(candidate != nullptr)
+        {
+            currentFrameTime = 0U;
+            currentFrame = 0U;
+            currentAnimation = candidate;
+            GetFrame();
+            return true;
+        }
 
-	void Sprite::Update(const sf::Time & elapsed)
-	{
-		assert(currentAnimation != nullptr);
+        return false;
+    }
 
-		if(IsAnimationFinished())
-		{
-			return;
-		}
+    void Sprite::Update(const sf::Time & elapsed)
+    {
+        assert(currentAnimation != nullptr);
 
-		currentFrameTime += elapsed.asMilliseconds();
-		if(currentFrameTime < currentAnimation->frameTime)
-		{
-			return;
-		}
+        if(IsAnimationFinished())
+        {
+            return;
+        }
 
-		currentFrameTime = 0U;
-		++currentFrame;
-		if(currentFrame < currentAnimation->frameCount)
-		{
-			GetFrame();
-		}
-		else if(currentAnimation->loop)
-		{
-			currentFrame = 0U;
-			GetFrame();
-		}
-		else
-		{
-			currentFrame = currentAnimation->frameCount;
-		}
-	}
+        currentFrameTime += elapsed.asMilliseconds();
+        if(currentFrameTime < currentAnimation->frameTime)
+        {
+            return;
+        }
 
-	void Sprite::Update(const Sprite & parent)
-	{
-		if(!parent.IsAnimationFinished() && currentFrame != parent.currentFrame)
-		{
-			currentFrame = parent.currentFrame;
-			GetFrame();
-		}
-	}
+        currentFrameTime = 0U;
+        ++currentFrame;
+        if(currentFrame < currentAnimation->frameCount)
+        {
+            GetFrame();
+        }
+        else if(currentAnimation->loop)
+        {
+            currentFrame = 0U;
+            GetFrame();
+        }
+        else
+        {
+            currentFrame = currentAnimation->frameCount;
+        }
+    }
 
-	Sprite::Sprite(const Sheet & sheetRef)
-		: sf::Sprite(sheetRef.GetTexture()),
-		sheet(sheetRef)
-	{
-	}
+    void Sprite::Update(const Sprite & parent)
+    {
+        if(!parent.IsAnimationFinished() && currentFrame != parent.currentFrame)
+        {
+            currentFrame = parent.currentFrame;
+            GetFrame();
+        }
+    }
+
+    Sprite::Sprite(const Sheet & sheetRef) : sf::Sprite(sheetRef.GetTexture()), sheet(sheetRef) { }
 }

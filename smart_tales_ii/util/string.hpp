@@ -11,7 +11,7 @@
 
 namespace Util
 {
-	std::string GetStringInQuotes(const std::string & line);
+    std::string GetStringInQuotes(const std::string & line);
 
-	std::string GetFileName(const std::string & path);
+    std::string GetFileName(const std::string & path);
 }
